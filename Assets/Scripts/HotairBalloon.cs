@@ -18,17 +18,22 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] GameObject gameOverGroup = null;
     [SerializeField] ParticleSystem[] fireParticleSystemList = null;
     [SerializeField] float zeroOilDuration = 0;
+    [SerializeField] BalloonHandleSlider handleSlider = null;
 
     public float RemainOilAmount {
         get => remainOilAmount;
-        set { remainOilAmount = Mathf.Clamp(value, 0, 100); }
+        private set { remainOilAmount = Mathf.Clamp(value, 0, 100); }
     }
 
     public bool IsGameOver => gameOverGroup.activeSelf;
 
     void Update() {
         oil.localScale = new Vector3(oil.localScale.x, remainOilAmount / 100.0f, oil.localScale.z);
-        var v = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (90 - maxDeg * Input.GetAxis("Horizontal"))), Mathf.Sin(Mathf.Deg2Rad * (90 - maxDeg * Input.GetAxis("Horizontal"))), 0);
+        var horizontalAxis = Input.GetAxis("Horizontal");
+        if (handleSlider != null) {
+            horizontalAxis += handleSlider.Horizontal;
+        }
+        var v = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (90 - maxDeg * horizontalAxis)), Mathf.Sin(Mathf.Deg2Rad * (90 - maxDeg * horizontalAxis)), 0);
         v += Vector3.up * Input.GetAxis("Vertical") / 2;
         if (RemainOilAmount > 0) {
             balloonRb.velocity = defaultVelocity * v;
@@ -54,5 +59,9 @@ public class HotairBalloon : MonoBehaviour {
         if ((zeroOilDuration > 5.0f || balloon.position.y < -5) && gameOverGroup.activeSelf == false) {
             gameOverGroup.SetActive(true);
         }
+    }
+
+    public void RefillOil() {
+        RemainOilAmount = 100.0f;
     }
 }
