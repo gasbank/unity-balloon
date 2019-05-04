@@ -9,9 +9,14 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
     [SerializeField] float startPosition = 0;
     [SerializeField] bool controlled = false;
     [SerializeField] float horizontal = 0;
+    [SerializeField] bool leftButton;
+    [SerializeField] bool rightButton;
 
     public bool Controlled { get => controlled; private set => controlled = value; }
     public float Horizontal => horizontal;
+
+    public bool LeftButton { get => leftButton; set => leftButton = value; }
+    public bool RightButton { get => rightButton; set => rightButton = value; }
 
     public void OnPointerDown(PointerEventData eventData) {
         startPosition = slider.normalizedValue;
@@ -23,6 +28,13 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
     }
 
     void Update() {
-        horizontal = Controlled ? Mathf.Clamp(8 * (slider.normalizedValue - startPosition), -1, 1) : 0;
+        float v = 0;
+        if (LeftButton) {
+            v += -1;
+        }
+        if (RightButton) {
+            v += 1;
+        }
+        horizontal = v + (Controlled ? Mathf.Clamp(8 * (slider.normalizedValue - startPosition), -1, 1) : 0);
     }
 }
