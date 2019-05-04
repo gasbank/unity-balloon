@@ -19,6 +19,7 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] ParticleSystem[] fireParticleSystemList = null;
     [SerializeField] float zeroOilDuration = 0;
     [SerializeField] BalloonHandleSlider handleSlider = null;
+    [SerializeField] Transform balloonOilSpritePivot = null;
 
     public float RemainOilAmount {
         get => remainOilAmount;
@@ -29,6 +30,8 @@ public class HotairBalloon : MonoBehaviour {
 
     void Update() {
         oil.localScale = new Vector3(oil.localScale.x, remainOilAmount / 100.0f, oil.localScale.z);
+        balloonOilSpritePivot.localPosition = new Vector3(balloonOilSpritePivot.localPosition.x, -0.1f + 0.2f * remainOilAmount / 100.0f, balloonOilSpritePivot.localPosition.z);
+
         var horizontalAxis = Input.GetAxis("Horizontal");
         if (handleSlider != null) {
             horizontalAxis += handleSlider.Horizontal;
