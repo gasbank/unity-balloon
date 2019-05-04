@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class MoveTouchButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
     [SerializeField] BalloonHandleSlider slider = null;
-    [SerializeField] bool rightOrLeft;
+    [SerializeField] bool rightOrLeft = false;
 
     public void OnPointerDown(PointerEventData eventData) {
         if (rightOrLeft) {

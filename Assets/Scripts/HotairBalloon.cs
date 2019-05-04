@@ -1,5 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using TMProText = TMPro.TextMeshProUGUI;
 
 public class HotairBalloon : MonoBehaviour {
     [SerializeField] Rigidbody balloonRb = null;
@@ -20,6 +20,15 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] float zeroOilDuration = 0;
     [SerializeField] BalloonHandleSlider handleSlider = null;
     [SerializeField] Transform balloonOilSpritePivot = null;
+    [SerializeField] GameObject finishGroup = null;
+    [SerializeField] int fastRefillCounter;
+    [SerializeField] float lastRefillTime = 0;
+    [SerializeField] float boostVelocity = 0;
+    [SerializeField] float boostVelocityDamp = 0.3f;
+    [SerializeField] float boostRefillMaxInterval = 0.5f;
+    [SerializeField] float boostInitialVelocity = 15.0f;
+    [SerializeField] int boostRepeatCounter = 2;
+    [SerializeField] TMProText stageStatText = null;
 
     public float RemainOilAmount {
         get => remainOilAmount;
@@ -39,8 +48,10 @@ public class HotairBalloon : MonoBehaviour {
         var v = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (90 - maxDeg * horizontalAxis)), Mathf.Sin(Mathf.Deg2Rad * (90 - maxDeg * horizontalAxis)), 0);
         v += Vector3.up * Input.GetAxis("Vertical") / 2;
         if (RemainOilAmount > 0) {
-            balloonRb.velocity = defaultVelocity * v;
-            RemainOilAmount -= Time.deltaTime * burnSpeed;
+            balloonRb.velocity = defaultVelocity * v + Vector3.up * boostVelocity;
+            if (finishGroup == null || finishGroup.activeSelf == false) {
+                RemainOilAmount -= Time.deltaTime * burnSpeed;
+            }
         }
 
         if (RemainOilAmount <= 0) {
@@ -62,9 +73,27 @@ public class HotairBalloon : MonoBehaviour {
         if ((zeroOilDuration > 5.0f || balloon.position.y < -5) && gameOverGroup.activeSelf == false) {
             gameOverGroup.SetActive(true);
         }
+
+        float boostVelocityVelocity = 0;
+        boostVelocity = Mathf.SmoothDamp(boostVelocity, 0, ref boostVelocityVelocity, boostVelocityDamp);
+
+        if (stageStatText != null) {
+            stageStatText.SetText(string.Format("SPEED: {0:f1}\nHEIGHT: {1:f1}", balloonRb.velocity.magnitude, balloon.transform.position.y));
+        }
     }
 
     public void RefillOil() {
         RemainOilAmount = 100.0f;
+        if (Time.time - lastRefillTime < boostRefillMaxInterval) {
+            Debug.Log("Boost Counter!");
+            fastRefillCounter++;
+            if (fastRefillCounter >= boostRepeatCounter) {
+                boostVelocity = boostInitialVelocity;
+                Debug.Log("Boost!!!");
+            }
+        } else {
+            fastRefillCounter = 0;
+        }
+        lastRefillTime = Time.time;
     }
 }

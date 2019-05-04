@@ -4962,7 +4962,7 @@ BoxCollider:
   m_GameObject: {fileID: 4940520358470733199}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -19509,12 +19509,23 @@ MonoBehaviour:
   oil: {fileID: 4940520360087828364}
   burnSpeed: 15
   remainOilAmount: 100
-  balloon: {fileID: 0}
+  balloon: {fileID: 4940520360091206959}
   gameOverGroup: {fileID: 0}
-  fireParticleSystemList: []
+  fireParticleSystemList:
+  - {fileID: 4940520360280552368}
+  - {fileID: 4940520358634168721}
   zeroOilDuration: 0
   handleSlider: {fileID: 0}
   balloonOilSpritePivot: {fileID: 8950739624212945749}
+  finishGroup: {fileID: 0}
+  fastRefillCounter: 0
+  lastRefillTime: 0
+  boostVelocity: 0
+  boostVelocityDamp: 0.3
+  boostRefillMaxInterval: 0.5
+  boostInitialVelocity: 15
+  boostRepeatCounter: 2
+  stageStatText: {fileID: 0}
 --- !u!1 &4940520359288410078
 GameObject:
   m_ObjectHideFlags: 0
@@ -19694,7 +19705,7 @@ BoxCollider:
   m_GameObject: {fileID: 4940520359493264269}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -20063,7 +20074,7 @@ BoxCollider:
   m_GameObject: {fileID: 4940520359627042261}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -25048,7 +25059,7 @@ BoxCollider:
   m_GameObject: {fileID: 4940520360018456143}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -25083,7 +25094,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4940520360087828364
 Transform:
   m_ObjectHideFlags: 0
@@ -25121,6 +25132,7 @@ GameObject:
   - component: {fileID: 4940520360091206948}
   - component: {fileID: 4940520360091206949}
   - component: {fileID: 4940520360091206946}
+  - component: {fileID: 118084479}
   m_Layer: 8
   m_Name: Balloon
   m_TagString: Untagged
@@ -25216,7 +25228,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!138 &4940520360091206951
 FixedJoint:
@@ -25274,6 +25286,19 @@ FixedJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &118084479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4940520360091206956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c2c08d1e6c01014894edcaf5b9755da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  widthLimit: 7
 --- !u!1 &4940520360101839490
 GameObject:
   m_ObjectHideFlags: 0
@@ -25319,7 +25344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4940520360164430494
 Transform:
   m_ObjectHideFlags: 0
@@ -30157,7 +30182,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e1a4a7b62697b354a8c9b5c6c08c873f, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.19907355, a: 0.54509807}
+  m_Color: {r: 0, g: 1, b: 0.19907355, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
