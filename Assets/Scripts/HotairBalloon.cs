@@ -15,12 +15,12 @@ public class HotairBalloon : MonoBehaviour {
 
     [SerializeField] [Range(0, 100)] float remainOilAmount = 100.0f;
     [SerializeField] Transform balloon = null;
-    [SerializeField] GameObject gameOverGroup = null;
+    [SerializeField] Canvas gameOverGroup = null;
     [SerializeField] ParticleSystem[] fireParticleSystemList = null;
     [SerializeField] float zeroOilDuration = 0;
     [SerializeField] BalloonHandleSlider handleSlider = null;
     [SerializeField] Transform balloonOilSpritePivot = null;
-    [SerializeField] GameObject finishGroup = null;
+    [SerializeField] Canvas finishGroup = null;
     [SerializeField] int fastRefillCounter;
     [SerializeField] float lastRefillTime = 0;
     [SerializeField] float boostVelocity = 0;
@@ -35,7 +35,12 @@ public class HotairBalloon : MonoBehaviour {
         private set { remainOilAmount = Mathf.Clamp(value, 0, 100); }
     }
 
-    public bool IsGameOver => gameOverGroup.activeSelf;
+    public bool IsGameOver => gameOverGroup.enabled;
+
+    void Awake() {
+        gameOverGroup = FindObjectOfType<GameOverGroup>().GetComponent<Canvas>();
+        finishGroup = FindObjectOfType<FinishGroup>().GetComponent<Canvas>();
+    }
 
     void Update() {
         oil.localScale = new Vector3(oil.localScale.x, remainOilAmount / 100.0f, oil.localScale.z);
@@ -49,9 +54,12 @@ public class HotairBalloon : MonoBehaviour {
         v += Vector3.up * Input.GetAxis("Vertical") / 2;
         if (RemainOilAmount > 0) {
             balloonRb.velocity = defaultVelocity * v + Vector3.up * boostVelocity;
-            if (finishGroup == null || finishGroup.activeSelf == false) {
+            if (finishGroup == null || finishGroup.enabled == false) {
                 RemainOilAmount -= Time.deltaTime * burnSpeed;
             }
+        } else {
+            // 추락 중에는 조타만 가능하게 한다.
+            balloonRb.velocity = new Vector3(defaultVelocity * v.x, balloonRb.velocity.y, balloonRb.velocity.z);
         }
 
         if (RemainOilAmount <= 0) {
@@ -70,8 +78,8 @@ public class HotairBalloon : MonoBehaviour {
             }
         }
 
-        if ((zeroOilDuration > 5.0f || balloon.position.y < -5) && gameOverGroup.activeSelf == false) {
-            gameOverGroup.SetActive(true);
+        if ((zeroOilDuration > 5.0f || balloon.position.y < -5) && gameOverGroup.enabled == false) {
+            gameOverGroup.enabled = true;
         }
 
         float boostVelocityVelocity = 0;
