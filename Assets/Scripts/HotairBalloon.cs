@@ -17,6 +17,8 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] Transform balloon = null;
     [SerializeField] Canvas gameOverGroup = null;
     [SerializeField] ParticleSystem[] fireParticleSystemList = null;
+    [SerializeField] ParticleSystem thrusterLeft = null;
+    [SerializeField] ParticleSystem thrusterRight = null;
     [SerializeField] float zeroOilDuration = 0;
     [SerializeField] BalloonHandleSlider handleSlider = null;
     [SerializeField] Transform balloonOilSpritePivot = null;
@@ -29,6 +31,7 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] float boostInitialVelocity = 15.0f;
     [SerializeField] int boostRepeatCounter = 2;
     [SerializeField] TMProText stageStatText = null;
+
 
     public float RemainOilAmount {
         get => remainOilAmount;
@@ -54,6 +57,20 @@ public class HotairBalloon : MonoBehaviour {
         v += Vector3.up * Input.GetAxis("Vertical") / 2;
         if (RemainOilAmount > 0) {
             balloonRb.velocity = defaultVelocity * v + Vector3.up * boostVelocity;
+
+            var emissionLeft = thrusterLeft.emission;
+            var emissionRight = thrusterRight.emission;
+            if (v.x > 0.01f) {
+                emissionLeft.rateOverTime = 50;
+                emissionRight.rateOverTime = 0;
+            } else if (v.x < -0.01f) {
+                emissionLeft.rateOverTime = 0;
+                emissionRight.rateOverTime = 50;
+            } else {
+                emissionLeft.rateOverTime = 0;
+                emissionRight.rateOverTime = 0;
+            }
+
             if (finishGroup == null || finishGroup.enabled == false) {
                 RemainOilAmount -= Time.deltaTime * burnSpeed;
             }
@@ -65,14 +82,14 @@ public class HotairBalloon : MonoBehaviour {
         if (RemainOilAmount <= 0) {
             zeroOilDuration += Time.deltaTime;
             foreach (var ps in fireParticleSystemList) {
-                if (ps.isPlaying) {
+                if (ps != null && ps.isPlaying) {
                     ps.Stop();
                 }
             }
         } else {
             zeroOilDuration = 0;
             foreach (var ps in fireParticleSystemList) {
-                if (ps.isPlaying == false) {
+                if (ps != null && ps.isPlaying == false) {
                     ps.Play();
                 }
             }
