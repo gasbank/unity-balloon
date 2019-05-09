@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// SushiDrag에서 쓰이는 IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler 이벤트를
+// IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler 이벤트를
 // 받기 위해서는 오브젝트에 기본적으로 Raycast Target 속성이 있어야하고, 이를 위해 지금까지는 Image 컴포넌트를 써 왔다.
 // 그러나 경량화 프리팹에서 (A) Raycast Target 속성을 위한 Image 컴포넌트 하나(알파가 0인 눈에 보이지 않는 이미지),
 // 실제 완전한 초밥 이미지를 위한 (B) Image 컴포넌트 하나 이렇게 해서 총 두 개의 이미지를 씀에 따라,
