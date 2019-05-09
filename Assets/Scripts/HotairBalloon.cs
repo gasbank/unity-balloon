@@ -31,6 +31,7 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] float boostInitialVelocity = 15.0f;
     [SerializeField] int boostRepeatCounter = 2;
     [SerializeField] TMProText stageStatText = null;
+    [SerializeField] Transform directionArrowPivot = null;
 
 
     public float RemainOilAmount {
@@ -53,13 +54,18 @@ public class HotairBalloon : MonoBehaviour {
         if (handleSlider != null) {
             horizontalAxis += handleSlider.Horizontal;
         }
-        var v = new Vector3(Mathf.Cos(Mathf.Deg2Rad * (90 - maxDeg * horizontalAxis)), Mathf.Sin(Mathf.Deg2Rad * (90 - maxDeg * horizontalAxis)), 0);
+
+        var dirRad = Mathf.Deg2Rad * (90 - maxDeg * horizontalAxis);
+        var v = new Vector3(Mathf.Cos(dirRad), Mathf.Sin(dirRad), 0);
+        directionArrowPivot.rotation = Quaternion.Euler(0, 0, - 90 + Mathf.Rad2Deg * dirRad);
         v += Vector3.up * Input.GetAxis("Vertical") / 2;
-        if (RemainOilAmount > 0) {
+
+        var emissionLeft = thrusterLeft.emission;
+        var emissionRight = thrusterRight.emission;
+
+        if (RemainOilAmount > 0 && horizontalAxis != 0) {
             balloonRb.velocity = defaultVelocity * v + Vector3.up * boostVelocity;
 
-            var emissionLeft = thrusterLeft.emission;
-            var emissionRight = thrusterRight.emission;
             if (v.x > 0.01f) {
                 emissionLeft.rateOverTime = 50;
                 emissionRight.rateOverTime = 0;
@@ -77,21 +83,20 @@ public class HotairBalloon : MonoBehaviour {
         } else {
             // 추락 중에는 조타만 가능하게 한다.
             balloonRb.velocity = new Vector3(defaultVelocity * v.x, balloonRb.velocity.y, balloonRb.velocity.z);
+
+            emissionLeft.rateOverTime = 0;
+            emissionRight.rateOverTime = 0;
         }
 
         if (RemainOilAmount <= 0) {
             zeroOilDuration += Time.deltaTime;
-            foreach (var ps in fireParticleSystemList) {
-                if (ps != null && ps.isPlaying) {
-                    ps.Stop();
-                }
-            }
+            StopTopThrusterParticle();
         } else {
             zeroOilDuration = 0;
-            foreach (var ps in fireParticleSystemList) {
-                if (ps != null && ps.isPlaying == false) {
-                    ps.Play();
-                }
+            if (horizontalAxis != 0) {
+                PlayTopThrusterPaticle();
+            } else {
+                StopTopThrusterParticle();
             }
         }
 
@@ -104,6 +109,22 @@ public class HotairBalloon : MonoBehaviour {
 
         if (stageStatText != null) {
             stageStatText.SetText(string.Format("SPEED: {0:f1}\nHEIGHT: {1:f1}", balloonRb.velocity.magnitude, balloon.transform.position.y));
+        }
+    }
+
+    private void PlayTopThrusterPaticle() {
+        foreach (var ps in fireParticleSystemList) {
+            if (ps != null && ps.isPlaying == false) {
+                ps.Play();
+            }
+        }
+    }
+
+    private void StopTopThrusterParticle() {
+        foreach (var ps in fireParticleSystemList) {
+            if (ps != null && ps.isPlaying) {
+                ps.Stop();
+            }
         }
     }
 
