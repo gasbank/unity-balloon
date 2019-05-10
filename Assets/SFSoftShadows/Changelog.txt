@@ -1,0 +1,53 @@
+New in 4.0.4:
+* Fix an issue with iOS devices defaulting to non-alpha render textures.
+* Added a "black level factor" feature that helps fix precision artifacts in shadow seams.
+
+New in 4.0.3:
+* Fix a matrix multiplication order issue introduced in 4.0.2
+
+New in 4.0.2:
+* Eliminate warnings in Unity 5.6.x
+* Add some profiling information
+
+New in 4.0.1:
+* Updated for Unity 5.6.0.
+* Added colored light cookies. You may need to change your cookie texture import settings.
+
+New in 4.0.0:
+* Perspective Support!
+* Updated for Unity 5.5.0.
+* Precision fix for large lights on mobile.
+* Better detection of renderer texture format on Android.
+* New workarounds for Unity bugs on Metal.
+
+New in 3.1.2:
+* Updated shader so it can be used with tinted and transparent meshes.
+* New TintedSpriteExample example
+
+New in 3.1.1:
+* Fix Shadow Layers being ignored
+* New Shadow Layer example
+* Metaball particle example
+
+New in 3.1:
+* Memory usage improvements.
+	* No dynamic memory allocation. (Very GC friendly)
+	* Reducing memory usage by sharing meshes and vertex arrays.
+* Correctly render lights and SFPolygons with flipped transforms.
+* Copy from collider now respects the "offset" property.
+* Fix "cracks" that would appear in shadows for a 0 radius light.
+* Always show  light intensity. (It would disappear with certain colorspace settings.)
+* Editor mode shadow fixes.
+
+New in 3.0:
+* Light penetration: Light can now softly bleed into a surface.
+	* Can be used to make the lit edges of an object glow, or for a self shadowing effect.
+	* Helps hide resolution shadow resolution artifacts.
+* HDR support:
+	* Lightmap rendering is automatically performed in HDR when attached to an HDR camera.
+	* Lights now have an additional intensity property when using linear light blending.
+* Editor scene preview of lighting effects.
+* Now works with Metal rendering on iOS with the latest Unity versions. (Earlier versions had shader compiler bugs)
+* Disable DirectX workarounds on Windows when using the OpenGL renderer.
+* Better support for batching of lit sprites.
+* Improved tooltips.
