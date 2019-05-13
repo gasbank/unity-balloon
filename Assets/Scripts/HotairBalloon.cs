@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMProText = TMPro.TextMeshProUGUI;
+using System.Linq;
 
 public class HotairBalloon : MonoBehaviour {
     [SerializeField] Rigidbody balloonRb = null;
@@ -10,8 +13,19 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] float burnSpeed = 5.0f;
     [SerializeField] [Range(0, 100)] float remainOilAmount = 100.0f;
     [SerializeField] Transform balloon = null;
+    [SerializeField] HashSet<WindRegion> appliedWindRegionSet = new HashSet<WindRegion>();
+
+    internal void AddWindForce(WindRegion windRegion) {
+        appliedWindRegionSet.Add(windRegion);
+    }
+
     [SerializeField] Canvas gameOverGroup = null;
     [SerializeField] ParticleSystem[] fireParticleSystemList = null;
+
+    internal void RemoveWindForce(WindRegion windRegion) {
+        appliedWindRegionSet.Remove(windRegion);
+    }
+
     [SerializeField] ParticleSystem thrusterLeft = null;
     [SerializeField] ParticleSystem thrusterRight = null;
     [SerializeField] float zeroOilDuration = 0;
@@ -128,6 +142,10 @@ public class HotairBalloon : MonoBehaviour {
             } else {
                 StopTopThrusterParticle();
             }
+        }
+
+        foreach (var windRegion in appliedWindRegionSet) {
+            balloonRb.velocity += windRegion.WindForce;
         }
 
         if ((zeroOilDuration > 5.0f || balloon.position.y < -5) && gameOverGroup.enabled == false) {
