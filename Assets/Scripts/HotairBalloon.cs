@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using TMProText = TMPro.TextMeshProUGUI;
 
 public class HotairBalloon : MonoBehaviour {
@@ -7,12 +8,6 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] float maxDeg = 15.0f;
     [SerializeField] Transform oil = null;
     [SerializeField] float burnSpeed = 5.0f;
-
-    internal void AddExplosionForce(Vector3 direction) {
-        Debug.Log("AddExplosionForce");
-        balloonRb.AddForce(direction * 10000);
-    }
-
     [SerializeField] [Range(0, 100)] float remainOilAmount = 100.0f;
     [SerializeField] Transform balloon = null;
     [SerializeField] Canvas gameOverGroup = null;
@@ -32,7 +27,7 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] int boostRepeatCounter = 2;
     [SerializeField] TMProText stageStatText = null;
     [SerializeField] Transform directionArrowPivot = null;
-
+    [SerializeField] float freeOilOnStartDuration = 5.0f;
 
     public float RemainOilAmount {
         get => remainOilAmount;
@@ -40,6 +35,12 @@ public class HotairBalloon : MonoBehaviour {
     }
 
     public bool IsGameOver => gameOverGroup.enabled;
+
+    public bool IsFreeOilOnStart => Time.timeSinceLevelLoad < freeOilOnStartDuration;
+
+    public bool IsOilConsumed => IsFreeOilOnStart == false && IsStageFinished == false;
+
+    public bool IsStageFinished => finishGroup != null && finishGroup.enabled;
 
     void Awake() {
         gameOverGroup = FindObjectOfType<GameOverGroup>().GetComponent<Canvas>();
@@ -57,13 +58,19 @@ public class HotairBalloon : MonoBehaviour {
 
         var dirRad = Mathf.Deg2Rad * (90 - maxDeg * horizontalAxis);
         var vNormalized = new Vector3(Mathf.Cos(dirRad), Mathf.Sin(dirRad), 0);
-        directionArrowPivot.rotation = Quaternion.Euler(0, 0, - 90 + Mathf.Rad2Deg * dirRad);
+        directionArrowPivot.rotation = Quaternion.Euler(0, 0, -90 + Mathf.Rad2Deg * dirRad);
         //v += Vector3.up * Input.GetAxis("Vertical") / 2;
 
         var emissionLeft = thrusterLeft.emission;
         var emissionRight = thrusterRight.emission;
 
-        if (RemainOilAmount > 0) {
+        if (IsStageFinished) {
+            // 스테이지 완료 한 이후에는 그냥 위로만 쭈욱 올라가자
+            emissionLeft.rateOverTime = 25;
+            emissionRight.rateOverTime = 25;
+            PlayTopThrusterPaticle();
+            balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
+        } else if (RemainOilAmount > 0) {
             // 연료가 남아있는 경우
 
             // 방향 조작을 하면 상승 + 좌우 이동
@@ -81,7 +88,7 @@ public class HotairBalloon : MonoBehaviour {
                     emissionRight.rateOverTime = 0;
                 }
 
-                if (finishGroup == null || finishGroup.enabled == false) {
+                if (IsOilConsumed) {
                     RemainOilAmount -= Time.deltaTime * burnSpeed;
                 }
             } else if (handleSlider.Controlled) {
@@ -90,9 +97,18 @@ public class HotairBalloon : MonoBehaviour {
                 emissionLeft.rateOverTime = 25;
                 emissionRight.rateOverTime = 25;
 
-                if (finishGroup == null || finishGroup.enabled == false) {
+                if (IsOilConsumed) {
                     RemainOilAmount -= Time.deltaTime * burnSpeed;
                 }
+            } else if (IsFreeOilOnStart) {
+                // 스테이지 시작하고 5초동안은 공짜로 위로 올라간다.
+                balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
+
+                emissionLeft.rateOverTime = 25;
+                emissionRight.rateOverTime = 25;
+            } else {
+                emissionLeft.rateOverTime = 0;
+                emissionRight.rateOverTime = 0;
             }
         } else {
             // 추락 중에는 조타만 가능하게 한다.
@@ -107,7 +123,7 @@ public class HotairBalloon : MonoBehaviour {
             StopTopThrusterParticle();
         } else {
             zeroOilDuration = 0;
-            if (horizontalAxis != 0) {
+            if (horizontalAxis != 0 || IsFreeOilOnStart) {
                 PlayTopThrusterPaticle();
             } else {
                 StopTopThrusterParticle();
@@ -143,6 +159,7 @@ public class HotairBalloon : MonoBehaviour {
     }
 
     public void RefillOil() {
+        Debug.Log("RefillOil");
         RemainOilAmount = 100.0f;
         if (Time.time - lastRefillTime < boostRefillMaxInterval) {
             Debug.Log("Boost Counter!");
@@ -155,5 +172,10 @@ public class HotairBalloon : MonoBehaviour {
             fastRefillCounter = 0;
         }
         lastRefillTime = Time.time;
+    }
+
+    internal void AddExplosionForce(Vector3 direction) {
+        Debug.Log("AddExplosionForce");
+        balloonRb.AddForce(direction * 10000);
     }
 }
