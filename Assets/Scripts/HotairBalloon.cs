@@ -146,7 +146,9 @@ public class HotairBalloon : MonoBehaviour {
             if (horizontalAxis != 0 || IsFreeOilOnStart) {
                 PlayTopThrusterPaticle();
             } else {
-                StopTopThrusterParticle();
+                if (IsStageFinished == false) {
+                    StopTopThrusterParticle();
+                }
             }
         }
 
@@ -154,7 +156,7 @@ public class HotairBalloon : MonoBehaviour {
             balloonRb.velocity += windRegion.WindForce;
         }
 
-        if ((zeroOilDuration > 5.0f || balloon.position.y < -5) && gameOverGroup.enabled == false) {
+        if ((zeroOilDuration > 5.0f || balloon.position.y < -5) && gameOverGroup.enabled == false && IsStageFinished == false) {
             gameOverGroup.enabled = true;
             BalloonSound.instance.PlayGameOver();
         }
@@ -173,7 +175,9 @@ public class HotairBalloon : MonoBehaviour {
         foreach (var ps in fireParticleSystemList) {
             if (ps != null && ps.isPlaying == false) {
                 engineRunning = true;
-                BalloonSound.instance.PlayStartEngine();
+                if (IsGameOver == false && IsStageFinished == false) {
+                    BalloonSound.instance.PlayStartEngine();
+                }
                 ps.Play();
             }
         }
@@ -182,7 +186,7 @@ public class HotairBalloon : MonoBehaviour {
     private void StopTopThrusterParticle() {
         foreach (var ps in fireParticleSystemList) {
             if (ps != null && ps.isStopped == false) {
-                if (engineRunning) {
+                if (engineRunning && IsGameOver == false && IsStageFinished == false) {
                     BalloonSound.instance.PlayStopEngine();
                     engineRunning = false;
                 }
