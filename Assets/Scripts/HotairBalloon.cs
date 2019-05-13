@@ -56,33 +56,47 @@ public class HotairBalloon : MonoBehaviour {
         }
 
         var dirRad = Mathf.Deg2Rad * (90 - maxDeg * horizontalAxis);
-        var v = new Vector3(Mathf.Cos(dirRad), Mathf.Sin(dirRad), 0);
+        var vNormalized = new Vector3(Mathf.Cos(dirRad), Mathf.Sin(dirRad), 0);
         directionArrowPivot.rotation = Quaternion.Euler(0, 0, - 90 + Mathf.Rad2Deg * dirRad);
-        v += Vector3.up * Input.GetAxis("Vertical") / 2;
+        //v += Vector3.up * Input.GetAxis("Vertical") / 2;
 
         var emissionLeft = thrusterLeft.emission;
         var emissionRight = thrusterRight.emission;
 
-        if (RemainOilAmount > 0 && horizontalAxis != 0) {
-            balloonRb.velocity = defaultVelocity * v + Vector3.up * boostVelocity;
+        if (RemainOilAmount > 0) {
+            // 연료가 남아있는 경우
 
-            if (v.x > 0.01f) {
-                emissionLeft.rateOverTime = 50;
-                emissionRight.rateOverTime = 0;
-            } else if (v.x < -0.01f) {
-                emissionLeft.rateOverTime = 0;
-                emissionRight.rateOverTime = 50;
-            } else {
-                emissionLeft.rateOverTime = 0;
-                emissionRight.rateOverTime = 0;
-            }
+            // 방향 조작을 하면 상승 + 좌우 이동
+            if (horizontalAxis != 0) {
+                balloonRb.velocity = defaultVelocity * vNormalized + Vector3.up * boostVelocity;
 
-            if (finishGroup == null || finishGroup.enabled == false) {
-                RemainOilAmount -= Time.deltaTime * burnSpeed;
+                if (vNormalized.x > 0.01f) {
+                    emissionLeft.rateOverTime = 50;
+                    emissionRight.rateOverTime = 0;
+                } else if (vNormalized.x < -0.01f) {
+                    emissionLeft.rateOverTime = 0;
+                    emissionRight.rateOverTime = 50;
+                } else {
+                    emissionLeft.rateOverTime = 0;
+                    emissionRight.rateOverTime = 0;
+                }
+
+                if (finishGroup == null || finishGroup.enabled == false) {
+                    RemainOilAmount -= Time.deltaTime * burnSpeed;
+                }
+            } else if (handleSlider.Controlled) {
+                balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
+
+                emissionLeft.rateOverTime = 25;
+                emissionRight.rateOverTime = 25;
+
+                if (finishGroup == null || finishGroup.enabled == false) {
+                    RemainOilAmount -= Time.deltaTime * burnSpeed;
+                }
             }
         } else {
             // 추락 중에는 조타만 가능하게 한다.
-            balloonRb.velocity = new Vector3(defaultVelocity * v.x, balloonRb.velocity.y, balloonRb.velocity.z);
+            balloonRb.velocity = new Vector3(defaultVelocity * vNormalized.x, balloonRb.velocity.y, balloonRb.velocity.z);
 
             emissionLeft.rateOverTime = 0;
             emissionRight.rateOverTime = 0;
