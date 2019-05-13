@@ -78,6 +78,12 @@ public class HotairBalloon : MonoBehaviour {
         var emissionLeft = thrusterLeft.emission;
         var emissionRight = thrusterRight.emission;
 
+        if (balloonRb.velocity.y < 0) {
+            BalloonSound.instance.SetEngineVolume(0);
+        } else if (balloonRb.velocity.y > 0) {
+            BalloonSound.instance.SetEngineVolume(1);
+        }
+
         if (IsStageFinished) {
             // 스테이지 완료 한 이후에는 그냥 위로만 쭈욱 올라가자
             emissionLeft.rateOverTime = 25;
@@ -150,6 +156,7 @@ public class HotairBalloon : MonoBehaviour {
 
         if ((zeroOilDuration > 5.0f || balloon.position.y < -5) && gameOverGroup.enabled == false) {
             gameOverGroup.enabled = true;
+            BalloonSound.instance.PlayGameOver();
         }
 
         float boostVelocityVelocity = 0;
@@ -160,9 +167,13 @@ public class HotairBalloon : MonoBehaviour {
         }
     }
 
+    bool engineRunning = false;
+
     private void PlayTopThrusterPaticle() {
         foreach (var ps in fireParticleSystemList) {
             if (ps != null && ps.isPlaying == false) {
+                engineRunning = true;
+                BalloonSound.instance.PlayStartEngine();
                 ps.Play();
             }
         }
@@ -170,7 +181,11 @@ public class HotairBalloon : MonoBehaviour {
 
     private void StopTopThrusterParticle() {
         foreach (var ps in fireParticleSystemList) {
-            if (ps != null && ps.isPlaying) {
+            if (ps != null && ps.isStopped == false) {
+                if (engineRunning) {
+                    BalloonSound.instance.PlayStopEngine();
+                    engineRunning = false;
+                }
                 ps.Stop();
             }
         }
@@ -178,6 +193,7 @@ public class HotairBalloon : MonoBehaviour {
 
     public void RefillOil() {
         Debug.Log("RefillOil");
+        BalloonSound.instance.PlayGetOilItem();
         RemainOilAmount = 100.0f;
         if (Time.time - lastRefillTime < boostRefillMaxInterval) {
             Debug.Log("Boost Counter!");
@@ -185,6 +201,7 @@ public class HotairBalloon : MonoBehaviour {
             if (fastRefillCounter >= boostRepeatCounter) {
                 boostVelocity = boostInitialVelocity;
                 Debug.Log("Boost!!!");
+                BalloonSound.instance.PlayStartBoost();
             }
         } else {
             fastRefillCounter = 0;
@@ -194,6 +211,7 @@ public class HotairBalloon : MonoBehaviour {
 
     internal void AddExplosionForce(Vector3 direction) {
         Debug.Log("AddExplosionForce");
+        BalloonSound.instance.PlayKnockback();
         balloonRb.AddForce(direction * 10000);
     }
 }
