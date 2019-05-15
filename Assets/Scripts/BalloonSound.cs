@@ -12,6 +12,12 @@ public class BalloonSound : MonoBehaviour {
     [SerializeField] AudioClip gameOver = null;
     [SerializeField] AudioClip startBoost = null;
     [SerializeField] AudioClip knockback = null;
+    [SerializeField] AudioClip goalincheer = null;
+    [SerializeField] AudioClip goalinSound = null;
+    [SerializeField] AudioClip gameover_sigh = null;
+    [SerializeField] AudioClip dash_continuous = null;
+    [SerializeField] AudioClip going_up = null;
+
 
     // Loop
     //[SerializeField] AudioClip ascendingLoop = null;
