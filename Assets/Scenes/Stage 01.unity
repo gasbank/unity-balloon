@@ -2160,14 +2160,14 @@ MonoBehaviour:
     m_Bits: 1024
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 1
-  antialiasingMode: 0
+  antialiasingMode: 3
   temporalAntialiasing:
-    jitterSpread: 0.75
-    sharpness: 0.25
-    stationaryBlending: 0.95
-    motionBlending: 0.85
+    jitterSpread: 0.309
+    sharpness: 1.91
+    stationaryBlending: 0.119
+    motionBlending: 0.492
   subpixelMorphologicalAntialiasing:
-    quality: 2
+    quality: 1
   fastApproximateAntialiasing:
     fastMode: 0
     keepAlpha: 0
@@ -2217,12 +2217,12 @@ MonoBehaviour:
   startEngine: {fileID: 8300000, guid: 089888ab89776184fb5665f63413dbfc, type: 3}
   getOilItem: {fileID: 8300000, guid: 32267a6d23591284798a204571e0a1d8, type: 3}
   stopEngine: {fileID: 0}
-  gameOver: {fileID: 8300000, guid: 97ca941df030d4ec6a7f6031f6c5c7f6, type: 3}
+  gameOver: {fileID: 8300000, guid: 7775004f951c94d259a7f09c22a34e3c, type: 3}
   startBoost: {fileID: 8300000, guid: 8163cdea61237b645a42378a659f689c, type: 3}
   knockback: {fileID: 8300000, guid: 35aa02dbbf2275f44a605daa102e0ddd, type: 3}
-  goalincheer: {fileID: 0}
-  goalinSound: {fileID: 0}
-  gameover_sigh: {fileID: 0}
+  goalincheer: {fileID: 8300000, guid: fd2ff20ef1294466a98f9365411324a7, type: 3}
+  goalinSound: {fileID: 8300000, guid: abda8682585184e0db39bfb136f2449e, type: 3}
+  gameover_sigh: {fileID: 8300000, guid: 5f3d4eb2333f24c4c9683a43eb8f51c2, type: 3}
   dash_continuous: {fileID: 0}
   going_up: {fileID: 0}
   ascendingLoopSource: {fileID: 347963644}
@@ -3828,6 +3828,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio Source Group
       objectReference: {fileID: 0}
+    - target: {fileID: 5239399340372194346, guid: ffa394074a41841c8be42eb32335fb66,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7775004f951c94d259a7f09c22a34e3c, type: 3}
     - target: {fileID: 5685389870566513659, guid: ffa394074a41841c8be42eb32335fb66,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -12,6 +12,8 @@ public class FinishLine : MonoBehaviour {
     void Update() {
         if (balloon.position.y > transform.position.y && finishGroup.enabled == false) {
             finishGroup.enabled = true;
+            BalloonSound.instance.PlayGoalIn();
+            BalloonSound.instance.PlayCheer();
         }
     }
 }

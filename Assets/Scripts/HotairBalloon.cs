@@ -159,6 +159,7 @@ public class HotairBalloon : MonoBehaviour {
         if ((zeroOilDuration > 5.0f || balloon.position.y < -5) && gameOverGroup.enabled == false && IsStageFinished == false) {
             gameOverGroup.enabled = true;
             BalloonSound.instance.PlayGameOver();
+            BalloonSound.instance.PlayGameOver_sigh();
         }
 
         float boostVelocityVelocity = 0;

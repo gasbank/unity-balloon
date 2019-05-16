@@ -30,7 +30,14 @@ public class BalloonSound : MonoBehaviour {
     public void PlayStartEngine() { Debug.Log("PlayStartEngine"); oneShotSource.PlayOneShot(startEngine); }
     public void PlayGetOilItem() { Debug.Log("PlayGetOilItem"); oneShotSource.PlayOneShot(getOilItem); }
     public void PlayStopEngine() { Debug.Log("PlayStopEngine"); oneShotSource.PlayOneShot(stopEngine); }
+
+    public void PlayGoalIn() { Debug.Log("GoalinSoubnd"); oneShotSource.PlayOneShot(goalinSound); }
+    public void PlayCheer() { Debug.Log("GoalinCheer"); oneShotSource.PlayOneShot(goalincheer); }
+
+
     public void PlayGameOver() { Debug.Log("PlayGameOver"); oneShotSource.PlayOneShot(gameOver); }
+
+    public void PlayGameOver_sigh() { Debug.Log("PlayGameOver"); oneShotSource.PlayOneShot(gameover_sigh); }
     public void PlayStartBoost() { Debug.Log("PlayStartBoost"); oneShotSource.PlayOneShot(startBoost); }
     public void PlayKnockback() { Debug.Log("PlayKnockback"); oneShotSource.PlayOneShot(knockback); }
 
