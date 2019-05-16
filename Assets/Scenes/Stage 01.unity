@@ -2157,7 +2157,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 1381825264}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 1024
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 1
   antialiasingMode: 3
@@ -2217,7 +2217,7 @@ MonoBehaviour:
   startEngine: {fileID: 8300000, guid: 089888ab89776184fb5665f63413dbfc, type: 3}
   getOilItem: {fileID: 8300000, guid: 32267a6d23591284798a204571e0a1d8, type: 3}
   stopEngine: {fileID: 0}
-  gameOver: {fileID: 8300000, guid: 7775004f951c94d259a7f09c22a34e3c, type: 3}
+  gameOver: {fileID: 8300000, guid: ddb3d4bb0c6314b5099d234aa8a00266, type: 3}
   startBoost: {fileID: 8300000, guid: 8163cdea61237b645a42378a659f689c, type: 3}
   knockback: {fileID: 8300000, guid: 35aa02dbbf2275f44a605daa102e0ddd, type: 3}
   goalincheer: {fileID: 8300000, guid: fd2ff20ef1294466a98f9365411324a7, type: 3}
@@ -2228,6 +2228,7 @@ MonoBehaviour:
   ascendingLoopSource: {fileID: 347963644}
   descendingLoopSource: {fileID: 389832415}
   oneShotSource: {fileID: 1844162255}
+  AmbientSound1: {fileID: 443684498859314809}
 --- !u!1001 &1455164765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3738,6 +3739,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &443684498859314809 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 443684498859314809, guid: ffa394074a41841c8be42eb32335fb66,
+    type: 3}
+  m_PrefabInstance: {fileID: 5239399340525529845}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4940520360075040345
 PrefabInstance:
   m_ObjectHideFlags: 0

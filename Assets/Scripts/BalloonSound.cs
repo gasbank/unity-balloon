@@ -26,17 +26,13 @@ public class BalloonSound : MonoBehaviour {
     [SerializeField] AudioSource ascendingLoopSource = null;
     [SerializeField] AudioSource descendingLoopSource = null;
     [SerializeField] AudioSource oneShotSource = null;
-
+    [SerializeField] AudioSource AmbientSound1 = null;
     public void PlayStartEngine() { Debug.Log("PlayStartEngine"); oneShotSource.PlayOneShot(startEngine); }
     public void PlayGetOilItem() { Debug.Log("PlayGetOilItem"); oneShotSource.PlayOneShot(getOilItem); }
     public void PlayStopEngine() { Debug.Log("PlayStopEngine"); oneShotSource.PlayOneShot(stopEngine); }
-
     public void PlayGoalIn() { Debug.Log("GoalinSoubnd"); oneShotSource.PlayOneShot(goalinSound); }
     public void PlayCheer() { Debug.Log("GoalinCheer"); oneShotSource.PlayOneShot(goalincheer); }
-
-
     public void PlayGameOver() { Debug.Log("PlayGameOver"); oneShotSource.PlayOneShot(gameOver); }
-
     public void PlayGameOver_sigh() { Debug.Log("PlayGameOver"); oneShotSource.PlayOneShot(gameover_sigh); }
     public void PlayStartBoost() { Debug.Log("PlayStartBoost"); oneShotSource.PlayOneShot(startBoost); }
     public void PlayKnockback() { Debug.Log("PlayKnockback"); oneShotSource.PlayOneShot(knockback); }
@@ -49,5 +45,6 @@ public class BalloonSound : MonoBehaviour {
         ratio = Mathf.Clamp(ratio, 0, 1);
         ascendingLoopSource.volume = ratio;
         descendingLoopSource.volume = 1.0f - ratio;
+        AmbientSound1.volume = 0.5f;
     }
 }
