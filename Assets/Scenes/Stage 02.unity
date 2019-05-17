@@ -2105,9 +2105,15 @@ MonoBehaviour:
   gameOver: {fileID: 8300000, guid: 97ca941df030d4ec6a7f6031f6c5c7f6, type: 3}
   startBoost: {fileID: 8300000, guid: 8163cdea61237b645a42378a659f689c, type: 3}
   knockback: {fileID: 8300000, guid: 35aa02dbbf2275f44a605daa102e0ddd, type: 3}
+  goalincheer: {fileID: 0}
+  goalinSound: {fileID: 0}
+  gameover_sigh: {fileID: 0}
+  dash_continuous: {fileID: 0}
+  going_up: {fileID: 0}
   ascendingLoopSource: {fileID: 347963644}
   descendingLoopSource: {fileID: 389832415}
   oneShotSource: {fileID: 1844162255}
+  AmbientSound1: {fileID: 0}
 --- !u!1001 &1455164765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3709,10 +3715,6 @@ PrefabInstance:
       propertyPath: handleSlider
       value: 
       objectReference: {fileID: 1573303693}
-    - target: {fileID: 118084479, guid: 593c303ad101d7142a49327789131521, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 593c303ad101d7142a49327789131521, type: 3}
 --- !u!1001 &5239399340525529845

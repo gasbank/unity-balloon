@@ -617,6 +617,35 @@ AudioSource:
     type: 3}
   m_PrefabInstance: {fileID: 5239399340525529845}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &386585592
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1947360482}
+    m_Modifications:
+    - target: {fileID: 5244942270581459133, guid: 08378b2cd1b12f248997f93e4218a42c,
+        type: 3}
+      propertyPath: m_Name
+      value: Oil Item (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5244942270581459105, guid: 08378b2cd1b12f248997f93e4218a42c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 5244942270581459105, guid: 08378b2cd1b12f248997f93e4218a42c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5244942270581459105, guid: 08378b2cd1b12f248997f93e4218a42c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 08378b2cd1b12f248997f93e4218a42c, type: 3}
 --- !u!82 &389832415 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 5239399340372194346, guid: ffa394074a41841c8be42eb32335fb66,
@@ -1974,6 +2003,16 @@ PrefabInstance:
       propertyPath: finishGroup
       value: 
       objectReference: {fileID: 1455164767}
+    - target: {fileID: 5244942270638848170, guid: ba39c64fd56a41740b801111660872d0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 5244942270638848170, guid: ba39c64fd56a41740b801111660872d0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba39c64fd56a41740b801111660872d0, type: 3}
 --- !u!1 &1282109010
@@ -3453,6 +3492,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!4 &1947360482 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 386409686, guid: ba39c64fd56a41740b801111660872d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1226405968}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1964127883
 GameObject:
   m_ObjectHideFlags: 0
@@ -3812,6 +3857,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4940520359282821976, guid: 593c303ad101d7142a49327789131521,
+        type: 3}
+      propertyPath: handleSlider
+      value: 
+      objectReference: {fileID: 1573303693}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 593c303ad101d7142a49327789131521, type: 3}
 --- !u!1001 &5239399340525529845

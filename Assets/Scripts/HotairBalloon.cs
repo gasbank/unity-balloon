@@ -42,6 +42,7 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] TMProText stageStatText = null;
     [SerializeField] Transform directionArrowPivot = null;
     [SerializeField] float freeOilOnStartDuration = 5.0f;
+    [SerializeField] TrailRenderer boostTrailRenderer = null;
 
     public float RemainOilAmount {
         get => remainOilAmount;
@@ -55,6 +56,10 @@ public class HotairBalloon : MonoBehaviour {
     public bool IsOilConsumed => IsFreeOilOnStart == false && IsStageFinished == false;
 
     public bool IsStageFinished => finishGroup != null && finishGroup.enabled;
+
+    void OnValidate() {
+        handleSlider = GameObject.Find("Canvas/Slider").GetComponent<BalloonHandleSlider>();
+    }
 
     void Awake() {
         gameOverGroup = FindObjectOfType<GameOverGroup>().GetComponent<Canvas>();
@@ -163,6 +168,8 @@ public class HotairBalloon : MonoBehaviour {
         }
 
         float boostVelocityVelocity = 0;
+        //boostTrailRenderer.gameObject.SetActive(boostVelocity > 5.0f);
+        boostTrailRenderer.emitting = boostVelocity > 2.0f;
         boostVelocity = Mathf.SmoothDamp(boostVelocity, 0, ref boostVelocityVelocity, boostVelocityDamp);
 
         if (stageStatText != null) {
