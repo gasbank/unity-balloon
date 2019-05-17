@@ -58,7 +58,9 @@ public class HotairBalloon : MonoBehaviour {
     public bool IsStageFinished => finishGroup != null && finishGroup.enabled;
 
     void OnValidate() {
-        handleSlider = GameObject.Find("Canvas/Slider").GetComponent<BalloonHandleSlider>();
+        if (gameObject.scene.rootCount != 0) {
+            handleSlider = GameObject.Find("Canvas/Slider").GetComponent<BalloonHandleSlider>();
+        }
     }
 
     void Awake() {
