@@ -209,10 +209,10 @@ public class HotairBalloon : MonoBehaviour {
         }
     }
 
-    public void RefillOil() {
+    public void RefillOil(float amount) {
         Debug.Log("RefillOil");
         BalloonSound.instance.PlayGetOilItem();
-        RemainOilAmount = 100.0f;
+        RemainOilAmount = Mathf.Clamp(RemainOilAmount + amount, 0, 100.0f);
         if (Time.time - lastRefillTime < boostRefillMaxInterval) {
             Debug.Log("Boost Counter!");
             fastRefillCounter++;
