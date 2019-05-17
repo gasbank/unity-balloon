@@ -97,12 +97,14 @@ public class HotairBalloon : MonoBehaviour {
             emissionRight.rateOverTime = 25;
             PlayTopThrusterPaticle();
             balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
+            balloonRb.velocity += Vector3.up * boostVelocity;
         } else if (RemainOilAmount > 0) {
             // 연료가 남아있는 경우
 
             // 방향 조작을 하면 상승 + 좌우 이동
             if (horizontalAxis != 0) {
-                balloonRb.velocity = defaultVelocity * vNormalized + Vector3.up * boostVelocity;
+                balloonRb.velocity = defaultVelocity * vNormalized;
+                balloonRb.velocity += Vector3.up * boostVelocity;
 
                 if (vNormalized.x > 0.01f) {
                     emissionLeft.rateOverTime = 50;
@@ -120,6 +122,7 @@ public class HotairBalloon : MonoBehaviour {
                 }
             } else if (handleSlider.Controlled) {
                 balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
+                balloonRb.velocity += Vector3.up * boostVelocity;
 
                 emissionLeft.rateOverTime = 25;
                 emissionRight.rateOverTime = 25;
@@ -130,6 +133,7 @@ public class HotairBalloon : MonoBehaviour {
             } else if (IsFreeOilOnStart) {
                 // 스테이지 시작하고 5초동안은 공짜로 위로 올라간다.
                 balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
+                balloonRb.velocity += Vector3.up * boostVelocity;
 
                 emissionLeft.rateOverTime = 25;
                 emissionRight.rateOverTime = 25;

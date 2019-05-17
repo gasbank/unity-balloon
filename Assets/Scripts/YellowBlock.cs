@@ -8,6 +8,7 @@ public class YellowBlock : MonoBehaviour {
     [SerializeField] float lastHitTime = 0;
     [SerializeField] float lastHitMinInterval = 0.5f;
     [SerializeField] TMProText hpText = null;
+    [SerializeField] GameObject afterDestroySpawn = null;
 
     void Awake() {
         hpText.text = hp.ToString();
@@ -22,6 +23,10 @@ public class YellowBlock : MonoBehaviour {
             hpText.text = hp.ToString();
             player.AddExplosionForce((collision.transform.position - collision.contacts[0].point).normalized);
             if (hp <= 0) {
+                if (afterDestroySpawn != null) {
+                    Instantiate(afterDestroySpawn, transform.position, transform.rotation, transform.parent);
+                }
+
                 Destroy(gameObject);
             }
         }
