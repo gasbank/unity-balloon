@@ -123,10 +123,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9eef854cb0b2490d9b75b28d2972267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3
+  hp: 1
   lastHitTime: 0
   lastHitMinInterval: 0.5
   hpText: {fileID: 6845225752565563702}
+  afterDestroySpawn: {fileID: 0}
+  afterDestroySpawnParent: {fileID: 0}
 --- !u!1 &4449667344668743744
 GameObject:
   m_ObjectHideFlags: 0
