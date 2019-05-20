@@ -36,7 +36,7 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] float lastRefillTime = 0;
     [SerializeField] float boostVelocity = 0;
     [SerializeField] float boostVelocityDamp = 0.3f;
-    [SerializeField] float boostRefillMaxInterval = 0.5f;
+    [SerializeField] float boostRefillMaxInterval = 0.65f;
     [SerializeField] float boostInitialVelocity = 15.0f;
     [SerializeField] int boostRepeatCounter = 2;
     [SerializeField] TMProText stageStatText = null;

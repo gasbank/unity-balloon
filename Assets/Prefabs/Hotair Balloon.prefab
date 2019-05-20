@@ -19676,7 +19676,7 @@ MonoBehaviour:
   lastRefillTime: 0
   boostVelocity: 0
   boostVelocityDamp: 0.3
-  boostRefillMaxInterval: 0.5
+  boostRefillMaxInterval: 0.65
   boostInitialVelocity: 15
   boostRepeatCounter: 2
   stageStatText: {fileID: 0}
@@ -35938,6 +35938,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 53.8
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 04797bc70be75495a83e5214bef03fc1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 14cffc44a5788b24a880c49ec320d13f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04797bc70be75495a83e5214bef03fc1, type: 3}
 --- !u!4 &671176385140279379 stripped
