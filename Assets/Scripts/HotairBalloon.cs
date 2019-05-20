@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMProText = TMPro.TextMeshProUGUI;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class HotairBalloon : MonoBehaviour {
     [SerializeField] Rigidbody balloonRb = null;
@@ -43,6 +44,9 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] Transform directionArrowPivot = null;
     [SerializeField] float freeOilOnStartDuration = 5.0f;
     [SerializeField] TrailRenderer boostTrailRenderer = null;
+    [SerializeField] float feverRemainTime = 0;
+
+    public float FeverRemainTime => feverRemainTime;
 
     public float RemainOilAmount {
         get => remainOilAmount;
@@ -181,6 +185,13 @@ public class HotairBalloon : MonoBehaviour {
         if (stageStatText != null) {
             stageStatText.SetText(string.Format("SPEED: {0:f1}\nHEIGHT: {1:f1}", balloonRb.velocity.magnitude, balloon.transform.position.y));
         }
+
+        if (feverRemainTime > 0) {
+            feverRemainTime -= Time.deltaTime;
+            if (feverRemainTime <= 0) {
+                StopFever();
+            }
+        }
     }
 
     bool engineRunning = false;
@@ -212,6 +223,9 @@ public class HotairBalloon : MonoBehaviour {
     public void RefillOil(float amount) {
         Debug.Log("RefillOil");
         BalloonSound.instance.PlayGetOilItem();
+        if (RemainOilAmount + amount > 100.0f && feverRemainTime <= 0) {
+            StartFever();
+        }
         RemainOilAmount = Mathf.Clamp(RemainOilAmount + amount, 0, 100.0f);
         if (Time.time - lastRefillTime < boostRefillMaxInterval) {
             Debug.Log("Boost Counter!");
@@ -225,6 +239,30 @@ public class HotairBalloon : MonoBehaviour {
             fastRefillCounter = 0;
         }
         lastRefillTime = Time.time;
+    }
+
+    private void StartFever() {
+        Debug.Log("Fever!!!");
+        // var stageName = SceneManager.GetActiveScene().name;
+        // var feverTouchedLayer = LayerMask.NameToLayer("Fever Touched");
+        // foreach (var stageRb in GameObject.Find(stageName).GetComponentsInChildren<Rigidbody>()) {
+        //     if (stageRb.gameObject.layer != feverTouchedLayer) {
+        //         stageRb.isKinematic = false;
+        //         stageRb.useGravity = false;
+        //     }
+        // }
+        feverRemainTime = 10.0f;
+    }
+
+    private static void StopFever() {
+        // var stageName = SceneManager.GetActiveScene().name;
+        // var feverTouchedLayer = LayerMask.NameToLayer("Fever Touched");
+        // foreach (var stageRb in GameObject.Find(stageName).GetComponentsInChildren<Rigidbody>()) {
+        //     if (stageRb.gameObject.layer != feverTouchedLayer) {
+        //         stageRb.isKinematic = true;
+        //         stageRb.useGravity = true;
+        //     }
+        // }
     }
 
     internal void AddExplosionForce(Vector3 direction) {
