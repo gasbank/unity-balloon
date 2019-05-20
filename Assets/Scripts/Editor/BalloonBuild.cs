@@ -26,6 +26,11 @@ class BalloonBuild
                 "Assets/Scenes/Stage 13.unity",
                 "Assets/Scenes/Stage 14.unity",
                 "Assets/Scenes/Stage 15.unity",
+                "Assets/Scenes/Stage 16.unity",
+                "Assets/Scenes/Stage 17.unity",
+                "Assets/Scenes/Stage 18.unity",
+                "Assets/Scenes/Stage 19.unity",
+                "Assets/Scenes/Stage 20.unity",
             };
         }
     }
