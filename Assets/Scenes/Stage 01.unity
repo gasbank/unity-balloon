@@ -746,6 +746,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &551961605 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6800839040557778999, guid: 2f2baa4385a179341a11e45299815ba0,
+    type: 3}
+  m_PrefabInstance: {fileID: 6800839041559870906}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8e7b3f8fec544d09a417137335e8c79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &612314664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3319,6 +3331,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4940520359282821976, guid: 593c303ad101d7142a49327789131521,
+        type: 3}
+      propertyPath: handleSlider
+      value: 
+      objectReference: {fileID: 551961605}
+    - target: {fileID: 4940520359282821976, guid: 593c303ad101d7142a49327789131521,
+        type: 3}
+      propertyPath: postProcessVolume
+      value: 
+      objectReference: {fileID: 1545629136}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 593c303ad101d7142a49327789131521, type: 3}
 --- !u!1001 &6800839041559870906

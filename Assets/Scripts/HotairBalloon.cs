@@ -5,6 +5,7 @@ using UnityEngine;
 using TMProText = TMPro.TextMeshProUGUI;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.PostProcessing;
 
 public class HotairBalloon : MonoBehaviour {
     [SerializeField] Rigidbody balloonRb = null;
@@ -45,6 +46,9 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] float freeOilOnStartDuration = 5.0f;
     [SerializeField] TrailRenderer boostTrailRenderer = null;
     [SerializeField] float feverRemainTime = 0;
+    [SerializeField] PostProcessVolume postProcessVolume = null;
+    
+    Vignette vignette;
 
     public float FeverRemainTime => feverRemainTime;
 
@@ -70,6 +74,10 @@ public class HotairBalloon : MonoBehaviour {
     void Awake() {
         gameOverGroup = FindObjectOfType<GameOverGroup>().GetComponent<Canvas>();
         finishGroup = FindObjectOfType<FinishGroup>().GetComponent<Canvas>();
+
+        if (postProcessVolume != null) {
+            postProcessVolume.profile.TryGetSettings(out vignette);
+        }
     }
 
     void Update() {
@@ -165,6 +173,10 @@ public class HotairBalloon : MonoBehaviour {
                     StopTopThrusterParticle();
                 }
             }
+        }
+
+        if (vignette != null) {
+            vignette.intensity.value = zeroOilDuration > 0 ? (0.5f + Mathf.PingPong(Time.time * 0.7f, 0.1f)) : 0;
         }
 
         foreach (var windRegion in appliedWindRegionSet) {
