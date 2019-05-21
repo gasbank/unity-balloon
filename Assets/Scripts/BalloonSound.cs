@@ -15,8 +15,10 @@ public class BalloonSound : MonoBehaviour {
     [SerializeField] AudioClip goalincheer = null;
     [SerializeField] AudioClip goalinSound = null;
     [SerializeField] AudioClip gameover_sigh = null;
+    #pragma warning disable CS0414
     [SerializeField] AudioClip dash_continuous = null;
     [SerializeField] AudioClip going_up = null;
+    #pragma warning restore CS0414
 
 
     // Loop
