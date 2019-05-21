@@ -6,6 +6,7 @@ public class ExplosionCube : MonoBehaviour {
         if (player != null && player.IsGameOver == false) {
             
             player.AddExplosionForce((collision.transform.position - collision.contacts[0].point).normalized);
+             player.IncreaseFeverGauge();
         }
     }
 }
