@@ -162,7 +162,7 @@ public class HotairBalloon : MonoBehaviour {
                 }
 
                 if (IsOilConsumed) {
-                    RemainOilAmount -= Time.deltaTime *1.5f* burnSpeed;
+                    RemainOilAmount -= Time.deltaTime * burnSpeed;
                 }
             } else if (handleSlider.Controlled) {
                 balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
