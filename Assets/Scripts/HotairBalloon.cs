@@ -47,7 +47,7 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] TrailRenderer boostTrailRenderer = null;
     [SerializeField] float feverRemainTime = 0;
     [SerializeField] PostProcessVolume postProcessVolume = null;
-    
+
     Vignette vignette;
 
     public float FeverRemainTime => feverRemainTime;
@@ -161,8 +161,14 @@ public class HotairBalloon : MonoBehaviour {
             emissionRight.rateOverTime = 0;
         }
 
+        // 기름이 바닥난 상태라면...
         if (RemainOilAmount <= 0) {
+            // 연료가 바닥난 순간 한번만 처리해야 하는 일은 여기서 한다.
+            if (zeroOilDuration == 0) {
+                BalloonSound.instance.PlayMaydayMayday();
+            }
             zeroOilDuration += Time.deltaTime;
+            
             StopTopThrusterParticle();
         } else {
             zeroOilDuration = 0;
@@ -175,13 +181,13 @@ public class HotairBalloon : MonoBehaviour {
             }
         }
 
+        // 연료 바닥났을 때 화면 효과
         if (vignette != null) {
-            if(zeroOilDuration > 0){
-             vignette.intensity.value = (0.5f + Mathf.PingPong(Time.time * 0.7f, 0.1f));
-             BalloonSound.instance.PlayMaydayMayday();}
-            else 
-            vignette.intensity.value = 0;
-            
+            if (zeroOilDuration > 0) {
+                vignette.intensity.value = (0.5f + Mathf.PingPong(Time.time * 0.7f, 0.1f));
+            } else {
+                vignette.intensity.value = 0;
+            }
         }
 
         foreach (var windRegion in appliedWindRegionSet) {
