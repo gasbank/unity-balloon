@@ -45,13 +45,18 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] Transform directionArrowPivot = null;
     [SerializeField] float freeOilOnStartDuration = 5.0f;
     [SerializeField] TrailRenderer boostTrailRenderer = null;
-    [SerializeField] float feverRemainTime = 0;
     [SerializeField] PostProcessVolume postProcessVolume = null;
+    [SerializeField] Renderer feverRingRenderer = null;
+    [SerializeField] float feverGaugeMax = 50.0f;
+    [SerializeField] float feverGaugeIncrement = 8.0f;
+    [SerializeField] float feverGaugeDecrement = 3.0f;
+    [SerializeField] GameObject feverItemParticle = null;
+    [SerializeField] bool inFever = false;
+    [SerializeField] float feverMaxVelocity = 30;
 
     Vignette vignette;
 
-    public float FeverRemainTime => feverRemainTime;
-
+    
     public float RemainOilAmount {
         get => remainOilAmount;
         private set { remainOilAmount = Mathf.Clamp(value, 0, 100); }
@@ -61,9 +66,33 @@ public class HotairBalloon : MonoBehaviour {
 
     public bool IsFreeOilOnStart => Time.timeSinceLevelLoad < freeOilOnStartDuration;
 
-    public bool IsOilConsumed => IsFreeOilOnStart == false && IsStageFinished == false;
+    public bool IsOilConsumed => IsFreeOilOnStart == false && IsStageFinished == false && InFeverGaugeNotEmpty == false;
 
     public bool IsStageFinished => finishGroup != null && finishGroup.enabled;
+
+    float FeverGauge {
+        get => (1.0f - feverRingRenderer.material.mainTextureOffset.y) * feverGaugeMax;
+        set {
+            var y = Mathf.Clamp(1.0f - (value / feverGaugeMax), 0, 1);
+            feverRingRenderer.material.mainTextureOffset = new Vector2(feverRingRenderer.material.mainTextureOffset.x, y);
+        }
+    }
+
+    public bool InFeverGaugeNotEmpty => inFever && FeverGauge > 0;
+
+    public void IncreaseFeverGauge() {
+        if (inFever) {
+            return;
+        }
+
+        if (FeverGauge < feverGaugeMax && FeverGauge + feverGaugeIncrement >= feverGaugeMax) {
+            Debug.Log("Fever full!");
+            feverItemParticle.SetActive(true);
+        }
+        FeverGauge += feverGaugeIncrement;
+    }
+
+    float AdditionalVelocity => boostVelocity + (InFeverGaugeNotEmpty ? feverMaxVelocity : 0);
 
     void OnValidate() {
         if (gameObject.scene.rootCount != 0) {
@@ -78,6 +107,9 @@ public class HotairBalloon : MonoBehaviour {
         if (postProcessVolume != null) {
             postProcessVolume.profile.TryGetSettings(out vignette);
         }
+
+        feverRingRenderer.material = Instantiate(feverRingRenderer.material);
+        FeverGauge = 0;
     }
 
     void Update() {
@@ -109,14 +141,14 @@ public class HotairBalloon : MonoBehaviour {
             emissionRight.rateOverTime = 25;
             PlayTopThrusterPaticle();
             balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
-            balloonRb.velocity += Vector3.up * boostVelocity;
-        } else if (RemainOilAmount > 0) {
-            // 연료가 남아있는 경우
+            balloonRb.velocity += Vector3.up * AdditionalVelocity;
+        } else if (RemainOilAmount > 0 || InFeverGaugeNotEmpty) {
+            // 연료가 남아있는 경우 또는 피버 중
 
             // 방향 조작을 하면 상승 + 좌우 이동
             if (horizontalAxis != 0) {
                 balloonRb.velocity = defaultVelocity * vNormalized;
-                balloonRb.velocity += Vector3.up * boostVelocity;
+                balloonRb.velocity += Vector3.up * AdditionalVelocity;
 
                 if (vNormalized.x > 0.01f) {
                     emissionLeft.rateOverTime = 50;
@@ -134,7 +166,7 @@ public class HotairBalloon : MonoBehaviour {
                 }
             } else if (handleSlider.Controlled) {
                 balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
-                balloonRb.velocity += Vector3.up * boostVelocity;
+                balloonRb.velocity += Vector3.up * AdditionalVelocity;
 
                 emissionLeft.rateOverTime = 25;
                 emissionRight.rateOverTime = 25;
@@ -145,7 +177,7 @@ public class HotairBalloon : MonoBehaviour {
             } else if (IsFreeOilOnStart) {
                 // 스테이지 시작하고 5초동안은 공짜로 위로 올라간다.
                 balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
-                balloonRb.velocity += Vector3.up * boostVelocity;
+                balloonRb.velocity += Vector3.up * AdditionalVelocity;
 
                 emissionLeft.rateOverTime = 25;
                 emissionRight.rateOverTime = 25;
@@ -209,11 +241,9 @@ public class HotairBalloon : MonoBehaviour {
             stageStatText.SetText(string.Format("SPEED: {0:f1}\nHEIGHT: {1:f1}", balloonRb.velocity.magnitude, balloon.transform.position.y));
         }
 
-        if (feverRemainTime > 0) {
-            feverRemainTime -= Time.deltaTime;
-            if (feverRemainTime <= 0) {
-                StopFever();
-            }
+        // 피버 아이템을 가지고 있지 않을 때만 감소
+        if (feverItemParticle.activeSelf == false) {
+            FeverGauge -= Time.deltaTime * feverGaugeDecrement;
         }
     }
 
@@ -246,9 +276,9 @@ public class HotairBalloon : MonoBehaviour {
     public void RefillOil(float amount) {
         Debug.Log("RefillOil");
         BalloonSound.instance.PlayGetOilItem();
-        if (RemainOilAmount + amount > 100.0f && feverRemainTime <= 0) {
-            StartFever();
-        }
+        // if (RemainOilAmount + amount > 100.0f && feverRemainTime <= 0) {
+        //     StartFever();
+        // }
         RemainOilAmount = Mathf.Clamp(RemainOilAmount + amount, 0, 100.0f);
         if (Time.time - lastRefillTime < boostRefillMaxInterval) {
             Debug.Log("Boost Counter!");
@@ -264,28 +294,16 @@ public class HotairBalloon : MonoBehaviour {
         lastRefillTime = Time.time;
     }
 
-    private void StartFever() {
-        Debug.Log("Fever!!!");
-        // var stageName = SceneManager.GetActiveScene().name;
-        // var feverTouchedLayer = LayerMask.NameToLayer("Fever Touched");
-        // foreach (var stageRb in GameObject.Find(stageName).GetComponentsInChildren<Rigidbody>()) {
-        //     if (stageRb.gameObject.layer != feverTouchedLayer) {
-        //         stageRb.isKinematic = false;
-        //         stageRb.useGravity = false;
-        //     }
-        // }
-        feverRemainTime = 10.0f;
+    public void StartFever() {
+        if (feverItemParticle.activeSelf) {
+            feverItemParticle.SetActive(false);
+            inFever = true;
+            Debug.Log("Fever!!!");
+        }
     }
 
     private static void StopFever() {
-        // var stageName = SceneManager.GetActiveScene().name;
-        // var feverTouchedLayer = LayerMask.NameToLayer("Fever Touched");
-        // foreach (var stageRb in GameObject.Find(stageName).GetComponentsInChildren<Rigidbody>()) {
-        //     if (stageRb.gameObject.layer != feverTouchedLayer) {
-        //         stageRb.isKinematic = true;
-        //         stageRb.useGravity = true;
-        //     }
-        // }
+        
     }
 
     internal void AddExplosionForce(Vector3 direction) {

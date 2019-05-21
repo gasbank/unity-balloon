@@ -49,6 +49,7 @@ public class YellowBlock : MonoBehaviour {
                     }
                 }
                 Destroy(gameObject);
+                player.IncreaseFeverGauge();
             }
         }
     }
