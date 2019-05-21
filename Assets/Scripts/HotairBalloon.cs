@@ -244,6 +244,11 @@ public class HotairBalloon : MonoBehaviour {
         // 피버 아이템을 가지고 있지 않을 때만 감소
         if (feverItemParticle.activeSelf == false) {
             FeverGauge -= Time.deltaTime * feverGaugeDecrement;
+            // 피버 게이지가 바닥 나면
+            if (FeverGauge <= 0) {
+                // 피버 모드 종료
+                inFever = false;
+            }
         }
     }
 
