@@ -162,7 +162,7 @@ public class HotairBalloon : MonoBehaviour {
                 }
 
                 if (IsOilConsumed) {
-                    RemainOilAmount -= Time.deltaTime * burnSpeed;
+                    RemainOilAmount -= Time.deltaTime *1.5f* burnSpeed;
                 }
             } else if (handleSlider.Controlled) {
                 balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
@@ -243,7 +243,7 @@ public class HotairBalloon : MonoBehaviour {
 
         // 피버 아이템을 가지고 있지 않을 때만 감소
         if (feverItemParticle.activeSelf == false) {
-            FeverGauge -= Time.deltaTime * feverGaugeDecrement;
+            FeverGauge -= Time.deltaTime *2* feverGaugeDecrement;
             // 피버 게이지가 바닥 나면
             if (FeverGauge <= 0) {
                 // 피버 모드 종료
