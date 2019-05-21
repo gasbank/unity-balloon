@@ -643,7 +643,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1405652644}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1960,6 +1960,12 @@ PrefabInstance:
       objectReference: {fileID: 112137436}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e23757ca4cfe34e05b059bd65e4c59a4, type: 3}
+--- !u!20 &1405652644 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 556196813606185405, guid: e23757ca4cfe34e05b059bd65e4c59a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1315054919}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1455164765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3406,6 +3412,31 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6800839041691681448, guid: 2f2baa4385a179341a11e45299815ba0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 993997156534541103, guid: 2f2baa4385a179341a11e45299815ba0,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 993997156534541103, guid: 2f2baa4385a179341a11e45299815ba0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481721402844063130, guid: 2f2baa4385a179341a11e45299815ba0,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481721402844063130, guid: 2f2baa4385a179341a11e45299815ba0,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481721402844063130, guid: 2f2baa4385a179341a11e45299815ba0,
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

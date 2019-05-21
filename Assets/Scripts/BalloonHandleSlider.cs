@@ -11,6 +11,9 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
     [SerializeField] float horizontal = 0;
     [SerializeField] bool leftButton;
     [SerializeField] bool rightButton;
+    [SerializeField] SliderInterface sliderInterface = null;
+    [SerializeField] RectTransform rt = null;
+    [SerializeField] CanvasScaler canvasScaler = null;
 
     public bool Controlled { get => controlled; private set => controlled = value; }
     public float Horizontal => horizontal;
@@ -18,9 +21,17 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
     public bool LeftButton { get => leftButton; set => leftButton = value; }
     public bool RightButton { get => rightButton; set => rightButton = value; }
 
+    void Awake() {
+        rt = GetComponent<RectTransform>();
+        canvasScaler = GetComponentInParent<CanvasScaler>();
+    }
+
     public void OnPointerDown(PointerEventData eventData) {
         startPosition = slider.normalizedValue;
         Controlled = true;
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(rt, eventData.position, null, out var positionInParentRect)) {
+            sliderInterface.Rt.anchoredPosition = positionInParentRect;
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData) {
@@ -36,5 +47,9 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
             v += 1;
         }
         horizontal = v + (Controlled ? Mathf.Clamp(8 * (slider.normalizedValue - startPosition), -1, 1) : 0);
+
+        if (sliderInterface != null) {
+            sliderInterface.Value = Horizontal;
+        }
     }
 }

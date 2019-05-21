@@ -5,11 +5,16 @@ public class HotairBalloonCamera : MonoBehaviour {
 
     void OnValidate() {
         if (gameObject.scene.rootCount != 0) {
-            followTarget = GameObject.Find("Hotair Balloon/Balloon/Balloon Camera Target").transform;
+            var balloonCameraTarget = GameObject.Find("Hotair Balloon/Balloon/Balloon Camera Target");
+            if (balloonCameraTarget != null) {
+                followTarget = balloonCameraTarget.transform;
+            }
         }
     }
 
     void LateUpdate() {
-        transform.position = new Vector3(transform.position.x, followTarget.position.y, transform.position.z);
+        if (followTarget != null) {
+            transform.position = new Vector3(transform.position.x, followTarget.position.y, transform.position.z);
+        }
     }
 }
