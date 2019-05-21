@@ -176,7 +176,12 @@ public class HotairBalloon : MonoBehaviour {
         }
 
         if (vignette != null) {
-            vignette.intensity.value = zeroOilDuration > 0 ? (0.5f + Mathf.PingPong(Time.time * 0.7f, 0.1f)) : 0;
+            if(zeroOilDuration > 0){
+             vignette.intensity.value = (0.5f + Mathf.PingPong(Time.time * 0.7f, 0.1f));
+             BalloonSound.instance.PlayMaydayMayday();}
+            else 
+            vignette.intensity.value = 0;
+            
         }
 
         foreach (var windRegion in appliedWindRegionSet) {

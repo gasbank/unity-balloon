@@ -18,6 +18,7 @@ public class BalloonSound : MonoBehaviour {
     #pragma warning disable CS0414
     [SerializeField] AudioClip dash_continuous = null;
     [SerializeField] AudioClip going_up = null;
+    [SerializeField] AudioClip maydaymayday = null;
     #pragma warning restore CS0414
 
 
@@ -39,6 +40,7 @@ public class BalloonSound : MonoBehaviour {
     public void PlayStartBoost() { Debug.Log("PlayStartBoost"); oneShotSource.PlayOneShot(startBoost); }
     public void PlayKnockback() { Debug.Log("PlayKnockback"); oneShotSource.PlayOneShot(knockback); }
 
+ public void PlayMaydayMayday() { Debug.Log("MaydayMayday"); oneShotSource.PlayOneShot(maydaymayday); }
     void Awake() {
         instance = this;
     }
