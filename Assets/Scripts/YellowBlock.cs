@@ -10,9 +10,26 @@ public class YellowBlock : MonoBehaviour {
     [SerializeField] TMProText hpText = null;
     [SerializeField] GameObject afterDestroySpawn = null;
     [SerializeField] Transform afterDestroySpawnParent = null;
+    [SerializeField] Material halfRingMaterialOriginal = null;
+    [SerializeField] Renderer halfRingRenderer = null;
+    static Material halfRingMaterialCopy = null;
 
     void Awake() {
         hpText.text = hp.ToString();
+        if (halfRingMaterialOriginal != null) {
+            if (halfRingMaterialCopy == null) {
+                halfRingMaterialCopy = Instantiate(halfRingMaterialOriginal);
+            }
+        }
+        if (halfRingRenderer != null) {
+            halfRingRenderer.material = halfRingMaterialCopy;
+        }
+    }
+
+    void Update() {
+        if (halfRingMaterialCopy != null) {
+            halfRingMaterialCopy.mainTextureOffset = new Vector2(0, Time.time);
+        }
     }
 
     void OnCollisionEnter(Collision collision) {
