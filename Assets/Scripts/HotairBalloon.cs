@@ -55,6 +55,7 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] float feverMaxVelocity = 30;
     [SerializeField] bool verticallyStationary = false;
     [SerializeField] FixedJoint[] fixedJointArray = null;
+    [SerializeField] Gear gear = null;
 
     Vignette vignette;
 
@@ -85,6 +86,7 @@ public class HotairBalloon : MonoBehaviour {
     }
 
     [SerializeField] Rigidbody[] rbArray = null;
+    [SerializeField] Collider[] colliderArray = null;
 
     public bool InFeverGaugeNotEmpty => inFever && FeverGauge > 0;
 
@@ -130,6 +132,7 @@ public class HotairBalloon : MonoBehaviour {
 
         rbArray = GetComponentsInChildren<Rigidbody>();
         fixedJointArray = GetComponentsInChildren<FixedJoint>();
+        colliderArray = GetComponentsInChildren<Collider>();
     }
 
     void Update() {
@@ -159,7 +162,11 @@ public class HotairBalloon : MonoBehaviour {
             balloonRb.AddForce(Vector3.up * (-5 * balloonRb.position.y - 2 * balloonRb.velocity.y), ForceMode.Impulse);
         }
 
-        if (IsStageFinished) {
+        if (IsGameOver) {
+            StopTopThrusterParticle();
+            emissionLeft.rateOverTime = 0;
+            emissionRight.rateOverTime = 0;
+        } else if (IsStageFinished) {
             // 스테이지 완료 한 이후에는 그냥 위로만 쭈욱 올라가자
             emissionLeft.rateOverTime = 25;
             emissionRight.rateOverTime = 25;
@@ -266,6 +273,13 @@ public class HotairBalloon : MonoBehaviour {
             foreach (var fixedJoint in fixedJointArray) {
                 Destroy(fixedJoint);
             }
+            foreach (var rb in rbArray) {
+                rb.constraints = 0;
+            }
+            foreach (var collider in colliderArray) {
+                collider.enabled = true;
+            }
+            gear.enabled = false;
         }
 
         float boostVelocityVelocity = 0;
