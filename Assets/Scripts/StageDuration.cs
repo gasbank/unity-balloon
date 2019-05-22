@@ -6,8 +6,15 @@ using UnityEngine;
 
 public class StageDuration : MonoBehaviour {
     [SerializeField] TextMeshProUGUI text = null;
+    [SerializeField] HotairBalloon hotairBalloon = null;
+
+    void Awake() {
+        hotairBalloon = GameObject.Find("Hotair Balloon").GetComponent<HotairBalloon>();
+    }
 
     void Update() {
-        text.text = (DateTime.MinValue + TimeSpan.FromSeconds(Time.timeSinceLevelLoad)).ToString("mm:ss.fff");
+        if (hotairBalloon.IsGameOver == false && hotairBalloon.IsStageFinished == false) {
+            text.text = (DateTime.MinValue + TimeSpan.FromSeconds(Time.timeSinceLevelLoad)).ToString("mm:ss.fff");
+        }
     }
 }
