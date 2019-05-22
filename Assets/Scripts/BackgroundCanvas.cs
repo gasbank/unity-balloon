@@ -11,9 +11,14 @@ public class BackgroundCanvas : MonoBehaviour {
     [SerializeField] Color colorMid;
     [SerializeField] Color colorBot;
     [SerializeField] float colorChangeScale = 200;
+
+    void OnValidate() {
+        if (gameObject.scene.rootCount != 0) {
+            canvas.worldCamera = Camera.main;
+        }
+    }
     
     void Awake() {
-        canvas.worldCamera = Camera.main;
         image.material = Instantiate(image.material);
         hotairBalloon = GameObject.Find("Hotair Balloon").GetComponent<HotairBalloon>();
         colorTop = image.material.GetColor("_ColorTop");
