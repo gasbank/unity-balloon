@@ -54,6 +54,7 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] bool inFever = false;
     [SerializeField] float feverMaxVelocity = 30;
     [SerializeField] bool verticallyStationary = false;
+    [SerializeField] FixedJoint[] fixedJointArray = null;
 
     Vignette vignette;
 
@@ -128,6 +129,7 @@ public class HotairBalloon : MonoBehaviour {
         FeverGauge = 0;
 
         rbArray = GetComponentsInChildren<Rigidbody>();
+        fixedJointArray = GetComponentsInChildren<FixedJoint>();
     }
 
     void Update() {
@@ -212,7 +214,7 @@ public class HotairBalloon : MonoBehaviour {
                 emissionLeft.rateOverTime = 0;
                 emissionRight.rateOverTime = 0;
             }
-        } else {
+        } else if (IsStageFinished == false && IsGameOver == false) {
             // 추락 중에는 조타만 가능하게 한다.
             balloonRb.velocity = new Vector3(defaultVelocity * vNormalized.x, balloonRb.velocity.y, balloonRb.velocity.z);
 
@@ -261,6 +263,9 @@ public class HotairBalloon : MonoBehaviour {
             gameOverGroup.enabled = true;
             BalloonSound.instance.PlayGameOver();
             BalloonSound.instance.PlayGameOver_sigh();
+            foreach (var fixedJoint in fixedJointArray) {
+                Destroy(fixedJoint);
+            }
         }
 
         float boostVelocityVelocity = 0;
