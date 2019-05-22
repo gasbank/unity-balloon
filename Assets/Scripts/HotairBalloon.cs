@@ -57,7 +57,6 @@ public class HotairBalloon : MonoBehaviour {
 
     Vignette vignette;
 
-
     public float RemainOilAmount {
         get => remainOilAmount;
         private set { remainOilAmount = Mathf.Clamp(value, 0, 100); }
@@ -67,9 +66,14 @@ public class HotairBalloon : MonoBehaviour {
 
     public bool IsFreeOilOnStart => Time.timeSinceLevelLoad < freeOilOnStartDuration;
 
-    public bool IsOilConsumed => IsFreeOilOnStart == false && IsStageFinished == false && InFeverGaugeNotEmpty == false && VerticallyStationary == false;
+    public bool IsOilConsumed =>
+        IsFreeOilOnStart == false
+        && IsStageFinished == false
+        && InFeverGaugeNotEmpty == false;
 
-    public bool IsStageFinished => finishGroup != null && finishGroup.enabled;
+    public bool IsStageFinished =>
+        finishGroup != null
+        && finishGroup.enabled;
 
     float FeverGauge {
         get => (1.0f - feverRingRenderer.material.mainTextureOffset.y) * feverGaugeMax;
@@ -82,6 +86,8 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] Rigidbody[] rbArray = null;
 
     public bool InFeverGaugeNotEmpty => inFever && FeverGauge > 0;
+
+    public bool BalloonGameOverCondition => zeroOilDuration > 5.0f || balloon.position.y < -5;
 
     public void IncreaseFeverGauge() {
         if (inFever) {
@@ -101,14 +107,7 @@ public class HotairBalloon : MonoBehaviour {
 
     public bool VerticallyStationary {
         get => verticallyStationary;
-        set {
-            verticallyStationary = value;
-            // if (value) {
-            //     balloonRb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
-            // } else {
-            //     balloonRb.constraints = RigidbodyConstraints.FreezePositionZ;
-            // }
-        }
+        set => verticallyStationary = value;
     }
 
     void OnValidate() {
@@ -154,8 +153,8 @@ public class HotairBalloon : MonoBehaviour {
             BalloonSound.instance.SetEngineVolume(1);
         }
 
-        if (VerticallyStationary && balloonRb.position.y < 0) {
-            balloonRb.AddForce(Vector3.up * (- 5 * balloonRb.position.y - 2 * balloonRb.velocity.y), ForceMode.Impulse);
+        if (VerticallyStationary && balloonRb.position.y < 0 && RemainOilAmount > 0) {
+            balloonRb.AddForce(Vector3.up * (-5 * balloonRb.position.y - 2 * balloonRb.velocity.y), ForceMode.Impulse);
         }
 
         if (IsStageFinished) {
@@ -254,7 +253,9 @@ public class HotairBalloon : MonoBehaviour {
             balloonRb.velocity += windRegion.WindForce;
         }
 
-        if ((zeroOilDuration > 5.0f || balloon.position.y < -5) && gameOverGroup.enabled == false && IsStageFinished == false && VerticallyStationary == false) {
+        if (BalloonGameOverCondition
+            && gameOverGroup.enabled == false
+            && IsStageFinished == false) {
             gameOverGroup.enabled = true;
             BalloonSound.instance.PlayGameOver();
             BalloonSound.instance.PlayGameOver_sigh();
@@ -287,7 +288,9 @@ public class HotairBalloon : MonoBehaviour {
             if (ps != null && ps.isPlaying == false) {
                 engineRunning = true;
                 if (IsGameOver == false && IsStageFinished == false) {
-                    if (VerticallyStationary == false) {
+                    // VerticallyStationary에 의해서 Y=0 부근에서 진동 일어날 때
+                    // 엔진 사운드가 너무 반복적인 문제를 해결하기 위한 조건문
+                    if (Y > 1) {
                         BalloonSound.instance.PlayStartEngine();
                     }
                 }
@@ -300,7 +303,9 @@ public class HotairBalloon : MonoBehaviour {
         foreach (var ps in fireParticleSystemList) {
             if (ps != null && ps.isStopped == false) {
                 if (engineRunning && IsGameOver == false && IsStageFinished == false) {
-                    if (VerticallyStationary == false) {
+                    // VerticallyStationary에 의해서 Y=0 부근에서 진동 일어날 때
+                    // 엔진 사운드가 너무 반복적인 문제를 해결하기 위한 조건문
+                    if (Y > 1) {
                         BalloonSound.instance.PlayStopEngine();
                     }
                     engineRunning = false;
