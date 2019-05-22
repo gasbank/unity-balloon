@@ -16,7 +16,7 @@ public class HotairBalloonCamera : MonoBehaviour {
     }
 
     void LateUpdate() {
-        if (followTarget != null && hotairBalloon.IsGameOver == false && hotairBalloon.IsStageFinished == false) {
+        if (followTarget != null) {
             transform.position = new Vector3(transform.position.x, followTarget.position.y, transform.position.z);
         }
     }
