@@ -53,10 +53,11 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] GameObject feverItemParticle = null;
     [SerializeField] bool inFever = false;
     [SerializeField] float feverMaxVelocity = 30;
+    [SerializeField] bool verticallyStationary = false;
 
     Vignette vignette;
 
-    
+
     public float RemainOilAmount {
         get => remainOilAmount;
         private set { remainOilAmount = Mathf.Clamp(value, 0, 100); }
@@ -66,7 +67,7 @@ public class HotairBalloon : MonoBehaviour {
 
     public bool IsFreeOilOnStart => Time.timeSinceLevelLoad < freeOilOnStartDuration;
 
-    public bool IsOilConsumed => IsFreeOilOnStart == false && IsStageFinished == false && InFeverGaugeNotEmpty == false;
+    public bool IsOilConsumed => IsFreeOilOnStart == false && IsStageFinished == false && InFeverGaugeNotEmpty == false && VerticallyStationary == false;
 
     public bool IsStageFinished => finishGroup != null && finishGroup.enabled;
 
@@ -77,6 +78,8 @@ public class HotairBalloon : MonoBehaviour {
             feverRingRenderer.material.mainTextureOffset = new Vector2(feverRingRenderer.material.mainTextureOffset.x, y);
         }
     }
+
+    [SerializeField] Rigidbody[] rbArray = null;
 
     public bool InFeverGaugeNotEmpty => inFever && FeverGauge > 0;
 
@@ -94,6 +97,20 @@ public class HotairBalloon : MonoBehaviour {
 
     float AdditionalVelocity => boostVelocity + (InFeverGaugeNotEmpty ? feverMaxVelocity : 0);
 
+    public float Y => balloonRb.position.y;
+
+    public bool VerticallyStationary {
+        get => verticallyStationary;
+        set {
+            verticallyStationary = value;
+            // if (value) {
+            //     balloonRb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
+            // } else {
+            //     balloonRb.constraints = RigidbodyConstraints.FreezePositionZ;
+            // }
+        }
+    }
+
     void OnValidate() {
         if (gameObject.scene.rootCount != 0) {
             handleSlider = GameObject.Find("Canvas/Slider").GetComponent<BalloonHandleSlider>();
@@ -110,6 +127,8 @@ public class HotairBalloon : MonoBehaviour {
 
         feverRingRenderer.material = Instantiate(feverRingRenderer.material);
         FeverGauge = 0;
+
+        rbArray = GetComponentsInChildren<Rigidbody>();
     }
 
     void Update() {
@@ -133,6 +152,10 @@ public class HotairBalloon : MonoBehaviour {
             BalloonSound.instance.SetEngineVolume(0);
         } else if (balloonRb.velocity.y > 0) {
             BalloonSound.instance.SetEngineVolume(1);
+        }
+
+        if (VerticallyStationary && balloonRb.position.y < 0) {
+            balloonRb.AddForce(Vector3.up * (- 5 * balloonRb.position.y - 2 * balloonRb.velocity.y), ForceMode.Impulse);
         }
 
         if (IsStageFinished) {
@@ -174,6 +197,10 @@ public class HotairBalloon : MonoBehaviour {
                 if (IsOilConsumed) {
                     RemainOilAmount -= Time.deltaTime * burnSpeed;
                 }
+            } else if (VerticallyStationary) {
+                PlayTopThrusterPaticle();
+                emissionLeft.rateOverTime = 0;
+                emissionRight.rateOverTime = 0;
             } else if (IsFreeOilOnStart) {
                 // 스테이지 시작하고 5초동안은 공짜로 위로 올라간다.
                 balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
@@ -201,7 +228,7 @@ public class HotairBalloon : MonoBehaviour {
                 BalloonSound.instance.PlayMaydayMayday();
             }
             zeroOilDuration += Time.deltaTime;
-            
+
             StopTopThrusterParticle();
         } else {
             zeroOilDuration = 0;
@@ -227,7 +254,7 @@ public class HotairBalloon : MonoBehaviour {
             balloonRb.velocity += windRegion.WindForce;
         }
 
-        if ((zeroOilDuration > 5.0f || balloon.position.y < -5) && gameOverGroup.enabled == false && IsStageFinished == false) {
+        if ((zeroOilDuration > 5.0f || balloon.position.y < -5) && gameOverGroup.enabled == false && IsStageFinished == false && VerticallyStationary == false) {
             gameOverGroup.enabled = true;
             BalloonSound.instance.PlayGameOver();
             BalloonSound.instance.PlayGameOver_sigh();
@@ -244,7 +271,7 @@ public class HotairBalloon : MonoBehaviour {
 
         // 피버 아이템을 가지고 있지 않을 때만 감소
         if (feverItemParticle.activeSelf == false) {
-            FeverGauge -= Time.deltaTime *2* feverGaugeDecrement;
+            FeverGauge -= Time.deltaTime * 2 * feverGaugeDecrement;
             // 피버 게이지가 바닥 나면
             if (FeverGauge <= 0) {
                 // 피버 모드 종료
@@ -260,7 +287,9 @@ public class HotairBalloon : MonoBehaviour {
             if (ps != null && ps.isPlaying == false) {
                 engineRunning = true;
                 if (IsGameOver == false && IsStageFinished == false) {
-                    BalloonSound.instance.PlayStartEngine();
+                    if (VerticallyStationary == false) {
+                        BalloonSound.instance.PlayStartEngine();
+                    }
                 }
                 ps.Play();
             }
@@ -271,7 +300,9 @@ public class HotairBalloon : MonoBehaviour {
         foreach (var ps in fireParticleSystemList) {
             if (ps != null && ps.isStopped == false) {
                 if (engineRunning && IsGameOver == false && IsStageFinished == false) {
-                    BalloonSound.instance.PlayStopEngine();
+                    if (VerticallyStationary == false) {
+                        BalloonSound.instance.PlayStopEngine();
+                    }
                     engineRunning = false;
                 }
                 ps.Stop();
@@ -309,7 +340,7 @@ public class HotairBalloon : MonoBehaviour {
     }
 
     private static void StopFever() {
-        
+
     }
 
     internal void AddExplosionForce(Vector3 direction) {

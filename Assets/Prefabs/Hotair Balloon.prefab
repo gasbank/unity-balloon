@@ -24463,14 +24463,16 @@ MonoBehaviour:
   directionArrowPivot: {fileID: 3414897231241613112}
   freeOilOnStartDuration: 5
   boostTrailRenderer: {fileID: 1406606275}
-  feverRemainTime: 0
   postProcessVolume: {fileID: 0}
   feverRingRenderer: {fileID: 3412497662314834818}
   feverGaugeMax: 50
   feverGaugeIncrement: 8
   feverGaugeDecrement: 3
-  feverStartButton: {fileID: 0}
   feverItemParticle: {fileID: 3045181185264388267}
+  inFever: 0
+  feverMaxVelocity: 30
+  verticallyStationary: 0
+  rbArray: []
 --- !u!1 &4940520359288410078
 GameObject:
   m_ObjectHideFlags: 0
