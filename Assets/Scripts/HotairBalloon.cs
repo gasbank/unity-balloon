@@ -162,7 +162,11 @@ public class HotairBalloon : MonoBehaviour {
             balloonRb.AddForce(Vector3.up * (-5 * balloonRb.position.y - 2 * balloonRb.velocity.y), ForceMode.Impulse);
         }
 
-        if (IsStageFinished) {
+        if (IsGameOver) {
+            StopTopThrusterParticle();
+            emissionLeft.rateOverTime = 0;
+            emissionRight.rateOverTime = 0;
+        } else if (IsStageFinished) {
             // 스테이지 완료 한 이후에는 그냥 위로만 쭈욱 올라가자
             emissionLeft.rateOverTime = 25;
             emissionRight.rateOverTime = 25;
