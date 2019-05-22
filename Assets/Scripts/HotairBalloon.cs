@@ -144,9 +144,8 @@ public class HotairBalloon : MonoBehaviour {
             balloonRb.velocity += Vector3.up * AdditionalVelocity;
         } else if (RemainOilAmount > 0 || InFeverGaugeNotEmpty) {
             // 연료가 남아있는 경우 또는 피버 중
-
-            // 방향 조작을 하면 상승 + 좌우 이동
             if (horizontalAxis != 0) {
+                // 방향 조작을 하고 있는 중이면 상승 + 좌우 이동
                 balloonRb.velocity = defaultVelocity * vNormalized;
                 balloonRb.velocity += Vector3.up * AdditionalVelocity;
 
@@ -164,7 +163,8 @@ public class HotairBalloon : MonoBehaviour {
                 if (IsOilConsumed) {
                     RemainOilAmount -= Time.deltaTime * burnSpeed;
                 }
-            } else if (handleSlider.Controlled) {
+            } else if (handleSlider.Controlled || InFeverGaugeNotEmpty) {
+                // 터치만 하고 있는 상태(방향 조작 0)라면 위로만 올라가면 된다.
                 balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
                 balloonRb.velocity += Vector3.up * AdditionalVelocity;
 
@@ -182,6 +182,7 @@ public class HotairBalloon : MonoBehaviour {
                 emissionLeft.rateOverTime = 25;
                 emissionRight.rateOverTime = 25;
             } else {
+                // 좌우 엔진 효과 끈다. 물리 법칙에 맡긴다. (자유 낙하)
                 emissionLeft.rateOverTime = 0;
                 emissionRight.rateOverTime = 0;
             }
