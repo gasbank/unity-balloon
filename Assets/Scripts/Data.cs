@@ -13,7 +13,20 @@ public class Data : MonoBehaviour {
     public BalloonLanguageCode CurrentLanguageCode = BalloonLanguageCode.Ko;
     public bool IsBigNumberNotationOn = false;
 
+    private void ChangeLanguageBySystemLanguage() {
+        switch (Application.systemLanguage) {
+            case SystemLanguage.Korean: //korean
+                CurrentLanguageCode = BalloonLanguageCode.Ko;
+                break;
+            default:
+                CurrentLanguageCode = BalloonLanguageCode.En;
+                break;
+        }
+    }
+
     void Awake() {
+        ChangeLanguageBySystemLanguage();
+        
         if (dataSet == null) {
             var formatter = new BinaryFormatter();
             DataUpdater.DeleteAllCaches();

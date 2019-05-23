@@ -46,6 +46,8 @@ public class DataReloader {
            formatter.Serialize(stream, dataSet);
            stream.Close();
         }
+
+        AssetDatabase.Refresh();
     }
 
     // https://stackoverflow.com/questions/323640/can-i-convert-a-c-sharp-string-value-to-an-escaped-string-literal
