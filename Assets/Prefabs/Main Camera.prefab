@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 556196813606185407}
   - component: {fileID: 556196813606185376}
   - component: {fileID: 556196813606185379}
+  - component: {fileID: 5513993847739811755}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -100,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 0}
+  hotairBalloon: {fileID: 0}
 --- !u!114 &556196813606185376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,6 +190,20 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &5513993847739811755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556196813606185406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3b1f63f68eeb4b1c8df6f34239c2dbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentLanguageCode: 0
+  IsBigNumberNotationOn: 0
 --- !u!1001 &5696516961012234663
 PrefabInstance:
   m_ObjectHideFlags: 0
