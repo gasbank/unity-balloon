@@ -9,9 +9,9 @@ public class HotairBalloonCamera : MonoBehaviour {
             var balloonCameraTarget = GameObject.Find("Hotair Balloon/Balloon/Balloon Camera Target");
             if (balloonCameraTarget != null) {
                 followTarget = balloonCameraTarget.transform;
-            }
 
-            hotairBalloon = GameObject.Find("Hotair Balloon").GetComponent<HotairBalloon>();
+                hotairBalloon = GameObject.Find("Hotair Balloon").GetComponent<HotairBalloon>();
+            }
         }
     }
 
