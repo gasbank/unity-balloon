@@ -125,9 +125,12 @@ public class HotairBalloon : MonoBehaviour {
         gameOverGroup = FindObjectOfType<GameOverGroup>().GetComponent<Canvas>();
         finishGroup = FindObjectOfType<FinishGroup>().GetComponent<Canvas>();
 
-        postProcessVolume = GameObject.Find("Main Camera/Post Process Volume").GetComponent<PostProcessVolume>();
+        var postProcessVolumeGo = GameObject.Find("Main Camera/Post Process Volume");
         if (postProcessVolume != null) {
-            postProcessVolume.profile.TryGetSettings(out vignette);
+            postProcessVolume = postProcessVolumeGo.GetComponent<PostProcessVolume>();
+            if (postProcessVolume != null) {
+                postProcessVolume.profile.TryGetSettings(out vignette);
+            }
         }
 
         feverRingRenderer.material = Instantiate(feverRingRenderer.material);

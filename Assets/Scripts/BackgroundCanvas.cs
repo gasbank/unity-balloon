@@ -14,7 +14,7 @@ public class BackgroundCanvas : MonoBehaviour {
 
     void OnValidate() {
         if (gameObject.scene.rootCount != 0) {
-            canvas.worldCamera = Camera.main;
+            canvas.worldCamera = GameObject.Find("Main Camera/Far Camera").GetComponent<Camera>();
         }
     }
     
