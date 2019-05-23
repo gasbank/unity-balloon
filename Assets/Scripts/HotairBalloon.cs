@@ -71,7 +71,9 @@ public class HotairBalloon : MonoBehaviour {
     public bool IsOilConsumed =>
         IsFreeOilOnStart == false
         && IsStageFinished == false
-        && InFeverGaugeNotEmpty == false;
+        && IsGameOver == false
+        && InFeverGaugeNotEmpty == false
+        && (HorizontalAxis != 0 || handleSlider.Controlled || InFeverGaugeNotEmpty);
 
     public bool IsStageFinished =>
         finishGroup != null
@@ -135,33 +137,14 @@ public class HotairBalloon : MonoBehaviour {
         colliderArray = GetComponentsInChildren<Collider>();
     }
 
-    void Update() {
-        oil.localScale = new Vector3(oil.localScale.x, remainOilAmount / 100.0f, oil.localScale.z);
-        balloonOilSpritePivot.localPosition = new Vector3(balloonOilSpritePivot.localPosition.x, -0.1f + 0.2f * remainOilAmount / 100.0f, balloonOilSpritePivot.localPosition.z);
+    float HorizontalAxis => Input.GetAxis("Horizontal") + (handleSlider != null ? handleSlider.Horizontal : 0);
 
-        var horizontalAxis = Input.GetAxis("Horizontal");
-        if (handleSlider != null) {
-            horizontalAxis += handleSlider.Horizontal;
-        }
-
-        var dirRad = Mathf.Deg2Rad * (90 - maxDeg * horizontalAxis);
-        var vNormalized = new Vector3(Mathf.Cos(dirRad), Mathf.Sin(dirRad), 0);
-        directionArrowPivot.rotation = Quaternion.Euler(0, 0, -90 + Mathf.Rad2Deg * dirRad);
-        //v += Vector3.up * Input.GetAxis("Vertical") / 2;
-
+    void FixedUpdate() {
         var emissionLeft = thrusterLeft.emission;
         var emissionRight = thrusterRight.emission;
-
-        if (balloonRb.velocity.y < 0) {
-            BalloonSound.instance.SetEngineVolume(0);
-        } else if (balloonRb.velocity.y > 0) {
-            BalloonSound.instance.SetEngineVolume(1);
-        }
-
-        if (VerticallyStationary && balloonRb.position.y < 0 && RemainOilAmount > 0) {
-            balloonRb.AddForce(Vector3.up * (-5 * balloonRb.position.y - 2 * balloonRb.velocity.y), ForceMode.Impulse);
-        }
-
+        var dirRad = Mathf.Deg2Rad * (90 - maxDeg * HorizontalAxis);
+        var vNormalized = new Vector3(Mathf.Cos(dirRad), Mathf.Sin(dirRad), 0);
+        
         if (IsGameOver) {
             StopTopThrusterParticle();
             emissionLeft.rateOverTime = 0;
@@ -175,7 +158,7 @@ public class HotairBalloon : MonoBehaviour {
             balloonRb.velocity += Vector3.up * AdditionalVelocity;
         } else if (RemainOilAmount > 0 || InFeverGaugeNotEmpty) {
             // 연료가 남아있는 경우 또는 피버 중
-            if (horizontalAxis != 0) {
+            if (HorizontalAxis != 0) {
                 // 방향 조작을 하고 있는 중이면 상승 + 좌우 이동
                 balloonRb.velocity = defaultVelocity * vNormalized;
                 balloonRb.velocity += Vector3.up * AdditionalVelocity;
@@ -229,6 +212,27 @@ public class HotairBalloon : MonoBehaviour {
             emissionRight.rateOverTime = 0;
         }
 
+        if (IsGameOver == false) {
+            foreach (var windRegion in appliedWindRegionSet) {
+                balloonRb.velocity += windRegion.WindForce;
+            }
+        }
+    }
+
+    void Update() {
+        oil.localScale = new Vector3(oil.localScale.x, remainOilAmount / 100.0f, oil.localScale.z);
+        balloonOilSpritePivot.localPosition = new Vector3(balloonOilSpritePivot.localPosition.x, -0.1f + 0.2f * remainOilAmount / 100.0f, balloonOilSpritePivot.localPosition.z);
+
+        var dirRad = Mathf.Deg2Rad * (90 - maxDeg * HorizontalAxis);
+        var vNormalized = new Vector3(Mathf.Cos(dirRad), Mathf.Sin(dirRad), 0);
+        directionArrowPivot.rotation = Quaternion.Euler(0, 0, -90 + Mathf.Rad2Deg * dirRad);
+        
+        if (balloonRb.velocity.y < 0) {
+            BalloonSound.instance.SetEngineVolume(0);
+        } else if (balloonRb.velocity.y > 0) {
+            BalloonSound.instance.SetEngineVolume(1);
+        }
+
         // 기름이 바닥난 상태라면...
         if (RemainOilAmount <= 0) {
             // 연료가 바닥난 순간 한번만 처리해야 하는 일은 여기서 한다.
@@ -240,7 +244,7 @@ public class HotairBalloon : MonoBehaviour {
             StopTopThrusterParticle();
         } else {
             zeroOilDuration = 0;
-            if (horizontalAxis != 0 || IsFreeOilOnStart) {
+            if (HorizontalAxis != 0 || IsFreeOilOnStart) {
                 PlayTopThrusterPaticle();
             } else {
                 if (IsStageFinished == false) {
@@ -255,12 +259,6 @@ public class HotairBalloon : MonoBehaviour {
                 vignette.intensity.value = (0.5f + Mathf.PingPong(Time.time * 0.7f, 0.1f));
             } else {
                 vignette.intensity.value = 0;
-            }
-        }
-
-        if (IsGameOver == false) {
-            foreach (var windRegion in appliedWindRegionSet) {
-                balloonRb.velocity += windRegion.WindForce;
             }
         }
 
@@ -289,6 +287,12 @@ public class HotairBalloon : MonoBehaviour {
 
         if (stageStatText != null) {
             stageStatText.SetText(string.Format("SPEED: {0:f1}\nHEIGHT: {1:f1}", balloonRb.velocity.magnitude, balloon.transform.position.y));
+        }
+
+        // AddForce라서 FixedUpdate()에 있는 게 일반적이지만,
+        // 타입이 Impulse이니 Update()에 넣는다.
+        if (VerticallyStationary && balloonRb.position.y < 0 && RemainOilAmount > 0) {
+            balloonRb.AddForce(Vector3.up * (-5 * balloonRb.position.y - 2 * balloonRb.velocity.y), ForceMode.Impulse);
         }
 
         // 피버 아이템을 가지고 있지 않을 때만 감소
