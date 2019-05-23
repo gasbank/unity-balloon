@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 556196813606185376}
   - component: {fileID: 556196813606185379}
   - component: {fileID: 5513993847739811755}
+  - component: {fileID: 3794268015461746843}
+  - component: {fileID: 9161276330596630391}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -204,6 +206,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentLanguageCode: 0
   IsBigNumberNotationOn: 0
+--- !u!114 &3794268015461746843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556196813606185406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7c6499df98854ea5978106f12214976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  koreanFont: {fileID: 0}
+  japaneseFont: {fileID: 0}
+  simplifiedChineseFont: {fileID: 0}
+  traditionalChineseFont: {fileID: 0}
+--- !u!114 &9161276330596630391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556196813606185406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ca83254bc99f4e66b1bf01886370f7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confirmPopup: {fileID: 0}
+  progressMessage: {fileID: 0}
+  fontManager: {fileID: 3794268015461746843}
+  data: {fileID: 5513993847739811755}
 --- !u!1001 &5696516961012234663
 PrefabInstance:
   m_ObjectHideFlags: 0

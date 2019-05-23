@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 
 public class DataReloader {
     [MenuItem("Balloon/Reload Data")]
@@ -23,6 +24,21 @@ public class DataReloader {
             var tableList = new ExcelToObject.TableList(xlsx);
             tableList.MapInto(dataSet);
         }
+
+        // Characters.txt 파일 만든다. (TM Pro 폰트 생성에 쓰임)
+        StringBuilder sb = new StringBuilder();
+        foreach (var kv in dataSet.StrKoData) {
+            sb.Append(kv.Value.str[0]);
+        }
+        foreach (var kv in dataSet.StrEnData) {
+            sb.Append(kv.Value.str[0]);
+        }
+        for (int i = 1; i < 256; i++)
+        {
+            sb.Append((char)i);
+        }
+        sb.Append('…');
+        File.WriteAllText("Assets/Fonts/Characters.txt", sb.ToString());
 
         IFormatter formatter = new BinaryFormatter();
         var balloonDataPath = "Assets/Resources/Data/Balloon.bytes";

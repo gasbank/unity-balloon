@@ -1740,6 +1740,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5349610763780321020, guid: f2bc1799b51a4bd48a9e5af69790c853,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5349610763780321020, guid: f2bc1799b51a4bd48a9e5af69790c853,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2bc1799b51a4bd48a9e5af69790c853, type: 3}
 --- !u!224 &1068447231 stripped
@@ -1980,8 +1990,25 @@ PrefabInstance:
       propertyPath: followTarget
       value: 
       objectReference: {fileID: 112137436}
+    - target: {fileID: 556196813606185407, guid: e23757ca4cfe34e05b059bd65e4c59a4,
+        type: 3}
+      propertyPath: hotairBalloon
+      value: 
+      objectReference: {fileID: 1343909585}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e23757ca4cfe34e05b059bd65e4c59a4, type: 3}
+--- !u!114 &1343909585 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4940520359282821976, guid: 593c303ad101d7142a49327789131521,
+    type: 3}
+  m_PrefabInstance: {fileID: 4940520360075040345}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bcc87f1c4d609b43907ec2793156bee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!20 &1405652644 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 556196813606185405, guid: e23757ca4cfe34e05b059bd65e4c59a4,
@@ -2228,6 +2255,16 @@ PrefabInstance:
     - target: {fileID: 1455164772, guid: e59ab6061c26e374286f006472e6dd5d, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101114905004829759, guid: e59ab6061c26e374286f006472e6dd5d,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101114905004829759, guid: e59ab6061c26e374286f006472e6dd5d,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e59ab6061c26e374286f006472e6dd5d, type: 3}
@@ -3497,15 +3534,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3994110805707676012, guid: 82042ef2fef534ba0b24e14a2b13a9b0,
-        type: 3}
-      propertyPath: colorChangeScale
-      value: 150
-      objectReference: {fileID: 0}
     - target: {fileID: 6166136118324007295, guid: 82042ef2fef534ba0b24e14a2b13a9b0,
         type: 3}
       propertyPath: m_Name
       value: Canvas (Background)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994110805707676012, guid: 82042ef2fef534ba0b24e14a2b13a9b0,
+        type: 3}
+      propertyPath: colorChangeScale
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6166136118324007291, guid: 82042ef2fef534ba0b24e14a2b13a9b0,
         type: 3}
