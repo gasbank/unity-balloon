@@ -28,10 +28,10 @@ public class DataReloader {
         // Characters.txt 파일 만든다. (TM Pro 폰트 생성에 쓰임)
         StringBuilder sb = new StringBuilder();
         foreach (var kv in dataSet.StrKoData) {
-            sb.Append(kv.Value.str[0]);
+            sb.AppendLine(kv.Value.str[0]);
         }
         foreach (var kv in dataSet.StrEnData) {
-            sb.Append(kv.Value.str[0]);
+            sb.AppendLine(kv.Value.str[0]);
         }
         for (int i = 1; i < 256; i++)
         {
