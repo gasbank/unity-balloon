@@ -56,6 +56,8 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] bool verticallyStationary = false;
     [SerializeField] FixedJoint[] fixedJointArray = null;
     [SerializeField] Gear gear = null;
+    [SerializeField] ParticleSystem feverStart = null;
+    [SerializeField] ParticleSystem feverThrust = null;
 
     Vignette vignette;
 
@@ -308,6 +310,7 @@ public class HotairBalloon : MonoBehaviour {
             if (FeverGauge <= 0) {
                 // 피버 모드 종료
                 inFever = false;
+                feverThrust.Stop();
             }
         }
     }
@@ -372,12 +375,12 @@ public class HotairBalloon : MonoBehaviour {
             feverItemParticle.SetActive(false);
             inFever = true;
             BalloonSound.instance.PlayFever();
+            feverStart.Stop();
+            feverStart.Play();
+            feverThrust.Stop();
+            feverThrust.Play();
             Debug.Log("Fever!!!");
         }
-    }
-
-    private static void StopFever() {
-
     }
 
     internal void AddExplosionForce(Vector3 direction) {
