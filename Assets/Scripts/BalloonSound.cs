@@ -38,7 +38,7 @@ public class BalloonSound : MonoBehaviour {
     public void PlayGetOilItem() { Debug.Log("PlayGetOilItem"); oneShotSource.PlayOneShot(getOilItem); }
     public void PlayGetOilItem2() { Debug.Log("PlayGetOilItem2"); oneShotSource15.PlayOneShot(getOilItem); }
     public void PlayGetOilItem3() { Debug.Log("PlayGetOilItem3"); oneShotSource20.PlayOneShot(getOilItem); }
-    public void PlayStopEngine() { Debug.Log("PlayStopEngine"); oneShotSource.PlayOneShot(stopEngine); }
+    public void PlayStopEngine() { /*Debug.Log("PlayStopEngine"); oneShotSource.PlayOneShot(stopEngine);*/ }
     public void PlayGoalIn() { Debug.Log("GoalinSoubnd"); oneShotSource.PlayOneShot(goalinSound); }
     public void PlayCheer() { Debug.Log("GoalinCheer"); oneShotSource.PlayOneShot(goalincheer); }
     public void PlayGameOver() { Debug.Log("PlayGameOver"); oneShotSource.PlayOneShot(gameOver); }

@@ -12,6 +12,7 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
     [SerializeField] bool leftButton;
     [SerializeField] bool rightButton;
     [SerializeField] SliderInterface sliderInterface = null;
+    [SerializeField] GameObject sliderInterfaceBody = null;
     [SerializeField] RectTransform rt = null;
     [SerializeField] CanvasScaler canvasScaler = null;
     [SerializeField] RectTransform feverSwipeStartPosition = null;
@@ -20,6 +21,7 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
     [SerializeField] float feverSwipeMaxSpeed = 0.15f;
     [SerializeField] HotairBalloon hotairBalloon = null;
     [SerializeField] RawImage feverSwipeArrow = null;
+    [SerializeField] StageCommon stageCommon = null;
 
     public bool Controlled { get => controlled; private set => controlled = value; }
     public float Horizontal => horizontal;
@@ -33,6 +35,7 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
         rt = GetComponent<RectTransform>();
         canvasScaler = GetComponentInParent<CanvasScaler>();
         hotairBalloon = GameObject.Find("Hotair Balloon").GetComponent<HotairBalloon>();
+        stageCommon = GameObject.FindObjectOfType<StageCommon>();
     }
 
     public void OnPointerDown(PointerEventData eventData) {
@@ -44,6 +47,8 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
             feverSwipeStartPosition.anchoredPosition = Vector2.zero;
             feverSwipeTargetPosition.anchoredPosition = feverSwipeStartPosition.anchoredPosition + Vector2.up * feverSwipeDistance;
         }
+        sliderInterfaceBody.SetActive(true);
+        stageCommon.DeactivateTitleGroup();
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
