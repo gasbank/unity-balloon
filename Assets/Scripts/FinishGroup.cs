@@ -12,6 +12,10 @@ public class FinishGroup : MonoBehaviour {
 
     public void NextStage() {
         var nextStageNumber = int.Parse(SceneManager.GetActiveScene().name.Substring("Stage ".Length, 2)) + 1;
-        SceneManager.LoadScene($"Stage {nextStageNumber:d2}");
+        if (nextStageNumber >= 16) {
+            SceneManager.LoadScene("Ending");
+        } else {
+            SceneManager.LoadScene($"Stage {nextStageNumber:d2}");
+        }
     }
 }
