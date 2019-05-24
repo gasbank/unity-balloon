@@ -89,6 +89,8 @@ public class HotairBalloon : MonoBehaviour {
         }
     }
 
+    public float FeverGaugeRatio => FeverGauge / feverGaugeMax;
+
     [SerializeField] Rigidbody[] rbArray = null;
     [SerializeField] Collider[] colliderArray = null;
 
