@@ -198,13 +198,13 @@ public class HotairBalloon : MonoBehaviour {
                 balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
                 balloonRb.velocity += Vector3.up * AdditionalVelocity;
 
-                emissionLeft.rateOverTime = 25;
-                emissionRight.rateOverTime = 25;
+                emissionLeft.rateOverTime = 0;
+                emissionRight.rateOverTime = 0;
 
                 if (IsOilConsumed) {
                     RemainOilAmount -= Time.deltaTime * burnSpeed;
                 }
-            } else if (VerticallyStationary) {
+            } else if (IsVerticallyStationaryForceApplied) {
                 PlayTopThrusterParticle();
                 emissionLeft.rateOverTime = 0;
                 emissionRight.rateOverTime = 0;
@@ -262,10 +262,10 @@ public class HotairBalloon : MonoBehaviour {
             StopTopThrusterParticle();
         } else {
             zeroOilDuration = 0;
-            if (HorizontalAxis != 0 || IsFreeOilOnStart) {
+            if (handleSlider.Controlled || IsFreeOilOnStart) {
                 PlayTopThrusterParticle();
             } else {
-                if (IsStageFinished == false && IsVerticallyStationaryForceApplied == false && Y > 5) {
+                if (IsStageFinished == false && IsVerticallyStationaryForceApplied == false && Y > 2) {
                     StopTopThrusterParticle();
                 }
             }
