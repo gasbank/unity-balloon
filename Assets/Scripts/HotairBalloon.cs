@@ -369,6 +369,7 @@ public class HotairBalloon : MonoBehaviour {
         if (IsGameOver == false && feverItemParticle.activeSelf) {
             feverItemParticle.SetActive(false);
             inFever = true;
+            BalloonSound.instance.PlayFever();
             Debug.Log("Fever!!!");
         }
     }

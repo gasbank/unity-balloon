@@ -12,6 +12,7 @@ public class BalloonSound : MonoBehaviour {
     [SerializeField] AudioClip gameOver = null;
     [SerializeField] AudioClip startBoost = null;
     [SerializeField] AudioClip knockback = null;
+    [SerializeField] AudioClip feverstart = null;
     [SerializeField] AudioClip goalincheer = null;
     [SerializeField] AudioClip goalinSound = null;
     [SerializeField] AudioClip gameover_sigh = null;
@@ -19,6 +20,7 @@ public class BalloonSound : MonoBehaviour {
     [SerializeField] AudioClip dash_continuous = null;
     [SerializeField] AudioClip going_up = null;
     [SerializeField] AudioClip maydaymayday = null;
+ 
     #pragma warning restore CS0414
 
 
@@ -39,6 +41,8 @@ public class BalloonSound : MonoBehaviour {
     public void PlayGameOver_sigh() { Debug.Log("PlayGameOver"); oneShotSource.PlayOneShot(gameover_sigh); }
     public void PlayStartBoost() { Debug.Log("PlayStartBoost"); oneShotSource.PlayOneShot(startBoost); }
     public void PlayKnockback() { Debug.Log("PlayKnockback"); oneShotSource.PlayOneShot(knockback); }
+    public void PlayFever() { Debug.Log("PlayFever"); oneShotSource.PlayOneShot(feverstart); }
+
 
  public void PlayMaydayMayday() { Debug.Log("MaydayMayday"); oneShotSource.PlayOneShot(maydaymayday); }
     void Awake() {
