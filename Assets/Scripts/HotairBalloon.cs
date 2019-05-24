@@ -236,8 +236,8 @@ public class HotairBalloon : MonoBehaviour {
     }
 
     void Update() {
-        oil.localScale = new Vector3(oil.localScale.x, remainOilAmount / 100.0f, oil.localScale.z);
-        balloonOilSpritePivot.localPosition = new Vector3(balloonOilSpritePivot.localPosition.x, -0.1f + 0.2f * remainOilAmount / 100.0f, balloonOilSpritePivot.localPosition.z);
+        oil.localScale = new Vector3(oil.localScale.x, RemainOilAmount / 100.0f, oil.localScale.z);
+        balloonOilSpritePivot.localPosition = new Vector3(balloonOilSpritePivot.localPosition.x, -0.1f + 0.2f * RemainOilAmount / 100.0f, balloonOilSpritePivot.localPosition.z);
 
         var dirRad = Mathf.Deg2Rad * (90 - maxDeg * HorizontalAxis);
         var vNormalized = new Vector3(Mathf.Cos(dirRad), Mathf.Sin(dirRad), 0);
@@ -393,6 +393,7 @@ public class HotairBalloon : MonoBehaviour {
             feverItemParticle.SetActive(false);
             inFever = true;
             BalloonSound.instance.PlayFever();
+            RemainOilAmount = 100.0f;
             feverStart.Stop();
             feverStart.Play();
             feverThrust.Stop();
