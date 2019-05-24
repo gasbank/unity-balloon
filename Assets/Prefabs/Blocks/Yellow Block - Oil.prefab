@@ -147,31 +147,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Yellow Block HP Text (TMP)
       objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_text
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3562854433785300331, guid: 33b15b31be77046388a65b8edf9a6dae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -282,6 +257,31 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_text
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33b15b31be77046388a65b8edf9a6dae, type: 3}
 --- !u!224 &7842305618621319747 stripped
@@ -309,11 +309,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 82233218524446627}
     m_Modifications:
-    - target: {fileID: 7446494354819902511, guid: adde1a4897b85473bab1ea3063f312e1,
-        type: 3}
-      propertyPath: m_Name
-      value: Oil Item
-      objectReference: {fileID: 0}
     - target: {fileID: 7446494354819902515, guid: adde1a4897b85473bab1ea3063f312e1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -369,10 +364,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7446494354819902515, guid: adde1a4897b85473bab1ea3063f312e1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7446494354819902515, guid: adde1a4897b85473bab1ea3063f312e1,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7446494354819902511, guid: adde1a4897b85473bab1ea3063f312e1,
+        type: 3}
+      propertyPath: m_Name
+      value: Oil Item
+      objectReference: {fileID: 0}
     - target: {fileID: 7446494355722705080, guid: adde1a4897b85473bab1ea3063f312e1,
         type: 3}
       propertyPath: ShapeModule.type
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7446494355722705080, guid: adde1a4897b85473bab1ea3063f312e1,
         type: 3}
@@ -387,12 +397,12 @@ PrefabInstance:
     - target: {fileID: 7446494355722705080, guid: adde1a4897b85473bab1ea3063f312e1,
         type: 3}
       propertyPath: ShapeModule.m_Scale.x
-      value: 0.7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7446494355722705080, guid: adde1a4897b85473bab1ea3063f312e1,
         type: 3}
       propertyPath: ShapeModule.m_Scale.y
-      value: 0.7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7446494355722705080, guid: adde1a4897b85473bab1ea3063f312e1,
         type: 3}
@@ -402,7 +412,12 @@ PrefabInstance:
     - target: {fileID: 7446494355722705081, guid: adde1a4897b85473bab1ea3063f312e1,
         type: 3}
       propertyPath: m_MaxParticleSize
-      value: 0.02
+      value: 0.045
+      objectReference: {fileID: 0}
+    - target: {fileID: 7446494354819902513, guid: adde1a4897b85473bab1ea3063f312e1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adde1a4897b85473bab1ea3063f312e1, type: 3}
