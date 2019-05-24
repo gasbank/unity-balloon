@@ -8,7 +8,6 @@ public class BalloonSound : MonoBehaviour {
     // One-shot
     [SerializeField] AudioClip startEngine = null;
     [SerializeField] AudioClip getOilItem = null;
-    [SerializeField] AudioClip stopEngine = null;
     [SerializeField] AudioClip gameOver = null;
     [SerializeField] AudioClip startBoost = null;
     [SerializeField] AudioClip knockback = null;
@@ -16,17 +15,11 @@ public class BalloonSound : MonoBehaviour {
     [SerializeField] AudioClip goalincheer = null;
     [SerializeField] AudioClip goalinSound = null;
     [SerializeField] AudioClip gameover_sigh = null;
-    #pragma warning disable CS0414
+#pragma warning disable CS0414
     [SerializeField] AudioClip dash_continuous = null;
     [SerializeField] AudioClip going_up = null;
+#pragma warning restore CS0414
     [SerializeField] AudioClip maydaymayday = null;
- 
-    #pragma warning restore CS0414
-
-
-    // Loop
-    //[SerializeField] AudioClip ascendingLoop = null;
-    //[SerializeField] AudioClip descendingLoop = null;
 
     [SerializeField] AudioSource ascendingLoopSource = null;
     [SerializeField] AudioSource descendingLoopSource = null;
@@ -34,11 +27,11 @@ public class BalloonSound : MonoBehaviour {
     [SerializeField] AudioSource oneShotSource15 = null;
     [SerializeField] AudioSource oneShotSource20 = null;
     [SerializeField] AudioSource AmbientSound1 = null;
+    
     public void PlayStartEngine() { Debug.Log("PlayStartEngine"); oneShotSource.PlayOneShot(startEngine); }
     public void PlayGetOilItem() { Debug.Log("PlayGetOilItem"); oneShotSource.PlayOneShot(getOilItem); }
     public void PlayGetOilItem2() { Debug.Log("PlayGetOilItem2"); oneShotSource15.PlayOneShot(getOilItem); }
     public void PlayGetOilItem3() { Debug.Log("PlayGetOilItem3"); oneShotSource20.PlayOneShot(getOilItem); }
-    public void PlayStopEngine() { /*Debug.Log("PlayStopEngine"); oneShotSource.PlayOneShot(stopEngine);*/ }
     public void PlayGoalIn() { Debug.Log("GoalinSoubnd"); oneShotSource.PlayOneShot(goalinSound); }
     public void PlayCheer() { Debug.Log("GoalinCheer"); oneShotSource.PlayOneShot(goalincheer); }
     public void PlayGameOver() { Debug.Log("PlayGameOver"); oneShotSource.PlayOneShot(gameOver); }
@@ -46,9 +39,8 @@ public class BalloonSound : MonoBehaviour {
     public void PlayStartBoost() { Debug.Log("PlayStartBoost"); oneShotSource.PlayOneShot(startBoost); }
     public void PlayKnockback() { Debug.Log("PlayKnockback"); oneShotSource.PlayOneShot(knockback); }
     public void PlayFever() { Debug.Log("PlayFever"); oneShotSource.PlayOneShot(feverstart); }
-
-
- public void PlayMaydayMayday() { Debug.Log("MaydayMayday"); oneShotSource.PlayOneShot(maydaymayday); }
+    public void PlayMaydayMayday() { Debug.Log("MaydayMayday"); oneShotSource.PlayOneShot(maydaymayday); }
+    
     void Awake() {
         instance = this;
     }

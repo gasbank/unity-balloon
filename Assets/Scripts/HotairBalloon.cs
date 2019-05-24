@@ -122,6 +122,8 @@ public class HotairBalloon : MonoBehaviour {
         set => verticallyStationary = value;
     }
 
+    public bool IsVerticallyStationaryForceApplied => (IsTitleVisible || VerticallyStationary) && balloonRb.position.y < 0 && RemainOilAmount > 0;
+
     public bool IsTitleVisible => stageCommon.IsTitleVisible;
 
     void OnValidate() {
@@ -167,7 +169,7 @@ public class HotairBalloon : MonoBehaviour {
             // 스테이지 완료 한 이후에는 그냥 위로만 쭈욱 올라가자
             emissionLeft.rateOverTime = 25;
             emissionRight.rateOverTime = 25;
-            PlayTopThrusterPaticle();
+            PlayTopThrusterParticle();
             balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
             balloonRb.velocity += Vector3.up * AdditionalVelocity;
         } else if (RemainOilAmount > 0 || InFeverGaugeNotEmpty) {
@@ -203,7 +205,7 @@ public class HotairBalloon : MonoBehaviour {
                     RemainOilAmount -= Time.deltaTime * burnSpeed;
                 }
             } else if (VerticallyStationary) {
-                PlayTopThrusterPaticle();
+                PlayTopThrusterParticle();
                 emissionLeft.rateOverTime = 0;
                 emissionRight.rateOverTime = 0;
             } else if (IsFreeOilOnStart && IsTitleVisible == false) {
@@ -241,7 +243,9 @@ public class HotairBalloon : MonoBehaviour {
         var vNormalized = new Vector3(Mathf.Cos(dirRad), Mathf.Sin(dirRad), 0);
         directionArrowPivot.rotation = Quaternion.Euler(0, 0, -90 + Mathf.Rad2Deg * dirRad);
         
-        if (balloonRb.velocity.y < 0) {
+        if (IsVerticallyStationaryForceApplied) {
+            BalloonSound.instance.SetEngineVolume(1);
+        } else if (balloonRb.velocity.y < 0) {
             BalloonSound.instance.SetEngineVolume(0);
         } else if (balloonRb.velocity.y > 0) {
             BalloonSound.instance.SetEngineVolume(1);
@@ -259,9 +263,9 @@ public class HotairBalloon : MonoBehaviour {
         } else {
             zeroOilDuration = 0;
             if (HorizontalAxis != 0 || IsFreeOilOnStart) {
-                PlayTopThrusterPaticle();
+                PlayTopThrusterParticle();
             } else {
-                if (IsStageFinished == false) {
+                if (IsStageFinished == false && IsVerticallyStationaryForceApplied == false && Y > 5) {
                     StopTopThrusterParticle();
                 }
             }
@@ -305,7 +309,7 @@ public class HotairBalloon : MonoBehaviour {
 
         // AddForce라서 FixedUpdate()에 있는 게 일반적이지만,
         // 타입이 Impulse이니 Update()에 넣는다.
-        if ((IsTitleVisible || VerticallyStationary) && balloonRb.position.y < 0 && RemainOilAmount > 0) {
+        if (IsVerticallyStationaryForceApplied) {
             balloonRb.AddForce(Vector3.up * (-5 * balloonRb.position.y - 2 * balloonRb.velocity.y), ForceMode.Impulse);
         }
 
@@ -322,35 +326,36 @@ public class HotairBalloon : MonoBehaviour {
     }
 
     bool engineRunning = false;
+    private float lastPlayStartEngineSoundTime;
 
-    private void PlayTopThrusterPaticle() {
+    private void PlayTopThrusterParticle() {
         foreach (var ps in fireParticleSystemList) {
             if (ps != null && ps.isPlaying == false) {
                 engineRunning = true;
                 if (IsGameOver == false && IsStageFinished == false) {
                     // VerticallyStationary에 의해서 Y=0 부근에서 진동 일어날 때
                     // 엔진 사운드가 너무 반복적인 문제를 해결하기 위한 조건문
-                    if (Y > 1) {
-                        BalloonSound.instance.PlayStartEngine();
+                    if (IsVerticallyStationaryForceApplied == false) {
+                        if (Time.time - lastPlayStartEngineSoundTime > 0.5f) {
+                            lastPlayStartEngineSoundTime = Time.time;
+                            BalloonSound.instance.PlayStartEngine();
+                        }
                     }
                 }
                 ps.Play();
+                Debug.Log("PlayTopThrusterParticle - Played");
             }
         }
     }
 
     private void StopTopThrusterParticle() {
         foreach (var ps in fireParticleSystemList) {
-            if (ps != null && ps.isStopped == false) {
+            if (ps != null && ps.isEmitting == true) {
                 if (engineRunning && IsGameOver == false && IsStageFinished == false) {
-                    // VerticallyStationary에 의해서 Y=0 부근에서 진동 일어날 때
-                    // 엔진 사운드가 너무 반복적인 문제를 해결하기 위한 조건문
-                    if (Y > 1) {
-                        BalloonSound.instance.PlayStopEngine();
-                    }
                     engineRunning = false;
                 }
                 ps.Stop();
+                Debug.Log("PlayTopThrusterParticle - Stopped");
             }
         }
     }
