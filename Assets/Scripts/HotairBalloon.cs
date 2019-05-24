@@ -49,7 +49,8 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] Renderer feverRingRenderer = null;
     [SerializeField] float feverGaugeMax = 50.0f;
     [SerializeField] float feverGaugeIncrement = 8.0f;
-    [SerializeField] float feverGaugeDecrement = 3.0f;
+    [SerializeField] float feverGaugeDecrementByDecay = 8.0f;
+    [SerializeField] float feverGaugeDecrementByConsumption = 15.0f;
     [SerializeField] GameObject feverItemParticle = null;
     [SerializeField] bool inFever = false;
     [SerializeField] float feverMaxVelocity = 30;
@@ -315,7 +316,11 @@ public class HotairBalloon : MonoBehaviour {
 
         // 피버 아이템을 가지고 있지 않을 때만 감소
         if (CanStartFever == false) {
-            FeverGauge -= Time.deltaTime * feverGaugeDecrement;
+            if (inFever) {
+                FeverGauge -= Time.deltaTime * feverGaugeDecrementByConsumption;
+            } else {
+                FeverGauge -= Time.deltaTime * feverGaugeDecrementByDecay;
+            }
             // 피버 게이지가 바닥 나면
             if (FeverGauge <= 0) {
                 // 피버 모드 종료
