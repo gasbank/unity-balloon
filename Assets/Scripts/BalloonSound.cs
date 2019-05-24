@@ -31,9 +31,13 @@ public class BalloonSound : MonoBehaviour {
     [SerializeField] AudioSource ascendingLoopSource = null;
     [SerializeField] AudioSource descendingLoopSource = null;
     [SerializeField] AudioSource oneShotSource = null;
+    [SerializeField] AudioSource oneShotSource15 = null;
+    [SerializeField] AudioSource oneShotSource20 = null;
     [SerializeField] AudioSource AmbientSound1 = null;
     public void PlayStartEngine() { Debug.Log("PlayStartEngine"); oneShotSource.PlayOneShot(startEngine); }
     public void PlayGetOilItem() { Debug.Log("PlayGetOilItem"); oneShotSource.PlayOneShot(getOilItem); }
+    public void PlayGetOilItem2() { Debug.Log("PlayGetOilItem2"); oneShotSource15.PlayOneShot(getOilItem); }
+    public void PlayGetOilItem3() { Debug.Log("PlayGetOilItem3"); oneShotSource20.PlayOneShot(getOilItem); }
     public void PlayStopEngine() { Debug.Log("PlayStopEngine"); oneShotSource.PlayOneShot(stopEngine); }
     public void PlayGoalIn() { Debug.Log("GoalinSoubnd"); oneShotSource.PlayOneShot(goalinSound); }
     public void PlayCheer() { Debug.Log("GoalinCheer"); oneShotSource.PlayOneShot(goalincheer); }

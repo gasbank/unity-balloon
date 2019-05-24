@@ -353,10 +353,6 @@ public class HotairBalloon : MonoBehaviour {
 
     public void RefillOil(float amount) {
         Debug.Log("RefillOil");
-        BalloonSound.instance.PlayGetOilItem();
-        // if (RemainOilAmount + amount > 100.0f && feverRemainTime <= 0) {
-        //     StartFever();
-        // }
         RemainOilAmount = Mathf.Clamp(RemainOilAmount + amount, 0, 100.0f);
         if (Time.time - lastRefillTime < boostRefillMaxInterval) {
             Debug.Log("Boost Counter!");
@@ -369,6 +365,17 @@ public class HotairBalloon : MonoBehaviour {
         } else {
             fastRefillCounter = 0;
         }
+
+        // 얼마나 빠르게 연속으로 연료를 먹었냐에 따라 재생되는 사운드 피치가 다르게 하자.
+        // (사운드 파일은 동일)
+        if (fastRefillCounter <= 0) {
+            BalloonSound.instance.PlayGetOilItem();
+        } else if (fastRefillCounter <= 1) {
+            BalloonSound.instance.PlayGetOilItem2();
+        } else {
+            BalloonSound.instance.PlayGetOilItem3();
+        }
+
         lastRefillTime = Time.time;
     }
 
