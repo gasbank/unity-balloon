@@ -58,6 +58,7 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] Gear gear = null;
     [SerializeField] ParticleSystem feverStart = null;
     [SerializeField] ParticleSystem feverThrust = null;
+    [SerializeField] StageCommon stageCommon = null;
 
     Vignette vignette;
 
@@ -121,6 +122,8 @@ public class HotairBalloon : MonoBehaviour {
         set => verticallyStationary = value;
     }
 
+    public bool IsTitleVisible => stageCommon.IsTitleVisible;
+
     void OnValidate() {
         if (gameObject.scene.rootCount != 0) {
             handleSlider = GameObject.Find("Canvas/Slider").GetComponent<BalloonHandleSlider>();
@@ -145,6 +148,7 @@ public class HotairBalloon : MonoBehaviour {
         rbArray = GetComponentsInChildren<Rigidbody>();
         fixedJointArray = GetComponentsInChildren<FixedJoint>();
         colliderArray = GetComponentsInChildren<Collider>();
+        stageCommon = GameObject.FindObjectOfType<StageCommon>();
     }
 
     float HorizontalAxis => Input.GetAxis("Horizontal") + (handleSlider != null ? handleSlider.Horizontal : 0);
@@ -202,7 +206,7 @@ public class HotairBalloon : MonoBehaviour {
                 PlayTopThrusterPaticle();
                 emissionLeft.rateOverTime = 0;
                 emissionRight.rateOverTime = 0;
-            } else if (IsFreeOilOnStart) {
+            } else if (IsFreeOilOnStart && IsTitleVisible == false) {
                 // 스테이지 시작하고 5초동안은 공짜로 위로 올라간다.
                 balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
                 balloonRb.velocity += Vector3.up * AdditionalVelocity;
@@ -301,7 +305,7 @@ public class HotairBalloon : MonoBehaviour {
 
         // AddForce라서 FixedUpdate()에 있는 게 일반적이지만,
         // 타입이 Impulse이니 Update()에 넣는다.
-        if (VerticallyStationary && balloonRb.position.y < 0 && RemainOilAmount > 0) {
+        if ((IsTitleVisible || VerticallyStationary) && balloonRb.position.y < 0 && RemainOilAmount > 0) {
             balloonRb.AddForce(Vector3.up * (-5 * balloonRb.position.y - 2 * balloonRb.velocity.y), ForceMode.Impulse);
         }
 
