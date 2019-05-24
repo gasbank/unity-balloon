@@ -19,6 +19,7 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
     [SerializeField] float feverSwipeDistance = 150;
     [SerializeField] float feverSwipeMaxSpeed = 0.15f;
     [SerializeField] HotairBalloon hotairBalloon = null;
+    [SerializeField] RawImage feverSwipeArrow = null;
 
     public bool Controlled { get => controlled; private set => controlled = value; }
     public float Horizontal => horizontal;
@@ -81,6 +82,13 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
 
         if (feverSwipeStartPosition.anchoredPosition.y > feverSwipeTargetPosition.anchoredPosition.y) {
             hotairBalloon.StartFever();
+        }
+
+        feverSwipeArrow.gameObject.SetActive(hotairBalloon.CanStartFever);
+        if (hotairBalloon.CanStartFever) {
+            var feverSwipeArrowUvRect = feverSwipeArrow.uvRect;
+            feverSwipeArrowUvRect.y = -Time.time;
+            feverSwipeArrow.uvRect = feverSwipeArrowUvRect;
         }
     }
 }
