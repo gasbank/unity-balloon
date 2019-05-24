@@ -9,8 +9,6 @@ class BalloonBuild
         get
         {
             return new string[] {
-                "Assets/Scenes/Splash.unity",
-                "Assets/Scenes/Stage Selection.unity",
                 "Assets/Scenes/Stage 01.unity",
                 "Assets/Scenes/Stage 02.unity",
                 "Assets/Scenes/Stage 03.unity",
@@ -31,6 +29,8 @@ class BalloonBuild
                 "Assets/Scenes/Stage 18.unity",
                 "Assets/Scenes/Stage 19.unity",
                 "Assets/Scenes/Stage 20.unity",
+                "Assets/Scenes/Ending.unity",
+                "Assets/Scenes/Stage Selection.unity",
             };
         }
     }
