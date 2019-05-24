@@ -33980,8 +33980,9 @@ MonoBehaviour:
   postProcessVolume: {fileID: 0}
   feverRingRenderer: {fileID: 3412497662314834818}
   feverGaugeMax: 50
-  feverGaugeIncrement: 8
-  feverGaugeDecrement: 15
+  feverGaugeIncrement: 10
+  feverGaugeDecrementByDecay: 5
+  feverGaugeDecrementByConsumption: 15
   feverItemParticle: {fileID: 3045181185264388267}
   inFever: 0
   feverMaxVelocity: 30
