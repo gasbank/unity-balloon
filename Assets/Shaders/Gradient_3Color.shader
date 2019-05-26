@@ -21,9 +21,9 @@
          #pragma fragment frag
          #include "UnityCG.cginc"
  
-         fixed4 _ColorTop;
-         fixed4 _ColorMid;
-         fixed4 _ColorBot;
+         float4 _ColorTop;
+         float4 _ColorMid;
+         float4 _ColorBot;
          float  _Middle;
  
          struct v2f {
@@ -38,8 +38,8 @@
              return o;
          }
  
-         fixed4 frag (v2f i) : COLOR {
-             fixed4 c = lerp(_ColorBot, _ColorMid, i.texcoord.y / _Middle) * step(i.texcoord.y, _Middle);
+         float4 frag (v2f i) : COLOR {
+             float4 c = lerp(_ColorBot, _ColorMid, i.texcoord.y / _Middle) * step(i.texcoord.y, _Middle);
              c += lerp(_ColorMid, _ColorTop, (i.texcoord.y - _Middle) / (1 - _Middle)) * (1 - step(i.texcoord.y, _Middle));
              c.a = 1;
              return c;
