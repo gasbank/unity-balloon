@@ -18,7 +18,7 @@ public class Bootstrap : MonoBehaviour {
     public static int LastPlayedStageNumber {
         get => PlayerPrefs.GetInt(LAST_PLAYED_STAGE_NUMBER, 1);
         set {
-            PlayerPrefs.SetInt(LAST_PLAYED_STAGE_NUMBER, value);
+            PlayerPrefs.SetInt(LAST_PLAYED_STAGE_NUMBER, Mathf.Clamp(value, 1, ENDING_SCENE_NUMBER));
             PlayerPrefs.Save();
         }
     }
