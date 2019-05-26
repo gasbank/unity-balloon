@@ -33978,6 +33978,8 @@ MonoBehaviour:
   freeOilOnStartDuration: 5
   boostTrailRenderer: {fileID: 1406606275}
   postProcessVolume: {fileID: 0}
+  balloonFeverRing: {fileID: 2057832170647711202}
+  balloonFeverRingOuter: {fileID: 6303495623730133646}
   feverRingRenderer: {fileID: 3412497662314834818}
   feverGaugeMax: 50
   feverGaugeIncrement: 9
@@ -54632,6 +54634,7 @@ Transform:
   m_Children:
   - {fileID: 88998179674303821}
   - {fileID: 3681423989711066746}
+  - {fileID: 6303495623730133646}
   m_Father: {fileID: 4940520360091206959}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -54798,6 +54801,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b99143ff755f1d4eb0b1255a26ec486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8917558031480972185
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6303495623730133646}
+  m_Layer: 8
+  m_Name: Balloon Fever Ring Outer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6303495623730133646
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8917558031480972185}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1144, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2057832170647711202}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8956026250923923363
 GameObject:
   m_ObjectHideFlags: 0
@@ -54994,11 +55027,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2057832170647711202}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 06e6fe26df6a24b46b849a6fe9280940,
-        type: 3}
-      propertyPath: m_Name
-      value: fillring
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 06e6fe26df6a24b46b849a6fe9280940,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -55079,6 +55107,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5ec358f9d9d34e24cb3297f02c1253ec, type: 2}
+    - target: {fileID: -927199367670048503, guid: 06e6fe26df6a24b46b849a6fe9280940,
+        type: 3}
+      propertyPath: m_Name
+      value: fillring
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06e6fe26df6a24b46b849a6fe9280940, type: 3}
 --- !u!4 &88998179674303821 stripped
@@ -55100,16 +55133,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4940520360091206959}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 2e54d6008493a402ca8c8515c75e03b3,
-        type: 3}
-      propertyPath: m_Name
-      value: windeffect
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 2e54d6008493a402ca8c8515c75e03b3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2e54d6008493a402ca8c8515c75e03b3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -55170,6 +55193,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 2e54d6008493a402ca8c8515c75e03b3,
+        type: 3}
+      propertyPath: m_Name
+      value: windeffect
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 2e54d6008493a402ca8c8515c75e03b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 2e54d6008493a402ca8c8515c75e03b3,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -55196,11 +55229,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4940520358894240945}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 04797bc70be75495a83e5214bef03fc1,
-        type: 3}
-      propertyPath: m_Name
-      value: hotair-bottom
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 04797bc70be75495a83e5214bef03fc1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -55270,6 +55298,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 53.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 04797bc70be75495a83e5214bef03fc1,
+        type: 3}
+      propertyPath: m_Name
+      value: hotair-bottom
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 04797bc70be75495a83e5214bef03fc1,
         type: 3}

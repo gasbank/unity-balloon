@@ -46,6 +46,8 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] float freeOilOnStartDuration = 5.0f;
     [SerializeField] TrailRenderer boostTrailRenderer = null;
     [SerializeField] PostProcessVolume postProcessVolume = null;
+    [SerializeField] Transform balloonFeverRing = null;
+    [SerializeField] Transform balloonFeverRingOuter = null;
     [SerializeField] Renderer feverRingRenderer = null;
     [SerializeField] float feverGaugeMax = 50.0f;
     [SerializeField] float feverGaugeIncrement = 8.0f;
@@ -126,6 +128,10 @@ public class HotairBalloon : MonoBehaviour {
     public bool IsVerticallyStationaryForceApplied => (IsTitleVisible || VerticallyStationary) && balloonRb.position.y < 0 && RemainOilAmount > 0;
 
     public bool IsTitleVisible => stageCommon.IsTitleVisible;
+
+    public Vector3 FeverRingPosition => balloonFeverRing.position;
+
+    public Vector3 FeverRingOuterPosition => balloonFeverRingOuter.position;
 
     void OnValidate() {
         if (gameObject.scene.rootCount != 0) {
