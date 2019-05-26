@@ -70,6 +70,8 @@ public class HotairBalloon : MonoBehaviour {
         private set { remainOilAmount = Mathf.Clamp(value, 0, 100); }
     }
 
+    public float RemainOilAmountRatio => RemainOilAmount / 100;
+
     public bool IsGameOver => gameOverGroup.enabled;
 
     public bool IsFreeOilOnStart => Time.timeSinceLevelLoad < freeOilOnStartDuration;
