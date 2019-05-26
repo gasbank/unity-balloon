@@ -2,16 +2,16 @@
 
 public class FinishLine : MonoBehaviour {
     [SerializeField] Transform balloon = null;
-    [SerializeField] Canvas finishGroup = null;
+    [SerializeField] HotairBalloon hotairBalloon = null;
 
     void Awake() {
         balloon = FindObjectOfType<BalloonLimiter>().transform;
-        finishGroup = FindObjectOfType<FinishGroup>().GetComponent<Canvas>();
+        hotairBalloon = FindObjectOfType<HotairBalloon>();
     }
 
     void Update() {
-        if (balloon.position.y > transform.position.y && finishGroup.enabled == false) {
-            finishGroup.enabled = true;
+        if (balloon.position.y > transform.position.y && hotairBalloon.IsStageFinished == false) {
+            hotairBalloon.IsStageFinished = true;
             BalloonSound.instance.PlayGoalIn();
             BalloonSound.instance.PlayCheer();
         }

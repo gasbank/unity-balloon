@@ -21,7 +21,7 @@ public class HotairBalloon : MonoBehaviour {
         appliedWindRegionSet.Add(windRegion);
     }
 
-    [SerializeField] Canvas gameOverGroup = null;
+    [SerializeField] GameOverGroup gameOverGroup = null;
     [SerializeField] ParticleSystem[] fireParticleSystemList = null;
 
     internal void RemoveWindForce(WindRegion windRegion) {
@@ -33,7 +33,7 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] float zeroOilDuration = 0;
     [SerializeField] BalloonHandleSlider handleSlider = null;
     [SerializeField] Transform balloonOilSpritePivot = null;
-    [SerializeField] Canvas finishGroup = null;
+    [SerializeField] FinishGroup finishGroup = null;
     [SerializeField] int fastRefillCounter;
     [SerializeField] float lastRefillTime = 0;
     [SerializeField] float boostVelocity = 0;
@@ -72,7 +72,7 @@ public class HotairBalloon : MonoBehaviour {
 
     public float RemainOilAmountRatio => RemainOilAmount / 100;
 
-    public bool IsGameOver => gameOverGroup.enabled;
+    public bool IsGameOver => gameOverGroup.Visible;
 
     public bool IsFreeOilOnStart => Time.timeSinceLevelLoad < freeOilOnStartDuration;
 
@@ -83,9 +83,10 @@ public class HotairBalloon : MonoBehaviour {
         && InFeverGaugeNotEmpty == false
         && (HorizontalAxis != 0 || handleSlider.Controlled || InFeverGaugeNotEmpty);
 
-    public bool IsStageFinished =>
-        finishGroup != null
-        && finishGroup.enabled;
+    public bool IsStageFinished {
+        get => finishGroup.Visible;
+        set => finishGroup.Visible = value;
+    }
 
     float FeverGauge {
         get {
@@ -151,8 +152,8 @@ public class HotairBalloon : MonoBehaviour {
         if (Application.isMobilePlatform == false) {
             Screen.SetResolution(720, 1280, FullScreenMode.Windowed);
         }
-        gameOverGroup = FindObjectOfType<GameOverGroup>().GetComponent<Canvas>();
-        finishGroup = FindObjectOfType<FinishGroup>().GetComponent<Canvas>();
+        gameOverGroup = FindObjectOfType<GameOverGroup>();
+        finishGroup = FindObjectOfType<FinishGroup>();
 
         var postProcessVolumeGo = GameObject.Find("Main Camera/Post Process Volume");
         if (postProcessVolume != null) {
@@ -303,9 +304,9 @@ public class HotairBalloon : MonoBehaviour {
         }
 
         if (BalloonGameOverCondition
-            && gameOverGroup.enabled == false
+            && gameOverGroup.Visible == false
             && IsStageFinished == false) {
-            gameOverGroup.enabled = true;
+            gameOverGroup.Visible = true;
             BalloonSound.instance.PlayGameOver();
             BalloonSound.instance.PlayGameOver_sigh();
             foreach (var fixedJoint in fixedJointArray) {

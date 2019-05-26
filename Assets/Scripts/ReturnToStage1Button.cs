@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class ReturnToStage1Button : MonoBehaviour {
     public void ReturnToStage1() {
         StageCommon.awaken = false;
-        SceneManager.LoadScene("Stage 01");
+        Bootstrap.LastPlayedStageNumber = 1;
+        SceneManager.LoadScene("Bootstrap");
     }
 }

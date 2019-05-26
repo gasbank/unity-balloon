@@ -9,6 +9,7 @@ class BalloonBuild
         get
         {
             return new string[] {
+                "Assets/Scenes/Bootstrap.unity",
                 "Assets/Scenes/Stage 01.unity",
                 "Assets/Scenes/Stage 02.unity",
                 "Assets/Scenes/Stage 03.unity",
