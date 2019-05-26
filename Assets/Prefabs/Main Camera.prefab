@@ -65,7 +65,6 @@ GameObject:
   - component: {fileID: 5513993847739811755}
   - component: {fileID: 3794268015461746843}
   - component: {fileID: 9161276330596630391}
-  - component: {fileID: 9010961912787053823}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -170,7 +169,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startEngine: {fileID: 8300000, guid: 089888ab89776184fb5665f63413dbfc, type: 3}
   getOilItem: {fileID: 8300000, guid: 77375e655470f4dae916297ef3be35dd, type: 3}
-  stopEngine: {fileID: 0}
   gameOver: {fileID: 8300000, guid: ddb3d4bb0c6314b5099d234aa8a00266, type: 3}
   startBoost: {fileID: 8300000, guid: bb985cd1924984b77896c8c1acc7e2a4, type: 3}
   knockback: {fileID: 8300000, guid: 1deb76710337a174f9b4c5f98d496843, type: 3}
@@ -293,23 +291,6 @@ MonoBehaviour:
   progressMessage: {fileID: 0}
   fontManager: {fileID: 3794268015461746843}
   data: {fileID: 5513993847739811755}
---- !u!114 &9010961912787053823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 556196813606185406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 7ceff242be587e44d9543d5910f66df0, type: 2}
-  isGlobal: 1
-  blendDistance: 0
-  weight: 1
-  priority: 0
 --- !u!1001 &5696516961012234663
 PrefabInstance:
   m_ObjectHideFlags: 0

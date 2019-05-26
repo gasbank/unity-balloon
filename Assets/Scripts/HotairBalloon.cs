@@ -160,11 +160,14 @@ public class HotairBalloon : MonoBehaviour {
         finishGroup = FindObjectOfType<FinishGroup>();
 
         var postProcessVolumeGo = GameObject.Find("Main Camera/Post Process Volume");
-        if (postProcessVolume != null) {
+        if (postProcessVolumeGo != null) {
             postProcessVolume = postProcessVolumeGo.GetComponent<PostProcessVolume>();
             if (postProcessVolume != null) {
                 postProcessVolume.profile.TryGetSettings(out vignette);
             }
+        }
+        if (vignette == null) {
+            Debug.LogError("Vignette cannot be found.");
         }
 
         feverRingRenderer.material = Instantiate(feverRingRenderer.material);
