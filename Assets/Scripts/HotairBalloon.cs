@@ -62,8 +62,11 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] ParticleSystem feverStart = null;
     [SerializeField] ParticleSystem feverThrust = null;
     [SerializeField] StageCommon stageCommon = null;
+    [SerializeField] float stageElapsedTime = 0;
 
     Vignette vignette;
+
+    public float StageElapsedTime => stageElapsedTime;
 
     public float RemainOilAmount {
         get => remainOilAmount;
@@ -74,7 +77,7 @@ public class HotairBalloon : MonoBehaviour {
 
     public bool IsGameOver => gameOverGroup.Visible;
 
-    public bool IsFreeOilOnStart => Time.timeSinceLevelLoad < freeOilOnStartDuration;
+    public bool IsFreeOilOnStart => StageElapsedTime < freeOilOnStartDuration;
 
     public bool IsOilConsumed =>
         IsFreeOilOnStart == false
@@ -149,6 +152,7 @@ public class HotairBalloon : MonoBehaviour {
     }
 
     void Awake() {
+        Application.runInBackground = false;
         if (Application.isMobilePlatform == false) {
             Screen.SetResolution(720, 1280, FullScreenMode.Windowed);
         }
@@ -257,6 +261,10 @@ public class HotairBalloon : MonoBehaviour {
     void Update() {
         if (HorizontalAxis != 0) {
             handleSlider.OnStartStage();
+        }
+
+        if (IsGameOver == false && IsStageFinished == false && IsTitleVisible == false) {
+            stageElapsedTime += Time.deltaTime;
         }
 
         oil.localScale = new Vector3(oil.localScale.x, RemainOilAmount / 100.0f, oil.localScale.z);
