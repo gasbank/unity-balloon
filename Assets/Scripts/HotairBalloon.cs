@@ -88,7 +88,13 @@ public class HotairBalloon : MonoBehaviour {
         && finishGroup.enabled;
 
     float FeverGauge {
-        get => (1.0f - feverRingRenderer.material.mainTextureOffset.y) * feverGaugeMax;
+        get {
+            if (Application.isPlaying) {
+                return (1.0f - feverRingRenderer.material.mainTextureOffset.y) * feverGaugeMax;
+            } else {
+                return 1.0f;
+            }
+        }
         set {
             var y = Mathf.Clamp(1.0f - (value / feverGaugeMax), 0, 1);
             feverRingRenderer.material.mainTextureOffset = new Vector2(feverRingRenderer.material.mainTextureOffset.x, y);
