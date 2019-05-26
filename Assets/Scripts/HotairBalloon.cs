@@ -251,6 +251,10 @@ public class HotairBalloon : MonoBehaviour {
     }
 
     void Update() {
+        if (HorizontalAxis != 0) {
+            handleSlider.OnStartStage();
+        }
+
         oil.localScale = new Vector3(oil.localScale.x, RemainOilAmount / 100.0f, oil.localScale.z);
         balloonOilSpritePivot.localPosition = new Vector3(balloonOilSpritePivot.localPosition.x, -0.1f + 0.2f * RemainOilAmount / 100.0f, balloonOilSpritePivot.localPosition.z);
 

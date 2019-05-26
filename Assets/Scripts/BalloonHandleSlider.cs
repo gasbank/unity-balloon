@@ -47,6 +47,10 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
             feverSwipeStartPosition.anchoredPosition = Vector2.zero;
             feverSwipeTargetPosition.anchoredPosition = feverSwipeStartPosition.anchoredPosition + Vector2.up * feverSwipeDistance;
         }
+        OnStartStage();
+    }
+
+    public void OnStartStage() {
         sliderInterfaceBody.SetActive(true);
         stageCommon.DeactivateTitleGroup();
     }
