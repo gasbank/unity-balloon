@@ -72,6 +72,8 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
         Controlled = false;
     }
 
+    static bool keyboardControlled = false;
+
     void Update() {
         float v = 0;
         if (LeftButton) {
@@ -82,14 +84,18 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
         }
         horizontal = v + (Controlled ? Mathf.Clamp(8 * (slider.normalizedValue - startPosition), -1, 1) : 0);
 
-        if (sliderInterface != null) {
+        if (keyboardControlled == false) {
+            keyboardControlled = Input.GetAxis("Horizontal") != 0;
+        }
+
+        if (sliderInterface != null && keyboardControlled == false) {
             sliderInterface.Value = Horizontal;
         }
 
         Vector2 feverSwipeVelocity = Vector2.zero;
         feverSwipeTargetPosition.anchoredPosition = Vector2.SmoothDamp(feverSwipeTargetPosition.anchoredPosition, feverSwipeStartPosition.anchoredPosition + Vector2.up * feverSwipeDistance, ref feverSwipeVelocity, feverSwipeMaxSpeed);
 
-        if (feverSwipeStartPosition.anchoredPosition.y > feverSwipeTargetPosition.anchoredPosition.y) {
+        if (feverSwipeStartPosition.anchoredPosition.y > feverSwipeTargetPosition.anchoredPosition.y || Input.GetKeyDown(KeyCode.UpArrow)) {
             hotairBalloon.StartFever();
         }
 

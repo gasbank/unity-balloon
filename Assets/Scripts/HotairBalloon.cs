@@ -149,7 +149,7 @@ public class HotairBalloon : MonoBehaviour {
 
     void Awake() {
         if (Application.isMobilePlatform == false) {
-            Screen.SetResolution(1080, 1920, FullScreenMode.Windowed);
+            Screen.SetResolution(720, 1280, FullScreenMode.Windowed);
         }
         gameOverGroup = FindObjectOfType<GameOverGroup>().GetComponent<Canvas>();
         finishGroup = FindObjectOfType<FinishGroup>().GetComponent<Canvas>();
