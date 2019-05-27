@@ -10,7 +10,7 @@ xcodebuild \
     archive \
     -archivePath build \
     CODE_SIGN_STYLE="Manual" \
-    PROVISIONING_PROFILE_SPECIFIER="Balloon AppStore" \
+    PROVISIONING_PROFILE_SPECIFIER="Balloon iOS Distribution" \
     CODE_SIGN_IDENTITY="iPhone Distribution: GEOYEOB KIM (TG9MHV97AH)"
 
 xcodebuild \
