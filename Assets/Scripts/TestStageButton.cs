@@ -6,7 +6,7 @@ using TMProText = TMPro.TextMeshProUGUI;
 
 public class TestStageButton : MonoBehaviour {
     [SerializeField] TMProText text = null;
-    [SerializeField] string sceneName;
+    [SerializeField] string sceneName = "";
 
     void OnValidate() {
         text.text = sceneName;
