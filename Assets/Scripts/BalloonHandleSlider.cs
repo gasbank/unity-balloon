@@ -34,7 +34,9 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
     void Awake() {
         rt = GetComponent<RectTransform>();
         canvasScaler = GetComponentInParent<CanvasScaler>();
-        hotairBalloon = GameObject.Find("Hotair Balloon").GetComponent<HotairBalloon>();
+        if (GameObject.Find("Hotair Balloon") != null) {
+            hotairBalloon = GameObject.Find("Hotair Balloon").GetComponent<HotairBalloon>();
+        }
         stageCommon = GameObject.FindObjectOfType<StageCommon>();
     }
 
@@ -99,8 +101,11 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
             hotairBalloon.StartFever();
         }
 
-        feverSwipeArrow.gameObject.SetActive(hotairBalloon.CanStartFever);
-        if (hotairBalloon.CanStartFever) {
+        if (feverSwipeArrow != null && hotairBalloon != null) {
+            feverSwipeArrow.gameObject.SetActive(hotairBalloon.CanStartFever);
+        }
+
+        if (hotairBalloon != null && hotairBalloon.CanStartFever) {
             var feverSwipeArrowUvRect = feverSwipeArrow.uvRect;
             feverSwipeArrowUvRect.y = -Time.time;
             feverSwipeArrow.uvRect = feverSwipeArrowUvRect;

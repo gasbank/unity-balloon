@@ -9,10 +9,14 @@ public class StageDuration : MonoBehaviour {
     [SerializeField] HotairBalloon hotairBalloon = null;
 
     void Awake() {
-        hotairBalloon = GameObject.Find("Hotair Balloon").GetComponent<HotairBalloon>();
+        if (GameObject.Find("Hotair Balloon") != null) {
+            hotairBalloon = GameObject.Find("Hotair Balloon").GetComponent<HotairBalloon>();
+        }
     }
 
     void Update() {
-        text.text = (DateTime.MinValue + TimeSpan.FromSeconds(hotairBalloon.StageElapsedTime)).ToString("mm:ss.fff");
+        if (hotairBalloon != null) {
+            text.text = (DateTime.MinValue + TimeSpan.FromSeconds(hotairBalloon.StageElapsedTime)).ToString("mm:ss.fff");
+        }
     }
 }

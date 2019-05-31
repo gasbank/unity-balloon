@@ -32,6 +32,15 @@ class BalloonBuild
                 "Assets/Scenes/Stage 20.unity",
                 "Assets/Scenes/Ending.unity",
                 "Assets/Scenes/Stage Selection.unity",
+
+                "Assets/Test Scenes/Stage 02 - Test.unity",
+                "Assets/Test Scenes/Stage Boost Test.unity",
+                "Assets/Test Scenes/Stage Fever Gauge.unity",
+                "Assets/Test Scenes/Stage Shading.unity",
+                "Assets/Test Scenes/Stage Slider Interface.unity",
+                "Assets/Test Scenes/Stage Wind Region (Rechargeable).unity",
+                "Assets/Test Scenes/Stage Yellow Block Spawn.unity",
+                "Assets/Test Scenes/Test.unity",
             };
         }
     }

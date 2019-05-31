@@ -27,7 +27,10 @@ public class Bootstrap : MonoBehaviour {
         if (sceneName == ENDING_SCENE_NAME) {
             return ENDING_SCENE_NUMBER;
         } else {
-            return int.Parse(sceneName.Substring("Stage ".Length, 2));
+            if (int.TryParse(sceneName.Substring("Stage ".Length, 2), out var result)) {
+                return result;
+            }
+            return 1;
         }
     }
 

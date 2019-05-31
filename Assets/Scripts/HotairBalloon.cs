@@ -167,7 +167,7 @@ public class HotairBalloon : MonoBehaviour {
             }
         }
         if (vignette == null) {
-            Debug.LogError("Vignette cannot be found.");
+            Debug.LogWarning("Vignette cannot be found.");
         }
 
         feverRingRenderer.material = Instantiate(feverRingRenderer.material);
