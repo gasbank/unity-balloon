@@ -47,6 +47,14 @@ if ($ERROR_COUNT -ne 0) {
     exit $ERROR_COUNT
 }
 
+$ERROR_LINES = (Get-Content build.log | Select-String ": Build Failed")
+$ERROR_COUNT = $ERROR_LINES.length
+if ($ERROR_COUNT -ne 0) {
+    Write-Output "$ERROR_COUNT lines detected!"
+	Write-Output $ERROR_LINES
+    exit $ERROR_COUNT
+}
+
 # 5. Upload APK (disabled)
 ####
 
