@@ -15,6 +15,10 @@ public class StageName : MonoBehaviour {
     }
 
     void Awake() {
-        text.text = SceneManager.GetActiveScene().name;
+        SetStageName(SceneManager.GetActiveScene().name);
+    }
+
+    public void SetStageName(string stageName) {
+        text.text = stageName;
     }
 }

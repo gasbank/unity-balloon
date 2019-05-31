@@ -22,10 +22,21 @@ public class BackgroundCanvas : MonoBehaviour {
             }
         }
     }
-    
+
+    public void SetImageMaterial(Material mat) {
+        image.material = mat;
+        InstantiateImageMaterialAndSetup();
+    }
+
     void Awake() {
-        image.material = Instantiate(image.material);
         hotairBalloon = GameObject.Find("Hotair Balloon").GetComponent<HotairBalloon>();
+        if (GameObject.FindObjectOfType<StagePrefabSpawner>() == null) {
+            InstantiateImageMaterialAndSetup();
+        }
+    }
+    
+    void InstantiateImageMaterialAndSetup() {
+        image.material = Instantiate(image.material);
         colorTop = image.material.GetColor("_ColorTop");
         colorMid = image.material.GetColor("_ColorMid");
         colorBot = image.material.GetColor("_ColorBot");

@@ -5,7 +5,9 @@ using UnityEngine;
 using TMProText = TMPro.TextMeshProUGUI;
 using System.Linq;
 using UnityEngine.SceneManagement;
+#if BALLOON_POST_PROCESSING
 using UnityEngine.Rendering.PostProcessing;
+#endif
 
 public class HotairBalloon : MonoBehaviour {
     [SerializeField] Rigidbody balloonRb = null;
@@ -45,7 +47,9 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] Transform directionArrowPivot = null;
     [SerializeField] float freeOilOnStartDuration = 5.0f;
     [SerializeField] TrailRenderer boostTrailRenderer = null;
+#if BALLOON_POST_PROCESSING
     [SerializeField] PostProcessVolume postProcessVolume = null;
+#endif
     [SerializeField] Transform balloonFeverRing = null;
     [SerializeField] Transform balloonFeverRingOuter = null;
     [SerializeField] Renderer feverRingRenderer = null;
@@ -64,7 +68,9 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] StageCommon stageCommon = null;
     [SerializeField] float stageElapsedTime = 0;
 
+#if BALLOON_POST_PROCESSING
     Vignette vignette;
+#endif
 
     public float StageElapsedTime => stageElapsedTime;
 
@@ -159,6 +165,7 @@ public class HotairBalloon : MonoBehaviour {
         gameOverGroup = FindObjectOfType<GameOverGroup>();
         finishGroup = FindObjectOfType<FinishGroup>();
 
+#if BALLOON_POST_PROCESSING
         var postProcessVolumeGo = GameObject.Find("Main Camera/Post Process Volume");
         if (postProcessVolumeGo != null) {
             postProcessVolume = postProcessVolumeGo.GetComponent<PostProcessVolume>();
@@ -169,6 +176,7 @@ public class HotairBalloon : MonoBehaviour {
         if (vignette == null) {
             Debug.LogWarning("Vignette cannot be found.");
         }
+#endif
 
         feverRingRenderer.material = Instantiate(feverRingRenderer.material);
         FeverGauge = 0;
@@ -306,6 +314,7 @@ public class HotairBalloon : MonoBehaviour {
         }
 
         // 연료 바닥났을 때 화면 효과
+#if BALLOON_POST_PROCESSING
         if (vignette != null) {
             if (zeroOilDuration > 0) {
                 vignette.intensity.value = (0.5f + Mathf.PingPong(Time.time * 0.7f, 0.1f));
@@ -313,6 +322,7 @@ public class HotairBalloon : MonoBehaviour {
                 vignette.intensity.value = 0;
             }
         }
+#endif
 
         if (BalloonGameOverCondition
             && gameOverGroup.Visible == false

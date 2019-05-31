@@ -36,7 +36,13 @@ public class Bootstrap : MonoBehaviour {
 
     public static int CurrentStageNumber => GetStageNumber(SceneManager.GetActiveScene().name);
 
+    static public void LoadStageScene(int stageNumber) {
+        StagePrefabSpawner.PrefabPathToLoad = "Levels/" + GetStageSceneName(LastPlayedStageNumber);
+        SceneManager.LoadScene("Stage");
+    }
+
     void Awake() {
-        SceneManager.LoadScene(GetStageSceneName(LastPlayedStageNumber));
+        //SceneManager.LoadScene(GetStageSceneName(LastPlayedStageNumber));
+        LoadStageScene(LastPlayedStageNumber);
     }
 }
