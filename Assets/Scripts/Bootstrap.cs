@@ -34,10 +34,21 @@ public class Bootstrap : MonoBehaviour {
         }
     }
 
-    public static int CurrentStageNumber => GetStageNumber(SceneManager.GetActiveScene().name);
+    public static string CurrentStageName {
+        get {
+            var stagePrefabSpawner = GameObject.FindObjectOfType<StagePrefabSpawner>();
+            if (stagePrefabSpawner != null) {
+                return stagePrefabSpawner.PrefabName;
+            } else {
+                return SceneManager.GetActiveScene().name;
+            }
+        }
+    }
+
+    public static int CurrentStageNumber => GetStageNumber(CurrentStageName);
 
     static public void LoadStageScene(int stageNumber) {
-        StagePrefabSpawner.PrefabPathToLoad = "Levels/" + GetStageSceneName(LastPlayedStageNumber);
+        StagePrefabSpawner.PrefabPathToLoad = "Levels/" + GetStageSceneName(stageNumber);
         SceneManager.LoadScene("Stage");
     }
 

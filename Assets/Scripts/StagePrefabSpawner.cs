@@ -2,13 +2,18 @@
 
 public class StagePrefabSpawner : MonoBehaviour {
     public static string PrefabPathToLoad;
+    [SerializeField] string prefabName = "";
+
+    public string PrefabName => prefabName;
 
     void Awake() {
         if (string.IsNullOrEmpty(PrefabPathToLoad)) {
             PrefabPathToLoad = "Levels/Stage 01";
         }
         SushiDebug.Log($"Instantiating stage prefab resource '{PrefabPathToLoad}'...");
-        var stage = Instantiate(Resources.Load<GameObject>(PrefabPathToLoad)).GetComponent<Stage>();
+        var prefab = Resources.Load<GameObject>(PrefabPathToLoad);
+        prefabName = prefab.name;
+        var stage = Instantiate(prefab).GetComponent<Stage>();
         GameObject.Find("Canvas (Tutorial)").SetActive(stage.Tutorial);
     }
 

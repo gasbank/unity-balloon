@@ -14,6 +14,7 @@ public class StageButton : MonoBehaviour {
     }
 
     public void GoToStage() {
-        SceneManager.LoadScene(Bootstrap.GetStageSceneName(ButtonStageNumber));
+        //SceneManager.LoadScene(Bootstrap.GetStageSceneName(ButtonStageNumber));
+        Bootstrap.LoadStageScene(ButtonStageNumber);
     }
 }

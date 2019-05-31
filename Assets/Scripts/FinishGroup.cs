@@ -28,6 +28,6 @@ public class FinishGroup : MonoBehaviour {
     }
 
     public void NextStage() {
-        SceneManager.LoadScene(Bootstrap.GetStageSceneName(NextStageNumber));
+        Bootstrap.LoadStageScene(NextStageNumber);
     }
 }
