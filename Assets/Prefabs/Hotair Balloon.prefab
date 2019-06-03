@@ -33977,14 +33977,13 @@ MonoBehaviour:
   directionArrowPivot: {fileID: 3414897231241613112}
   freeOilOnStartDuration: 5
   boostTrailRenderer: {fileID: 1406606275}
-  postProcessVolume: {fileID: 0}
   balloonFeverRing: {fileID: 2057832170647711202}
   balloonFeverRingOuter: {fileID: 6303495623730133646}
   feverRingRenderer: {fileID: 3412497662314834818}
   feverGaugeMax: 50
   feverGaugeIncrement: 9
   feverGaugeDecrementByDecay: 5
-  feverGaugeDecrementByConsumption: 15
+  feverGaugeDecrementByConsumption: 35
   feverItemParticle: {fileID: 3045181185264388267}
   inFever: 0
   feverMaxVelocity: 30
@@ -33994,6 +33993,7 @@ MonoBehaviour:
   feverStart: {fileID: 96588063}
   feverThrust: {fileID: 2112785101}
   stageCommon: {fileID: 0}
+  stageElapsedTime: 0
   rbArray: []
   colliderArray: []
 --- !u!1 &4940520359288410078
@@ -55027,6 +55027,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2057832170647711202}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 06e6fe26df6a24b46b849a6fe9280940,
+        type: 3}
+      propertyPath: m_Name
+      value: fillring
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 06e6fe26df6a24b46b849a6fe9280940,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -55112,11 +55117,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 06e6fe26df6a24b46b849a6fe9280940,
-        type: 3}
-      propertyPath: m_Name
-      value: fillring
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06e6fe26df6a24b46b849a6fe9280940, type: 3}
 --- !u!4 &88998179674303821 stripped
@@ -55138,6 +55138,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4940520360091206959}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 2e54d6008493a402ca8c8515c75e03b3,
+        type: 3}
+      propertyPath: m_Name
+      value: windeffect
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 2e54d6008493a402ca8c8515c75e03b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2e54d6008493a402ca8c8515c75e03b3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -55198,16 +55208,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 500
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 2e54d6008493a402ca8c8515c75e03b3,
-        type: 3}
-      propertyPath: m_Name
-      value: windeffect
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 2e54d6008493a402ca8c8515c75e03b3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 2e54d6008493a402ca8c8515c75e03b3,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -55234,6 +55234,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4940520358894240945}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 04797bc70be75495a83e5214bef03fc1,
+        type: 3}
+      propertyPath: m_Name
+      value: hotair-bottom
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 04797bc70be75495a83e5214bef03fc1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -55303,11 +55308,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 53.8
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 04797bc70be75495a83e5214bef03fc1,
-        type: 3}
-      propertyPath: m_Name
-      value: hotair-bottom
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 04797bc70be75495a83e5214bef03fc1,
         type: 3}
