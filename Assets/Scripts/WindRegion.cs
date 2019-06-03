@@ -11,8 +11,10 @@ public class WindRegion : MonoBehaviour {
     [SerializeField] Transform gaugeRed = null;
     [SerializeField] Transform gaugeGreen = null;
     [SerializeField] int enteredCount = 0;
-
+    
     public Vector3 WindForce => windPower * transform.right;
+    public float Power => windPower;
+    public float CapacityRatio => capacity / maxCapacity;
 
     void OnTriggerEnter(Collider collider) {
         var player = collider.gameObject.GetComponentInParent<HotairBalloon>();
