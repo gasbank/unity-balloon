@@ -17,7 +17,7 @@
         }
         LOD 100
         ColorMask RGB
-		AlphaTest Greater .01
+		//AlphaTest Greater .01
 		ZWrite Off
         Lighting Off
         Cull Off
@@ -74,8 +74,9 @@
                 float ycomp = 0.2f - abs(i.uv.y - 0.5 + sin(i.uv.x*30)/20);
                 float xweight2 = abs(i.uv.x - (_Center + 0.9));
                 float xcomp2 = 0.2f - abs(0.5 - xweight2);
-                col = float4(_Color.r,_Color.g,_Color.b,xweightmid*(xcomp1 + ycomp));
-                //col += float4(1.0,1.0,1.0,xweightmid*(xcomp2 + ycomp));
+                col = float4(_Color.r,_Color.g,_Color.b,clamp(xweightmid*(xcomp1 + ycomp), 0, 1));
+                //col = float4(_Color.r,_Color.g,_Color.b,1);
+                
                 return col;
             }
             ENDCG
