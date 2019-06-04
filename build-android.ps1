@@ -59,9 +59,9 @@ if ($ERROR_COUNT -ne 0) {
 ####
 
 # 6. Deploy to d.yyt.life
-.\upload-to-yyt.ps1 balloon android-armeabi-v7a top.plusalpha.balloon "balloon.apk\Balloon Rider.armeabi-v7a.apk"
-.\upload-to-yyt.ps1 balloon android-arm64-v8a top.plusalpha.balloon "balloon.apk\Balloon Rider.arm64-v8a.apk"
-.\upload-to-yyt.ps1 balloon android-x86 top.plusalpha.balloon "balloon.apk\Balloon Rider.x86.apk"
+.\upload-to-yyt.ps1 balloon android-armeabi-v7a top.plusalpha.balloon "balloon.apk\BalloonRider.armeabi-v7a.apk"
+.\upload-to-yyt.ps1 balloon android-arm64-v8a top.plusalpha.balloon "balloon.apk\BalloonRider.arm64-v8a.apk"
+.\upload-to-yyt.ps1 balloon android-x86 top.plusalpha.balloon "balloon.apk\BalloonRider.x86.apk"
 
 # 7.  Notify Developers on Telegram
 .\notify-telegram-android-windows.ps1
