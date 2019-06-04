@@ -160,7 +160,7 @@ MonoBehaviour:
   lastHitTime: 0
   lastHitMinInterval: 0.5
   hpText: {fileID: 4213719770883994287}
-  afterDestroySpawn: {fileID: 318595627495073414, guid: b15747a56e89e448b9c587432a9d29fc,
+  afterDestroySpawn: {fileID: 318595627495073414, guid: 9f56b7c251f124657afcc930102b0fe3,
     type: 3}
   afterDestroySpawnParent: {fileID: 9177803494116073374}
   halfRingMaterialOriginal: {fileID: 2100000, guid: dadbe6f536a694f859e00a1e338cc3f0,
@@ -177,11 +177,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Yellow Block Question Mark Animated
-      objectReference: {fileID: 0}
-    - target: {fileID: 147170592548837379, guid: ca5f3b13926614cec94609c5fd4f670e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3769938429808683536, guid: ca5f3b13926614cec94609c5fd4f670e,
         type: 3}
@@ -374,10 +369,26 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7668553661595417565, guid: 9875ffcd8ae5e4879a8486515ff23823,
+    - target: {fileID: 7544129513607932607, guid: 9875ffcd8ae5e4879a8486515ff23823,
         type: 3}
-      propertyPath: m_Mesh
+      propertyPath: m_sharedMaterial
       value: 
+      objectReference: {fileID: -4906057758283591719, guid: b8f4b02be8d8e42cfa76afb8a88c3859,
+        type: 2}
+    - target: {fileID: 7544129513607932607, guid: 9875ffcd8ae5e4879a8486515ff23823,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190335
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544129513607932607, guid: 9875ffcd8ae5e4879a8486515ff23823,
+        type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544129513607932607, guid: 9875ffcd8ae5e4879a8486515ff23823,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7544129513607932607, guid: 9875ffcd8ae5e4879a8486515ff23823,
         type: 3}
@@ -403,32 +414,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7544129513607932607, guid: 9875ffcd8ae5e4879a8486515ff23823,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -4906057758283591719, guid: b8f4b02be8d8e42cfa76afb8a88c3859,
-        type: 2}
-    - target: {fileID: 7544129513607932607, guid: 9875ffcd8ae5e4879a8486515ff23823,
-        type: 3}
-      propertyPath: m_fontColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7544129513607932607, guid: 9875ffcd8ae5e4879a8486515ff23823,
-        type: 3}
-      propertyPath: m_fontColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7544129513607932607, guid: 9875ffcd8ae5e4879a8486515ff23823,
-        type: 3}
-      propertyPath: m_fontColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7544129513607932607, guid: 9875ffcd8ae5e4879a8486515ff23823,
-        type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4278190335
       objectReference: {fileID: 0}
     - target: {fileID: 3546356280560542366, guid: 9875ffcd8ae5e4879a8486515ff23823,
         type: 3}
@@ -568,6 +553,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 750181e6341d14994930052ffc0818bf, type: 2}
     - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
         type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 750181e6341d14994930052ffc0818bf, type: 2}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
       propertyPath: m_textInfo.characterCount
       value: 1
       objectReference: {fileID: 0}
@@ -590,16 +580,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 750181e6341d14994930052ffc0818bf, type: 2}
-    - target: {fileID: 5593931071224285496, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33b15b31be77046388a65b8edf9a6dae, type: 3}
