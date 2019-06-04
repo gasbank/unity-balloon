@@ -33,7 +33,7 @@ class BalloonBuild
         options.locationPathName = "./balloon.apk";
         // BALLOON_DEBUG 심볼을 빼서 디버그 메시지 나오지 않도록 한다.
         if (System.Environment.GetEnvironmentVariable("BALLOON_DEV_BUILD") != "1") {
-            RemovingBalloonDebugDefine(BuildTargetGroup.Android);
+            RemovingSushiDebugDefine(BuildTargetGroup.Android);
         }
         var cmdArgs = System.Environment.GetCommandLineArgs().ToList();
         if (ProcessAndroidKeystorePassArg(options, cmdArgs)) {
@@ -87,7 +87,7 @@ class BalloonBuild
         options.locationPathName = "./build";
         // BALLOON_DEBUG 심볼을 빼서 디버그 메시지 나오지 않도록 한다.
         if (System.Environment.GetEnvironmentVariable("BALLOON_DEV_BUILD") != "1") {
-            RemovingBalloonDebugDefine(BuildTargetGroup.iOS);
+            RemovingSushiDebugDefine(BuildTargetGroup.iOS);
         }
         PlayerSettings.iOS.appleDeveloperTeamID = "TG9MHV97AH";
         var cmdArgs = System.Environment.GetCommandLineArgs().ToList();
@@ -95,7 +95,7 @@ class BalloonBuild
         BuildPipeline.BuildPlayer(options);
     }
 
-    private static void RemovingBalloonDebugDefine(BuildTargetGroup buildTargetGroup) {
+    private static void RemovingSushiDebugDefine(BuildTargetGroup buildTargetGroup) {
         var scriptingDefineSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
         scriptingDefineSymbols = string.Join(";", scriptingDefineSymbols.Split(';').Where(e => e != "BALLOON_DEBUG" && e != "BALLOON_ADMIN"));
         PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, scriptingDefineSymbols);
