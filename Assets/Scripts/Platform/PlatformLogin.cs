@@ -16,7 +16,9 @@ public class PlatformLogin : MonoBehaviour {
         //rootCanvasGroup.interactable = false;
         try {
             Platform.StartAuthAsync((result, reason) => {
-                rootCanvasGroup.interactable = true;
+                if (rootCanvasGroup != null) {
+                    rootCanvasGroup.interactable = true;
+                }
                 SushiDebug.LogFormat("Social.localUser.Authenticate {0}", result);
                 if (result) {
                     SushiDebug.LogFormat("Social.localUser userName={0}, userId={1}", Social.localUser.userName, Social.localUser.id);
@@ -29,11 +31,9 @@ public class PlatformLogin : MonoBehaviour {
                 }
             });
         } catch {
-            rootCanvasGroup.interactable = true;
+            if (rootCanvasGroup != null) {
+                rootCanvasGroup.interactable = true;
+            }
         }
-    }
-
-    public void ReturnToGame() {
-        SceneManager.LoadScene("main");
     }
 }

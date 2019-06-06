@@ -5,9 +5,9 @@ using UnityEngine.Advertisements;
 [DisallowMultipleComponent]
 public class PlatformUnityAdsInit : MonoBehaviour {
 #if UNITY_ANDROID
-    string gameID = "2864446";
+    string gameID = "3173511";
 #elif UNITY_IOS
-    string gameID = "2864445";
+    string gameID = "3173510";
 #endif
     void Start() {
         SushiDebug.Log("PlatformUnityAdsInit.Start()");
