@@ -9,6 +9,7 @@ using GoogleMobileAds.Api;
 public class PlatformAdMobAdsInit : MonoBehaviour {
 #if GOOGLE_MOBILE_ADS
     private RewardBasedVideoAd rewardBasedVideo;
+    public static InterstitialAd interstitial;
     bool shouldBeRewarded;
 
     public void Start() {
@@ -42,6 +43,18 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
         rewardBasedVideo.OnAdLeavingApplication += HandleRewardBasedVideoLeftApplication;
 
         RequestRewardBasedVideo();
+        RequestInterstitial();
+
+        // Called when an ad request has successfully loaded.
+        interstitial.OnAdLoaded += HandleOnAdLoaded;
+        // Called when an ad request failed to load.
+        interstitial.OnAdFailedToLoad += HandleOnAdFailedToLoad;
+        // Called when an ad is shown.
+        interstitial.OnAdOpening += HandleOnAdOpened;
+        // Called when the ad is closed.
+        interstitial.OnAdClosed += HandleOnAdClosed;
+        // Called when the ad click caused the user to leave the application.
+        interstitial.OnAdLeavingApplication += HandleOnAdLeavingApplication;
     }
 
     void HandleRewardBasedVideoLoaded(object sender, EventArgs args) {
@@ -146,7 +159,25 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
         rewardBasedVideo.OnAdClosed -= HandleRewardBasedVideoClosed;
         // Called when the ad click caused the user to leave the application.
         rewardBasedVideo.OnAdLeavingApplication -= HandleRewardBasedVideoLeftApplication;
+
+
+        // Called when an ad request has successfully loaded.
+        interstitial.OnAdLoaded -= HandleOnAdLoaded;
+        // Called when an ad request failed to load.
+        interstitial.OnAdFailedToLoad -= HandleOnAdFailedToLoad;
+        // Called when an ad is shown.
+        interstitial.OnAdOpening -= HandleOnAdOpened;
+        // Called when the ad is closed.
+        interstitial.OnAdClosed -= HandleOnAdClosed;
+        // Called when the ad click caused the user to leave the application.
+        interstitial.OnAdLeavingApplication -= HandleOnAdLeavingApplication;
+
+        interstitial.Destroy();
     }
+
+    AdRequest DefaultAdRequest => new AdRequest.Builder()
+        .AddTestDevice("F626104A61B1DF52DAFC0B5BE7F72B00") // Galaxy S6 Edge
+        .Build();
 
     void RequestRewardBasedVideo() {
 #if UNITY_ANDROID
@@ -156,13 +187,44 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
 #else
         string adUnitId = "unexpected_platform";
 #endif
-
-        // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder()
-            .AddTestDevice("F626104A61B1DF52DAFC0B5BE7F72B00") // Galaxy S6 Edge
-            .Build();
         // Load the rewarded video ad with the request.
-        rewardBasedVideo.LoadAd(request, adUnitId);
+        rewardBasedVideo.LoadAd(DefaultAdRequest, adUnitId);
     }
+
+    void RequestInterstitial() {
+#if UNITY_ANDROID
+            string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+#elif UNITY_IPHONE
+        string adUnitId = "ca-app-pub-3940256099942544/4411468910";
+#else
+            string adUnitId = "unexpected_platform";
 #endif
+        // Initialize an InterstitialAd.
+        interstitial = new InterstitialAd(adUnitId);
+
+        // Load the interstitial with the request.
+        interstitial.LoadAd(DefaultAdRequest);
+    }
+
+    public void HandleOnAdLoaded(object sender, EventArgs args) {
+        MonoBehaviour.print("HandleAdLoaded event received");
+    }
+
+    public void HandleOnAdFailedToLoad(object sender, AdFailedToLoadEventArgs args) {
+        MonoBehaviour.print("HandleFailedToReceiveAd event received with message: "
+                            + args.Message);
+    }
+
+    public void HandleOnAdOpened(object sender, EventArgs args) {
+        MonoBehaviour.print("HandleAdOpened event received");
+    }
+
+    public void HandleOnAdClosed(object sender, EventArgs args) {
+        MonoBehaviour.print("HandleAdClosed event received");
+    }
+
+    public void HandleOnAdLeavingApplication(object sender, EventArgs args) {
+        MonoBehaviour.print("HandleAdLeavingApplication event received");
+    }
+#endif // #if GOOGLE_MOBILE_ADS
 }

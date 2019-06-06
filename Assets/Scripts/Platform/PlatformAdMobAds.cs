@@ -34,6 +34,14 @@ public class PlatformAdMobAds {
 #endif
     }
 
+    public static void TryShowInterstitialAd(ShopProductEntry shopProductEntry, ShopProductData shopProductData) {
+#if GOOGLE_MOBILE_ADS
+        if (PlatformAdMobAdsInit.interstitial.IsLoaded()) {
+            PlatformAdMobAdsInit.interstitial.Show();
+        }
+#endif
+    }
+
     public static void HandleRewarded() {
 #if GOOGLE_MOBILE_ADS        
         PlatformAds.HandleRewarded(shopProductEntry, shopProductData, PlatformAds.AdsType.AdMob);

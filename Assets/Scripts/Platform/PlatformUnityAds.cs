@@ -6,15 +6,23 @@ public class PlatformUnityAds {
     private static ShopProductData shopProductData;
 
     public static void TryShowRewardedAd(ShopProductEntry shopProductEntry, ShopProductData shopProductData) {
+        TryShowAd("rewardedVideo", shopProductEntry, shopProductData);
+    }
+
+    public static void TryShowInterstitialAd(ShopProductEntry shopProductEntry, ShopProductData shopProductData) {
+        TryShowAd("video", shopProductEntry, shopProductData);
+    }
+
+    public static void TryShowAd(string placementId, ShopProductEntry shopProductEntry, ShopProductData shopProductData) {
         if (Application.internetReachability == NetworkReachability.NotReachable) {
             ConfirmPopup.instance.Open(string.Format("\\광고를 보기 위해서는 인터넷 연결이 필요합니다.".Localized()));
-        } else if (Advertisement.IsReady("rewardedVideo")) {
+        } else if (Advertisement.IsReady(placementId)) {
             PlatformUnityAds.shopProductEntry = shopProductEntry;
             PlatformUnityAds.shopProductData = shopProductData;
             var options = new ShowOptions { resultCallback = HandleShowResult };
-            Advertisement.Show("rewardedVideo", options);
+            Advertisement.Show(placementId, options);
         } else {
-            Debug.LogError("Ad not ready!");
+            Debug.LogError("Ad not ready! - " + placementId);
             ShowAdsErrorPopup();
         }
     }
