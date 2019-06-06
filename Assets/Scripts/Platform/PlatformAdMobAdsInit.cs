@@ -14,13 +14,11 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
     public void Start() {
         SushiDebug.Log("PlatformAdMobAdsInit.Start()");
 #if UNITY_ANDROID
-        string appId = "ca-app-pub-5072035175916776~8524864268";
+        string appId = "ca-app-pub-5072035175916776~9742483955";
 #elif UNITY_IOS
-        string appId = "ca-app-pub-5072035175916776~1063454449";
-        // TEST
-        //string appId = "ca-app-pub-3940256099942544~3347511713";
+        string appId = "ca-app-pub-5072035175916776~2508482457";
 #else
-        //string appId = "unexpected_platform";
+        string appId = "unexpected_platform";
 #endif
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize(appId);
@@ -152,13 +150,11 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
 
     void RequestRewardBasedVideo() {
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-5072035175916776/4885002150";
+        string adUnitId = "ca-app-pub-5072035175916776/5803238943";
 #elif UNITY_IOS
-        string adUnitId = "ca-app-pub-5072035175916776/5048653683";
-        // TEST
-        //string adUnitId = "ca-app-pub-3940256099942544/5224354917";
+        string adUnitId = "ca-app-pub-5072035175916776/9016505898";
 #else
-        //string adUnitId = "unexpected_platform";
+        string adUnitId = "unexpected_platform";
 #endif
 
         // Create an empty ad request.
