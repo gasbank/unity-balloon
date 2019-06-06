@@ -158,7 +158,9 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
 #endif
 
         // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().Build();
+        AdRequest request = new AdRequest.Builder()
+            .AddTestDevice("F626104A61B1DF52DAFC0B5BE7F72B00") // Galaxy S6 Edge
+            .Build();
         // Load the rewarded video ad with the request.
         rewardBasedVideo.LoadAd(request, adUnitId);
     }
