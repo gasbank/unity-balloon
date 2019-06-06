@@ -5,7 +5,7 @@
 cd build
 
 xcodebuild \
-    -project Unity-iPhone.xcodeproj \
+    -workspace Unity-iPhone.xcworkspace \
     -scheme Unity-iPhone \
     archive \
     -archivePath build \
