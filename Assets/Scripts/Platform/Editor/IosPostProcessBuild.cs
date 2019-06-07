@@ -42,6 +42,8 @@ public static class DisableBitcode
             // 스크린샷을 앨범에 저장하고자 할 때 필요한 권한을 요청하는 팝업 설정 (지정하지 않으면 크래시)
             plist.root.SetString("NSPhotoLibraryUsageDescription", "Screenshot Save");
             plist.root.SetString("NSPhotoLibraryAddUsageDescription", "Screenshot Save");
+            // 최신 AdMob SDK에서는 아래 항목이 필수다...헛헛헛...
+            plist.root.SetString("GADApplicationIdentifier", "ca-app-pub-5072035175916776~2508482457");
    
             plist.WriteToFile (plistPath);
 
