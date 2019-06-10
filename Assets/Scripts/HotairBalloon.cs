@@ -332,7 +332,7 @@ public class HotairBalloon : MonoBehaviour {
             BalloonSound.instance.PlayGameOver();
             BalloonSound.instance.PlayGameOver_sigh();
 
-            Time.timeScale = 0.35f;
+            
             foreach (var fixedJoint in fixedJointArray) {
                 Destroy(fixedJoint);
             }
@@ -343,6 +343,7 @@ public class HotairBalloon : MonoBehaviour {
                 collider.enabled = true;
             }
             gear.enabled = false;
+            Time.timeScale = 0.5f;
         }
 
         float boostVelocityVelocity = 0;
