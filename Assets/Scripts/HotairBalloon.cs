@@ -276,6 +276,7 @@ public class HotairBalloon : MonoBehaviour {
 
         if (IsGameOver == false && IsStageFinished == false && IsTitleVisible == false) {
             stageElapsedTime += Time.deltaTime;
+            Time.timeScale = 1f;
         }
 
         oil.localScale = new Vector3(oil.localScale.x, RemainOilAmount / 100.0f, oil.localScale.z);
@@ -330,6 +331,8 @@ public class HotairBalloon : MonoBehaviour {
             gameOverGroup.Visible = true;
             BalloonSound.instance.PlayGameOver();
             BalloonSound.instance.PlayGameOver_sigh();
+
+            Time.timeScale = 0.35f;
             foreach (var fixedJoint in fixedJointArray) {
                 Destroy(fixedJoint);
             }
