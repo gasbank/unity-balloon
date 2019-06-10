@@ -7,9 +7,14 @@ public class PlatformLogin : MonoBehaviour {
     public Text userName;
     public Text userId;
     public CanvasGroup rootCanvasGroup;
+    static bool initLogin = false;
 
     private void Start() {
-        StartLogin();
+        // 게임 켜고 처음 한번만 자동 로그인 시도한다.
+        if (initLogin == false) {
+            StartLogin();
+            initLogin = true;
+        }
     }
 
     public void StartLogin() {
