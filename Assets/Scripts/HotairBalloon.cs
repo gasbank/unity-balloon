@@ -120,7 +120,7 @@ public class HotairBalloon : MonoBehaviour {
 
     public bool BalloonGameOverCondition => zeroOilDuration > 5.0f || balloon.position.y < -5;
 
-    public void IncreaseFeverGauge() {
+    public void IncreaseFeverGauge(float feverGaugeIncrement) {
         if (inFever) {
             return;
         }
