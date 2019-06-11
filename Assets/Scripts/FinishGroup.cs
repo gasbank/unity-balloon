@@ -28,6 +28,7 @@ public class FinishGroup : MonoBehaviour {
     }
 
     public void NextStage() {
+        HotairBalloon.initialPositionY = 0;
         Bootstrap.LoadStageScene(NextStageNumber);
     }
 }

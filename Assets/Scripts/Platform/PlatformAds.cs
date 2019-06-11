@@ -11,6 +11,8 @@ public class PlatformAds {
         SushiDebug.LogFormat("HandleShowResult: shopProductEntry: {0}", shopProductEntry);
         SushiDebug.LogFormat("HandleShowResult: shopProductData: {0}", shopProductData);
         // 체크포인트부터 이어서 플레이한다.
+        // HotairBalloon.initialPositionY를 리셋하지 않으면
+        // 이어서 되도록 해 놓았다.
         Bootstrap.ReloadCurrentScene();
     }
 
@@ -19,6 +21,7 @@ public class PlatformAds {
         SushiDebug.LogFormat("HandleShowResult: shopProductEntry: {0}", shopProductEntry);
         SushiDebug.LogFormat("HandleShowResult: shopProductData: {0}", shopProductData);
         // 이번 스테이지를 처음부터 새로 시작한다.
+        HotairBalloon.initialPositionY = 0;
         Bootstrap.ReloadCurrentScene();
     }
 }

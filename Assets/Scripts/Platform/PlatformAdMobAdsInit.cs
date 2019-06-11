@@ -146,33 +146,36 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
 
     void OnDestroy() {
         // Called when an ad request has successfully loaded.
-        rewardBasedVideo.OnAdLoaded -= HandleRewardBasedVideoLoaded;
-        // Called when an ad request failed to load.
-        rewardBasedVideo.OnAdFailedToLoad -= HandleRewardBasedVideoFailedToLoad;
-        // Called when an ad is shown.
-        rewardBasedVideo.OnAdOpening -= HandleRewardBasedVideoOpened;
-        // Called when the ad starts to play.
-        rewardBasedVideo.OnAdStarted -= HandleRewardBasedVideoStarted;
-        // Called when the user should be rewarded for watching a video.
-        rewardBasedVideo.OnAdRewarded -= HandleRewardBasedVideoRewarded;
-        // Called when the ad is closed.
-        rewardBasedVideo.OnAdClosed -= HandleRewardBasedVideoClosed;
-        // Called when the ad click caused the user to leave the application.
-        rewardBasedVideo.OnAdLeavingApplication -= HandleRewardBasedVideoLeftApplication;
+        if (rewardBasedVideo != null) {
+            rewardBasedVideo.OnAdLoaded -= HandleRewardBasedVideoLoaded;
+            // Called when an ad request failed to load.
+            rewardBasedVideo.OnAdFailedToLoad -= HandleRewardBasedVideoFailedToLoad;
+            // Called when an ad is shown.
+            rewardBasedVideo.OnAdOpening -= HandleRewardBasedVideoOpened;
+            // Called when the ad starts to play.
+            rewardBasedVideo.OnAdStarted -= HandleRewardBasedVideoStarted;
+            // Called when the user should be rewarded for watching a video.
+            rewardBasedVideo.OnAdRewarded -= HandleRewardBasedVideoRewarded;
+            // Called when the ad is closed.
+            rewardBasedVideo.OnAdClosed -= HandleRewardBasedVideoClosed;
+            // Called when the ad click caused the user to leave the application.
+            rewardBasedVideo.OnAdLeavingApplication -= HandleRewardBasedVideoLeftApplication;
+        }
 
+        if (interstitial != null) {
+            // Called when an ad request has successfully loaded.
+            interstitial.OnAdLoaded -= HandleOnAdLoaded;
+            // Called when an ad request failed to load.
+            interstitial.OnAdFailedToLoad -= HandleOnAdFailedToLoad;
+            // Called when an ad is shown.
+            interstitial.OnAdOpening -= HandleOnAdOpened;
+            // Called when the ad is closed.
+            interstitial.OnAdClosed -= HandleOnAdClosed;
+            // Called when the ad click caused the user to leave the application.
+            interstitial.OnAdLeavingApplication -= HandleOnAdLeavingApplication;
 
-        // Called when an ad request has successfully loaded.
-        interstitial.OnAdLoaded -= HandleOnAdLoaded;
-        // Called when an ad request failed to load.
-        interstitial.OnAdFailedToLoad -= HandleOnAdFailedToLoad;
-        // Called when an ad is shown.
-        interstitial.OnAdOpening -= HandleOnAdOpened;
-        // Called when the ad is closed.
-        interstitial.OnAdClosed -= HandleOnAdClosed;
-        // Called when the ad click caused the user to leave the application.
-        interstitial.OnAdLeavingApplication -= HandleOnAdLeavingApplication;
-
-        interstitial.Destroy();
+            interstitial.Destroy();
+        }
     }
 
     AdRequest DefaultAdRequest => new AdRequest.Builder()
@@ -227,7 +230,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
     IEnumerator HandleAdClosedCoro() {
         yield return null;
         SushiDebug.Log("HandleAdClosedCoro event received");
-        Bootstrap.ReloadCurrentScene();
+        PlatformAds.HandleRewarded_Video(null, null, PlatformAds.AdsType.AdMob);
     }
 
     public void HandleOnAdLeavingApplication(object sender, EventArgs args) {
