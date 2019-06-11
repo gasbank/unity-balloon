@@ -5,6 +5,7 @@ using UnityEngine;
 using TMProText = TMPro.TextMeshProUGUI;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 #if BALLOON_POST_PROCESSING
 using UnityEngine.Rendering.PostProcessing;
 #endif
@@ -67,12 +68,13 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] ParticleSystem feverThrust = null;
     [SerializeField] StageCommon stageCommon = null;
     [SerializeField] float stageElapsedTime = 0;
-    
+
     public static float initialPositionY = 0;
 
 #if BALLOON_POST_PROCESSING
     Vignette vignette;
 #endif
+    [SerializeField] Image vignetteImage = null;
 
     public float StageElapsedTime => stageElapsedTime;
 
@@ -184,6 +186,8 @@ public class HotairBalloon : MonoBehaviour {
         fixedJointArray = GetComponentsInChildren<FixedJoint>();
         colliderArray = GetComponentsInChildren<Collider>();
         stageCommon = GameObject.FindObjectOfType<StageCommon>();
+
+        vignetteImage = GameObject.Find("Canvas/Vignette Image").GetComponent<Image>();
     }
 
     float HorizontalAxis => Input.GetAxis("Horizontal") + (handleSlider != null ? handleSlider.Horizontal : 0);
@@ -323,6 +327,11 @@ public class HotairBalloon : MonoBehaviour {
             }
         }
 #endif
+        if (zeroOilDuration > 0) {
+            vignetteImage.color = new Color(1, 0, 0, (0.1f + Mathf.PingPong(Time.time * 1.4f, 0.4f)));
+        } else {
+            vignetteImage.color = new Color(1, 0, 0, 0);
+        }
 
         if (BalloonGameOverCondition && continuePopup.IsOpen == false && IsStageFinished == false) {
 
