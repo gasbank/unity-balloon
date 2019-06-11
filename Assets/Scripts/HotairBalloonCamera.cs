@@ -6,10 +6,14 @@ public class HotairBalloonCamera : MonoBehaviour {
     [SerializeField] Vector3 followVelocity;
     [SerializeField] float followSmoothMaxTime = 0.35f;
 
-    void OnValidate() {
-        if (gameObject.scene.rootCount != 0) {
-            UpdateHotairBalloon();
-        }
+    // void OnValidate() {
+    //     if (gameObject.scene.rootCount != 0) {
+    //         UpdateHotairBalloon();
+    //     }
+    // }
+
+    void Start() {
+        UpdateHotairBalloon();
     }
 
     public void UpdateHotairBalloon() {

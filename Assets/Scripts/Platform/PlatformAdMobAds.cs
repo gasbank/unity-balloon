@@ -34,9 +34,10 @@ public class PlatformAdMobAds {
 #endif
     }
 
-    public static void TryShowInterstitialAd(ShopProductEntry shopProductEntry, ShopProductData shopProductData) {
+    public static void TryShowInterstitialAd(ShopProductEntry shopProductEntry, ShopProductData shopProductData, int stageNumber) {
 #if GOOGLE_MOBILE_ADS
         if (PlatformAdMobAdsInit.interstitial.IsLoaded()) {
+            PlatformAds.stageNumber = stageNumber;
             PlatformAdMobAdsInit.interstitial.Show();
         }
 #endif

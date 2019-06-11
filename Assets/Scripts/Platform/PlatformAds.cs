@@ -6,6 +6,8 @@ public class PlatformAds {
         UnityAds,
     }
 
+    public static int stageNumber;
+
     public static void HandleRewarded_RewardedVideo(ShopProductEntry shopProductEntry, ShopProductData shopProductData, AdsType adsType) {
         SushiDebug.Log("The ad was successfully shown. (Rewarded Video)");
         SushiDebug.LogFormat("HandleShowResult: shopProductEntry: {0}", shopProductEntry);
@@ -22,6 +24,6 @@ public class PlatformAds {
         SushiDebug.LogFormat("HandleShowResult: shopProductData: {0}", shopProductData);
         // 이번 스테이지를 처음부터 새로 시작한다.
         HotairBalloon.initialPositionY = 0;
-        Bootstrap.ReloadCurrentScene();
+        Bootstrap.LoadStageScene(stageNumber);
     }
 }

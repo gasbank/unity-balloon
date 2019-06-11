@@ -68,9 +68,9 @@ public class ConfirmPopup : MonoBehaviour {
         Bottom,
     }
 
-    void OnValidate() {
-        subcanvas = GetComponent<Subcanvas>();
-    }
+    // void OnValidate() {
+    //     subcanvas = GetComponent<Subcanvas>();
+    // }
 
     IEnumerator Start() {
         while (true) {

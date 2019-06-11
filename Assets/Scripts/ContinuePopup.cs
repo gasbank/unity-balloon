@@ -25,9 +25,9 @@ public class ContinuePopup : MonoBehaviour {
 
     public void Open() => subcanvas.Open();
 
-    void OnValidate() {
-        subcanvas = GetComponent<Subcanvas>();
-    }
+    // void OnValidate() {
+    //     subcanvas = GetComponent<Subcanvas>();
+    // }
 
     void OnEnable() {
         OpenPopup();
@@ -80,9 +80,9 @@ public class ContinuePopup : MonoBehaviour {
         // 에디터에서 테스트하기 쉽도록 에디터에서는 Unity Ads를,
         // 실제 기기에서는 Google AdMob을 쓴다.
         if (Application.isEditor) {
-            PlatformUnityAds.TryShowInterstitialAd(null, null);
+            PlatformUnityAds.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumber);
         } else {
-            PlatformAdMobAds.TryShowInterstitialAd(null, null);
+            PlatformAdMobAds.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumber);
         }
     }
 }

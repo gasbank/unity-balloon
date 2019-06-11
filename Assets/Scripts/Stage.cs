@@ -13,12 +13,12 @@ public class Stage : MonoBehaviour {
     public bool Tutorial => tutorial;
     public float TotalStageLength { get; private set; }
 
-    void OnValidate() {
-        finishLine = GameObject.FindObjectOfType<FinishLine>();
-        if (finishLine != null) {
-            TotalStageLength = finishLine.transform.position.y;
-        }
-    }
+    // void OnValidate() {
+    //     finishLine = GameObject.FindObjectOfType<FinishLine>();
+    //     if (finishLine != null) {
+    //         TotalStageLength = finishLine.transform.position.y;
+    //     }
+    // }
 
     void Awake() {
         var backgroundCanvas = GameObject.FindObjectOfType<BackgroundCanvas>();

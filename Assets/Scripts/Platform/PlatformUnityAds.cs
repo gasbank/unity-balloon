@@ -4,12 +4,13 @@ using UnityEngine.Advertisements;
 public class PlatformUnityAds {
     private static ShopProductEntry shopProductEntry;
     private static ShopProductData shopProductData;
-
+    
     public static void TryShowRewardedAd(ShopProductEntry shopProductEntry, ShopProductData shopProductData) {
         TryShowAd("rewardedVideo", shopProductEntry, shopProductData, new ShowOptions { resultCallback = HandleShowResult_RewardedVideo });
     }
 
-    public static void TryShowInterstitialAd(ShopProductEntry shopProductEntry, ShopProductData shopProductData) {
+    public static void TryShowInterstitialAd(ShopProductEntry shopProductEntry, ShopProductData shopProductData, int stageNumber) {
+        PlatformAds.stageNumber = stageNumber;
         TryShowAd("video", shopProductEntry, shopProductData, new ShowOptions { resultCallback = HandleShowResult_Video });
     }
 

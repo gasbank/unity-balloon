@@ -28,6 +28,12 @@ public class FinishGroup : MonoBehaviour {
     }
 
     public void NextStage() {
+        if (Application.isEditor) {
+            PlatformUnityAds.TryShowInterstitialAd(null, null, NextStageNumber);
+        } else {
+            PlatformAdMobAds.TryShowInterstitialAd(null, null, NextStageNumber);
+        }
+
         HotairBalloon.initialPositionY = 0;
         Bootstrap.LoadStageScene(NextStageNumber);
     }

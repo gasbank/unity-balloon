@@ -12,16 +12,16 @@ public class BackgroundCanvas : MonoBehaviour {
     [SerializeField] Color colorBot;
     [SerializeField] float colorChangeScale = 200;
 
-    void OnValidate() {
-        if (gameObject.scene.rootCount != 0) {
-            var farCam = GameObject.Find("Main Camera/Far Camera");
-            if (farCam != null) {
-                canvas.worldCamera = farCam.GetComponent<Camera>();
-            } else {
-                canvas.worldCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-            }
-        }
-    }
+    // void OnValidate() {
+    //     if (gameObject.scene.rootCount != 0) {
+    //         var farCam = GameObject.Find("Main Camera/Far Camera");
+    //         if (farCam != null) {
+    //             canvas.worldCamera = farCam.GetComponent<Camera>();
+    //         } else {
+    //             canvas.worldCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+    //         }
+    //     }
+    // }
 
     public void SetImageMaterial(Material mat) {
         image.material = mat;

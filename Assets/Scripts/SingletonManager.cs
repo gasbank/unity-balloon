@@ -7,9 +7,9 @@ public class SingletonManager : MonoBehaviour {
     [SerializeField] private FontManager fontManager = null;
     [SerializeField] private Data data = null;
 
-    void OnValidate() {
+    // void OnValidate() {
         
-    }
+    // }
 
     void Awake() {
         confirmPopup = GameObject.FindObjectOfType<ConfirmPopup>();
