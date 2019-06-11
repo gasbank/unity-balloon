@@ -10,7 +10,7 @@ public class GameOverGroup : MonoBehaviour {
     }
 
     public void ReloadMainScene() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Bootstrap.ReloadCurrentScene();
     }
 
     public void SelectStage() {

@@ -23,7 +23,7 @@ public class HotairBalloon : MonoBehaviour {
         appliedWindRegionSet.Add(windRegion);
     }
 
-    [SerializeField] GameOverGroup gameOverGroup = null;
+    [SerializeField] ContinuePopup continuePopup = null;
     [SerializeField] ParticleSystem[] fireParticleSystemList = null;
 
     internal void RemoveWindForce(WindRegion windRegion) {
@@ -81,7 +81,7 @@ public class HotairBalloon : MonoBehaviour {
 
     public float RemainOilAmountRatio => RemainOilAmount / 100;
 
-    public bool IsGameOver => gameOverGroup.Visible;
+    public bool IsGameOver => continuePopup.IsOpen;
 
     public bool IsFreeOilOnStart => StageElapsedTime < freeOilOnStartDuration;
 
@@ -162,7 +162,7 @@ public class HotairBalloon : MonoBehaviour {
         if (Application.isMobilePlatform == false) {
             Screen.SetResolution(720, 1280, FullScreenMode.Windowed);
         }
-        gameOverGroup = FindObjectOfType<GameOverGroup>();
+        continuePopup = FindObjectOfType<ContinuePopup>();
         finishGroup = FindObjectOfType<FinishGroup>();
 
 #if BALLOON_POST_PROCESSING
@@ -326,9 +326,9 @@ public class HotairBalloon : MonoBehaviour {
 #endif
 
         if (BalloonGameOverCondition
-            && gameOverGroup.Visible == false
+            && continuePopup.IsOpen == false
             && IsStageFinished == false) {
-            gameOverGroup.Visible = true;
+            continuePopup.Open();
             BalloonSound.instance.PlayGameOver();
             BalloonSound.instance.PlayGameOver_sigh();
 

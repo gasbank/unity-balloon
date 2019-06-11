@@ -44,7 +44,7 @@ public class PlatformAdMobAds {
 
     public static void HandleRewarded() {
 #if GOOGLE_MOBILE_ADS        
-        PlatformAds.HandleRewarded(shopProductEntry, shopProductData, PlatformAds.AdsType.AdMob);
+        PlatformAds.HandleRewarded_RewardedVideo(shopProductEntry, shopProductData, PlatformAds.AdsType.AdMob);
 #endif
     }
 

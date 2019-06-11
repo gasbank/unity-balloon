@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections;
+using Text = TMPro.TextMeshProUGUI;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Subcanvas), typeof(RectTransform))]
@@ -43,9 +44,11 @@ public class ConfirmPopup : MonoBehaviour {
         get => autoCloseRemainSec;
         set {
             autoCloseRemainSec = value;
-            autoCloseText.gameObject.SetActive(autoCloseRemainSec > 0);
-            if (autoCloseRemainSec > 0) {
-                autoCloseText.text = "\\{0}초후 자동으로 닫힙니다.".Localized(autoCloseRemainSec);
+            if (autoCloseText != null) {
+                autoCloseText.gameObject.SetActive(autoCloseRemainSec > 0);
+                if (autoCloseRemainSec > 0) {
+                    autoCloseText.text = "\\{0}초후 자동으로 닫힙니다.".Localized(autoCloseRemainSec);
+                }
             }
         }
     }
@@ -190,9 +193,11 @@ public class ConfirmPopup : MonoBehaviour {
         }
         this.onClaimButton = onButton3;
 
-        inputField.gameObject.SetActive(showInputField);
-        inputField.text = inputFieldText;
-        inputFieldPlaceholderText.text = inputFieldPlaceholder;
+        if (inputField != null) {
+            inputField.gameObject.SetActive(showInputField);
+            inputField.text = inputFieldText;
+            inputFieldPlaceholderText.text = inputFieldPlaceholder;
+        }
 
         AutoCloseRemainSec = autoCloseSec;
 

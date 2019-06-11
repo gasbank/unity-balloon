@@ -220,7 +220,14 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
     }
 
     public void HandleOnAdClosed(object sender, EventArgs args) {
-        MonoBehaviour.print("HandleAdClosed event received");
+        // Workaround for processing result in main thread
+        StartCoroutine(HandleAdClosedCoro());
+    }
+
+    IEnumerator HandleAdClosedCoro() {
+        yield return null;
+        SushiDebug.Log("HandleAdClosedCoro event received");
+        Bootstrap.ReloadCurrentScene();
     }
 
     public void HandleOnAdLeavingApplication(object sender, EventArgs args) {
