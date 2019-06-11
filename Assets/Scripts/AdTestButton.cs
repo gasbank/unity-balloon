@@ -12,10 +12,10 @@ public class AdTestButton : MonoBehaviour {
     }
 
     public void ShowInterstitialAd_UnityAds() {
-        PlatformUnityAds.TryShowInterstitialAd(null, null);
+        PlatformUnityAds.TryShowInterstitialAd(null, null, 1);
     }
 
     public void ShowInterstitialAd_AdMob() {
-        PlatformAdMobAds.TryShowInterstitialAd(null, null);
+        PlatformAdMobAds.TryShowInterstitialAd(null, null, 1);
     }
 }

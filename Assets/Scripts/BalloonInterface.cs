@@ -15,13 +15,13 @@ public class BalloonInterface : MonoBehaviour {
     [SerializeField] Image feverRingImageLeft = null;
     [SerializeField] Image feverRingImageRight = null;
 
-    void OnValidate() {
-        if (gameObject.scene.rootCount != 0) {
-            UpdateReferences();
-        }
-    }
+    // void OnValidate() {
+    //     if (gameObject.scene.rootCount != 0) {
+    //         UpdateReferences();
+    //     }
+    // }
 
-    private void UpdateReferences() {
+    public void UpdateReferences() {
         hotairBalloon = GameObject.FindObjectOfType<HotairBalloon>();
         mainCamera = Camera.main;
         feverRingParentRt = feverRingRt.transform.parent.GetComponent<RectTransform>();

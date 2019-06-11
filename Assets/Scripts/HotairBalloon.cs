@@ -5,6 +5,7 @@ using UnityEngine;
 using TMProText = TMPro.TextMeshProUGUI;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 #if BALLOON_POST_PROCESSING
 using UnityEngine.Rendering.PostProcessing;
 #endif
@@ -23,7 +24,7 @@ public class HotairBalloon : MonoBehaviour {
         appliedWindRegionSet.Add(windRegion);
     }
 
-    [SerializeField] GameOverGroup gameOverGroup = null;
+    [SerializeField] ContinuePopup continuePopup = null;
     [SerializeField] ParticleSystem[] fireParticleSystemList = null;
 
     internal void RemoveWindForce(WindRegion windRegion) {
@@ -68,9 +69,12 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] StageCommon stageCommon = null;
     [SerializeField] float stageElapsedTime = 0;
 
+    public static float initialPositionY = 0;
+
 #if BALLOON_POST_PROCESSING
     Vignette vignette;
 #endif
+    [SerializeField] Image vignetteImage = null;
 
     public float StageElapsedTime => stageElapsedTime;
 
@@ -81,7 +85,7 @@ public class HotairBalloon : MonoBehaviour {
 
     public float RemainOilAmountRatio => RemainOilAmount / 100;
 
-    public bool IsGameOver => gameOverGroup.Visible;
+    public bool IsGameOver => continuePopup.IsOpen;
 
     public bool IsFreeOilOnStart => StageElapsedTime < freeOilOnStartDuration;
 
@@ -134,7 +138,9 @@ public class HotairBalloon : MonoBehaviour {
 
     float AdditionalVelocity => boostVelocity + (InFeverGaugeNotEmpty ? feverMaxVelocity : 0);
 
-    public float Y => balloonRb.position.y;
+    public float Y => balloonRb != null ? balloonRb.position.y : 0;
+
+    public float highestY = 0;
 
     public bool CanStartFever => feverItemParticle.activeSelf;
 
@@ -143,7 +149,7 @@ public class HotairBalloon : MonoBehaviour {
         set => verticallyStationary = value;
     }
 
-    public bool IsVerticallyStationaryForceApplied => (IsTitleVisible || VerticallyStationary) && balloonRb.position.y < 0 && RemainOilAmount > 0;
+    public bool IsVerticallyStationaryForceApplied => (IsTitleVisible || VerticallyStationary) && balloonRb.position.y < initialPositionY && RemainOilAmount > 0;
 
     public bool IsTitleVisible => stageCommon.IsTitleVisible;
 
@@ -151,18 +157,13 @@ public class HotairBalloon : MonoBehaviour {
 
     public Vector3 FeverRingOuterPosition => balloonFeverRingOuter.position;
 
-    void OnValidate() {
-        if (gameObject.scene.rootCount != 0) {
-            handleSlider = GameObject.Find("Canvas/Slider").GetComponent<BalloonHandleSlider>();
-        }
-    }
-
     void Awake() {
+        handleSlider = GameObject.Find("Canvas/Slider").GetComponent<BalloonHandleSlider>();
         Application.runInBackground = false;
         if (Application.isMobilePlatform == false) {
             Screen.SetResolution(720, 1280, FullScreenMode.Windowed);
         }
-        gameOverGroup = FindObjectOfType<GameOverGroup>();
+        continuePopup = FindObjectOfType<ContinuePopup>();
         finishGroup = FindObjectOfType<FinishGroup>();
 
 #if BALLOON_POST_PROCESSING
@@ -185,6 +186,8 @@ public class HotairBalloon : MonoBehaviour {
         fixedJointArray = GetComponentsInChildren<FixedJoint>();
         colliderArray = GetComponentsInChildren<Collider>();
         stageCommon = GameObject.FindObjectOfType<StageCommon>();
+
+        vignetteImage = GameObject.Find("Canvas/Vignette Image").GetComponent<Image>();
     }
 
     float HorizontalAxis => Input.GetAxis("Horizontal") + (handleSlider != null ? handleSlider.Horizontal : 0);
@@ -194,7 +197,7 @@ public class HotairBalloon : MonoBehaviour {
         var emissionRight = thrusterRight.emission;
         var dirRad = Mathf.Deg2Rad * (90 - maxDeg * HorizontalAxis);
         var vNormalized = new Vector3(Mathf.Cos(dirRad), Mathf.Sin(dirRad), 0);
-        
+
         if (IsGameOver) {
             StopTopThrusterParticle();
             emissionLeft.rateOverTime = 0;
@@ -285,7 +288,7 @@ public class HotairBalloon : MonoBehaviour {
         var dirRad = Mathf.Deg2Rad * (90 - maxDeg * HorizontalAxis);
         var vNormalized = new Vector3(Mathf.Cos(dirRad), Mathf.Sin(dirRad), 0);
         directionArrowPivot.rotation = Quaternion.Euler(0, 0, -90 + Mathf.Rad2Deg * dirRad);
-        
+
         if (IsVerticallyStationaryForceApplied) {
             BalloonSound.instance.SetEngineVolume(1);
         } else if (balloonRb.velocity.y < 0) {
@@ -324,15 +327,31 @@ public class HotairBalloon : MonoBehaviour {
             }
         }
 #endif
+        if (zeroOilDuration > 0) {
+            vignetteImage.color = new Color(1, 0, 0, (0.1f + Mathf.PingPong(Time.time * 1.4f, 0.4f)));
+        } else {
+            vignetteImage.color = new Color(1, 0, 0, 0);
+        }
 
-        if (BalloonGameOverCondition
-            && gameOverGroup.Visible == false
-            && IsStageFinished == false) {
-            gameOverGroup.Visible = true;
+        if (BalloonGameOverCondition && continuePopup.IsOpen == false && IsStageFinished == false) {
+
+            var stage = GameObject.FindObjectOfType<Stage>();
+            var stageLengthRatio = highestY / stage.TotalStageLength;
+            if (stageLengthRatio < 0.25f) {
+                initialPositionY = 0;
+            } else if (stageLengthRatio < 0.50f) {
+                initialPositionY = stage.TotalStageLength * 0.25f;
+            } else if (stageLengthRatio < 0.75f) {
+                initialPositionY = stage.TotalStageLength * 0.50f;
+            } else {
+                initialPositionY = stage.TotalStageLength * 0.75f;
+            }
+
+            continuePopup.Open();
             BalloonSound.instance.PlayGameOver();
             BalloonSound.instance.PlayGameOver_sigh();
 
-            
+
             foreach (var fixedJoint in fixedJointArray) {
                 Destroy(fixedJoint);
             }
@@ -344,6 +363,12 @@ public class HotairBalloon : MonoBehaviour {
             }
             gear.enabled = false;
             Time.timeScale = Time.deltaTime*20;
+        }
+
+        if (BalloonGameOverCondition == false) {
+            if (highestY < Y) {
+                highestY = Y;
+            }
         }
 
         float boostVelocityVelocity = 0;
@@ -358,7 +383,7 @@ public class HotairBalloon : MonoBehaviour {
         // AddForce라서 FixedUpdate()에 있는 게 일반적이지만,
         // 타입이 Impulse이니 Update()에 넣는다.
         if (IsVerticallyStationaryForceApplied) {
-            balloonRb.AddForce(Vector3.up * (-5 * balloonRb.position.y - 2 * balloonRb.velocity.y), ForceMode.Impulse);
+            balloonRb.AddForce(Vector3.up * (-5 * (balloonRb.position.y - initialPositionY) - 2 * balloonRb.velocity.y), ForceMode.Impulse);
         }
 
         // 피버 아이템을 가지고 있지 않을 때만 감소

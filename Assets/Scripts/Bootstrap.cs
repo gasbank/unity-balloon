@@ -53,7 +53,10 @@ public class Bootstrap : MonoBehaviour {
     }
 
     void Awake() {
-        //SceneManager.LoadScene(GetStageSceneName(LastPlayedStageNumber));
         LoadStageScene(LastPlayedStageNumber);
+    }
+
+    static public void ReloadCurrentScene() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

@@ -29,6 +29,7 @@ public class Subcanvas : MonoBehaviour {
     }
 
     public void Close() {
+        SushiDebug.Log("Subcanvas.Close()");
         if (canvas.enabled) {
             canvas.enabled = false;
             SendPopupEventMessage();

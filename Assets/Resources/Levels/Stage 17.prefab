@@ -360,6 +360,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundMaterial: {fileID: 2100000, guid: bc5eeb06170d84d159ec339387c45836, type: 2}
   tutorial: 0
+  checkpointPrefab: {fileID: 2479184788956522286, guid: 99645abfefdf04c9da597d36ef4d19f8,
+    type: 3}
+  finishLine: {fileID: 0}
+  hotairBalloonPrefab: {fileID: 4940520359282821797, guid: 593c303ad101d7142a49327789131521,
+    type: 3}
 --- !u!1001 &157924124625636815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -802,6 +807,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 6638637574544461908, guid: 6222f6600020e4660b29de56189db4b7,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6845225752565563702, guid: 6222f6600020e4660b29de56189db4b7,
         type: 3}
       propertyPath: m_sharedMaterial
@@ -831,11 +841,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6638637574544461908, guid: 6222f6600020e4660b29de56189db4b7,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6222f6600020e4660b29de56189db4b7, type: 3}
@@ -4677,6 +4682,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 6638637574544461908, guid: 6222f6600020e4660b29de56189db4b7,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6845225752565563702, guid: 6222f6600020e4660b29de56189db4b7,
         type: 3}
       propertyPath: m_sharedMaterial
@@ -4706,11 +4716,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6638637574544461908, guid: 6222f6600020e4660b29de56189db4b7,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6222f6600020e4660b29de56189db4b7, type: 3}
@@ -8172,6 +8177,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 6638637574544461908, guid: 6222f6600020e4660b29de56189db4b7,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6845225752565563702, guid: 6222f6600020e4660b29de56189db4b7,
         type: 3}
       propertyPath: m_sharedMaterial
@@ -8201,11 +8211,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6638637574544461908, guid: 6222f6600020e4660b29de56189db4b7,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6222f6600020e4660b29de56189db4b7, type: 3}
@@ -9947,12 +9952,12 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.0000005
       objectReference: {fileID: 0}
-    - target: {fileID: 8521423966369123440, guid: 44705654da14b48c2b65d3924a0183f0,
+    - target: {fileID: 5126037826238191755, guid: 44705654da14b48c2b65d3924a0183f0,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 5126037826238191755, guid: 44705654da14b48c2b65d3924a0183f0,
+    - target: {fileID: 8521423966369123440, guid: 44705654da14b48c2b65d3924a0183f0,
         type: 3}
       propertyPath: m_Mesh
       value: 

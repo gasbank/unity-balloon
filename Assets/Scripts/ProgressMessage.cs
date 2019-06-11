@@ -13,9 +13,9 @@ public class ProgressMessage : MonoBehaviour {
         }
     }
 
-    void OnValidate() {
-        subcanvas = GetComponent<Subcanvas>();
-    }
+    // void OnValidate() {
+    //     subcanvas = GetComponent<Subcanvas>();
+    // }
 
     void OpenPopup() {
         // should receive message even if there is nothing to do

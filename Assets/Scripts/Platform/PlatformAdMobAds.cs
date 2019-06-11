@@ -34,9 +34,10 @@ public class PlatformAdMobAds {
 #endif
     }
 
-    public static void TryShowInterstitialAd(ShopProductEntry shopProductEntry, ShopProductData shopProductData) {
+    public static void TryShowInterstitialAd(ShopProductEntry shopProductEntry, ShopProductData shopProductData, int stageNumber) {
 #if GOOGLE_MOBILE_ADS
         if (PlatformAdMobAdsInit.interstitial.IsLoaded()) {
+            PlatformAds.stageNumber = stageNumber;
             PlatformAdMobAdsInit.interstitial.Show();
         }
 #endif
@@ -44,7 +45,7 @@ public class PlatformAdMobAds {
 
     public static void HandleRewarded() {
 #if GOOGLE_MOBILE_ADS        
-        PlatformAds.HandleRewarded(shopProductEntry, shopProductData, PlatformAds.AdsType.AdMob);
+        PlatformAds.HandleRewarded_RewardedVideo(shopProductEntry, shopProductData, PlatformAds.AdsType.AdMob);
 #endif
     }
 

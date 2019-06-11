@@ -9,9 +9,11 @@ public class StageDuration : MonoBehaviour {
     [SerializeField] HotairBalloon hotairBalloon = null;
 
     void Awake() {
-        if (GameObject.Find("Hotair Balloon") != null) {
-            hotairBalloon = GameObject.Find("Hotair Balloon").GetComponent<HotairBalloon>();
-        }
+        UpdateReferences();
+    }
+
+    public void UpdateReferences() {
+        hotairBalloon = GameObject.FindObjectOfType<HotairBalloon>();
     }
 
     void Update() {
