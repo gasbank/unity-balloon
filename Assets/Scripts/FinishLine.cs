@@ -5,6 +5,10 @@ public class FinishLine : MonoBehaviour {
     [SerializeField] HotairBalloon hotairBalloon = null;
 
     void Awake() {
+        UpdateReferences();
+    }
+
+    public void UpdateReferences() {
         balloon = FindObjectOfType<BalloonLimiter>().transform;
         hotairBalloon = FindObjectOfType<HotairBalloon>();
     }

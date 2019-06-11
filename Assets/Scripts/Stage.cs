@@ -15,7 +15,9 @@ public class Stage : MonoBehaviour {
 
     void OnValidate() {
         finishLine = GameObject.FindObjectOfType<FinishLine>();
-        TotalStageLength = finishLine.transform.position.y;
+        if (finishLine != null) {
+            TotalStageLength = finishLine.transform.position.y;
+        }
     }
 
     void Awake() {
@@ -43,6 +45,25 @@ public class Stage : MonoBehaviour {
             hotairBalloonCamera.UpdateHotairBalloon();
             var balloonInterface = GameObject.FindObjectOfType<BalloonInterface>();
             balloonInterface.UpdateReferences();
+            var balloonHandleSlider = GameObject.FindObjectOfType<BalloonHandleSlider>();
+            balloonHandleSlider.UpdateReferences();
+
+
+            backgroundCanvas.UpdateReferences();
+
+            var stageDuration = GameObject.FindObjectOfType<StageDuration>();
+            stageDuration.UpdateReferences();
+
+            var tutorial = GameObject.FindObjectOfType<Tutorial>();
+            if (tutorial != null) {
+                tutorial.UpdateReferences();
+            }
+
+            var finishLine = GameObject.FindObjectOfType<FinishLine>();
+            if (finishLine != null) {
+                finishLine.UpdateReferences();
+            }
+
 
             // 이어서하게 되는 체크포인트 부근의 오브젝트는 모두 삭제한다.
             var allRbs = transform.GetComponentsInChildren<Rigidbody>();

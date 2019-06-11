@@ -9,8 +9,12 @@ public class Tutorial : MonoBehaviour {
     [SerializeField] HotairBalloon hotairBalloon = null;
 
     void Start() {
-        hotairBalloon = GameObject.Find("Hotair Balloon").GetComponent<HotairBalloon>();
+        UpdateReferences();
         hotairBalloon.VerticallyStationary = true;
+    }
+
+    public void UpdateReferences() {
+        hotairBalloon = GameObject.FindObjectOfType<HotairBalloon>();
     }
 
     void Update() {

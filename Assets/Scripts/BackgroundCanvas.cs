@@ -29,12 +29,16 @@ public class BackgroundCanvas : MonoBehaviour {
     }
 
     void Awake() {
-        hotairBalloon = GameObject.Find("Hotair Balloon").GetComponent<HotairBalloon>();
+        UpdateReferences();
         if (GameObject.FindObjectOfType<StagePrefabSpawner>() == null) {
             InstantiateImageMaterialAndSetup();
         }
     }
-    
+
+    public void UpdateReferences() {
+        hotairBalloon = GameObject.FindObjectOfType<HotairBalloon>();
+    }
+
     void InstantiateImageMaterialAndSetup() {
         image.material = Instantiate(image.material);
         colorTop = image.material.GetColor("_ColorTop");

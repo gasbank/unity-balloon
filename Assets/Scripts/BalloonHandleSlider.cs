@@ -34,10 +34,12 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
     void Awake() {
         rt = GetComponent<RectTransform>();
         canvasScaler = GetComponentInParent<CanvasScaler>();
-        if (GameObject.Find("Hotair Balloon") != null) {
-            hotairBalloon = GameObject.Find("Hotair Balloon").GetComponent<HotairBalloon>();
-        }
+        UpdateReferences();
         stageCommon = GameObject.FindObjectOfType<StageCommon>();
+    }
+
+    public void UpdateReferences() {
+        hotairBalloon = GameObject.FindObjectOfType<HotairBalloon>();
     }
 
     public void OnPointerDown(PointerEventData eventData) {

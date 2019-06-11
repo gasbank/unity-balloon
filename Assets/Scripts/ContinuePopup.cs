@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using Text = TMPro.TextMeshProUGUI;
 
 public class ContinuePopup : MonoBehaviour {
+    [SerializeField] Slider stageProgressSlider = null;
     [SerializeField] Text stageName = null;
     [SerializeField] Text waitRemainTime = null;
     [SerializeField] Slider waitTimeSlider = null;
@@ -12,6 +13,8 @@ public class ContinuePopup : MonoBehaviour {
     [SerializeField] float totalWaitTime = 5.0f;
     [SerializeField] float noThanksAppearTime = 2.0f;
     [SerializeField] Subcanvas subcanvas = null;
+    [SerializeField] HotairBalloon hotairBalloon = null;
+    [SerializeField] Stage stage = null;
     
     float WaitTimeValue {
         get => waitTimeSlider.value;
@@ -31,12 +34,15 @@ public class ContinuePopup : MonoBehaviour {
     }
 
     void OpenPopup() {
+        hotairBalloon = GameObject.FindObjectOfType<HotairBalloon>();
+        stage = GameObject.FindObjectOfType<Stage>();
         stageName.text = Bootstrap.CurrentStageName;
         waitTimeSlider.minValue = 0;
         waitTimeSlider.maxValue = totalWaitTime;
         waitTimeSlider.value = totalWaitTime;
         noThanksCanvasGroup.interactable = false;
         noThanksCanvasGroup.alpha = 0;
+        stageProgressSlider.value = (stage != null && hotairBalloon != null) ? (hotairBalloon.highestY / stage.TotalStageLength) : 0;
     }
 
     void ClosePopup() {
