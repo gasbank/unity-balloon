@@ -78,11 +78,14 @@ public class Stage : MonoBehaviour {
 
     void OnDrawGizmos() {
         if (hideGizmos == false) {
-            var checkpointInterval = 0.25f;
-            for (var i = 1; i <= 3; i++) {
-                var checkpointRatio = i * checkpointInterval;
-                Gizmos.color = new Color(1, 1, 0, 0.5f);
-                Gizmos.DrawCube(Vector3.up * TotalStageLength * checkpointRatio, new Vector3(20, 0.5f, 1));
+            var finishLine = transform.Find("Finish Line").GetComponent<FinishLine>();
+            if (finishLine != null) {
+                var checkpointInterval = 0.25f;
+                for (var i = 1; i <= 3; i++) {
+                    var checkpointRatio = i * checkpointInterval;
+                    Gizmos.color = new Color(1, 1, 0, 0.5f);
+                    Gizmos.DrawCube(Vector3.up * finishLine.transform.position.y * checkpointRatio, new Vector3(20, 0.5f, 1));
+                }
             }
         }
     }
