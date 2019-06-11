@@ -27,7 +27,7 @@ public class ExplosionCube : MonoBehaviour {
         var player = collision.gameObject.GetComponentInParent<HotairBalloon>();
         if (player != null && player.IsGameOver == false && CanExplode) {
             player.AddExplosionForce((collision.transform.position - collision.contacts[0].point).normalized);
-            player.IncreaseFeverGauge();
+            player.IncreaseFeverGauge(8);
             rechargeGauge = 0;
         }
     }
