@@ -343,7 +343,7 @@ public class HotairBalloon : MonoBehaviour {
                 collider.enabled = true;
             }
             gear.enabled = false;
-            Time.timeScale = 0.5f;
+            Time.timeScale = Time.deltaTime*20;
         }
 
         float boostVelocityVelocity = 0;
