@@ -136,7 +136,7 @@ public class HotairBalloon : MonoBehaviour {
 
     float AdditionalVelocity => boostVelocity + (InFeverGaugeNotEmpty ? feverMaxVelocity : 0);
 
-    public float Y => balloonRb.position.y;
+    public float Y => balloonRb != null ? balloonRb.position.y : 0;
 
     public float highestY = 0;
 
@@ -155,13 +155,8 @@ public class HotairBalloon : MonoBehaviour {
 
     public Vector3 FeverRingOuterPosition => balloonFeverRingOuter.position;
 
-    void OnValidate() {
-        if (gameObject.scene.rootCount != 0) {
-            handleSlider = GameObject.Find("Canvas/Slider").GetComponent<BalloonHandleSlider>();
-        }
-    }
-
     void Awake() {
+        handleSlider = GameObject.Find("Canvas/Slider").GetComponent<BalloonHandleSlider>();
         Application.runInBackground = false;
         if (Application.isMobilePlatform == false) {
             Screen.SetResolution(720, 1280, FullScreenMode.Windowed);
@@ -189,10 +184,6 @@ public class HotairBalloon : MonoBehaviour {
         fixedJointArray = GetComponentsInChildren<FixedJoint>();
         colliderArray = GetComponentsInChildren<Collider>();
         stageCommon = GameObject.FindObjectOfType<StageCommon>();
-
-        // 체크포인트 기능 지원
-        transform.position = Vector3.up * initialPositionY;
-        balloonRb.velocity = Vector3.zero;
     }
 
     float HorizontalAxis => Input.GetAxis("Horizontal") + (handleSlider != null ? handleSlider.Horizontal : 0);

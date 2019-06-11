@@ -21,7 +21,7 @@ public class BalloonInterface : MonoBehaviour {
         }
     }
 
-    private void UpdateReferences() {
+    public void UpdateReferences() {
         hotairBalloon = GameObject.FindObjectOfType<HotairBalloon>();
         mainCamera = Camera.main;
         feverRingParentRt = feverRingRt.transform.parent.GetComponent<RectTransform>();

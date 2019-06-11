@@ -8,11 +8,17 @@ public class HotairBalloonCamera : MonoBehaviour {
 
     void OnValidate() {
         if (gameObject.scene.rootCount != 0) {
-            var balloonCameraTarget = GameObject.Find("Hotair Balloon/Balloon/Balloon Camera Target");
+            UpdateHotairBalloon();
+        }
+    }
+
+    public void UpdateHotairBalloon() {
+        hotairBalloon = GameObject.FindObjectOfType<HotairBalloon>();
+
+        if (hotairBalloon != null) {
+            var balloonCameraTarget = hotairBalloon.transform.Find("Balloon/Balloon Camera Target");
             if (balloonCameraTarget != null) {
                 followTarget = balloonCameraTarget.transform;
-
-                hotairBalloon = GameObject.Find("Hotair Balloon").GetComponent<HotairBalloon>();
             }
         }
     }
