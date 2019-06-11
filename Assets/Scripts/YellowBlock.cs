@@ -40,7 +40,7 @@ public class YellowBlock : MonoBehaviour {
             hp--;
             hpText.text = hp.ToString();
             player.AddExplosionForce((collision.transform.position - collision.contacts[0].point).normalized);
-            player.IncreaseFeverGauge(16);
+            player.IncreaseFeverGauge(10);
             if (hp <= 0) {
                 if (afterDestroySpawn != null) {
                     if (afterDestroySpawnParent != null) {
