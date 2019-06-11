@@ -11,6 +11,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
     private RewardBasedVideoAd rewardBasedVideo;
     public static InterstitialAd interstitial;
     bool shouldBeRewarded;
+    private BannerView bannerView;
 
     public void Start() {
         SushiDebug.Log("PlatformAdMobAdsInit.Start()");
@@ -55,6 +56,8 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
         interstitial.OnAdClosed += HandleOnAdClosed;
         // Called when the ad click caused the user to leave the application.
         interstitial.OnAdLeavingApplication += HandleOnAdLeavingApplication;
+
+        RequestBanner();
     }
 
     void HandleRewardBasedVideoLoaded(object sender, EventArgs args) {
@@ -235,6 +238,19 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
 
     public void HandleOnAdLeavingApplication(object sender, EventArgs args) {
         MonoBehaviour.print("HandleAdLeavingApplication event received");
+    }
+
+    private void RequestBanner() {
+#if UNITY_ANDROID
+        string adUnitId = "ca-app-pub-3940256099942544/6300978111";
+#elif UNITY_IPHONE
+        string adUnitId = "ca-app-pub-3940256099942544/2934735716";
+#else
+        string adUnitId = "unexpected_platform";
+#endif
+
+        // Create a 320x50 banner at the top of the screen.
+        bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Top);
     }
 #endif // #if GOOGLE_MOBILE_ADS
 }
