@@ -49,6 +49,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundMaterial: {fileID: 2100000, guid: bc5eeb06170d84d159ec339387c45836, type: 2}
   tutorial: 0
+  checkpointPrefab: {fileID: 2479184788956522286, guid: 99645abfefdf04c9da597d36ef4d19f8,
+    type: 3}
+  finishLine: {fileID: 0}
 --- !u!1 &1264196853806637692
 GameObject:
   m_ObjectHideFlags: 0
@@ -6081,15 +6084,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.0000005
       objectReference: {fileID: 0}
-    - target: {fileID: 4497115746597995670, guid: ec59d23c0194642fb9ce59d1e5db6541,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2662669208262993239, guid: ec59d23c0194642fb9ce59d1e5db6541,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497115746597995670, guid: ec59d23c0194642fb9ce59d1e5db6541,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec59d23c0194642fb9ce59d1e5db6541, type: 3}
