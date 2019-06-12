@@ -31,7 +31,7 @@ public class Stage : MonoBehaviour {
         for (var i = 1; i <= 3; i++) {
             var checkpointRatio = i * checkpointInterval;
             var checkpointLine = Instantiate(checkpointPrefab, Vector3.up * TotalStageLength * checkpointRatio, Quaternion.identity).GetComponent<CheckpointLine>();
-            checkpointLine.CheckpointText = string.Format("========== {0:F0}% ==========", checkpointRatio * 100);
+            checkpointLine.CheckpointText = string.Format("{0:F0}% ==", checkpointRatio * 100);
         }
 
         // 체크포인트 기능 지원
