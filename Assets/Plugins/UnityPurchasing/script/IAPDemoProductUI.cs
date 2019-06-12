@@ -24,7 +24,7 @@ public class IAPDemoProductUI : MonoBehaviour
         descriptionText.text = p.metadata.localizedDescription;
         priceText.text = p.metadata.localizedPriceString;
 
-        //receiptButton.interactable = p.hasReceipt;
+        receiptButton.interactable = p.hasReceipt;
         m_Receipt = p.receipt;
 
         m_ProductID = p.definition.id;

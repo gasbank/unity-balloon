@@ -705,9 +705,9 @@ public class IAPDemo : MonoBehaviour, IStoreListener
 
         ClearProductUIs();
 
-        //restoreButton.onClick.AddListener(RestoreButtonClick);
-        //loginButton.onClick.AddListener(LoginButtonClick);
-        //validateButton.onClick.AddListener(ValidateButtonClick);
+        restoreButton.onClick.AddListener(RestoreButtonClick);
+        loginButton.onClick.AddListener(LoginButtonClick);
+        validateButton.onClick.AddListener(ValidateButtonClick);
 
         versionText.text = "Unity version: " + Application.unityVersion + "\n" +
                            "IAP version: " + StandardPurchasingModule.k_PackageVersion;

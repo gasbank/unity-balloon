@@ -22,6 +22,7 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
     [SerializeField] HotairBalloon hotairBalloon = null;
     [SerializeField] RawImage feverSwipeArrow = null;
     [SerializeField] StageCommon stageCommon = null;
+    [SerializeField] GameObject iapGroup = null;
 
     public bool Controlled { get => controlled; private set => controlled = value; }
     public float Horizontal => horizontal;
@@ -57,6 +58,7 @@ public class BalloonHandleSlider : MonoBehaviour, IPointerDownHandler, IPointerU
     public void OnStartStage() {
         sliderInterfaceBody.SetActive(true);
         stageCommon.DeactivateTitleGroup();
+        iapGroup.SetActive(false);
     }
 
     public void OnBeginDrag(PointerEventData eventData) {
