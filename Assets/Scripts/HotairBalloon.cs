@@ -55,7 +55,7 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] Transform balloonFeverRingOuter = null;
     [SerializeField] Renderer feverRingRenderer = null;
     [SerializeField] float feverGaugeMax = 50.0f;
-    [SerializeField] float feverGaugeIncrement = 8.0f;
+    //[SerializeField] float feverGaugeIncrement = 8.0f;
     [SerializeField] float feverGaugeDecrementByDecay = 8.0f;
     [SerializeField] float feverGaugeDecrementByConsumption = 15.0f;
     [SerializeField] GameObject feverItemParticle = null;

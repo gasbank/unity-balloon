@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class BackgroundCanvas : MonoBehaviour {
-    [SerializeField] Canvas canvas = null;
+    //[SerializeField] Canvas canvas = null;
     [SerializeField] Image image = null;
     [SerializeField] HotairBalloon hotairBalloon = null;
     [SerializeField] Color colorTop;

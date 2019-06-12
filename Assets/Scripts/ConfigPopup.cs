@@ -14,29 +14,29 @@ using BigInteger = System.Numerics.BigInteger;
 public class ConfigPopup : MonoBehaviour {
     public static ConfigPopup instance;
 
-    [SerializeField] Toggle bgmToggle = null;
-    [SerializeField] Toggle sfxToggle = null;
-    [SerializeField] Toggle gatherStoredMaxSfxToggle = null;
+    //[SerializeField] Toggle bgmToggle = null;
+    //[SerializeField] Toggle sfxToggle = null;
+    //[SerializeField] Toggle gatherStoredMaxSfxToggle = null;
     [SerializeField] Toggle notchToggle = null;
     [SerializeField] Toggle performanceModeToggle = null;
     [SerializeField] Toggle alwaysOnToggle = null;
     [SerializeField] Toggle bigNumberNotationToggle = null;
     [SerializeField] Toggle hideSpawnEffectToggle = null;
     [SerializeField] Toggle fastAutoMergerOnlyModeToggle = null;
-    [SerializeField] GameObject fastAutoMergerOnlyMode = null;
+    //[SerializeField] GameObject fastAutoMergerOnlyMode = null;
     [SerializeField] Toggle lowLevelBalloonRemovalToggle = null;
-    [SerializeField] GameObject lowLevelBalloonRemoval = null;
-    [SerializeField] Toggle languageCodeKoToggle = null;
-    [SerializeField] Toggle languageCodeJaToggle = null;
-    [SerializeField] Toggle languageCodeChToggle = null;
-    [SerializeField] Toggle languageCodeTwToggle = null;
-    [SerializeField] Dropdown languageDropdown = null;
+    //[SerializeField] GameObject lowLevelBalloonRemoval = null;
+    //[SerializeField] Toggle languageCodeKoToggle = null;
+    //[SerializeField] Toggle languageCodeJaToggle = null;
+    //[SerializeField] Toggle languageCodeChToggle = null;
+    //[SerializeField] Toggle languageCodeTwToggle = null;
+    //[SerializeField] Dropdown languageDropdown = null;
 
-    [SerializeField] TopNotchOffsetGroup[] topNotchOffsetGroupList = null;
-    [SerializeField] Animator topAnimator = null;
-    [SerializeField] Text userPseudoIdText = null;
-    [SerializeField] Text appMetaInfoText = null;
-    [SerializeField] List<GameObject> configButtonGroupEtc = null;
+    //[SerializeField] TopNotchOffsetGroup[] topNotchOffsetGroupList = null;
+    //[SerializeField] Animator topAnimator = null;
+    //[SerializeField] Text userPseudoIdText = null;
+    //[SerializeField] Text appMetaInfoText = null;
+    //[SerializeField] List<GameObject> configButtonGroupEtc = null;
     public bool IsNotchOn { get { return notchToggle.isOn; } set { notchToggle.isOn = value; } }
     public bool IsPerformanceModeOn { get { return performanceModeToggle.isOn; } set { performanceModeToggle.isOn = value; } }
     public bool IsAlwaysOnOn { get { return alwaysOnToggle.isOn; } set { alwaysOnToggle.isOn = value; } }
@@ -49,8 +49,8 @@ public class ConfigPopup : MonoBehaviour {
     static readonly string ServiceDbUrl = BaseUrl + "/service";
     public static string NoticeDbUrl { get { return BaseUrl + "/notice" + noticeDbPostfix; } }
     public static string noticeDbPostfix = "";
-    [SerializeField] GameObject configButtonNewImage = null;
-    [SerializeField] GameObject noticeButtonNewImage = null;
+    //[SerializeField] GameObject configButtonNewImage = null;
+    //[SerializeField] GameObject noticeButtonNewImage = null;
     public bool EtcGroupVisible { get { return Application.systemLanguage == SystemLanguage.Korean || BalloonSpawner.instance.cheatMode; } }
 
     public string GetAppMetaInfo() {
