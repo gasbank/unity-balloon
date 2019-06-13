@@ -3,6 +3,7 @@
 [DisallowMultipleComponent]
 public class SingletonManager : MonoBehaviour {
     [SerializeField] private ConfirmPopup confirmPopup = null;
+    [SerializeField] private ConfigPopup configPopup = null;
     [SerializeField] private ProgressMessage progressMessage = null;
     [SerializeField] private FontManager fontManager = null;
     [SerializeField] private PlatformIapManager platformIapManager = null;
@@ -12,10 +13,12 @@ public class SingletonManager : MonoBehaviour {
 
     void Awake() {
         confirmPopup = GameObject.FindObjectOfType<ConfirmPopup>();
+        configPopup = GameObject.FindObjectOfType<ConfigPopup>();
         progressMessage = GameObject.FindObjectOfType<ProgressMessage>();
         purchasingInProgress = GameObject.FindObjectOfType<PurchasingInProgress>();
         
         ConfirmPopup.instance = confirmPopup;
+        ConfigPopup.instance = configPopup;
         ProgressMessage.instance = progressMessage;
         FontManager.instance = fontManager;
         PlatformIapManager.instance = platformIapManager;
