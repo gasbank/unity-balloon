@@ -21,7 +21,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
 
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder()
-            .AddTestDevice("F626104A61B1DF52DAFC0B5BE7F72B00") // Galaxy S6 Edge
+            //.AddTestDevice("F626104A61B1DF52DAFC0B5BE7F72B00") // Galaxy S6 Edge
             .Build();
 
         // Load the banner with the request.
@@ -50,12 +50,22 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
         if (PlatformIapManager.instance.NoAdsPurchased) {
             Debug.Log("PlatformIapManager.NoAdsPurchased = true (thank you!)");
         } else {
+#if BALLOON_TEST_ADS
+#if UNITY_ANDROID
+            string appId = "ca-app-pub-3940256099942544~3347511713";
+#elif UNITY_IPHONE
+            string appId = "ca-app-pub-3940256099942544~1458002511";
+#else
+            string appId = "unexpected_platform";
+#endif
+#else
 #if UNITY_ANDROID
             string appId = "ca-app-pub-5072035175916776~9742483955";
 #elif UNITY_IOS
             string appId = "ca-app-pub-5072035175916776~2508482457";
 #else
             string appId = "unexpected_platform";
+#endif
 #endif
             // Initialize the Google Mobile Ads SDK.
             MobileAds.Initialize(appId);
@@ -231,10 +241,19 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
     }
 
     AdRequest DefaultAdRequest => new AdRequest.Builder()
-        .AddTestDevice("F626104A61B1DF52DAFC0B5BE7F72B00") // Galaxy S6 Edge
+        //.AddTestDevice("F626104A61B1DF52DAFC0B5BE7F72B00") // Galaxy S6 Edge
         .Build();
 
     void RequestRewardBasedVideo() {
+#if BALLOON_TEST_ADS
+#if UNITY_ANDROID
+        string adUnitId = "ca-app-pub-3940256099942544/5224354917";
+#elif UNITY_IPHONE
+        string adUnitId = "ca-app-pub-3940256099942544/1712485313";
+#else
+        string adUnitId = "unexpected_platform";
+#endif
+#else
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-5072035175916776/5803238943";
 #elif UNITY_IOS
@@ -242,17 +261,28 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
 #else
         string adUnitId = "unexpected_platform";
 #endif
+#endif
         // Load the rewarded video ad with the request.
         rewardBasedVideo.LoadAd(DefaultAdRequest, adUnitId);
     }
 
     void RequestInterstitial() {
+#if BALLOON_TEST_ADS
 #if UNITY_ANDROID
-            string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+        string adUnitId = "ca-app-pub-3940256099942544/1033173712";
 #elif UNITY_IPHONE
         string adUnitId = "ca-app-pub-3940256099942544/4411468910";
 #else
-            string adUnitId = "unexpected_platform";
+        string adUnitId = "unexpected_platform";
+#endif
+#else
+#if UNITY_ANDROID
+        string adUnitId = "ca-app-pub-5072035175916776/8453453014";
+#elif UNITY_IPHONE
+        string adUnitId = "ca-app-pub-5072035175916776/7626260968";
+#else
+        string adUnitId = "unexpected_platform";
+#endif
 #endif
         // Initialize an InterstitialAd.
         interstitial = new InterstitialAd(adUnitId);
@@ -290,6 +320,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
     }
 
     private void CreateBanner() {
+#if BALLOON_TEST_ADS
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-3940256099942544/6300978111";
 #elif UNITY_IPHONE
@@ -297,7 +328,15 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
 #else
         string adUnitId = "unexpected_platform";
 #endif
-
+#else
+#if UNITY_ANDROID
+        string adUnitId = "ca-app-pub-5072035175916776/4198513232";
+#elif UNITY_IPHONE
+        string adUnitId = "ca-app-pub-5072035175916776/5602732856";
+#else
+        string adUnitId = "unexpected_platform";
+#endif
+#endif
         // Create a 320x50 banner at the top of the screen.
         bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Bottom);
 
@@ -317,29 +356,24 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
         //StartShowBanner();
     }
 
-    public void HandleOnBannerAdLoaded(object sender, EventArgs args)
-    {
+    public void HandleOnBannerAdLoaded(object sender, EventArgs args) {
         MonoBehaviour.print("HandleAdLoaded event received");
     }
 
-    public void HandleOnBannerAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
-    {
+    public void HandleOnBannerAdFailedToLoad(object sender, AdFailedToLoadEventArgs args) {
         MonoBehaviour.print("HandleFailedToReceiveAd event received with message: "
                             + args.Message);
     }
 
-    public void HandleOnBannerAdOpened(object sender, EventArgs args)
-    {
+    public void HandleOnBannerAdOpened(object sender, EventArgs args) {
         MonoBehaviour.print("HandleAdOpened event received");
     }
 
-    public void HandleOnBannerAdClosed(object sender, EventArgs args)
-    {
+    public void HandleOnBannerAdClosed(object sender, EventArgs args) {
         MonoBehaviour.print("HandleAdClosed event received");
     }
 
-    public void HandleOnBannerAdLeavingApplication(object sender, EventArgs args)
-    {
+    public void HandleOnBannerAdLeavingApplication(object sender, EventArgs args) {
         MonoBehaviour.print("HandleAdLeavingApplication event received");
     }
 #endif // #if GOOGLE_MOBILE_ADS

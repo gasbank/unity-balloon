@@ -14,11 +14,15 @@ public class PlatformIapManager : MonoBehaviour, IStoreListener {
     public bool NoAdsPurchased {
         get => PlayerPrefs.GetInt(NO_ADS_PREF_KEY, 0) != 0;
         private set {
-            PlayerPrefs.SetInt(NO_ADS_PREF_KEY, value ? 1 : 0);
-            PlayerPrefs.Save();
+            SetNoAdsPurchased_Admin(value);
             SushiDebug.Log($"NoAdsPurchased set to {value}");
             SyncNoAdsStates();
         }
+    }
+
+    static public void SetNoAdsPurchased_Admin(bool b) {
+        PlayerPrefs.SetInt(NO_ADS_PREF_KEY, b ? 1 : 0);
+        PlayerPrefs.Save();
     }
 
     private void SyncNoAdsStates() {
