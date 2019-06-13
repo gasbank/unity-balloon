@@ -39,6 +39,15 @@ public class Stage : MonoBehaviour {
         // 이어서해야할 위치에 만든다.
         var hotairBalloon = GameObject.FindObjectOfType<HotairBalloon>();
         if (HotairBalloon.initialPositionY != 0) {
+            // 이어서하게 되는 체크포인트 부근의 오브젝트는 모두 삭제한다.
+            var allRbs = transform.GetComponentsInChildren<Rigidbody>();
+            foreach (var rb in allRbs) {
+                if (Mathf.Abs(rb.position.y - HotairBalloon.initialPositionY) < 10) {
+                    SushiDebug.Log($"{rb.gameObject.name} is destroyed since it is close to checkpoint.");
+                    Destroy(rb.gameObject);
+                }
+            }
+            
             Destroy(hotairBalloon.gameObject);
             Instantiate(hotairBalloonPrefab, Vector3.up * HotairBalloon.initialPositionY, Quaternion.identity);
             var hotairBalloonCamera = GameObject.FindObjectOfType<HotairBalloonCamera>();
@@ -62,16 +71,6 @@ public class Stage : MonoBehaviour {
             var finishLine = GameObject.FindObjectOfType<FinishLine>();
             if (finishLine != null) {
                 finishLine.UpdateReferences();
-            }
-
-
-            // 이어서하게 되는 체크포인트 부근의 오브젝트는 모두 삭제한다.
-            var allRbs = transform.GetComponentsInChildren<Rigidbody>();
-            foreach (var rb in allRbs) {
-                if (Mathf.Abs(rb.position.y - HotairBalloon.initialPositionY) < 10) {
-                    SushiDebug.Log($"{rb.gameObject.name} is destroyed since it is close to checkpoint.");
-                    Destroy(rb.gameObject);
-                }
             }
         }
     }
