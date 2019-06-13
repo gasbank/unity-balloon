@@ -113,7 +113,7 @@ public class PlatformIapManager : MonoBehaviour, IStoreListener {
         if (e.purchasedProduct.definition.id == NO_ADS_PRODUCT_ID) {
             NoAdsPurchased = true;
         }
-
+        PurchasingInProgress.instance.Show(false);
         return PurchaseProcessingResult.Complete;
     }
 
@@ -122,11 +122,16 @@ public class PlatformIapManager : MonoBehaviour, IStoreListener {
     /// </summary>
     public void OnPurchaseFailed(Product product, PurchaseFailureReason reason) {
         SushiDebug.Log($"PlatformIapManager.OnPurchaseFailed: {product.definition.id}, Reason: {reason}");
+        PurchasingInProgress.instance.Show(false);
+        ConfirmPopup.instance.Open("\\구입을 실패했습니다.".Localized() + "\n\n" + reason);
     }
 
     public void PurchaseNoAds() {
         if (controller != null) {
+            PurchasingInProgress.instance.Show(true);
             controller.InitiatePurchase(NO_ADS_PRODUCT_ID);
+        } else {
+            ConfirmPopup.instance.Open("\\인터넷 연결이 필요합니다.".Localized());
         }
     }
 }
