@@ -12,7 +12,7 @@ public class WindRegion : MonoBehaviour {
     [SerializeField] Transform gaugeGreen = null;
     [SerializeField] int enteredCount = 0;
     
-    public Vector3 WindForce => windPower * transform.right;
+    public Vector3 WindForce => transform != null ? windPower * transform.right : Vector3.zero;
     public float Power => windPower;
     public float CapacityRatio => capacity / maxCapacity;
 
