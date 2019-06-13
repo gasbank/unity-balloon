@@ -37,11 +37,20 @@ public class ContinuePopup : MonoBehaviour {
         hotairBalloon = GameObject.FindObjectOfType<HotairBalloon>();
         stage = GameObject.FindObjectOfType<Stage>();
         stageName.text = Bootstrap.CurrentStageName;
-        waitTimeSlider.minValue = 0;
-        waitTimeSlider.maxValue = totalWaitTime;
-        waitTimeSlider.value = totalWaitTime;
-        noThanksCanvasGroup.interactable = false;
-        noThanksCanvasGroup.alpha = 0;
+        if (PlatformIapManager.instance.NoAdsPurchased) {
+            waitTimeSlider.minValue = 0;
+            waitTimeSlider.maxValue = totalWaitTime;
+            waitTimeSlider.value = 0;
+            noThanksCanvasGroup.interactable = true;
+            noThanksCanvasGroup.alpha = 1;
+        } else {
+            waitTimeSlider.minValue = 0;
+            waitTimeSlider.maxValue = totalWaitTime;
+            waitTimeSlider.value = totalWaitTime;
+            noThanksCanvasGroup.interactable = false;
+            noThanksCanvasGroup.alpha = 0;
+        }
+        waitRemainTime.text = "";
         stageProgressSlider.value = (stage != null && hotairBalloon != null) ? (hotairBalloon.highestY / stage.TotalStageLength) : 0;
     }
 
@@ -54,35 +63,45 @@ public class ContinuePopup : MonoBehaviour {
             return;
         }
 
-        WaitTimeValue = Mathf.Clamp(WaitTimeValue - Time.deltaTime, waitTimeSlider.minValue, waitTimeSlider.maxValue);
-        waitRemainTime.text = WaitTimeValue.ToString("F0");
-        if (WaitTimeValue <= 0) {
-            OnNoThanksButton();
-            subcanvas.Close();
-        }
-        if (totalWaitTime - WaitTimeValue > noThanksAppearTime) {
-            noThanksCanvasGroup.interactable = true;
-            noThanksCanvasGroup.alpha = 1.0f;
+        if (PlatformIapManager.instance.NoAdsPurchased == false) {
+            WaitTimeValue = Mathf.Clamp(WaitTimeValue - Time.deltaTime, waitTimeSlider.minValue, waitTimeSlider.maxValue);
+            waitRemainTime.text = WaitTimeValue.ToString("F0");
+            if (WaitTimeValue <= 0) {
+                OnNoThanksButton();
+                subcanvas.Close();
+            }
+            if (noThanksCanvasGroup.interactable == false && totalWaitTime - WaitTimeValue > noThanksAppearTime) {
+                noThanksCanvasGroup.interactable = true;
+                noThanksCanvasGroup.alpha = 1.0f;
+            }
         }
     }
     
     public void OnContinueButton() {
-        // 에디터에서 테스트하기 쉽도록 에디터에서는 Unity Ads를,
-        // 실제 기기에서는 Google AdMob을 쓴다.
-        if (Application.isEditor) {
-            PlatformUnityAds.TryShowRewardedAd(null, null);
+        if (PlatformIapManager.instance.NoAdsPurchased) {
+            PlatformAds.HandleRewarded_RewardedVideo(null, null, PlatformAds.AdsType.AdMob);
         } else {
-            PlatformAdMobAds.TryShowRewardedAd(null, null);
+            // 에디터에서 테스트하기 쉽도록 에디터에서는 Unity Ads를,
+            // 실제 기기에서는 Google AdMob을 쓴다.
+            if (Application.isEditor) {
+                PlatformUnityAds.TryShowRewardedAd(null, null);
+            } else {
+                PlatformAdMobAds.TryShowRewardedAd(null, null);
+            }
         }
     }
 
     public void OnNoThanksButton() {
-        // 에디터에서 테스트하기 쉽도록 에디터에서는 Unity Ads를,
-        // 실제 기기에서는 Google AdMob을 쓴다.
-        if (Application.isEditor) {
-            PlatformUnityAds.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumber);
+        if (PlatformIapManager.instance.NoAdsPurchased) {
+            PlatformAds.HandleRewarded_Video(null, null, PlatformAds.AdsType.AdMob);
         } else {
-            PlatformAdMobAds.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumber);
+            // 에디터에서 테스트하기 쉽도록 에디터에서는 Unity Ads를,
+            // 실제 기기에서는 Google AdMob을 쓴다.
+            if (Application.isEditor) {
+                PlatformUnityAds.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumber);
+            } else {
+                PlatformAdMobAds.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumber);
+            }
         }
     }
 }

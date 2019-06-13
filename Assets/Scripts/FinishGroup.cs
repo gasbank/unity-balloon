@@ -28,10 +28,13 @@ public class FinishGroup : MonoBehaviour {
     }
 
     public void NextStage() {
-        if (Application.isEditor) {
-            PlatformUnityAds.TryShowInterstitialAd(null, null, NextStageNumber);
+        if (PlatformIapManager.instance.NoAdsPurchased) {
         } else {
-            PlatformAdMobAds.TryShowInterstitialAd(null, null, NextStageNumber);
+            if (Application.isEditor) {
+                PlatformUnityAds.TryShowInterstitialAd(null, null, NextStageNumber);
+            } else {
+                PlatformAdMobAds.TryShowInterstitialAd(null, null, NextStageNumber);
+            }
         }
 
         HotairBalloon.initialPositionY = 0;

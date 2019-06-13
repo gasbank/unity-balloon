@@ -4,18 +4,47 @@ using UnityEngine;
 using UnityEngine.Purchasing;
 
 public class PlatformIapManager : MonoBehaviour, IStoreListener {
+    internal static PlatformIapManager instance;
     static readonly string NO_ADS_PRODUCT_ID = "top.plusalpha.balloon.noads";
     static readonly string NO_ADS_PREF_KEY = "NO_ADS_PREF_KEY";
     private IStoreController controller;
     private IExtensionProvider extensions;
-    internal static PlatformIapManager instance;
+    [SerializeField] GameObject iapGroup = null;
 
-    public static bool NoAdsPurchased => PlayerPrefs.GetInt(NO_ADS_PREF_KEY, 0) != 0;
+    public bool NoAdsPurchased {
+        get => PlayerPrefs.GetInt(NO_ADS_PREF_KEY, 0) != 0;
+        private set {
+            PlayerPrefs.SetInt(NO_ADS_PREF_KEY, value ? 1 : 0);
+            PlayerPrefs.Save();
+            SushiDebug.Log($"NoAdsPurchased set to {value}");
+            SyncNoAdsStates();
+        }
+    }
+
+    private void SyncNoAdsStates() {
+        iapGroup.SetActive(NoAdsPurchased == false);
+        if (NoAdsPurchased) {
+            PlatformAdMobAdsInit.instance.HideBanner();
+        } else {
+            PlatformAdMobAdsInit.instance.StartShowBanner();
+        }
+    }
 
     void Awake() {
+        iapGroup = GameObject.Find("Canvas/IAP Group");
+
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
         builder.AddProduct(NO_ADS_PRODUCT_ID, ProductType.NonConsumable);
         UnityPurchasing.Initialize(this, builder);
+
+        // 일단 로컬 저장된 상태만으로 빠르게 판단해서 배너 광고를 보여줘야 하면 보여준다.
+        SyncNoAdsStates();
+    }
+
+    void Update() {
+        if (Application.isEditor && Input.GetKeyDown(KeyCode.F8)) {
+            NoAdsPurchased = false;
+        }
     }
 
     /// <summary>
@@ -29,22 +58,12 @@ public class PlatformIapManager : MonoBehaviour, IStoreListener {
         foreach (var product in controller.products.all) {
             sb.AppendLine($" - {product.definition.id}: hasReceipt={product.hasReceipt}");
             if (product.hasReceipt) {
-                // var receipt = MiniJson.JsonDecode(product.receipt) as Hashtable;
-                // foreach (var key in receipt.Keys) {
-                //     var value = receipt[key];
-                //     sb.AppendLine($" --- {key} = {value}");
-                // }
-
                 if (product.definition.id == NO_ADS_PRODUCT_ID) {
-                    PlayerPrefs.SetInt(NO_ADS_PREF_KEY, 1);
-                    PlayerPrefs.Save();
+                    NoAdsPurchased = true;
                 }
             }
         }
         SushiDebug.Log(sb.ToString());
-        if (NoAdsPurchased == false) {
-            PlatformAdMobAdsInit.instance.StartShowBanner();
-        }
     }
 
     /// <summary>
@@ -55,9 +74,6 @@ public class PlatformIapManager : MonoBehaviour, IStoreListener {
     /// </summary>
     public void OnInitializeFailed(InitializationFailureReason error) {
         Debug.LogError($"PlatformIapManager.OnInitializeFailed: {error}");
-        if (NoAdsPurchased == false) {
-            PlatformAdMobAdsInit.instance.StartShowBanner();
-        }
     }
 
     /// <summary>
@@ -77,12 +93,7 @@ public class PlatformIapManager : MonoBehaviour, IStoreListener {
         SushiDebug.Log(sb.ToString());
 
         if (e.purchasedProduct.definition.id == NO_ADS_PRODUCT_ID) {
-            PlayerPrefs.SetInt(NO_ADS_PREF_KEY, 1);
-            PlayerPrefs.Save();
-        }
-
-        if (NoAdsPurchased) {
-            PlatformAdMobAdsInit.instance.HideBanner();
+            NoAdsPurchased = true;
         }
 
         return PurchaseProcessingResult.Complete;
@@ -96,6 +107,8 @@ public class PlatformIapManager : MonoBehaviour, IStoreListener {
     }
 
     public void PurchaseNoAds() {
-        controller.InitiatePurchase(NO_ADS_PRODUCT_ID);
+        if (controller != null) {
+            controller.InitiatePurchase(NO_ADS_PRODUCT_ID);
+        }
     }
 }

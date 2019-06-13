@@ -14,6 +14,11 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
         if (bannerView == null) {
             CreateBanner();
         }
+
+        if (isBannerViewLoaded) {
+            return;
+        }
+
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder()
             .AddTestDevice("F626104A61B1DF52DAFC0B5BE7F72B00") // Galaxy S6 Edge
@@ -21,6 +26,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
 
         // Load the banner with the request.
         bannerView.LoadAd(request);
+        isBannerViewLoaded = true;
 #endif
     }
 
@@ -37,50 +43,55 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
     public static InterstitialAd interstitial;
     bool shouldBeRewarded;
     private BannerView bannerView;
+    bool isBannerViewLoaded;
 
     public void Start() {
         SushiDebug.Log("PlatformAdMobAdsInit.Start()");
+        if (PlatformIapManager.instance.NoAdsPurchased) {
+            Debug.Log("PlatformIapManager.NoAdsPurchased = true (thank you!)");
+        } else {
 #if UNITY_ANDROID
-        string appId = "ca-app-pub-5072035175916776~9742483955";
+            string appId = "ca-app-pub-5072035175916776~9742483955";
 #elif UNITY_IOS
-        string appId = "ca-app-pub-5072035175916776~2508482457";
+            string appId = "ca-app-pub-5072035175916776~2508482457";
 #else
-        string appId = "unexpected_platform";
+            string appId = "unexpected_platform";
 #endif
-        // Initialize the Google Mobile Ads SDK.
-        MobileAds.Initialize(appId);
+            // Initialize the Google Mobile Ads SDK.
+            MobileAds.Initialize(appId);
 
-        // Get singleton reward based video ad reference.
-        rewardBasedVideo = RewardBasedVideoAd.Instance;
+            // Get singleton reward based video ad reference.
+            rewardBasedVideo = RewardBasedVideoAd.Instance;
 
-        // Called when an ad request has successfully loaded.
-        rewardBasedVideo.OnAdLoaded += HandleRewardBasedVideoLoaded;
-        // Called when an ad request failed to load.
-        rewardBasedVideo.OnAdFailedToLoad += HandleRewardBasedVideoFailedToLoad;
-        // Called when an ad is shown.
-        rewardBasedVideo.OnAdOpening += HandleRewardBasedVideoOpened;
-        // Called when the ad starts to play.
-        rewardBasedVideo.OnAdStarted += HandleRewardBasedVideoStarted;
-        // Called when the user should be rewarded for watching a video.
-        rewardBasedVideo.OnAdRewarded += HandleRewardBasedVideoRewarded;
-        // Called when the ad is closed.
-        rewardBasedVideo.OnAdClosed += HandleRewardBasedVideoClosed;
-        // Called when the ad click caused the user to leave the application.
-        rewardBasedVideo.OnAdLeavingApplication += HandleRewardBasedVideoLeftApplication;
+            // Called when an ad request has successfully loaded.
+            rewardBasedVideo.OnAdLoaded += HandleRewardBasedVideoLoaded;
+            // Called when an ad request failed to load.
+            rewardBasedVideo.OnAdFailedToLoad += HandleRewardBasedVideoFailedToLoad;
+            // Called when an ad is shown.
+            rewardBasedVideo.OnAdOpening += HandleRewardBasedVideoOpened;
+            // Called when the ad starts to play.
+            rewardBasedVideo.OnAdStarted += HandleRewardBasedVideoStarted;
+            // Called when the user should be rewarded for watching a video.
+            rewardBasedVideo.OnAdRewarded += HandleRewardBasedVideoRewarded;
+            // Called when the ad is closed.
+            rewardBasedVideo.OnAdClosed += HandleRewardBasedVideoClosed;
+            // Called when the ad click caused the user to leave the application.
+            rewardBasedVideo.OnAdLeavingApplication += HandleRewardBasedVideoLeftApplication;
 
-        RequestRewardBasedVideo();
-        RequestInterstitial();
+            RequestRewardBasedVideo();
+            RequestInterstitial();
 
-        // Called when an ad request has successfully loaded.
-        interstitial.OnAdLoaded += HandleOnAdLoaded;
-        // Called when an ad request failed to load.
-        interstitial.OnAdFailedToLoad += HandleOnAdFailedToLoad;
-        // Called when an ad is shown.
-        interstitial.OnAdOpening += HandleOnAdOpened;
-        // Called when the ad is closed.
-        interstitial.OnAdClosed += HandleOnAdClosed;
-        // Called when the ad click caused the user to leave the application.
-        interstitial.OnAdLeavingApplication += HandleOnAdLeavingApplication;
+            // Called when an ad request has successfully loaded.
+            interstitial.OnAdLoaded += HandleOnAdLoaded;
+            // Called when an ad request failed to load.
+            interstitial.OnAdFailedToLoad += HandleOnAdFailedToLoad;
+            // Called when an ad is shown.
+            interstitial.OnAdOpening += HandleOnAdOpened;
+            // Called when the ad is closed.
+            interstitial.OnAdClosed += HandleOnAdClosed;
+            // Called when the ad click caused the user to leave the application.
+            interstitial.OnAdLeavingApplication += HandleOnAdLeavingApplication;
+        }
     }
 
     void HandleRewardBasedVideoLoaded(object sender, EventArgs args) {

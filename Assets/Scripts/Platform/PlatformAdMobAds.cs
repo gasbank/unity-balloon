@@ -16,7 +16,7 @@ public class PlatformAdMobAds {
         var rewardBasedVideo = RewardBasedVideoAd.Instance;
 
         if (Application.internetReachability == NetworkReachability.NotReachable) {
-            ConfirmPopup.instance.Open(string.Format("\\광고를 보기 위해서는 인터넷 연결이 필요합니다.".Localized()));
+            ConfirmPopup.instance.Open(string.Format("\\인터넷 연결이 필요합니다.".Localized()));
         } else if (rewardBasedVideo.IsLoaded()) {
             PlatformAdMobAds.shopProductEntry = shopProductEntry;
             PlatformAdMobAds.shopProductData = shopProductData;
@@ -25,20 +25,18 @@ public class PlatformAdMobAds {
             rewardBasedVideo.Show();
         } else {
             Debug.LogError("Ad not ready!");
-
-            // AdMob 광고 보기 실패 시에는 Unity Ads를 폴백으로 쓴다.
-            //PlatformUnityAds.TryShowRewardedAd(shopProductEntry, shopProductData);
-
-            ShowAdsErrorPopup();
+            ConfirmPopup.instance.Open(string.Format("\\광고가 아직 준비되지 않았습니다.".Localized()));
         }
 #endif
     }
 
     public static void TryShowInterstitialAd(ShopProductEntry shopProductEntry, ShopProductData shopProductData, int stageNumber) {
+        PlatformAds.stageNumber = stageNumber;
 #if GOOGLE_MOBILE_ADS
         if (PlatformAdMobAdsInit.interstitial.IsLoaded()) {
-            PlatformAds.stageNumber = stageNumber;
             PlatformAdMobAdsInit.interstitial.Show();
+        } else {
+            PlatformAds.HandleRewarded_Video(null, null, PlatformAds.AdsType.AdMob);
         }
 #endif
     }
@@ -53,9 +51,5 @@ public class PlatformAdMobAds {
         Debug.LogError("HandleFailedToLoad");
         // 유저에게 광고를 못불러왔다는 걸 굳이 게임 시작할 때 보여줄 필요는 없지...
         //ShortMessage.instance.ShowLocalized("광고 불러오기를 실패했습니다.");
-    }
-
-    static void ShowAdsErrorPopup() {
-        ConfirmPopup.instance.Open(string.Format("\\$AdMob 광고 볼 수 없는 사유 설명$".Localized()));
     }
 }
