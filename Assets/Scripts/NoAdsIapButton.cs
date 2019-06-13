@@ -11,4 +11,8 @@ public class NoAdsIapButton : MonoBehaviour {
     public void OnPurchaseFailed(Product product, PurchaseFailureReason reason) {
         SushiDebug.Log($"OnPurchaseFailed: {product.definition.id}, Reason: {reason}");
     }
+
+    public void Purchase() {
+        PlatformIapManager.instance.PurchaseNoAds();
+    }
 }

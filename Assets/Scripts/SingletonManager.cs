@@ -5,11 +5,9 @@ public class SingletonManager : MonoBehaviour {
     [SerializeField] private ConfirmPopup confirmPopup = null;
     [SerializeField] private ProgressMessage progressMessage = null;
     [SerializeField] private FontManager fontManager = null;
+    [SerializeField] private PlatformIapManager platformIapManager = null;
+    [SerializeField] private PlatformAdMobAdsInit platformAdMobAdsInit = null;
     [SerializeField] private Data data = null;
-
-    // void OnValidate() {
-        
-    // }
 
     void Awake() {
         confirmPopup = GameObject.FindObjectOfType<ConfirmPopup>();
@@ -18,6 +16,8 @@ public class SingletonManager : MonoBehaviour {
         ConfirmPopup.instance = confirmPopup;
         ProgressMessage.instance = progressMessage;
         FontManager.instance = fontManager;
+        PlatformIapManager.instance = platformIapManager;
+        PlatformAdMobAdsInit.instance = platformAdMobAdsInit;
         Data.instance = data;
     }
 }

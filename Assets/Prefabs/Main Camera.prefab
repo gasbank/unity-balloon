@@ -181,6 +181,8 @@ MonoBehaviour:
   confirmPopup: {fileID: 0}
   progressMessage: {fileID: 0}
   fontManager: {fileID: 3794268015461746843}
+  platformIapManager: {fileID: 6090269483576014039}
+  platformAdMobAdsInit: {fileID: 4594662308116753578}
   data: {fileID: 5513993847739811755}
 --- !u!1001 &4594662308101738167
 PrefabInstance:
@@ -257,6 +259,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4594662308101738167}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6090269483576014039 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7730286740639119968, guid: 68a5610b5b2d54a188bb09374e754838,
+    type: 3}
+  m_PrefabInstance: {fileID: 4594662308101738167}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd307fddd45a445dcba357fbdca46ff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4594662308116753578 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 57352733, guid: 68a5610b5b2d54a188bb09374e754838,
+    type: 3}
+  m_PrefabInstance: {fileID: 4594662308101738167}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9722bee0e0c514b699e5ceb4a38e7fdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5696516961012234663
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7,6 +7,31 @@ using GoogleMobileAds.Api;
 
 [DisallowMultipleComponent]
 public class PlatformAdMobAdsInit : MonoBehaviour {
+    public static PlatformAdMobAdsInit instance;
+
+    public void StartShowBanner() {
+#if GOOGLE_MOBILE_ADS
+        if (bannerView == null) {
+            CreateBanner();
+        }
+        // Create an empty ad request.
+        AdRequest request = new AdRequest.Builder()
+            .AddTestDevice("F626104A61B1DF52DAFC0B5BE7F72B00") // Galaxy S6 Edge
+            .Build();
+
+        // Load the banner with the request.
+        bannerView.LoadAd(request);
+#endif
+    }
+
+    public void HideBanner() {
+#if GOOGLE_MOBILE_ADS
+        if (bannerView != null) {
+            bannerView.Hide();
+        }
+#endif
+    }
+
 #if GOOGLE_MOBILE_ADS
     private RewardBasedVideoAd rewardBasedVideo;
     public static InterstitialAd interstitial;
@@ -56,8 +81,6 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
         interstitial.OnAdClosed += HandleOnAdClosed;
         // Called when the ad click caused the user to leave the application.
         interstitial.OnAdLeavingApplication += HandleOnAdLeavingApplication;
-
-        RequestBanner();
     }
 
     void HandleRewardBasedVideoLoaded(object sender, EventArgs args) {
@@ -255,7 +278,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
         MonoBehaviour.print("HandleAdLeavingApplication event received");
     }
 
-    private void RequestBanner() {
+    private void CreateBanner() {
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-3940256099942544/6300978111";
 #elif UNITY_IPHONE
@@ -278,13 +301,9 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
         // Called when the ad click caused the user to leave the application.
         bannerView.OnAdLeavingApplication += HandleOnBannerAdLeavingApplication;
 
-        // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder()
-            .AddTestDevice("F626104A61B1DF52DAFC0B5BE7F72B00") // Galaxy S6 Edge
-            .Build();
-
-        // Load the banner with the request.
-        bannerView.LoadAd(request);
+        // 나중에 인앱 결제 상품 현황 보고 광고를 띄울지 말지를 결정해야 한다.
+        // 여기서 무조건 띄우지 말자.
+        //StartShowBanner();
     }
 
     public void HandleOnBannerAdLoaded(object sender, EventArgs args)
