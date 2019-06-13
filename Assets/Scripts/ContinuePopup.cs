@@ -93,6 +93,7 @@ public class ContinuePopup : MonoBehaviour {
 
     public void OnNoThanksButton() {
         if (PlatformIapManager.instance.NoAdsPurchased) {
+            PlatformAds.stageNumber = Bootstrap.CurrentStageNumber;
             PlatformAds.HandleRewarded_Video(null, null, PlatformAds.AdsType.AdMob);
         } else {
             // 에디터에서 테스트하기 쉽도록 에디터에서는 Unity Ads를,
