@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using TMProText = TMPro.TextMeshProUGUI;
 
 public class AdminButton : MonoBehaviour {
-    public void SetNoAdsPurchased(bool b) {
-        PlatformIapManager.SetNoAdsPurchased_Admin(b);
+    public void SetForceAds(bool b) {
+        PlatformIapManager.SetForceAds(b);
     }
 }

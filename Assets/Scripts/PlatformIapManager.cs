@@ -7,21 +7,35 @@ public class PlatformIapManager : MonoBehaviour, IStoreListener {
     internal static PlatformIapManager instance;
     static readonly string NO_ADS_PRODUCT_ID = "top.plusalpha.balloon.noads";
     static readonly string NO_ADS_PREF_KEY = "NO_ADS_PREF_KEY";
+    static readonly string FORCE_ADS_PREF_KEY = "FORCE_ADS_PREF_KEY";
     private IStoreController controller;
     private IExtensionProvider extensions;
     [SerializeField] GameObject iapGroup = null;
 
+    public bool ForceAds {
+        get => PlayerPrefs.GetInt(FORCE_ADS_PREF_KEY, 0) != 0;
+        set {
+            SetForceAds(value);
+            SushiDebug.Log($"ForceAds set to {value}");
+        }
+    }
+
     public bool NoAdsPurchased {
-        get => PlayerPrefs.GetInt(NO_ADS_PREF_KEY, 0) != 0;
+        get => ForceAds ? false : PlayerPrefs.GetInt(NO_ADS_PREF_KEY, 0) != 0;
         private set {
-            SetNoAdsPurchased_Admin(value);
-            SushiDebug.Log($"NoAdsPurchased set to {value}");
+            SetNoAdsPurchased_Admin(ForceAds ? false : value);
+            SushiDebug.Log($"NoAdsPurchased set to {NoAdsPurchased}");
             SyncNoAdsStates();
         }
     }
 
     static public void SetNoAdsPurchased_Admin(bool b) {
         PlayerPrefs.SetInt(NO_ADS_PREF_KEY, b ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    static public void SetForceAds(bool b) {
+        PlayerPrefs.SetInt(FORCE_ADS_PREF_KEY, b ? 1 : 0);
         PlayerPrefs.Save();
     }
 
