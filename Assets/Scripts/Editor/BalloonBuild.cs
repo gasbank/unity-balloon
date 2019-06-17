@@ -14,14 +14,18 @@ class BalloonBuild
                 "Assets/Scenes/Ending.unity",
                 "Assets/Scenes/Stage Selection.unity",
 
+                "Assets/Scenes/Test Scenes/Iap Test Scene.unity",
                 "Assets/Scenes/Test Scenes/Stage 02 - Test.unity",
                 "Assets/Scenes/Test Scenes/Stage Boost Test.unity",
                 "Assets/Scenes/Test Scenes/Stage Fever Gauge.unity",
+                "Assets/Scenes/Test Scenes/Stage Game Over Immediately.unity",
+                "Assets/Scenes/Test Scenes/Stage Red Block (Rechargeable).unity",
                 "Assets/Scenes/Test Scenes/Stage Shading.unity",
                 "Assets/Scenes/Test Scenes/Stage Slider Interface.unity",
                 "Assets/Scenes/Test Scenes/Stage Wind Region (Rechargeable).unity",
                 "Assets/Scenes/Test Scenes/Stage Yellow Block Spawn.unity",
                 "Assets/Scenes/Test Scenes/Test.unity",
+                "Assets/Scenes/Test Scenes/Yellow Block Catalog.unity",
             };
         }
     }

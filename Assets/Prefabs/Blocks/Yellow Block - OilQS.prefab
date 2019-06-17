@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6773475744107772810}
   - component: {fileID: 1848252637779935547}
   m_Layer: 0
-  m_Name: Yellow Block - Oil 1
+  m_Name: Yellow Block - OilQS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 59713ce10b1ec4760ab38c31d5c379e5, type: 2}
+  - {fileID: 2100000, guid: 677a07435ac4b4ad6936c3299ca95e9c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -282,6 +282,42 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -4906057758283591719, guid: b8f4b02be8d8e42cfa76afb8a88c3859,
+        type: 2}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_text
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3562854433785300331, guid: 33b15b31be77046388a65b8edf9a6dae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -397,42 +433,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -4906057758283591719, guid: b8f4b02be8d8e42cfa76afb8a88c3859,
-        type: 2}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_text
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33b15b31be77046388a65b8edf9a6dae, type: 3}

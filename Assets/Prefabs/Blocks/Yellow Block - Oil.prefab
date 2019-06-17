@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 59713ce10b1ec4760ab38c31d5c379e5, type: 2}
+  - {fileID: 2100000, guid: 677a07435ac4b4ad6936c3299ca95e9c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -146,6 +146,37 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Yellow Block HP Text (TMP)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -4906057758283591719, guid: b8f4b02be8d8e42cfa76afb8a88c3859,
+        type: 2}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3562854433785300331, guid: 33b15b31be77046388a65b8edf9a6dae,
         type: 3}
@@ -252,35 +283,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1655845237227720827, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -4906057758283591719, guid: b8f4b02be8d8e42cfa76afb8a88c3859,
+        type: 2}
     - target: {fileID: 5593931071224285496, guid: 33b15b31be77046388a65b8edf9a6dae,
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_text
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33b15b31be77046388a65b8edf9a6dae, type: 3}
@@ -309,6 +321,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 82233218524446627}
     m_Modifications:
+    - target: {fileID: 7446494354819902511, guid: adde1a4897b85473bab1ea3063f312e1,
+        type: 3}
+      propertyPath: m_Name
+      value: Oil Item
+      objectReference: {fileID: 0}
     - target: {fileID: 7446494354819902515, guid: adde1a4897b85473bab1ea3063f312e1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -374,10 +391,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7446494354819902511, guid: adde1a4897b85473bab1ea3063f312e1,
+    - target: {fileID: 7446494354819902513, guid: adde1a4897b85473bab1ea3063f312e1,
         type: 3}
-      propertyPath: m_Name
-      value: Oil Item
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7446494355722705080, guid: adde1a4897b85473bab1ea3063f312e1,
         type: 3}
@@ -413,11 +430,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_MaxParticleSize
       value: 0.045
-      objectReference: {fileID: 0}
-    - target: {fileID: 7446494354819902513, guid: adde1a4897b85473bab1ea3063f312e1,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adde1a4897b85473bab1ea3063f312e1, type: 3}
