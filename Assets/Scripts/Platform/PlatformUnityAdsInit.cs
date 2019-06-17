@@ -4,6 +4,7 @@ using UnityEngine.Advertisements;
 
 [DisallowMultipleComponent]
 public class PlatformUnityAdsInit : MonoBehaviour {
+#if BALLOON_UNITY_ADS
 #if UNITY_ANDROID
     string gameID = "3173511";
 #elif UNITY_IOS
@@ -14,4 +15,5 @@ public class PlatformUnityAdsInit : MonoBehaviour {
         //Advertisement.debugMode = true;
         Advertisement.Initialize(gameID, false);
     }
+#endif
 }
