@@ -142,7 +142,7 @@ public class HotairBalloon : MonoBehaviour {
 
     public float highestY = 0;
 
-    public bool CanStartFever => feverItemParticle.activeSelf;
+    public bool CanStartFever => IsGameOver == false && feverItemParticle.activeSelf;
 
     public bool VerticallyStationary {
         get => verticallyStationary;
@@ -336,7 +336,7 @@ public class HotairBalloon : MonoBehaviour {
         if (BalloonGameOverCondition && continuePopup.IsOpen == false && IsStageFinished == false) {
 
             var stage = GameObject.FindObjectOfType<Stage>();
-            var stageLengthRatio = highestY / stage.TotalStageLength;
+            var stageLengthRatio = stage != null ? highestY / stage.TotalStageLength : 0;
             if (stageLengthRatio < 0.25f) {
                 initialPositionY = 0;
             } else if (stageLengthRatio < 0.50f) {
