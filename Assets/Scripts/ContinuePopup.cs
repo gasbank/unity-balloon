@@ -83,7 +83,9 @@ public class ContinuePopup : MonoBehaviour {
             waitRemainTime.text = WaitTimeValue.ToString("F0");
             if (WaitTimeValue <= 0) {
                 OnNoThanksButton();
-                subcanvas.Close();
+                // 여기서 Close를 했더니 게임 로직에서 바로 다시 열어버리는 것 같다.
+                // 닫지 말자. 어차피 신 전환으로 없어질 것이다.
+                //subcanvas.Close();
             }
             if (noThanksCanvasGroup.interactable == false && totalWaitTime - WaitTimeValue > noThanksAppearTime) {
                 noThanksCanvasGroup.interactable = true;
