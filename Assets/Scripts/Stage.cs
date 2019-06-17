@@ -26,12 +26,14 @@ public class Stage : MonoBehaviour {
             backgroundCanvas.SetImageMaterial(backgroundMaterial);
         }
         finishLine = GameObject.FindObjectOfType<FinishLine>();
-        TotalStageLength = finishLine.transform.position.y;
-        var checkpointInterval = 0.25f;
-        for (var i = 1; i <= 3; i++) {
-            var checkpointRatio = i * checkpointInterval;
-            var checkpointLine = Instantiate(checkpointPrefab, Vector3.up * TotalStageLength * checkpointRatio, Quaternion.identity).GetComponent<CheckpointLine>();
-            checkpointLine.CheckpointText = string.Format("{0:F0}% ==", checkpointRatio * 100);
+        if (finishLine != null) {
+            TotalStageLength = finishLine.transform.position.y;
+            var checkpointInterval = 0.25f;
+            for (var i = 1; i <= 3; i++) {
+                var checkpointRatio = i * checkpointInterval;
+                var checkpointLine = Instantiate(checkpointPrefab, Vector3.up * TotalStageLength * checkpointRatio, Quaternion.identity).GetComponent<CheckpointLine>();
+                checkpointLine.CheckpointText = string.Format("{0:F0}% ==", checkpointRatio * 100);
+            }
         }
 
         // 체크포인트 기능 지원
@@ -76,8 +78,9 @@ public class Stage : MonoBehaviour {
     }
 
     void OnDrawGizmos() {
-        if (hideGizmos == false) {
-            var finishLine = transform.Find("Finish Line").GetComponent<FinishLine>();
+        var finishLineTransform = transform.Find("Finish Line");
+        if (hideGizmos == false && finishLineTransform != null) {
+            var finishLine = finishLineTransform.GetComponent<FinishLine>();
             if (finishLine != null) {
                 var checkpointInterval = 0.25f;
                 for (var i = 1; i <= 3; i++) {
