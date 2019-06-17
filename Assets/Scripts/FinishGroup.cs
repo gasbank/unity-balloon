@@ -17,7 +17,7 @@ public class FinishGroup : MonoBehaviour {
         }
     }
 
-    static int NextStageNumber => Bootstrap.CurrentStageNumber + 1;
+    static int NextStageNumber => Bootstrap.CurrentStageNumberSafe + 1;
 
     public void ReloadMainScene() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

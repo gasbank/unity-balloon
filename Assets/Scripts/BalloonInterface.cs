@@ -21,6 +21,11 @@ public class BalloonInterface : MonoBehaviour {
     //     }
     // }
 
+    void Awake() {
+        UpdateReferences();
+        UpdateInterfaces();
+    }
+
     public void UpdateReferences() {
         hotairBalloon = GameObject.FindObjectOfType<HotairBalloon>();
         mainCamera = Camera.main;

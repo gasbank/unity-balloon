@@ -157,6 +157,10 @@ public class HotairBalloon : MonoBehaviour {
 
     public Vector3 FeverRingOuterPosition => balloonFeverRingOuter.position;
 
+    bool engineRunning = false;
+    private float lastPlayStartEngineSoundTime;
+
+
     void Awake() {
         handleSlider = GameObject.Find("Canvas/Slider").GetComponent<BalloonHandleSlider>();
         Application.runInBackground = false;
@@ -279,7 +283,6 @@ public class HotairBalloon : MonoBehaviour {
 
         if (IsGameOver == false && IsStageFinished == false && IsTitleVisible == false) {
             stageElapsedTime += Time.deltaTime;
-            Time.timeScale = 1f;
         }
 
         oil.localScale = new Vector3(oil.localScale.x, RemainOilAmount / 100.0f, oil.localScale.z);
@@ -334,35 +337,7 @@ public class HotairBalloon : MonoBehaviour {
         }
 
         if (BalloonGameOverCondition && continuePopup.IsOpen == false && IsStageFinished == false) {
-
-            var stage = GameObject.FindObjectOfType<Stage>();
-            var stageLengthRatio = stage != null ? highestY / stage.TotalStageLength : 0;
-            if (stageLengthRatio < 0.25f) {
-                initialPositionY = 0;
-            } else if (stageLengthRatio < 0.50f) {
-                initialPositionY = stage.TotalStageLength * 0.25f;
-            } else if (stageLengthRatio < 0.75f) {
-                initialPositionY = stage.TotalStageLength * 0.50f;
-            } else {
-                initialPositionY = stage.TotalStageLength * 0.75f;
-            }
-
-            continuePopup.Open();
-            BalloonSound.instance.PlayGameOver();
-            BalloonSound.instance.PlayGameOver_sigh();
-
-
-            foreach (var fixedJoint in fixedJointArray) {
-                Destroy(fixedJoint);
-            }
-            foreach (var rb in rbArray) {
-                rb.constraints = 0;
-            }
-            foreach (var collider in colliderArray) {
-                collider.enabled = true;
-            }
-            gear.enabled = false;
-           // Time.timeScale = Time.deltaTime*20;
+            OnStageFailed();
         }
 
         if (BalloonGameOverCondition == false) {
@@ -402,8 +377,35 @@ public class HotairBalloon : MonoBehaviour {
         }
     }
 
-    bool engineRunning = false;
-    private float lastPlayStartEngineSoundTime;
+    private void OnStageFailed() {
+        var stage = GameObject.FindObjectOfType<Stage>();
+        var stageLengthRatio = stage != null ? highestY / stage.TotalStageLength : 0;
+        if (stageLengthRatio < 0.25f) {
+            initialPositionY = 0;
+        } else if (stageLengthRatio < 0.50f) {
+            initialPositionY = stage.TotalStageLength * 0.25f;
+        } else if (stageLengthRatio < 0.75f) {
+            initialPositionY = stage.TotalStageLength * 0.50f;
+        } else {
+            initialPositionY = stage.TotalStageLength * 0.75f;
+        }
+
+        continuePopup.Open();
+        BalloonSound.instance.PlayGameOver();
+        BalloonSound.instance.PlayGameOver_sigh();
+
+
+        foreach (var fixedJoint in fixedJointArray) {
+            Destroy(fixedJoint);
+        }
+        foreach (var rb in rbArray) {
+            rb.constraints = 0;
+        }
+        foreach (var collider in colliderArray) {
+            collider.enabled = true;
+        }
+        gear.enabled = false;
+    }
 
     private void PlayTopThrusterParticle() {
         foreach (var ps in fireParticleSystemList) {

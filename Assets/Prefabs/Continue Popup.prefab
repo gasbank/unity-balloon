@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 85.72142}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &9154792233053370040
 CanvasRenderer:
@@ -618,7 +618,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 53.711426}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7631790275103672699
 MonoBehaviour:
@@ -743,7 +743,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 85.72142}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6762248002825036146
 CanvasRenderer:
@@ -1044,11 +1044,11 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_Spacing: 20
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
+  m_ChildControlHeight: 0
   m_ChildScaleWidth: 1
-  m_ChildScaleHeight: 1
+  m_ChildScaleHeight: 0
 --- !u!1 &2318693905752849814
 GameObject:
   m_ObjectHideFlags: 0
@@ -1085,7 +1085,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 112.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2085338671124999228
 CanvasRenderer:
@@ -1162,7 +1162,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 63.711426}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &2128729868220095064
 CanvasRenderer:
@@ -1395,7 +1395,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2757718970683022005}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -1505,6 +1505,7 @@ GameObject:
   - component: {fileID: 6228650720903846082}
   - component: {fileID: 7262099711830479873}
   - component: {fileID: 8559967280839301278}
+  - component: {fileID: 2887442317592567511}
   m_Layer: 5
   m_Name: Continue Popup
   m_TagString: Untagged
@@ -1614,6 +1615,21 @@ MonoBehaviour:
   subcanvas: {fileID: 6228650720903846082}
   hotairBalloon: {fileID: 0}
   stage: {fileID: 0}
+  canvasGroup: {fileID: 2887442317592567511}
+  canvasGroupAlphaTarget: 0
+  canvasGroupAlphaVelocity: 0
+--- !u!225 &2887442317592567511
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4651674494676242663}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5212808493399082329
 GameObject:
   m_ObjectHideFlags: 0
@@ -1653,7 +1669,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 53.711426}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4196445311535416597
 MonoBehaviour:
@@ -2071,7 +2087,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 63.711426}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &8376329024956005428
 CanvasRenderer:

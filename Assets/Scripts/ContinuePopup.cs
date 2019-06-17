@@ -15,7 +15,10 @@ public class ContinuePopup : MonoBehaviour {
     [SerializeField] Subcanvas subcanvas = null;
     [SerializeField] HotairBalloon hotairBalloon = null;
     [SerializeField] Stage stage = null;
-    
+    [SerializeField] CanvasGroup canvasGroup = null;
+    [SerializeField] float canvasGroupAlphaTarget = 0;
+    [SerializeField] float canvasGroupAlphaVelocity = 0;
+
     float WaitTimeValue {
         get => waitTimeSlider.value;
         set => waitTimeSlider.value = value;
@@ -34,6 +37,8 @@ public class ContinuePopup : MonoBehaviour {
     }
 
     void OpenPopup() {
+        canvasGroupAlphaTarget = 1;
+        canvasGroup.alpha = 0;
         hotairBalloon = GameObject.FindObjectOfType<HotairBalloon>();
         stage = GameObject.FindObjectOfType<Stage>();
         stageName.text = Bootstrap.CurrentStageName;
@@ -63,6 +68,8 @@ public class ContinuePopup : MonoBehaviour {
             return;
         }
 
+        canvasGroup.alpha = Mathf.SmoothDamp(canvasGroup.alpha, canvasGroupAlphaTarget, ref canvasGroupAlphaVelocity, 0.1f);
+
         if (PlatformIapManager.instance.NoAdsPurchased == false) {
             WaitTimeValue = Mathf.Clamp(WaitTimeValue - Time.deltaTime, waitTimeSlider.minValue, waitTimeSlider.maxValue);
             waitRemainTime.text = WaitTimeValue.ToString("F0");
@@ -76,7 +83,7 @@ public class ContinuePopup : MonoBehaviour {
             }
         }
     }
-    
+
     public void OnContinueButton() {
         if (PlatformIapManager.instance.NoAdsPurchased) {
             PlatformAds.HandleRewarded_RewardedVideo(null, null, PlatformAds.AdsType.AdMob);
@@ -92,16 +99,21 @@ public class ContinuePopup : MonoBehaviour {
     }
 
     public void OnNoThanksButton() {
-        if (PlatformIapManager.instance.NoAdsPurchased) {
-            PlatformAds.stageNumber = Bootstrap.CurrentStageNumber;
-            PlatformAds.HandleRewarded_Video(null, null, PlatformAds.AdsType.AdMob);
+        if (Bootstrap.CurrentStageNumber <= 0) {
+            // 정규 신이 아닌 경우 (테스트 신인 경우), 그냥 그 테스트 신을 다시 로드한다.
+            Bootstrap.ReloadCurrentScene();
         } else {
             // 에디터에서 테스트하기 쉽도록 에디터에서는 Unity Ads를,
             // 실제 기기에서는 Google AdMob을 쓴다.
-            if (Application.isEditor) {
-                PlatformUnityAds.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumber);
+            if (PlatformIapManager.instance.NoAdsPurchased) {
+                PlatformAds.stageNumber = Bootstrap.CurrentStageNumberSafe;
+                PlatformAds.HandleRewarded_Video(null, null, PlatformAds.AdsType.AdMob);
             } else {
-                PlatformAdMobAds.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumber);
+                if (Application.isEditor) {
+                    PlatformUnityAds.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumberSafe);
+                } else {
+                    PlatformAdMobAds.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumberSafe);
+                }
             }
         }
     }

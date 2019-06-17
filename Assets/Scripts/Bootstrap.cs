@@ -23,15 +23,30 @@ public class Bootstrap : MonoBehaviour {
         }
     }
 
-    public static int GetStageNumber(string sceneName) {
+    public static int GetStageNumberSafe(string sceneName) {
         if (sceneName == ENDING_SCENE_NAME) {
             return ENDING_SCENE_NUMBER;
         } else {
-            if (int.TryParse(sceneName.Substring("Stage ".Length, 2), out var result)) {
+            if (GetStageNumber(sceneName, out var result)) {
                 return result;
             }
             return 1;
         }
+    }
+
+    public static int GetStageNumber(string sceneName) {
+        if (sceneName == ENDING_SCENE_NAME) {
+            return ENDING_SCENE_NUMBER;
+        } else {
+            if (GetStageNumber(sceneName, out var result)) {
+                return result;
+            }
+            return -1;
+        }
+    }
+
+    public static bool GetStageNumber(string sceneName, out int stageNumber) {
+        return int.TryParse(sceneName.Substring("Stage ".Length, 2), out stageNumber);
     }
 
     public static string CurrentStageName {
@@ -44,6 +59,8 @@ public class Bootstrap : MonoBehaviour {
             }
         }
     }
+
+    public static int CurrentStageNumberSafe => GetStageNumberSafe(CurrentStageName);
 
     public static int CurrentStageNumber => GetStageNumber(CurrentStageName);
 
