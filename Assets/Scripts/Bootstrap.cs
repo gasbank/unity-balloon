@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class Bootstrap : MonoBehaviour {
     static readonly string LAST_PLAYED_STAGE_NUMBER = "LAST_PLAYED_STAGE_NUMBER";
-    static readonly int LAST_STAGE_NUMBER = 20;
+    static readonly int LAST_STAGE_NUMBER = 25;
     static readonly int ENDING_SCENE_NUMBER = LAST_STAGE_NUMBER + 1;
     static string ENDING_SCENE_NAME = "Ending";
 
