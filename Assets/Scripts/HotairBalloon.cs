@@ -271,7 +271,9 @@ public class HotairBalloon : MonoBehaviour {
 
         if (IsGameOver == false) {
             foreach (var windRegion in appliedWindRegionSet) {
-                balloonRb.velocity += windRegion.WindForce;
+                if (windRegion != null) {
+                    balloonRb.velocity += windRegion.WindForce;
+                }
             }
         }
     }
