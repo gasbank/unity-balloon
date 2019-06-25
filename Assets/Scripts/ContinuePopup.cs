@@ -120,16 +120,28 @@ public class ContinuePopup : MonoBehaviour {
             // 에디터에서 테스트하기 쉽도록 에디터에서는 Unity Ads를,
             // 실제 기기에서는 Google AdMob을 쓴다.
             if (PlatformIapManager.instance.NoAdsPurchased) {
-                PlatformAds.stageNumber = Bootstrap.CurrentStageNumberSafe;
-                PlatformAds.HandleRewarded_Video(null, null, PlatformAds.AdsType.AdMob);
+                ProceedNoThanksWithoutAds();
             } else {
-                if (Application.isEditor) {
-                    PlatformUnityAds.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumberSafe);
+                if (Random.Range(0, 100) < 40) {
+                    ProceedNoThanksWithAds();
                 } else {
-                    PlatformAdMobAds.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumberSafe);
+                    ProceedNoThanksWithoutAds();
                 }
             }
         }
+    }
+
+    private static void ProceedNoThanksWithAds() {
+        if (Application.isEditor) {
+            PlatformUnityAds.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumberSafe);
+        } else {
+            PlatformAdMobAds.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumberSafe);
+        }
+    }
+
+    private static void ProceedNoThanksWithoutAds() {
+        PlatformAds.stageNumber = Bootstrap.CurrentStageNumberSafe;
+        PlatformAds.HandleRewarded_Video(null, null, PlatformAds.AdsType.AdMob);
     }
 
     private void SetToSlowTimeScale(float newTimeScale) {
