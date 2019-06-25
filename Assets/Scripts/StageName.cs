@@ -19,6 +19,9 @@ public class StageName : MonoBehaviour {
     }
 
     public void SetStageName(string stageName) {
+        if (stageName.StartsWith("Levels/")) {
+            stageName = stageName.Substring("Levels/".Length);
+        }
         text.text = stageName;
     }
 }
