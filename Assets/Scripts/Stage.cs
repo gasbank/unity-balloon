@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteAlways]
 public class Stage : MonoBehaviour {
     [SerializeField] Material backgroundMaterial = null;
     [SerializeField] bool tutorial = false;
@@ -9,16 +10,19 @@ public class Stage : MonoBehaviour {
     [SerializeField] FinishLine finishLine = null;
     [SerializeField] GameObject hotairBalloonPrefab = null;
     [SerializeField] bool hideGizmos = false;
-
+    [SerializeField] float stageWidth = 17.0f;
+    [SerializeField] LimitCubeGroup limitCubeGroup = null;
+    
     public bool Tutorial => tutorial;
     public float TotalStageLength { get; private set; }
 
-    // void OnValidate() {
-    //     finishLine = GameObject.FindObjectOfType<FinishLine>();
-    //     if (finishLine != null) {
-    //         TotalStageLength = finishLine.transform.position.y;
-    //     }
-    // }
+    void OnValidate() {
+        // finishLine = GameObject.FindObjectOfType<FinishLine>();
+        // if (finishLine != null) {
+        //     TotalStageLength = finishLine.transform.position.y;
+        // }
+        limitCubeGroup = GameObject.Find("Limit Cube Group")?.GetComponent<LimitCubeGroup>() ?? null;
+    }
 
     void Awake() {
         var backgroundCanvas = GameObject.FindObjectOfType<BackgroundCanvas>();
@@ -74,6 +78,16 @@ public class Stage : MonoBehaviour {
             if (finishLine != null) {
                 finishLine.UpdateReferences();
             }
+        }
+
+        if (limitCubeGroup != null) {
+            limitCubeGroup.SetWidth(stageWidth);
+        }
+    }
+
+    void Update() {
+        if (limitCubeGroup != null) {
+            limitCubeGroup.SetWidth(stageWidth);
         }
     }
 
