@@ -1,0 +1,17 @@
+﻿===================================
+MOBILE EFFECTS DIFFERENCES
+===================================
+
+Regular Mesh:
+Effects use regular quad meshes billboarded, causing more overdraw but with less triangles drawn
+
+Reduced Overdraw:
+Effects use customized meshes to reduce overdraw, but with more triangles and with a script simulating the billboard behaviour
+
+
+It is recommended to use the reduced overdraw effects as long as they don't impact performances too much!
+
+===================================
+War FX
+© 2013,2014 Jean Moreno
+===================================
