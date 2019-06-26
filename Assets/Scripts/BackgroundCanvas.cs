@@ -36,6 +36,7 @@ public class BackgroundCanvas : MonoBehaviour {
         }
 
         testBackgroundImage.gameObject.SetActive(PlatformAds.stageNumber == 1);
+        image.gameObject.SetActive(PlatformAds.stageNumber != 1);
     }
 
     public void UpdateReferences() {
