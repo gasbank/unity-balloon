@@ -59,7 +59,7 @@ namespace UnityEngine.Purchasing
             {
                 if (button)
                 {
-    //                button.onClick.AddListener(PurchaseProduct);
+                   button.onClick.AddListener(PurchaseProduct);
                 }
 
                 if (string.IsNullOrEmpty(productId))
@@ -76,7 +76,7 @@ namespace UnityEngine.Purchasing
             {
                 if (button)
                 {
-    //                button.onClick.AddListener(Restore);
+                   button.onClick.AddListener(Restore);
                 }
             }
         }
