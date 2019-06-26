@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteAlways]
 public class Stage : MonoBehaviour {
     [SerializeField] Material backgroundMaterial = null;
     [SerializeField] bool tutorial = false;
@@ -84,12 +83,15 @@ public class Stage : MonoBehaviour {
             }
         }
 
-        if (limitCubeGroup != null) {
-            limitCubeGroup.SetWidth(stageWidth);
-        }
+        UpdateLimitCubeGroup();
     }
 
     void Update() {
+        UpdateLimitCubeGroup();
+    }
+
+    [ContextMenu("Update Limit Cube Group")]
+    private void UpdateLimitCubeGroup() {
         if (limitCubeGroup != null) {
             limitCubeGroup.SetWidth(stageWidth);
         }
