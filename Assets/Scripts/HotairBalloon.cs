@@ -17,6 +17,7 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] Transform oil = null;
     [SerializeField] float burnSpeed = 5.0f;
     [SerializeField] [Range(0, 100)] float remainOilAmount = 100.0f;
+
     [SerializeField] Transform balloon = null;
     [SerializeField] HashSet<WindRegion> appliedWindRegionSet = new HashSet<WindRegion>();
 
@@ -74,7 +75,7 @@ public class HotairBalloon : MonoBehaviour {
 #if BALLOON_POST_PROCESSING
     Vignette vignette;
 #endif
-    [SerializeField] Image vignetteImage = null;
+    [SerializeField] VignetteImage vignetteImage = null;
 
     public float StageElapsedTime => stageElapsedTime;
 
@@ -119,10 +120,11 @@ public class HotairBalloon : MonoBehaviour {
 
     [SerializeField] Rigidbody[] rbArray = null;
     [SerializeField] Collider[] colliderArray = null;
+    [SerializeField] float zeroOilThreshold = 5.0f;
 
     public bool InFeverGaugeNotEmpty => inFever && FeverGauge > 0;
 
-    public bool BalloonGameOverCondition => zeroOilDuration > 5.0f || balloon.position.y < -5;
+    public bool BalloonGameOverCondition => zeroOilDuration > zeroOilThreshold || balloon.position.y < -5;
 
     public void IncreaseFeverGauge(float feverGaugeIncrement) {
         if (inFever) {
@@ -191,7 +193,7 @@ public class HotairBalloon : MonoBehaviour {
         colliderArray = GetComponentsInChildren<Collider>();
         stageCommon = GameObject.FindObjectOfType<StageCommon>();
 
-        vignetteImage = GameObject.Find("Canvas/Vignette Image").GetComponent<Image>();
+        vignetteImage = GameObject.Find("Canvas/Vignette Image").GetComponent<VignetteImage>();
     }
 
     float HorizontalAxis => Input.GetAxis("Horizontal") + (handleSlider != null ? handleSlider.Horizontal : 0);
@@ -333,9 +335,9 @@ public class HotairBalloon : MonoBehaviour {
         }
 #endif
         if (zeroOilDuration > 0) {
-            vignetteImage.color = new Color(1, 0, 0, (0.1f + Mathf.PingPong(Time.time * 1.4f, 0.4f)));
+            vignetteImage.SetVignetteColor(new Color(1, 0, 0, (0.1f + Mathf.PingPong(Time.time * 1.4f, 0.4f))));
         } else {
-            vignetteImage.color = new Color(1, 0, 0, 0);
+            vignetteImage.SetVignetteColor(new Color(1, 0, 0, 0));
         }
 
         if (BalloonGameOverCondition && continuePopup.IsOpen == false && IsStageFinished == false) {
@@ -487,5 +489,10 @@ public class HotairBalloon : MonoBehaviour {
         Debug.Log("AddExplosionForce");
         BalloonSound.instance.PlayKnockback();
         balloonRb.AddForce(direction * 10000);
+    }
+
+    internal void DieImmediately() {
+        RemainOilAmount = 0;
+        zeroOilDuration = zeroOilThreshold;
     }
 }
