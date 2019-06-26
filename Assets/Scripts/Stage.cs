@@ -34,11 +34,13 @@ public class Stage : MonoBehaviour {
         finishLine = GameObject.FindObjectOfType<FinishLine>();
         if (finishLine != null) {
             TotalStageLength = finishLine.transform.position.y;
-            var checkpointInterval = 0.25f;
-            for (var i = 1; i <= 3; i++) {
-                var checkpointRatio = i * checkpointInterval;
-                var checkpointLine = Instantiate(checkpointPrefab, Vector3.up * TotalStageLength * checkpointRatio, Quaternion.identity).GetComponent<CheckpointLine>();
-                checkpointLine.CheckpointText = string.Format("{0:F0}% ==", checkpointRatio * 100);
+            if (Application.isPlaying) {
+                var checkpointInterval = 0.25f;
+                for (var i = 1; i <= 3; i++) {
+                    var checkpointRatio = i * checkpointInterval;
+                    var checkpointLine = Instantiate(checkpointPrefab, Vector3.up * TotalStageLength * checkpointRatio, Quaternion.identity).GetComponent<CheckpointLine>();
+                    checkpointLine.CheckpointText = string.Format("{0:F0}% ==", checkpointRatio * 100);
+                }
             }
         }
 
