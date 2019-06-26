@@ -218,16 +218,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8784824791208458047}
     m_Modifications:
-    - target: {fileID: 832433108652405705, guid: 9875ffcd8ae5e4879a8486515ff23823,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Block Wind Direction Text (TMP)
-      objectReference: {fileID: 0}
-    - target: {fileID: 832433108652405705, guid: 9875ffcd8ae5e4879a8486515ff23823,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1638258564881495950, guid: 9875ffcd8ae5e4879a8486515ff23823,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -333,6 +323,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 832433108652405705, guid: 9875ffcd8ae5e4879a8486515ff23823,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Block Wind Direction Text (TMP)
+      objectReference: {fileID: 0}
+    - target: {fileID: 832433108652405705, guid: 9875ffcd8ae5e4879a8486515ff23823,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546356280560542366, guid: 9875ffcd8ae5e4879a8486515ff23823,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 750181e6341d14994930052ffc0818bf, type: 2}
     - target: {fileID: 7668553661595417565, guid: 9875ffcd8ae5e4879a8486515ff23823,
         type: 3}
       propertyPath: m_Mesh
@@ -368,11 +373,6 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 750181e6341d14994930052ffc0818bf, type: 2}
-    - target: {fileID: 3546356280560542366, guid: 9875ffcd8ae5e4879a8486515ff23823,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 750181e6341d14994930052ffc0818bf, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9875ffcd8ae5e4879a8486515ff23823, type: 3}
 --- !u!224 &6598900703558502477 stripped
@@ -388,16 +388,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8784824791208458047}
     m_Modifications:
-    - target: {fileID: 147170592548837379, guid: ca5f3b13926614cec94609c5fd4f670e,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Block Question Mark Animated
-      objectReference: {fileID: 0}
-    - target: {fileID: 147170592548837379, guid: ca5f3b13926614cec94609c5fd4f670e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3769938429808683536, guid: ca5f3b13926614cec94609c5fd4f670e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -453,6 +443,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 147170592548837379, guid: ca5f3b13926614cec94609c5fd4f670e,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Block Question Mark Animated
+      objectReference: {fileID: 0}
+    - target: {fileID: 147170592548837379, guid: ca5f3b13926614cec94609c5fd4f670e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca5f3b13926614cec94609c5fd4f670e, type: 3}
 --- !u!4 &7666599253221875672 stripped
@@ -474,6 +474,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8784824791208458047}
     m_Modifications:
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 750181e6341d14994930052ffc0818bf, type: 2}
     - target: {fileID: 3188807777429635372, guid: 33b15b31be77046388a65b8edf9a6dae,
         type: 3}
       propertyPath: m_Name
@@ -482,7 +512,7 @@ PrefabInstance:
     - target: {fileID: 3188807777429635372, guid: 33b15b31be77046388a65b8edf9a6dae,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3562854433785300331, guid: 33b15b31be77046388a65b8edf9a6dae,
         type: 3}
@@ -589,36 +619,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5728490306665863258, guid: 33b15b31be77046388a65b8edf9a6dae,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 750181e6341d14994930052ffc0818bf, type: 2}
     - target: {fileID: 1655845237227720827, guid: 33b15b31be77046388a65b8edf9a6dae,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
