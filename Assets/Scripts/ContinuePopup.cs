@@ -121,12 +121,15 @@ public class ContinuePopup : MonoBehaviour {
             // 실제 기기에서는 Google AdMob을 쓴다.
             if (PlatformIapManager.instance.NoAdsPurchased) {
                 ProceedNoThanksWithoutAds();
-            } else {
-                if (Random.Range(0, 100) < 40) {
-                    ProceedNoThanksWithAds();
-                } else {
+            } else 
+            {
+              //  if (Random.Range(0, 100) < 40) 
+              //  {
+               //     ProceedNoThanksWithAds();
+                //} else    처음에는 혜자로 가야한다. 500~1000다운로드까지는 광고 최소화 하다가 유저풀 모이면 광고 서서히 늘려나간다.
+               // {
                     ProceedNoThanksWithoutAds();
-                }
+              //  }
             }
         }
     }
