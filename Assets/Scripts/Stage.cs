@@ -25,6 +25,8 @@ public class Stage : MonoBehaviour {
     }
 
     void Awake() {
+        Bootstrap.GetStageNumber(gameObject.name, out PlatformAds.stageNumber);
+
         var backgroundCanvas = GameObject.FindObjectOfType<BackgroundCanvas>();
         if (backgroundCanvas != null) {
             backgroundCanvas.SetImageMaterial(backgroundMaterial);

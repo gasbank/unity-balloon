@@ -11,6 +11,7 @@ public class BackgroundCanvas : MonoBehaviour {
     [SerializeField] Color colorMid;
     [SerializeField] Color colorBot;
     [SerializeField] float colorChangeScale = 200;
+    [SerializeField] Image testBackgroundImage = null;
 
     // void OnValidate() {
     //     if (gameObject.scene.rootCount != 0) {
@@ -33,6 +34,8 @@ public class BackgroundCanvas : MonoBehaviour {
         if (GameObject.FindObjectOfType<StagePrefabSpawner>() == null) {
             InstantiateImageMaterialAndSetup();
         }
+
+        testBackgroundImage.gameObject.SetActive(PlatformAds.stageNumber == 1);
     }
 
     public void UpdateReferences() {
@@ -55,5 +58,9 @@ public class BackgroundCanvas : MonoBehaviour {
         SetMaterialDarker("_ColorTop", colorTop);
         SetMaterialDarker("_ColorMid", colorMid);
         SetMaterialDarker("_ColorBot", colorBot);
+    }
+
+    void LateUpdate() {
+        testBackgroundImage.transform.position = new Vector3(testBackgroundImage.transform.position.x, -100 - hotairBalloon.Y, testBackgroundImage.transform.position.z);
     }
 }
