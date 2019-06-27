@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,15 @@ public class StageSegment : MonoBehaviour {
             foreach (var c in GetComponentsInChildren<Collider>()) {
                 segmentBounds.Encapsulate(c.bounds);
             }
+        }
+    }
+
+    [ContextMenu("Align All Children")]
+    void AlignAllChildren() {
+        foreach (Transform t in transform) {
+            var x = Math.Round(2 * t.position.x, MidpointRounding.AwayFromZero) / 2;
+            var y = Math.Round(2 * t.position.y, MidpointRounding.AwayFromZero) / 2;
+            t.position = new Vector3((float)x, (float)y, 0);
         }
     }
 }
