@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteAlways]
 public class Stage : MonoBehaviour {
     [SerializeField] Material backgroundMaterial = null;
     [SerializeField] bool tutorial = false;
@@ -24,6 +25,10 @@ public class Stage : MonoBehaviour {
     }
 
     void Awake() {
+        if (Application.isPlaying == false) {
+            return;
+        }
+
         Bootstrap.GetStageNumber(gameObject.name, out PlatformAds.stageNumber);
 
         var backgroundCanvas = GameObject.FindObjectOfType<BackgroundCanvas>();
@@ -87,10 +92,11 @@ public class Stage : MonoBehaviour {
     }
 
     void Update() {
-        UpdateLimitCubeGroup();
+        if (Application.isPlaying == false) {
+            UpdateLimitCubeGroup();
+        }
     }
 
-    [ContextMenu("Update Limit Cube Group")]
     private void UpdateLimitCubeGroup() {
         if (limitCubeGroup != null) {
             limitCubeGroup.SetWidth(stageWidth);

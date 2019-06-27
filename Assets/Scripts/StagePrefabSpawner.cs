@@ -8,7 +8,11 @@ public class StagePrefabSpawner : MonoBehaviour {
 
     void Awake() {
         if (string.IsNullOrEmpty(PrefabPathToLoad)) {
-            PrefabPathToLoad = "Levels/Stage 01";
+            if (string.IsNullOrEmpty(prefabName)) {
+                PrefabPathToLoad = "Levels/Stage 01";
+            } else {
+                PrefabPathToLoad = prefabName;
+            }
         }
         SushiDebug.Log($"Instantiating stage prefab resource '{PrefabPathToLoad}'...");
         var prefab = Resources.Load<GameObject>(PrefabPathToLoad);
