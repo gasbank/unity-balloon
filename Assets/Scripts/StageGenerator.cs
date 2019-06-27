@@ -60,7 +60,7 @@ public class StageGenerator : MonoBehaviour {
                 }
             }
             if (finishLinePrefab != null) {
-                var finishLineObject = PrefabUtility.InstantiatePrefab(finishLinePrefab) as GameObject;
+                var finishLineObject = Instantiate(finishLinePrefab) as GameObject;
                 finishLineObject.transform.position = Vector3.up * yOffset;
                 finishLineObject.transform.rotation = Quaternion.identity;
                 finishLineObject.transform.parent = transform;
