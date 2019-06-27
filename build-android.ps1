@@ -12,7 +12,7 @@ if (-not (Test-Path env:DUMMY_BUILD)) {
         $env:BUILD_NUMBER = '<NO ENV>'
     }
 
-    & "C:\Program Files\Unity\Hub\Editor\2019.1.1f1\Editor\Unity.exe" `
+    & "C:\Program Files\Unity\Hub\Editor\2019.1.8f1\Editor\Unity.exe" `
         -quit `
         -batchmode `
         -executeMethod BalloonBuild.PerformAndroidBuild `
