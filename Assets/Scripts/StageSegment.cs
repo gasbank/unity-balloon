@@ -25,5 +25,8 @@ public class StageSegment : MonoBehaviour {
             var y = Math.Round(2 * t.position.y, MidpointRounding.AwayFromZero) / 2;
             t.position = new Vector3((float)x, (float)y, 0);
         }
+#if UNITY_EDITOR
+        UnityEditor.EditorUtility.SetDirty(gameObject);
+#endif
     }
 }

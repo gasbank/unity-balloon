@@ -9,11 +9,17 @@ using UnityEditor;
 [ExecuteAlways]
 public class StageGenerator : MonoBehaviour {
     [SerializeField] StageSegment[] stageSegmentPrefabs = null;
+    [SerializeField] bool rebuild = false;
+
+    void OnValidate() {
+        rebuild = true;
+    }
     
     void Update() {
 #if UNITY_EDITOR
         var isPrefab = PrefabUtility.GetPrefabAssetType(gameObject) != PrefabAssetType.NotAPrefab;
-        if (Application.isPlaying == false && isPrefab == false && EditorUtility.IsDirty(gameObject)) {
+        if (Application.isPlaying == false && isPrefab == false && rebuild) {
+            Debug.Log("Rebuilding stage...");
             foreach (var t in transform.Cast<Transform>().ToArray()) {
                 DestroyImmediate(t.gameObject);
             }
@@ -32,6 +38,7 @@ public class StageGenerator : MonoBehaviour {
                     }
                 }
             }
+            rebuild = false;
         }
 #endif
     }
