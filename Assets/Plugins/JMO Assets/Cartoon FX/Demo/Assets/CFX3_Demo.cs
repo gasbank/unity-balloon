@@ -137,7 +137,7 @@ public class CFX3_Demo : MonoBehaviour
 		#endif
 		
 		ParticleSystem ps = particles.GetComponent<ParticleSystem>();
-		if(ps != null && ps.loop)
+		if(ps != null && ps.main.loop)
 		{
 			ps.gameObject.AddComponent<CFX3_AutoStopLoopedEffect>();
 			ps.gameObject.AddComponent<CFX_AutoDestructShuriken>();
