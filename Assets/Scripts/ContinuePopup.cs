@@ -146,7 +146,9 @@ public class ContinuePopup : MonoBehaviour {
 
     private static void ProceedNoThanksWithoutAds() {
         PlatformAds.stageNumber = Bootstrap.CurrentStageNumberSafe;
-        PlatformAds.HandleRewarded_Video(null, null, PlatformAds.AdsType.AdMob);
+        //PlatformAds.HandleRewarded_Video(null, null, PlatformAds.AdsType.AdMob);
+        HotairBalloon.InitialPositionY = 0;
+        Bootstrap.LoadStageScene(PlatformAds.stageNumber);
     }
 
     private void SetToSlowTimeScale(float newTimeScale) {
