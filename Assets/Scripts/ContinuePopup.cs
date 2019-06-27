@@ -115,6 +115,8 @@ public class ContinuePopup : MonoBehaviour {
 
         if (Bootstrap.CurrentStageNumber <= 0) {
             // 정규 신이 아닌 경우 (테스트 신인 경우), 그냥 그 테스트 신을 다시 로드한다.
+            // 이번 스테이지를 처음부터 새로 시작한다.
+            HotairBalloon.InitialPositionY = 0;
             Bootstrap.ReloadCurrentScene();
         } else {
             // 에디터에서 테스트하기 쉽도록 에디터에서는 Unity Ads를,

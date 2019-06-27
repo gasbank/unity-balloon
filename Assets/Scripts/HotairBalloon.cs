@@ -70,7 +70,14 @@ public class HotairBalloon : MonoBehaviour {
     [SerializeField] StageCommon stageCommon = null;
     [SerializeField] float stageElapsedTime = 0;
 
-    public static float initialPositionY = 0;
+    public static float InitialPositionY {
+        get => initialPositionY;
+        set {
+            SushiDebug.Log($"Setting initial position Y: {value}...");
+            initialPositionY = value;
+        }
+    }
+    static float initialPositionY = 0;
 
 #if BALLOON_POST_PROCESSING
     Vignette vignette;
@@ -151,7 +158,7 @@ public class HotairBalloon : MonoBehaviour {
         set => verticallyStationary = value;
     }
 
-    public bool IsVerticallyStationaryForceApplied => (IsTitleVisible || VerticallyStationary) && balloonRb.position.y < initialPositionY && RemainOilAmount > 0;
+    public bool IsVerticallyStationaryForceApplied => (IsTitleVisible || VerticallyStationary) && balloonRb.position.y < InitialPositionY && RemainOilAmount > 0;
 
     public bool IsTitleVisible => stageCommon.IsTitleVisible;
 
@@ -362,7 +369,7 @@ public class HotairBalloon : MonoBehaviour {
         // AddForce라서 FixedUpdate()에 있는 게 일반적이지만,
         // 타입이 Impulse이니 Update()에 넣는다.
         if (IsVerticallyStationaryForceApplied) {
-            balloonRb.AddForce(Vector3.up * (-5 * (balloonRb.position.y - initialPositionY) - 2 * balloonRb.velocity.y), ForceMode.Impulse);
+            balloonRb.AddForce(Vector3.up * (-5 * (balloonRb.position.y - InitialPositionY) - 2 * balloonRb.velocity.y), ForceMode.Impulse);
         }
 
         // 피버 아이템을 가지고 있지 않을 때만 감소
@@ -385,13 +392,13 @@ public class HotairBalloon : MonoBehaviour {
         var stage = GameObject.FindObjectOfType<Stage>();
         var stageLengthRatio = stage != null ? highestY / stage.TotalStageLength : 0;
         if (stageLengthRatio < 0.25f) {
-            initialPositionY = 0;
+            InitialPositionY = 0;
         } else if (stageLengthRatio < 0.50f) {
-            initialPositionY = stage.TotalStageLength * 0.25f;
+            InitialPositionY = stage.TotalStageLength * 0.25f;
         } else if (stageLengthRatio < 0.75f) {
-            initialPositionY = stage.TotalStageLength * 0.50f;
+            InitialPositionY = stage.TotalStageLength * 0.50f;
         } else {
-            initialPositionY = stage.TotalStageLength * 0.75f;
+            InitialPositionY = stage.TotalStageLength * 0.75f;
         }
 
         continuePopup.Open();

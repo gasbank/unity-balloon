@@ -23,7 +23,7 @@ public class PlatformAds {
         SushiDebug.LogFormat("HandleShowResult: shopProductEntry: {0}", shopProductEntry);
         SushiDebug.LogFormat("HandleShowResult: shopProductData: {0}", shopProductData);
         // 이번 스테이지를 처음부터 새로 시작한다.
-        HotairBalloon.initialPositionY = 0;
-        Bootstrap.LoadStageScene(stageNumber);
+        //HotairBalloon.InitialPositionY = 0;
+        //Bootstrap.LoadStageScene(stageNumber);
     }
 }

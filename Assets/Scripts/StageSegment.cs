@@ -11,9 +11,15 @@ public class StageSegment : MonoBehaviour {
 
     void Update() {
         if (Application.isPlaying == false) {
-            segmentBounds = new Bounds();
+            var newSegmentBounds = new Bounds();
             foreach (var c in GetComponentsInChildren<Collider>()) {
-                segmentBounds.Encapsulate(c.bounds);
+                newSegmentBounds.Encapsulate(c.bounds);
+            }
+            if (segmentBounds != newSegmentBounds) {
+                segmentBounds = newSegmentBounds;
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(gameObject);
+#endif
             }
         }
     }
