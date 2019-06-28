@@ -14,6 +14,7 @@ public class Bootstrap : MonoBehaviour {
         set {
             PlayerPrefs.SetInt(LAST_PLAYED_STAGE_NUMBER, Mathf.Clamp(value, 1, 99999));
             PlayerPrefs.Save();
+            SushiDebug.Log("LastPlayedStageNumber={LastPlayedStageNumber} written.");
         }
     }
 

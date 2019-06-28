@@ -9,6 +9,8 @@ public class FinishGroup : MonoBehaviour {
         set {
             canvas.enabled = value;
 
+            SushiDebug.Log($"FinishGroup.Visible={value}, LastPlayedStageNumber={Bootstrap.LastPlayedStageNumber}, NextStageNumber={NextStageNumber}");
+
             // 이게 보였다는 것은 판을 깼다는 말.
             // 마지막으로 플레이한 스테이지를 갱신한다.
             if (value && Bootstrap.LastPlayedStageNumber < NextStageNumber) {
