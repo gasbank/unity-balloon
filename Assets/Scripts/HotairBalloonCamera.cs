@@ -9,11 +9,16 @@ public class HotairBalloonCamera : MonoBehaviour {
     [SerializeField] Camera cam = null;
     [SerializeField] GameObject limitCubeRight = null;
 
-     void OnValidate() {
-        // if (gameObject.scene.rootCount != 0) {
-        //     UpdateHotairBalloon();
-        // }
+    void OnValidate() {
+        UpdateLimitCubeRightReference();
+    }
+
+    private void UpdateLimitCubeRightReference() {
         limitCubeRight = GameObject.Find("Limit Cube Group/Limit Cube (Right)");
+    }
+
+    void Awake() {
+        UpdateLimitCubeRightReference();
     }
 
     void Start() {
@@ -38,15 +43,13 @@ public class HotairBalloonCamera : MonoBehaviour {
             transform.position = Vector3.SmoothDamp(transform.position, followTargetPosition, ref followVelocity, followSmoothTime);
         }
 
-        //GeometryUtility.
-
         var fovYDeg = cam.fieldOfView;
         var fovXDeg = GetFovXDegFromFovYDeg(fovYDeg, cam.aspect);
 
         //SushiDebug.Log($"fovYDeg = {fovYDeg}, fovXDeg = {fovXDeg}, aspect = {cam.aspect}");
 
         if (limitCubeRight != null) {
-            var l = limitCubeRight.GetComponent<Collider>().bounds.min.x;//limitCubeRight.transform.position.x;
+            var l = limitCubeRight.GetComponent<Collider>().bounds.min.x;
             var d = Mathf.Abs(limitCubeRight.transform.position.z - transform.position.z);
             var targetFovXDeg = 2 * Mathf.Atan(l / d) * Mathf.Rad2Deg;
             var targetFovYDeg = GetFovYDegFromFovXDeg(targetFovXDeg, cam.aspect);

@@ -33,6 +33,10 @@ public class Stage : MonoBehaviour {
         // if (finishLine != null) {
         //     TotalStageLength = finishLine.transform.position.y;
         // }
+        UpdateLimitCubeGroupReference();
+    }
+
+    private void UpdateLimitCubeGroupReference() {
         limitCubeGroup = GameObject.Find("Limit Cube Group")?.GetComponent<LimitCubeGroup>() ?? null;
     }
 
@@ -41,13 +45,15 @@ public class Stage : MonoBehaviour {
             return;
         }
 
+        UpdateLimitCubeGroupReference();
+
         Bootstrap.GetStageNumber(gameObject.name, out PlatformAds.stageNumber);
 
         var backgroundCanvas = GameObject.FindObjectOfType<BackgroundCanvas>();
         if (backgroundCanvas != null) {
             backgroundCanvas.SetImageMaterial(backgroundMaterial);
         }
-        finishLine = GameObject.FindObjectOfType<FinishLine>();
+        UpdateFinishLineReference();
         if (finishLine != null) {
             TotalStageLength = finishLine.transform.position.y;
             if (Application.isPlaying) {
@@ -73,7 +79,7 @@ public class Stage : MonoBehaviour {
                     Destroy(rb.gameObject);
                 }
             }
-            
+
             Destroy(hotairBalloon.gameObject);
             Instantiate(hotairBalloonPrefab, Vector3.up * HotairBalloon.InitialPositionY, Quaternion.identity);
             var hotairBalloonCamera = GameObject.FindObjectOfType<HotairBalloonCamera>();
@@ -101,6 +107,10 @@ public class Stage : MonoBehaviour {
         }
 
         UpdateLimitCubeGroup();
+    }
+
+    private void UpdateFinishLineReference() {
+        finishLine = GameObject.FindObjectOfType<FinishLine>();
     }
 
     void Update() {
