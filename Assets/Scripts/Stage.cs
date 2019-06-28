@@ -104,9 +104,7 @@ public class Stage : MonoBehaviour {
     }
 
     void Update() {
-        if (Application.isPlaying == false) {
-            UpdateLimitCubeGroup();
-        }
+        UpdateLimitCubeGroup();
     }
 
     private void UpdateLimitCubeGroup() {
