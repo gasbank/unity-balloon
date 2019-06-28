@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,7 +21,17 @@ public class VignetteImage : MonoBehaviour {
         if (hotairBalloon != null) {
             hotairBalloon.DieImmediately();
         }
-        showContinuePopupImmediatelyButton.gameObject.SetActive(false);
+        HideShowContinuePopupImmediatelyButton();
+    }
+
+    public void HideShowContinuePopupImmediatelyButton() {
+        SushiDebug.Log("HideShowContinuePopupImmediatelyButton");
         continued = true;
+        showContinuePopupImmediatelyButton.gameObject.SetActive(false);
+    }
+
+    internal void ResetShowContinuePopupImmediatelyButton() {
+        SushiDebug.Log("ResetShowContinuePopupImmediatelyButton");
+        continued = false;
     }
 }

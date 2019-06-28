@@ -39,7 +39,7 @@ public class ContinuePopup : MonoBehaviour {
     }
 
     void OnEnable() {
-        OpenPopup();
+        //OpenPopup();
     }
 
     void OpenPopup() {
@@ -63,10 +63,17 @@ public class ContinuePopup : MonoBehaviour {
         }
         waitRemainTime.text = "";
         stageProgressSlider.value = (stage != null && hotairBalloon != null) ? (hotairBalloon.highestY / stage.TotalStageLength) : 0;
+        var vignetteImage = GameObject.FindObjectOfType<VignetteImage>();
+        if (vignetteImage != null) {
+            vignetteImage.HideShowContinuePopupImmediatelyButton();
+        }
     }
 
     void ClosePopup() {
-
+        var vignetteImage = GameObject.FindObjectOfType<VignetteImage>();
+        if (vignetteImage != null) {
+            vignetteImage.ResetShowContinuePopupImmediatelyButton();
+        }
     }
 
     void Update() {
