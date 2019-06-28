@@ -55,17 +55,7 @@ public class Stage : MonoBehaviour {
             backgroundCanvas.SetImageMaterial(backgroundMaterial);
         }
         UpdateFinishLineReference();
-        if (finishLine != null) {
-            TotalStageLength = finishLine.transform.position.y;
-            if (Application.isPlaying) {
-                var checkpointInterval = 0.25f;
-                for (var i = 1; i <= 3; i++) {
-                    var checkpointRatio = i * checkpointInterval;
-                    var checkpointLine = Instantiate(checkpointPrefab, Vector3.up * TotalStageLength * checkpointRatio, Quaternion.identity).GetComponent<CheckpointLine>();
-                    checkpointLine.CheckpointText = string.Format("{0:F0}% ==", checkpointRatio * 100);
-                }
-            }
-        }
+        RespawnCheckpointLines();
 
         // 체크포인트 기능 지원
         // 스테이지에 있는 Hotair Balloon을 삭제하고
@@ -76,8 +66,34 @@ public class Stage : MonoBehaviour {
         UpdateLimitCubeGroup();
     }
 
+    void RespawnCheckpointLines() {
+        if (finishLine != null) {
+            foreach (var cl in GameObject.FindObjectsOfType<CheckpointLine>()) {
+                Destroy(cl.gameObject);
+            }
+            TotalStageLength = finishLine.transform.position.y;
+            if (Application.isPlaying) {
+                var checkpointInterval = 0.25f;
+                for (var i = 1; i <= 3; i++) {
+                    var checkpointRatio = i * checkpointInterval;
+                    var checkpointLine = Instantiate(checkpointPrefab, Vector3.up * TotalStageLength * checkpointRatio, Quaternion.identity).GetComponent<CheckpointLine>();
+                    checkpointLine.CheckpointText = string.Format("{0:F0}% ==", checkpointRatio * 100);
+                }
+            }
+        }
+    }
+
+    public IEnumerator PostProcessOnStageSpawn() {
+        yield return new WaitForEndOfFrame();
+        DestroyStageAroundHotairBalloonConditional();
+        UpdateFinishLineReference();
+        RespawnCheckpointLines();
+        yield return new WaitForEndOfFrame();
+        RespawnHotairBalloonConditional();
+    }
+
     // 이어서하게 되는 체크포인트 부근의 오브젝트는 모두 삭제한다.
-    public void DestroyStageAroundHotairBalloonConditional() {
+    void DestroyStageAroundHotairBalloonConditional() {
         if (HotairBalloon.InitialPositionY != 0) {
             var allRbs = transform.GetComponentsInChildren<Rigidbody>();
             foreach (var rb in allRbs) {
@@ -90,7 +106,7 @@ public class Stage : MonoBehaviour {
     }
 
     // 이어서하게 되는 체크포인트로 새롭게 HotairBalloon을 생성시킨다. 기존 것은 삭제된다.
-    public void RespawnHotairBalloonConditional() {
+    void RespawnHotairBalloonConditional() {
         if (HotairBalloon.InitialPositionY != 0) {
             var hotairBalloon = GameObject.FindObjectOfType<HotairBalloon>();
             Destroy(hotairBalloon.gameObject);
@@ -119,7 +135,7 @@ public class Stage : MonoBehaviour {
         }
     }
 
-    private void UpdateFinishLineReference() {
+    void UpdateFinishLineReference() {
         finishLine = GameObject.FindObjectOfType<FinishLine>();
     }
 
