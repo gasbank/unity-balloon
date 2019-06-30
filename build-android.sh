@@ -15,7 +15,7 @@ fi
 ${UNITY_EDITOR} \
     -quit \
     -batchmode \
-    -executeMethod SushiBuild.PerformAndroidBuild \
+    -executeMethod BalloonBuild.PerformAndroidBuild \
     -logfile >(tee build.log) \
     -projectPath `pwd` \
     -buildTarget Android \

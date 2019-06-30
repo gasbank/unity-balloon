@@ -14,4 +14,4 @@ BUILD_NUMBER='%build.number%'
 
 MESSAGE="[From iMac] Build Number: $BUILD_NUMBER\nBuild Type: $BUILD_TYPE\nDownload: <a href='$DOWNLOAD_URL_ARMEABI_V7A'>ARMEABI_V7A</a> / <a href='$DOWNLOAD_URL_ARM64_V8A'>ARM64_V8A</a> / <a href='$DOWNLOAD_URL_X86'>X86</a>"
 
-echo -n "$MESSAGE" | curl -s -X POST -H "Content-Type: text/plain" -d@- https://plusalpha.top/sushi-telegram/$BOT_TOKEN/teamcity-build-event
+echo -n "$MESSAGE" | curl -s -X POST -H "Content-Type: text/plain" -d@- https://plusalpha.top/balloon-telegram/$BOT_TOKEN/teamcity-build-event
