@@ -417,7 +417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7a85c3b65b0fedc46921f5b3a4c4749e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.4
+      value: 59.4
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7a85c3b65b0fedc46921f5b3a4c4749e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -454,6 +454,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 7a85c3b65b0fedc46921f5b3a4c4749e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 7a85c3b65b0fedc46921f5b3a4c4749e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 12.951395
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 7a85c3b65b0fedc46921f5b3a4c4749e, type: 3}
       propertyPath: InitialModule.startSizeY.minMaxState
@@ -617,7 +621,7 @@ PrefabInstance:
     - target: {fileID: 556196813606185405, guid: e23757ca4cfe34e05b059bd65e4c59a4,
         type: 3}
       propertyPath: field of view
-      value: 109.743256
+      value: 109.74588
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e23757ca4cfe34e05b059bd65e4c59a4, type: 3}
@@ -637,6 +641,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
       propertyPath: m_Name
       value: CFXM3_Flying_Ember
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1230,27 +1238,27 @@ PrefabInstance:
     - target: {fileID: 4685480805635884133, guid: 3232a0f5364884aa79dd91e0914c08ff,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -29.999964
+      value: -29.999979
       objectReference: {fileID: 0}
     - target: {fileID: 4685480805635884133, guid: 3232a0f5364884aa79dd91e0914c08ff,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 82.33328
+      value: 82.33338
       objectReference: {fileID: 0}
     - target: {fileID: 4685480805635884133, guid: 3232a0f5364884aa79dd91e0914c08ff,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 82.33328
+      value: 82.33338
       objectReference: {fileID: 0}
     - target: {fileID: 7950076772127665826, guid: 3232a0f5364884aa79dd91e0914c08ff,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 41.16664
+      value: 41.16669
       objectReference: {fileID: 0}
     - target: {fileID: 7950076772127665826, guid: 3232a0f5364884aa79dd91e0914c08ff,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -29.999964
+      value: -29.999979
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3232a0f5364884aa79dd91e0914c08ff, type: 3}
@@ -1265,11 +1273,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hotair Balloon
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940520359282821976, guid: 593c303ad101d7142a49327789131521,
-        type: 3}
-      propertyPath: handleSlider
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4940520359282821977, guid: 593c303ad101d7142a49327789131521,
         type: 3}
@@ -1326,13 +1329,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 88998179674303821, guid: 593c303ad101d7142a49327789131521,
+    - target: {fileID: 4940520359282821976, guid: 593c303ad101d7142a49327789131521,
         type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      propertyPath: handleSlider
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 118084479, guid: 593c303ad101d7142a49327789131521, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 88998179674303821, guid: 593c303ad101d7142a49327789131521,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
