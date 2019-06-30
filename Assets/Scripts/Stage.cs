@@ -6,7 +6,7 @@ using UnityEngine;
 [ExecuteAlways]
 public class Stage : MonoBehaviour {
     [SerializeField] Material backgroundMaterial = null;
-    [SerializeField] bool tutorial = false;
+    [SerializeField] int tutorialTemplate = 0;
     [SerializeField] GameObject checkpointPrefab = null;
     [SerializeField] FinishLine finishLine = null;
     [SerializeField] GameObject hotairBalloonPrefab = null;
@@ -27,7 +27,7 @@ public class Stage : MonoBehaviour {
         }
     }
     
-    public bool Tutorial => tutorial;
+    public int TutorialTemplate => tutorialTemplate;
     public float TotalStageLength { get; private set; }
 
     void OnValidate() {

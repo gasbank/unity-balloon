@@ -39,7 +39,7 @@ public class Tutorial : MonoBehaviour {
                     hitRepulsive.alpha = 0;
                 }
             }
-        } else {
+        } else if (TutorialTemplate == 2) {
             if (hotairBalloon.IsTitleVisible == false) {
                 if (hotairBalloon.IsGameOver == false) {
                     holdToThrustVertically.alpha = 0;
@@ -53,6 +53,11 @@ public class Tutorial : MonoBehaviour {
                     hitRepulsive.alpha = 0;
                 }
             }
+        } else {
+            holdToThrustVertically.alpha = 0;
+            dragToSteerHorizontally.alpha = 0;
+            takeGas.alpha = 0;
+            hitRepulsive.alpha = 0;
         }
     }
 }

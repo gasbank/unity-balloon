@@ -40,7 +40,8 @@ public class StagePrefabSpawner : MonoBehaviour {
         var prefab = Resources.Load<GameObject>(PrefabPathToLoad);
         prefabName = prefab.name;
         stage = Instantiate(prefab).GetComponent<Stage>();
-        GameObject.Find("Canvas (Tutorial)").SetActive(stage.Tutorial);
+        GameObject.Find("Canvas (Tutorial)/Tutorial").GetComponent<Tutorial>().TutorialTemplate = stage.TutorialTemplate;
+        GameObject.Find("Canvas (Tutorial)").SetActive(stage.TutorialTemplate != 0);
 
         // 아래 할당으로 새로운 스테이지가 스폰된다.
         // 새롭게 스폰된 스테이지를 변경하기 위해서는 한 프레임 기다려햔다.
