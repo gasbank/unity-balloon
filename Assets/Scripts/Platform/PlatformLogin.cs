@@ -12,8 +12,9 @@ public class PlatformLogin : MonoBehaviour {
     private void Start() {
         // 게임 켜고 처음 한번만 자동 로그인 시도한다.
         if (initLogin == false) {
-            StartLogin();
-            initLogin = true;
+            if(Bootstrap.CurrentStageNumber > 1)
+            {StartLogin();
+            initLogin = true;}
         }
     }
 
