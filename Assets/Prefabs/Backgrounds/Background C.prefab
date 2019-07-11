@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2983946307738531818}
   m_Layer: 0
-  m_Name: Background A
+  m_Name: Background C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,9 +29,89 @@ Transform:
   m_Children:
   - {fileID: 6623798742223865529}
   - {fileID: 6623798743321159232}
+  - {fileID: 465751846}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &465884582
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2983946307738531818}
+    m_Modifications:
+    - target: {fileID: 100000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
+      propertyPath: m_Name
+      value: CFXM3_Flying_Ember
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f55b65f47fd49814caa4fb493775ce06, type: 3}
+--- !u!4 &465751846 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: f55b65f47fd49814caa4fb493775ce06,
+    type: 3}
+  m_PrefabInstance: {fileID: 465884582}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1875906231337848498
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43,6 +123,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Background Stars
+      objectReference: {fileID: 0}
+    - target: {fileID: 4748196004081911816, guid: 6247ce007fc6749799db593b297c8afa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4748196004081911819, guid: 6247ce007fc6749799db593b297c8afa,
         type: 3}
@@ -118,6 +203,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Background Clouds
+      objectReference: {fileID: 0}
+    - target: {fileID: 1570239277895824483, guid: 8a1d8ed7d52a74249a18e25a2bf0261c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1570239277895824482, guid: 8a1d8ed7d52a74249a18e25a2bf0261c,
         type: 3}
