@@ -8,7 +8,7 @@ fi
     -quit \
     -batchmode \
     -executeMethod BalloonBuild.PerformIosBuild \
-    -logfile >(tee build.log) \
+    -logfile build.log \
     -projectPath `pwd` \
     -buildTarget iOS \
     -buildNumber ${BUILD_NUMBER} \
