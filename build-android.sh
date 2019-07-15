@@ -16,7 +16,7 @@ ${UNITY_EDITOR} \
     -quit \
     -batchmode \
     -executeMethod BalloonBuild.PerformAndroidBuild \
-    -logfile >(tee build.log) \
+    -logfile build.log \
     -projectPath `pwd` \
     -buildTarget Android \
     -keystorePass ${KEYSTORE_PASS} \
