@@ -122,7 +122,9 @@ public class Stage : MonoBehaviour {
             backgroundCanvas.UpdateReferences();
 
             var stageDuration = GameObject.FindObjectOfType<StageDuration>();
-            stageDuration.UpdateReferences();
+            if (stageDuration != null) {
+                stageDuration.UpdateReferences();
+            }
 
             var tutorial = GameObject.FindObjectOfType<Tutorial>();
             if (tutorial != null) {

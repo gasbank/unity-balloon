@@ -5,6 +5,7 @@ public class BackButton : MonoBehaviour {
     [SerializeField] float lastTouchTime = 0;
     [SerializeField] int repeatedTouchCount = 0;
     public void GoToStageSelection() {
+#if BALLOON_ADMIN
         if (Application.isEditor) {
             SceneManager.LoadScene("Stage Selection");
         } else {
@@ -18,5 +19,6 @@ public class BackButton : MonoBehaviour {
             }
             lastTouchTime = Time.time;
         }
+#endif
     }
 }

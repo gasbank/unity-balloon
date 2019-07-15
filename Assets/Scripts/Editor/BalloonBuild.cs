@@ -2,16 +2,14 @@
 using UnityEditor;
 using System.Linq;
 
-class BalloonBuild
-{
-    static string[] Scenes
-    {
-        get
-        {
+class BalloonBuild {
+    static string[] Scenes {
+        get {
             return new string[] {
                 "Assets/Scenes/Bootstrap.unity",
                 "Assets/Scenes/Stage.unity",
                 "Assets/Scenes/Ending.unity",
+#if BALLOON_ADMIN
                 "Assets/Scenes/Stage Selection.unity",
 
                 "Assets/Scenes/Test Scenes/Iap Test Scene.unity",
@@ -26,6 +24,7 @@ class BalloonBuild
                 "Assets/Scenes/Test Scenes/Stage Yellow Block Spawn.unity",
                 "Assets/Scenes/Test Scenes/Test.unity",
                 "Assets/Scenes/Test Scenes/Yellow Block Catalog.unity",
+#endif
             };
         }
     }
@@ -37,7 +36,7 @@ class BalloonBuild
         options.locationPathName = "./balloon.apk";
         // BALLOON_DEBUG 심볼을 빼서 디버그 메시지 나오지 않도록 한다.
         if (System.Environment.GetEnvironmentVariable("BALLOON_DEV_BUILD") != "1") {
-            RemovingSushiDebugDefine(BuildTargetGroup.Android);
+            RemovingBalloonDebugDefine(BuildTargetGroup.Android);
         }
         var cmdArgs = System.Environment.GetCommandLineArgs().ToList();
         if (ProcessAndroidKeystorePassArg(options, cmdArgs)) {
@@ -91,7 +90,7 @@ class BalloonBuild
         options.locationPathName = "./build";
         // BALLOON_DEBUG 심볼을 빼서 디버그 메시지 나오지 않도록 한다.
         if (System.Environment.GetEnvironmentVariable("BALLOON_DEV_BUILD") != "1") {
-            RemovingSushiDebugDefine(BuildTargetGroup.iOS);
+            RemovingBalloonDebugDefine(BuildTargetGroup.iOS);
         }
         PlayerSettings.iOS.appleDeveloperTeamID = "TG9MHV97AH";
         var cmdArgs = System.Environment.GetCommandLineArgs().ToList();
@@ -99,9 +98,9 @@ class BalloonBuild
         BuildPipeline.BuildPlayer(options);
     }
 
-    private static void RemovingSushiDebugDefine(BuildTargetGroup buildTargetGroup) {
+    private static void RemovingBalloonDebugDefine(BuildTargetGroup buildTargetGroup) {
         var scriptingDefineSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
-        scriptingDefineSymbols = string.Join(";", scriptingDefineSymbols.Split(';').Where(e => e != "BALLOON_DEBUG" && e != "BALLOON_ADMIN"));
+        scriptingDefineSymbols = string.Join(";", scriptingDefineSymbols.Split(';').Where(e => e != "BALLOON_DEBUG" && e != "BALLOON_ADMIN" && e != "SUSHI_ADMIN" && e != "BALLOON_TEST_ADS"));
         PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, scriptingDefineSymbols);
     }
 }

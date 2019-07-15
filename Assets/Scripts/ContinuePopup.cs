@@ -19,7 +19,7 @@ public class ContinuePopup : MonoBehaviour {
     [SerializeField] float canvasGroupAlphaTarget = 0;
     [SerializeField] float canvasGroupAlphaVelocity = 0;
 
-    private float defaultFixedDeltaTime = 0.02f;
+    readonly static private float defaultFixedDeltaTime = 0.02f;
 
     float WaitTimeValue {
         get => waitTimeSlider.value;
@@ -35,7 +35,7 @@ public class ContinuePopup : MonoBehaviour {
     // }
 
     void Awake() {
-        defaultFixedDeltaTime = Time.fixedDeltaTime;
+        RevertToDefaultTimeScale();
     }
 
     void OnEnable() {
