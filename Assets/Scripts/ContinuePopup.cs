@@ -83,7 +83,10 @@ public class ContinuePopup : MonoBehaviour {
 
         canvasGroup.alpha = Mathf.SmoothDamp(canvasGroup.alpha, canvasGroupAlphaTarget, ref canvasGroupAlphaVelocity, 0.05f, 2.0f, Time.unscaledDeltaTime);
         //canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, canvasGroupAlphaTarget, Time.deltaTime * 5);
-        SetToSlowTimeScale(Mathf.Pow(canvasGroup.alpha, 10.0f));
+        // 슬로우 효과가 매 프레임마다 Time.timeScale을 덮어쓰는 것 때문에
+        // 로직이 복잡해진다. (iOS에서 광고 시청 시 Time.timeScale을 0으로 바꿔도 이 기능으로 0 아닌 다른 값이 됨)
+        // 기능 일단 끈다.
+        //SetToSlowTimeScale(Mathf.Pow(canvasGroup.alpha, 10.0f));
 
         if (PlatformIapManager.instance.NoAdsPurchased == false) {
             WaitTimeValue = Mathf.Clamp(WaitTimeValue - Time.deltaTime, waitTimeSlider.minValue, waitTimeSlider.maxValue);
@@ -102,7 +105,10 @@ public class ContinuePopup : MonoBehaviour {
     }
 
     public void OnContinueButton() {
-        RevertToDefaultTimeScale();
+        // iOS는 광고 재생 중에 게임이 멈추지 않는다.
+        // 강제로 멈추게 하자.
+        // 그렇게 하지 않으면 광고 재생 중에 10초 타임아웃으로 OnNoThanksButton() 호출되게 된다.
+        StopTimeScale();
 
         if (PlatformIapManager.instance.NoAdsPurchased) {
             PlatformAds.HandleRewarded_RewardedVideo(null, null, PlatformAds.AdsType.AdMob);
@@ -112,12 +118,6 @@ public class ContinuePopup : MonoBehaviour {
             if (Application.isEditor) {
                 PlatformUnityAds.TryShowRewardedAd(null, null);
             } else {
-                if (Application.platform == RuntimePlatform.IPhonePlayer) {
-                    // iOS는 광고 재생 중에 게임이 멈추지 않는다.
-                    // 강제로 멈추게 하자.
-                    // 그렇게 하지 않으면 광고 재생 중에 10초 타임아웃으로 OnNoThanksButton() 호출되게 된다.
-                    StopTimeScale();
-                }
                 PlatformAdMobAds.TryShowRewardedAd(null, null);
             }
         }
@@ -136,15 +136,14 @@ public class ContinuePopup : MonoBehaviour {
             // 실제 기기에서는 Google AdMob을 쓴다.
             if (PlatformIapManager.instance.NoAdsPurchased) {
                 ProceedNoThanksWithoutAds();
-            } else 
-            {
-              //  if (Random.Range(0, 100) < 40) 
-              //  {
-               //     ProceedNoThanksWithAds();
+            } else {
+                //  if (Random.Range(0, 100) < 40) 
+                //  {
+                //     ProceedNoThanksWithAds();
                 //} else    처음에는 혜자로 가야한다. 500~1000다운로드까지는 광고 최소화 하다가 유저풀 모이면 광고 서서히 늘려나간다.
-               // {
-                    ProceedNoThanksWithoutAds();
-              //  }
+                // {
+                ProceedNoThanksWithoutAds();
+                //  }
             }
         }
     }
@@ -165,16 +164,19 @@ public class ContinuePopup : MonoBehaviour {
     }
 
     private void SetToSlowTimeScale(float newTimeScale) {
+        SushiDebug.Log("SetToSlowTimeScale() called.");
         Time.timeScale = newTimeScale;
         Time.fixedDeltaTime = defaultFixedDeltaTime * Time.timeScale;
     }
 
     private void RevertToDefaultTimeScale() {
+        SushiDebug.Log("RevertToDefaultTimeScale() called.");
         Time.timeScale = 1.0f;
         Time.fixedDeltaTime = defaultFixedDeltaTime * Time.timeScale;
     }
 
     private void StopTimeScale() {
+        SushiDebug.Log("StopTimeScale() called.");
         Time.timeScale = 0.0f;
     }
 }
