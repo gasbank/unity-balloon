@@ -168,6 +168,12 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
         BalloonSound.instance.ResumeToNormalTimeAndResumeAudioMixer();
     }
 
+    IEnumerator HandleAdOpenedCoro(EventArgs args) {
+        yield return null;
+        SushiDebug.Log("HandleAdClosedCoro event received");
+        BalloonSound.instance.StopTimeAndMuteAudioMixer();
+    }
+
     void HandleRewardBasedVideoRewarded(object sender, Reward args) {
         // Workaround for processing result in main thread
         StartCoroutine(HandleRewardBasedVideoRewardedCoro(args));
@@ -301,10 +307,13 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
     }
 
     public void HandleOnAdOpened(object sender, EventArgs args) {
-        MonoBehaviour.print("HandleAdOpened event received");
+        MonoBehaviour.print("HandleOnAdOpened event received");
+        // Workaround for processing result in main thread
+        StartCoroutine(HandleAdOpenedCoro(args));
     }
 
     public void HandleOnAdClosed(object sender, EventArgs args) {
+        MonoBehaviour.print("HandleOnAdClosed event received");
         // Workaround for processing result in main thread
         StartCoroutine(HandleAdClosedCoro());
     }
@@ -313,6 +322,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
         yield return null;
         SushiDebug.Log("HandleAdClosedCoro event received");
         PlatformAds.HandleRewarded_Video(null, null, PlatformAds.AdsType.AdMob);
+        BalloonSound.instance.ResumeToNormalTimeAndResumeAudioMixer();
     }
 
     public void HandleOnAdLeavingApplication(object sender, EventArgs args) {

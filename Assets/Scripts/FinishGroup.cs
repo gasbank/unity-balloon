@@ -31,7 +31,7 @@ public class FinishGroup : MonoBehaviour {
 
     public void NextStage() {
         if (PlatformIapManager.instance.NoAdsPurchased) {
-            // 광고 제거 상품 구매한 상태에는 아무 것도 하지 않는다.
+            PlatformAds.LoadStageFromStart(NextStageNumber);
         } else {
             if (Application.isEditor) {
                 PlatformUnityAds.TryShowInterstitialAd(null, null, NextStageNumber);
@@ -39,8 +39,5 @@ public class FinishGroup : MonoBehaviour {
                 PlatformAdMobAds.TryShowInterstitialAd(null, null, NextStageNumber);
             }
         }
-
-        HotairBalloon.InitialPositionY = 0;
-        Bootstrap.LoadStageScene(NextStageNumber);
     }
 }
