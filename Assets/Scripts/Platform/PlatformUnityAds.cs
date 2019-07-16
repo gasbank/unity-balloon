@@ -21,6 +21,7 @@ public class PlatformUnityAds {
             PlatformUnityAds.shopProductEntry = shopProductEntry;
             PlatformUnityAds.shopProductData = shopProductData;
             Advertisement.Show(placementId, options);
+            BalloonSound.instance.StopTimeAndMuteAudioMixer();
         } else {
             Debug.LogError("Ad not ready! - " + placementId);
             ShowAdsErrorPopup();
@@ -41,6 +42,7 @@ public class PlatformUnityAds {
                 ShowAdsErrorPopup();
                 break;
         }
+        BalloonSound.instance.ResumeToNormalTimeAndResumeAudioMixer();
     }
 
     public static void HandleShowResult_Video(ShowResult result) {
