@@ -112,6 +112,12 @@ public class ContinuePopup : MonoBehaviour {
             if (Application.isEditor) {
                 PlatformUnityAds.TryShowRewardedAd(null, null);
             } else {
+                if (Application.platform == RuntimePlatform.IPhonePlayer) {
+                    // iOS는 광고 재생 중에 게임이 멈추지 않는다.
+                    // 강제로 멈추게 하자.
+                    // 그렇게 하지 않으면 광고 재생 중에 10초 타임아웃으로 OnNoThanksButton() 호출되게 된다.
+                    StopTimeScale();
+                }
                 PlatformAdMobAds.TryShowRewardedAd(null, null);
             }
         }
@@ -166,5 +172,9 @@ public class ContinuePopup : MonoBehaviour {
     private void RevertToDefaultTimeScale() {
         Time.timeScale = 1.0f;
         Time.fixedDeltaTime = defaultFixedDeltaTime * Time.timeScale;
+    }
+
+    private void StopTimeScale() {
+        Time.timeScale = 0.0f;
     }
 }
