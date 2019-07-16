@@ -22,7 +22,7 @@ public class PlatformEditor : IPlatformBase {
     }
 
     public void ExecuteCloudSave() {
-        SaveLoadManager.Save(BalloonSpawner.instance, ConfigPopup.instance, Sound.instance, Data.instance, SaveLoadManager.SaveReason.BeforeCloudSave);
+        SaveLoadManager.Save(BalloonSpawner.instance, ConfigPopup.instance, BalloonSound.instance, Data.instance, SaveLoadManager.SaveReason.BeforeCloudSave);
         PlatformSaveUtil.ShowSaveProgressPopup();
 
         var savedData = PlatformSaveUtil.SerializeSaveData();

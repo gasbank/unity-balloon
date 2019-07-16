@@ -69,7 +69,7 @@ public class PlatformIos : IPlatformBase {
     }
 
     public void ExecuteCloudSave() {
-        SaveLoadManager.Save(BalloonSpawner.instance, ConfigPopup.instance, Sound.instance, Data.instance, SaveLoadManager.SaveReason.BeforeCloudSave);
+        SaveLoadManager.Save(BalloonSpawner.instance, ConfigPopup.instance, BalloonSound.instance, Data.instance, SaveLoadManager.SaveReason.BeforeCloudSave);
         PlatformSaveUtil.ShowSaveProgressPopup();
 #pragma warning disable 219
         var savedData = PlatformSaveUtil.SerializeSaveData();

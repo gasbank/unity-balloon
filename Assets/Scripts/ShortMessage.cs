@@ -38,6 +38,6 @@ public class ShortMessage : MonoBehaviour {
         text.text = message;
         remainTime = visibleTime;
         alpha = 1.0f;
-        Sound.instance.PlayError();
+        BalloonSound.instance.PlayError();
     }
 }

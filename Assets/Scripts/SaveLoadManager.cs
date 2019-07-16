@@ -79,7 +79,7 @@ public class SaveLoadManager {
         ResetSaveDataSlotAndWrite();
     }
 
-    public static bool Save(BalloonSpawner spawner, ConfigPopup configPopup, Sound sound, Data data, SaveReason sr) {
+    public static bool Save(BalloonSpawner spawner, ConfigPopup configPopup, BalloonSound sound, Data data, SaveReason sr) {
         // 에디터에서 간혹 게임 플레이 시작할 때 Load도 호출되기도 전에 Save가 먼저 호출되기도 한다.
         // (OnApplicationPause 통해서)
         // 실제 기기에서도 이럴 수 있나? 이러면 망인데...

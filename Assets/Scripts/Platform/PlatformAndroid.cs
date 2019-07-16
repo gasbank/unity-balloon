@@ -122,7 +122,7 @@ public class PlatformAndroid : IPlatformBase {
 
     public void ExecuteCloudSave() {
 #if !NO_GPGS
-        SaveLoadManager.Save(BalloonSpawner.instance, ConfigPopup.instance, Sound.instance, Data.instance, SaveLoadManager.SaveReason.BeforeCloudSave);
+        SaveLoadManager.Save(BalloonSpawner.instance, ConfigPopup.instance, BalloonSound.instance, Data.instance, SaveLoadManager.SaveReason.BeforeCloudSave);
         PlatformSaveUtil.ShowSaveProgressPopup();
 
         ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;

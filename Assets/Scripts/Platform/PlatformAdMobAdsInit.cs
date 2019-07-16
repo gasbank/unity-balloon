@@ -139,7 +139,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
         yield return null;
         SushiDebug.Log("HandleRewardBasedVideoOpened event received");
         shouldBeRewarded = false;
-        Sound.instance.StopTimeAndMuteAudioMixer();
+        BalloonSound.instance.StopTimeAndMuteAudioMixer();
     }
 
     void HandleRewardBasedVideoStarted(object sender, EventArgs args) {
@@ -165,7 +165,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
             // Workaround for processing result in main thread
             StartCoroutine(HandleRewarded());
         }
-        Sound.instance.ResumeToNormalTimeAndResumeAudioMixer();
+        BalloonSound.instance.ResumeToNormalTimeAndResumeAudioMixer();
     }
 
     void HandleRewardBasedVideoRewarded(object sender, Reward args) {

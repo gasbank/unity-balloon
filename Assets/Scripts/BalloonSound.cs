@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class BalloonSound : MonoBehaviour {
     public static BalloonSound instance;
@@ -27,7 +29,9 @@ public class BalloonSound : MonoBehaviour {
     [SerializeField] AudioSource oneShotSource15 = null;
     [SerializeField] AudioSource oneShotSource20 = null;
     [SerializeField] AudioSource AmbientSound1 = null;
-    
+
+    [SerializeField] AudioMixer audioMixer = null;
+
     public void PlayStartEngine() { Debug.Log("PlayStartEngine"); oneShotSource.PlayOneShot(startEngine); }
     public void PlayGetOilItem() { Debug.Log("PlayGetOilItem"); oneShotSource.PlayOneShot(getOilItem); }
     public void PlayGetOilItem2() { Debug.Log("PlayGetOilItem2"); oneShotSource15.PlayOneShot(getOilItem); }
@@ -40,7 +44,8 @@ public class BalloonSound : MonoBehaviour {
     public void PlayKnockback() { Debug.Log("PlayKnockback"); oneShotSource.PlayOneShot(knockback); }
     public void PlayFever() { Debug.Log("PlayFever"); oneShotSource.PlayOneShot(feverstart); }
     public void PlayMaydayMayday() { Debug.Log("MaydayMayday"); oneShotSource.PlayOneShot(maydaymayday); }
-    
+    public void PlayError() { }
+
     void Awake() {
         instance = this;
     }
@@ -50,5 +55,20 @@ public class BalloonSound : MonoBehaviour {
         ascendingLoopSource.volume = ratio;
         descendingLoopSource.volume = 1.0f - ratio;
         AmbientSound1.volume = 0.5f;
+    }
+
+    public void StopTimeAndMuteAudioMixer() {
+        SushiDebug.Log("StopTimeAndMuteAudioMixer() called.");
+        if (Time.timeScale != 1) {
+            Debug.LogError("Time.timeScale expected to be 1 at this moment!");
+        }
+        Time.timeScale = 0;
+        audioMixer.SetFloat("MasterVolume", -80.0f);
+    }
+
+    public void ResumeToNormalTimeAndResumeAudioMixer() {
+        SushiDebug.Log("ResumeToNormalTimeAndResumeAudioMixer() called.");
+        Time.timeScale = 1;
+        audioMixer.SetFloat("MasterVolume", 0.0f);
     }
 }
