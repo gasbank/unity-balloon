@@ -18,7 +18,7 @@ public class StageCommon : MonoBehaviour {
         awaken = true;
 
     }
-bool bSsibal = false;
+bool bfadeout = false;
     public void DeactivateTitleGroup() 
     {
 
@@ -29,7 +29,7 @@ bool bSsibal = false;
         image.color -= new Color(0,0,0,Time.deltaTime) ;
        // image.color.a -= Time.deltaTime;
        // titleImage.a = color.a ;
-        bSsibal = true;
+        bfadeout = true;
        if(image.color.a <= 0)
         titleGroup.SetActive(false);
       
@@ -40,7 +40,7 @@ bool bSsibal = false;
 
     public void Update()
     {
-        if(bSsibal == true)
+        if(bfadeout == true)
         DeactivateTitleGroup();
     }
 }
