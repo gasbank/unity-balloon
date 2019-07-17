@@ -16,6 +16,7 @@ public class StageButton : MonoBehaviour {
     public void GoToStage() {
         //SceneManager.LoadScene(Bootstrap.GetStageSceneName(ButtonStageNumber));
         HotairBalloon.InitialPositionY = 0;
+        StageCommon.awaken = false;
         Bootstrap.LoadStageScene(ButtonStageNumber);
     }
 }

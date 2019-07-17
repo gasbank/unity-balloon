@@ -8,7 +8,7 @@ public class NoAdsIapButton : MonoBehaviour {
         PlatformIapManager.instance.PurchaseNoAds();
     }
 
-      public void ResetSaveData() {
+    public void ResetSaveData() {
         PlayerPrefs.DeleteAll();
     }
 }

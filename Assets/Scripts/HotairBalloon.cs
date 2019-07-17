@@ -211,6 +211,10 @@ public class HotairBalloon : MonoBehaviour {
         var dirRad = Mathf.Deg2Rad * (90 - maxDeg * HorizontalAxis);
         var vNormalized = new Vector3(Mathf.Cos(dirRad), Mathf.Sin(dirRad), 0);
 
+        if (IsVerticallyStationaryForceApplied) {
+            balloonRb.AddForce(Vector3.up * (-5 * (balloonRb.position.y - InitialPositionY) - 2 * balloonRb.velocity.y), ForceMode.Impulse);
+        }
+
         if (IsGameOver) {
             StopTopThrusterParticle();
             emissionLeft.rateOverTime = 0;
@@ -364,12 +368,6 @@ public class HotairBalloon : MonoBehaviour {
 
         if (stageStatText != null) {
             stageStatText.SetText(string.Format("SPEED: {0:f1}\nHEIGHT: {1:f1}", balloonRb.velocity.magnitude, balloon.transform.position.y));
-        }
-
-        // AddForce라서 FixedUpdate()에 있는 게 일반적이지만,
-        // 타입이 Impulse이니 Update()에 넣는다.
-        if (IsVerticallyStationaryForceApplied) {
-            balloonRb.AddForce(Vector3.up * (-5 * (balloonRb.position.y - InitialPositionY) - 2 * balloonRb.velocity.y), ForceMode.Impulse);
         }
 
         // 피버 아이템을 가지고 있지 않을 때만 감소

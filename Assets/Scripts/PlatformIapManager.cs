@@ -134,4 +134,21 @@ public class PlatformIapManager : MonoBehaviour, IStoreListener {
             ConfirmPopup.instance.Open("\\인터넷 연결이 필요합니다.".Localized());
         }
     }
+
+    public void RestorePurchase() {
+#if UNITY_IOS
+        if (extensions != null) {
+            extensions.GetExtension<IAppleExtensions>().RestoreTransactions(result => {
+                if (result) {
+                    // This does not mean anything was restored,
+                    // merely that the restoration process succeeded.
+                } else {
+                    // Restoration failed.
+                }
+            });
+        } else {
+            ConfirmPopup.instance.Open("\\다시 시도 해 주십시오.".Localized());
+        }
+#endif
+    }
 }
