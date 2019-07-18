@@ -127,7 +127,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 1.3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7253040873994990250
 PrefabInstance:
@@ -136,6 +136,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3081520675165631668}
     m_Modifications:
+    - target: {fileID: 3423402588594905036, guid: 6ccaa065873404001b9ce8cd81719505,
+        type: 3}
+      propertyPath: m_Name
+      value: Arrow Group
+      objectReference: {fileID: 0}
     - target: {fileID: 8280197656707161499, guid: 6ccaa065873404001b9ce8cd81719505,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -190,11 +195,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3423402588594905036, guid: 6ccaa065873404001b9ce8cd81719505,
-        type: 3}
-      propertyPath: m_Name
-      value: Arrow Group
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ccaa065873404001b9ce8cd81719505, type: 3}
@@ -274,17 +274,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 94ef49f7cce551b4fa1a0e258610493b,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 94ef49f7cce551b4fa1a0e258610493b,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 94ef49f7cce551b4fa1a0e258610493b,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 94ef49f7cce551b4fa1a0e258610493b,
         type: 3}
