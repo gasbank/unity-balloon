@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 318595627495073417}
   - component: {fileID: 318595627495073418}
   - component: {fileID: 318595627495073419}
-  - component: {fileID: 318595627495073412}
   - component: {fileID: -4337645118742864843}
+  - component: {fileID: -2790848988698337142}
   m_Layer: 0
   m_Name: Yellow Block
   m_TagString: Untagged
@@ -99,20 +99,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 0
---- !u!136 &318595627495073412
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 318595627495073414}
-  m_Material: {fileID: 13400000, guid: eb2a9f16d35bd4fd7bb14ced8e8cb863, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-4337645118742864843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +119,19 @@ MonoBehaviour:
   afterDestroySpawnParent: {fileID: 0}
   halfRingMaterialOriginal: {fileID: 0}
   halfRingRenderer: {fileID: 0}
+--- !u!135 &-2790848988698337142
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318595627495073414}
+  m_Material: {fileID: 13400000, guid: eb2a9f16d35bd4fd7bb14ced8e8cb863, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.0000002
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4449667344668743744
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,11 +343,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 318595627495073413}
     m_Modifications:
-    - target: {fileID: 3423402588594905036, guid: dd77ec073c3404a1eac568df66571fa8,
-        type: 3}
-      propertyPath: m_Name
-      value: Arrow Group (Yellow Block)
-      objectReference: {fileID: 0}
     - target: {fileID: 8280197656707161499, guid: dd77ec073c3404a1eac568df66571fa8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -403,6 +397,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423402588594905036, guid: dd77ec073c3404a1eac568df66571fa8,
+        type: 3}
+      propertyPath: m_Name
+      value: Arrow Group (Yellow Block)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd77ec073c3404a1eac568df66571fa8, type: 3}
@@ -478,6 +477,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Capsule Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 3694602269673688950, guid: db588b566c00a4ee9b52fce22cb7baa1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7649064653942311456, guid: db588b566c00a4ee9b52fce22cb7baa1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7649064653942311456, guid: db588b566c00a4ee9b52fce22cb7baa1,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7649064653942311456, guid: db588b566c00a4ee9b52fce22cb7baa1,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db588b566c00a4ee9b52fce22cb7baa1, type: 3}
