@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 5217370337402608822}
   - component: {fileID: 3781835361694405941}
   m_Layer: 0
-  m_Name: Stage 23
+  m_Name: Stage 24
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,6 +131,7 @@ Transform:
   - {fileID: 3796133161516565231}
   - {fileID: 7270162450200644525}
   - {fileID: 6959713951604371182}
+  - {fileID: 1441525097409512774}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -147,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundMaterial: {fileID: 2100000, guid: 102fca82f80e1401fa32695ea5ceac10, type: 2}
-  tutorial: 0
+  tutorialTemplate: 0
   checkpointPrefab: {fileID: 2479184788956522286, guid: 99645abfefdf04c9da597d36ef4d19f8,
     type: 3}
   finishLine: {fileID: 0}
@@ -430,6 +431,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (42)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -484,11 +490,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (42)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
@@ -580,6 +581,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Horizontal) (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -635,11 +641,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Horizontal) (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 5727832149436050047, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
         type: 3}
       propertyPath: m_Constraints
@@ -660,6 +661,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -715,11 +721,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (5)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &3363742969528299001 stripped
@@ -735,6 +736,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (93)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -790,11 +796,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (93)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &5110398073516388919 stripped
@@ -810,6 +811,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Vertical) (7)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -865,11 +871,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Vertical) (7)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eab28ebf877f47f9b3d7cf5054239bf, type: 3}
 --- !u!4 &815466102524823896 stripped
@@ -885,6 +886,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (36)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -940,11 +946,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (36)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &3293351998625905418 stripped
@@ -960,6 +961,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7270162450200644525}
     m_Modifications:
+    - target: {fileID: 8784824791208458044, guid: d017948bddf3d47538607b6a4966af3a,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Block QS - Up Wind
+      objectReference: {fileID: 0}
     - target: {fileID: 8784824791208458047, guid: d017948bddf3d47538607b6a4966af3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1015,46 +1021,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 8784824791208458047, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8784824791208458047, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8784824791208458044, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Block QS - Up Wind
-      objectReference: {fileID: 0}
-    - target: {fileID: 2423846037150548462, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2557259667652120716, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2557259667652120716, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2557259667652120716, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2557259667652120716, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d017948bddf3d47538607b6a4966af3a, type: 3}
 --- !u!4 &9106109389488065479 stripped
@@ -1070,6 +1036,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5217370337402608822}
     m_Modifications:
+    - target: {fileID: 5716164984115270521, guid: 6d48b2c8e961b49e7bd3515e0255a415,
+        type: 3}
+      propertyPath: m_Name
+      value: Finish Line
+      objectReference: {fileID: 0}
     - target: {fileID: 5716164984115270470, guid: 6d48b2c8e961b49e7bd3515e0255a415,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1125,11 +1096,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5716164984115270521, guid: 6d48b2c8e961b49e7bd3515e0255a415,
-        type: 3}
-      propertyPath: m_Name
-      value: Finish Line
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d48b2c8e961b49e7bd3515e0255a415, type: 3}
 --- !u!4 &5166846828534830748 stripped
@@ -1145,6 +1111,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (65)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1199,11 +1170,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (65)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
@@ -1295,6 +1261,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (111)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1350,11 +1321,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (111)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &5327325694378584712 stripped
@@ -1370,6 +1336,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (70)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1425,11 +1396,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (70)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &5463947927638870413 stripped
@@ -1445,6 +1411,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (61)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1500,11 +1471,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (61)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &5440880246382666941 stripped
@@ -1520,6 +1486,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (39)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1575,11 +1546,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (39)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &2809813004492288006 stripped
@@ -1595,6 +1561,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (91)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1650,11 +1621,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (91)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &5613298301437364785 stripped
@@ -1670,6 +1636,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Vertical) (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1725,11 +1696,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Vertical) (3)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eab28ebf877f47f9b3d7cf5054239bf, type: 3}
 --- !u!4 &121898056656028747 stripped
@@ -1745,6 +1711,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (66)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1800,11 +1771,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (66)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &5589145704652533349 stripped
@@ -1820,6 +1786,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (31)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1875,11 +1846,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (31)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &5597315452049941454 stripped
@@ -1895,6 +1861,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Horizontal) (8)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1950,11 +1921,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Horizontal) (8)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b303fe27c4336f4cb566a5753c4b0c7, type: 3}
 --- !u!4 &179640676739464848 stripped
@@ -1970,6 +1936,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (69)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2025,11 +1996,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (69)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &5675535219980685965 stripped
@@ -2045,6 +2011,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (57)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2100,11 +2071,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (57)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &2724533745878716618 stripped
@@ -2120,6 +2086,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (153)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2175,11 +2146,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (153)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &5781443890246263822 stripped
@@ -2195,6 +2161,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (22)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2250,11 +2221,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (22)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &5834347336686343703 stripped
@@ -2270,6 +2236,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (12)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2325,11 +2296,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (12)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &4184168195346057907 stripped
@@ -2345,6 +2311,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (150)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2400,11 +2371,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (150)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &5847575345058895638 stripped
@@ -2420,6 +2386,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (30)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2475,11 +2446,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (30)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &4089431110132500621 stripped
@@ -2495,6 +2461,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Vertical) (8)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2550,11 +2521,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Vertical) (8)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eab28ebf877f47f9b3d7cf5054239bf, type: 3}
 --- !u!4 &2191717573654246270 stripped
@@ -2570,6 +2536,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (71)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2625,11 +2596,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (71)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &6112395423127850922 stripped
@@ -2645,6 +2611,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (17)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2700,11 +2671,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (17)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &4334016835081004820 stripped
@@ -2720,6 +2686,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (31)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2775,11 +2746,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (31)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &4464033598331727956 stripped
@@ -2795,6 +2761,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Vertical) (12)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2850,11 +2821,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Vertical) (12)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eab28ebf877f47f9b3d7cf5054239bf, type: 3}
 --- !u!4 &1510925337460039477 stripped
@@ -2870,6 +2836,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (12)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2925,11 +2896,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (12)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &6510789199725807789 stripped
@@ -2945,6 +2911,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (125)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3000,11 +2971,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (125)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &6529537421848033740 stripped
@@ -3020,6 +2986,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (76)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3075,11 +3046,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (76)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &6585057432319777018 stripped
@@ -3095,6 +3061,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (64)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3150,11 +3121,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (64)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &6698921885098034160 stripped
@@ -3170,6 +3136,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (14)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3225,11 +3196,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (14)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &3925659209875664856 stripped
@@ -3245,6 +3211,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (126)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3300,11 +3271,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (126)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &6668822737952118664 stripped
@@ -3320,6 +3286,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (21)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3375,11 +3346,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (21)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &4021536108217575819 stripped
@@ -3395,6 +3361,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (132)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3450,11 +3421,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (132)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &6869863162469947784 stripped
@@ -3470,6 +3436,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (60)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3525,11 +3496,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (60)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &3880268536862964472 stripped
@@ -3545,6 +3511,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (16)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3600,11 +3571,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (16)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &3858824805276494983 stripped
@@ -3620,6 +3586,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Horizontal) (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3675,11 +3646,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Horizontal) (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 5727832149436050047, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
         type: 3}
       propertyPath: m_Constraints
@@ -3700,6 +3666,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (122)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3755,11 +3726,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (122)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &6902933355101119654 stripped
@@ -3775,6 +3741,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Vertical) (14)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3830,11 +3801,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Vertical) (14)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eab28ebf877f47f9b3d7cf5054239bf, type: 3}
 --- !u!4 &1427481629223134754 stripped
@@ -3850,6 +3816,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (58)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3905,11 +3876,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (58)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &3834093962515935592 stripped
@@ -3925,6 +3891,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (19)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3979,11 +3950,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (19)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
@@ -4075,6 +4041,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (160)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4130,11 +4101,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (160)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &7063242254194651894 stripped
@@ -4150,6 +4116,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7270162450200644525}
     m_Modifications:
+    - target: {fileID: 82233218524446624, guid: 1c734b14f08a2483ea7857765d44389a,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Block - Oil (10)
+      objectReference: {fileID: 0}
     - target: {fileID: 82233218524446627, guid: 1c734b14f08a2483ea7857765d44389a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4205,16 +4176,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 82233218524446624, guid: 1c734b14f08a2483ea7857765d44389a,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Block - Oil (10)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1154356333585335824, guid: 1c734b14f08a2483ea7857765d44389a,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c734b14f08a2483ea7857765d44389a, type: 3}
 --- !u!4 &2551919807706476966 stripped
@@ -4230,6 +4191,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (135)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4285,11 +4251,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (135)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &7128444386648200810 stripped
@@ -4305,6 +4266,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (24)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4360,11 +4326,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (24)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &1028731790019186044 stripped
@@ -4380,6 +4341,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (73)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4435,11 +4401,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (73)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &7278116791949210608 stripped
@@ -4455,6 +4416,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4510,11 +4476,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (3)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &1113834800988071925 stripped
@@ -4530,6 +4491,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (52)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4584,11 +4550,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (52)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
@@ -4680,6 +4641,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (100)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4735,11 +4701,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (100)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &7506943242394141777 stripped
@@ -4755,6 +4716,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (80)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4810,11 +4776,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (80)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &7507907057453112442 stripped
@@ -4830,6 +4791,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7270162450200644525}
     m_Modifications:
+    - target: {fileID: 82233218524446624, guid: 1c734b14f08a2483ea7857765d44389a,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Block - Oil (11)
+      objectReference: {fileID: 0}
     - target: {fileID: 82233218524446627, guid: 1c734b14f08a2483ea7857765d44389a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4885,16 +4851,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 82233218524446624, guid: 1c734b14f08a2483ea7857765d44389a,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Block - Oil (11)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1154356333585335824, guid: 1c734b14f08a2483ea7857765d44389a,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c734b14f08a2483ea7857765d44389a, type: 3}
 --- !u!4 &3003169259716422640 stripped
@@ -4910,6 +4866,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (53)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4965,11 +4926,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (53)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &149886647448052631 stripped
@@ -4985,6 +4941,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (155)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5040,11 +5001,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (155)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &7545913865056461547 stripped
@@ -5060,6 +5016,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (18)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5115,11 +5076,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (18)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &7590213560307865534 stripped
@@ -5135,6 +5091,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Vertical) (6)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5190,11 +5151,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Vertical) (6)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eab28ebf877f47f9b3d7cf5054239bf, type: 3}
 --- !u!4 &2704169283682466759 stripped
@@ -5210,6 +5166,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (61)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5265,11 +5226,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (61)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &244993063647831784 stripped
@@ -5285,6 +5241,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (128)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5340,11 +5301,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (128)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &7706966435178952771 stripped
@@ -5360,6 +5316,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (66)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5415,11 +5376,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (66)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &492361994199869764 stripped
@@ -5435,6 +5391,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (43)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5490,11 +5451,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (43)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &471523390169348408 stripped
@@ -5510,6 +5466,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (8)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5565,11 +5526,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (8)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &434824247517098143 stripped
@@ -5585,6 +5541,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (10)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5640,11 +5601,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (10)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &550098241884448506 stripped
@@ -5660,6 +5616,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (159)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5715,11 +5676,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (159)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &7910172711567563132 stripped
@@ -5735,6 +5691,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (15)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5790,11 +5751,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (15)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &539158993340432887 stripped
@@ -5810,6 +5766,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7270162450200644525}
     m_Modifications:
+    - target: {fileID: 8784824791208458044, guid: d017948bddf3d47538607b6a4966af3a,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Block QS - Up Wind
+      objectReference: {fileID: 0}
     - target: {fileID: 8784824791208458047, guid: d017948bddf3d47538607b6a4966af3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5865,26 +5826,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 8784824791208458047, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8784824791208458047, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8784824791208458044, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Block QS - Up Wind
-      objectReference: {fileID: 0}
-    - target: {fileID: 2423846037150548462, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d017948bddf3d47538607b6a4966af3a, type: 3}
 --- !u!4 &6299774872364024994 stripped
@@ -5900,6 +5841,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (77)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5955,11 +5901,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (77)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &7997440483642369122 stripped
@@ -5975,6 +5916,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (62)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6030,11 +5976,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (62)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &429524845022979474 stripped
@@ -6050,6 +5991,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (32)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6105,11 +6051,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (32)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &8133146387860492131 stripped
@@ -6125,6 +6066,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (130)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6180,11 +6126,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (130)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &8236464017028958121 stripped
@@ -6200,6 +6141,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (54)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6255,11 +6201,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (54)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &2217618152327395140 stripped
@@ -6275,6 +6216,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (27)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6330,11 +6276,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (27)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &2214540682288162415 stripped
@@ -6350,6 +6291,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6959713951604371182}
     m_Modifications:
+    - target: {fileID: 318595627495073414, guid: b15747a56e89e448b9c587432a9d29fc,
+        type: 3}
+      propertyPath: m_Name
+      value: Wind Region (Power 20)
+      objectReference: {fileID: 0}
     - target: {fileID: 318595627495073413, guid: b15747a56e89e448b9c587432a9d29fc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6405,11 +6351,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 318595627495073414, guid: b15747a56e89e448b9c587432a9d29fc,
-        type: 3}
-      propertyPath: m_Name
-      value: Wind Region (Power 20)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b15747a56e89e448b9c587432a9d29fc, type: 3}
 --- !u!4 &3510374203766136485 stripped
@@ -6425,6 +6366,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (78)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6480,11 +6426,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (78)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &8470531310766515926 stripped
@@ -6500,6 +6441,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7270162450200644525}
     m_Modifications:
+    - target: {fileID: 8784824791208458044, guid: d017948bddf3d47538607b6a4966af3a,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Block QS - Up Wind (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 8784824791208458047, guid: d017948bddf3d47538607b6a4966af3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6555,16 +6501,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 8784824791208458044, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Block QS - Up Wind (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2423846037150548462, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d017948bddf3d47538607b6a4966af3a, type: 3}
 --- !u!4 &5494203074933124067 stripped
@@ -6580,6 +6516,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7270162450200644525}
     m_Modifications:
+    - target: {fileID: 82233218524446624, guid: 1c734b14f08a2483ea7857765d44389a,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Block - Oil (13)
+      objectReference: {fileID: 0}
     - target: {fileID: 82233218524446627, guid: 1c734b14f08a2483ea7857765d44389a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6635,16 +6576,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 82233218524446624, guid: 1c734b14f08a2483ea7857765d44389a,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Block - Oil (13)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1154356333585335824, guid: 1c734b14f08a2483ea7857765d44389a,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c734b14f08a2483ea7857765d44389a, type: 3}
 --- !u!4 &3992062815936890516 stripped
@@ -6660,6 +6591,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Horizontal) (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6715,11 +6651,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Horizontal) (5)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b303fe27c4336f4cb566a5753c4b0c7, type: 3}
 --- !u!4 &4307223511723710551 stripped
@@ -6735,6 +6666,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (41)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6790,11 +6726,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (41)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &1360688151835324230 stripped
@@ -6810,6 +6741,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (131)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6865,11 +6801,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (131)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &8741459251729394035 stripped
@@ -6885,6 +6816,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7270162450200644525}
     m_Modifications:
+    - target: {fileID: 8784824791208458044, guid: d017948bddf3d47538607b6a4966af3a,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Block QS - Up Wind (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 8784824791208458047, guid: d017948bddf3d47538607b6a4966af3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6940,36 +6876,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
-    - target: {fileID: 8784824791208458044, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Block QS - Up Wind (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2423846037150548462, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2557259667652120716, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2557259667652120716, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2557259667652120716, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2557259667652120716, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d017948bddf3d47538607b6a4966af3a, type: 3}
 --- !u!4 &4869528600831943998 stripped
@@ -6985,6 +6891,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (124)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7040,11 +6951,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (124)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &8857195026496706236 stripped
@@ -7060,6 +6966,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (59)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7115,11 +7026,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (59)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &8928049886450135502 stripped
@@ -7135,6 +7041,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (79)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7190,11 +7101,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (79)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &9004039422281893218 stripped
@@ -7210,6 +7116,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7270162450200644525}
     m_Modifications:
+    - target: {fileID: 82233218524446624, guid: 1c734b14f08a2483ea7857765d44389a,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Block - Oil (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 82233218524446627, guid: 1c734b14f08a2483ea7857765d44389a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7265,16 +7176,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 82233218524446624, guid: 1c734b14f08a2483ea7857765d44389a,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Block - Oil (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1154356333585335824, guid: 1c734b14f08a2483ea7857765d44389a,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c734b14f08a2483ea7857765d44389a, type: 3}
 --- !u!4 &4452865665110053259 stripped
@@ -7283,6 +7184,111 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4390982251363036712}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4424865984224981676
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5217370337402608822}
+    m_Modifications:
+    - target: {fileID: 978505887898145086, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+        type: 3}
+      propertyPath: m_Name
+      value: Background C
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983946307738531818, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983946307738531818, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983946307738531818, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983946307738531818, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983946307738531818, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983946307738531818, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983946307738531818, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983946307738531818, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983946307738531818, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983946307738531818, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983946307738531818, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509120861346941774, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509120861346941774, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 37.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 6933697367019013081, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 42672981846944091, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 4303385652349145034, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4303385652349145034, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a8aa1398f854b42e9ad5aca6d569dbbe, type: 3}
+--- !u!4 &1441525097409512774 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2983946307738531818, guid: a8aa1398f854b42e9ad5aca6d569dbbe,
+    type: 3}
+  m_PrefabInstance: {fileID: 4424865984224981676}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4471503146001389334
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7290,6 +7296,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (104)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7345,11 +7356,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (104)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &9101293857082888946 stripped
@@ -7365,6 +7371,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7420,11 +7431,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &1486056430985574438 stripped
@@ -7440,6 +7446,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (74)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7495,11 +7506,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (74)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &9183029340730043614 stripped
@@ -7515,6 +7521,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (19)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7570,11 +7581,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (19)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &1583949954013931853 stripped
@@ -7590,6 +7596,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (56)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7645,11 +7656,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (56)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &7617556136574953121 stripped
@@ -7665,6 +7671,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (33)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7720,11 +7731,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (33)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &7990101782411508242 stripped
@@ -7740,6 +7746,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (18)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7795,11 +7806,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (18)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &7948645243090493901 stripped
@@ -7815,6 +7821,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (46)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7870,11 +7881,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (46)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &7938950391003240935 stripped
@@ -7890,6 +7896,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (127)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7945,11 +7956,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (127)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &368373547226445085 stripped
@@ -7965,6 +7971,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (63)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8020,11 +8031,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (63)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &407020952334809248 stripped
@@ -8040,6 +8046,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (149)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8095,11 +8106,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (149)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &436757717444740280 stripped
@@ -8115,6 +8121,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Horizontal)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8170,11 +8181,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Horizontal)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b303fe27c4336f4cb566a5753c4b0c7, type: 3}
 --- !u!4 &5382566977290432032 stripped
@@ -8190,6 +8196,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7270162450200644525}
     m_Modifications:
+    - target: {fileID: 82233218524446624, guid: 1c734b14f08a2483ea7857765d44389a,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Block - Oil (15)
+      objectReference: {fileID: 0}
     - target: {fileID: 82233218524446627, guid: 1c734b14f08a2483ea7857765d44389a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8245,16 +8256,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 82233218524446624, guid: 1c734b14f08a2483ea7857765d44389a,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Block - Oil (15)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1154356333585335824, guid: 1c734b14f08a2483ea7857765d44389a,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c734b14f08a2483ea7857765d44389a, type: 3}
 --- !u!4 &5172620363452475236 stripped
@@ -8270,6 +8271,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (34)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8325,11 +8331,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (34)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &7900437389849646366 stripped
@@ -8345,6 +8346,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Horizontal) (7)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8400,11 +8406,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Horizontal) (7)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b303fe27c4336f4cb566a5753c4b0c7, type: 3}
 --- !u!4 &5456393953910523050 stripped
@@ -8420,6 +8421,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Horizontal) (9)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8475,11 +8481,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Horizontal) (9)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b303fe27c4336f4cb566a5753c4b0c7, type: 3}
 --- !u!4 &4923566184589139561 stripped
@@ -8495,6 +8496,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (154)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8550,11 +8556,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (154)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &707380240993178168 stripped
@@ -8570,6 +8571,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (7)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8625,11 +8631,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (7)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &6943128316035214629 stripped
@@ -8645,6 +8646,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Horizontal)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8700,11 +8706,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Horizontal)
-      objectReference: {fileID: 0}
     - target: {fileID: 5727832149436050047, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
         type: 3}
       propertyPath: m_Constraints
@@ -8725,6 +8726,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Vertical) (13)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8780,11 +8786,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Vertical) (13)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eab28ebf877f47f9b3d7cf5054239bf, type: 3}
 --- !u!4 &4622835908894776312 stripped
@@ -8800,6 +8801,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (32)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8855,11 +8861,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (32)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &7277533544713658871 stripped
@@ -8875,6 +8876,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Horizontal) (6)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8930,11 +8936,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Horizontal) (6)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b303fe27c4336f4cb566a5753c4b0c7, type: 3}
 --- !u!4 &4774394896295689881 stripped
@@ -8950,6 +8951,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (13)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9005,11 +9011,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (13)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &7240635784314437143 stripped
@@ -9025,6 +9026,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (59)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9080,11 +9086,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (59)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &7216971353886716877 stripped
@@ -9100,6 +9101,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (152)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9155,11 +9161,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (152)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &1148514512985047258 stripped
@@ -9175,6 +9176,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (37)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9230,11 +9236,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (37)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &8934370234925000805 stripped
@@ -9250,6 +9251,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (44)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9305,11 +9311,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (44)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &8656291035838922168 stripped
@@ -9325,6 +9326,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (101)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9380,11 +9386,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (101)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &1392459811582465372 stripped
@@ -9400,6 +9401,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Horizontal) (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9455,11 +9461,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Horizontal) (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 5727832149436050047, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
         type: 3}
       propertyPath: m_Constraints
@@ -9480,6 +9481,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (49)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9535,11 +9541,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (49)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &9145127281181877423 stripped
@@ -9555,6 +9556,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (20)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9610,11 +9616,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (20)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &9211036900940194378 stripped
@@ -9630,6 +9631,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Vertical)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9685,11 +9691,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Vertical)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eab28ebf877f47f9b3d7cf5054239bf, type: 3}
 --- !u!4 &6433278370711253845 stripped
@@ -9705,6 +9706,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (136)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9760,11 +9766,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (136)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &1525554216097293906 stripped
@@ -9780,6 +9781,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (51)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9835,11 +9841,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (51)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &9198604996238386801 stripped
@@ -9855,6 +9856,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (35)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9910,11 +9916,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (35)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &9158039612037238061 stripped
@@ -9930,6 +9931,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (129)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9985,11 +9991,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (129)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &1622604432662991059 stripped
@@ -10005,6 +10006,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (138)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10060,11 +10066,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (138)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &1721396982597412758 stripped
@@ -10080,6 +10081,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (45)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10135,11 +10141,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (45)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &9016861224864611985 stripped
@@ -10155,6 +10156,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (123)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10210,11 +10216,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (123)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &1787385786127540997 stripped
@@ -10230,6 +10231,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (62)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10285,11 +10291,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (62)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &1920160613885773428 stripped
@@ -10305,6 +10306,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Vertical) (10)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10360,11 +10366,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Vertical) (10)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eab28ebf877f47f9b3d7cf5054239bf, type: 3}
 --- !u!4 &6311398984359912671 stripped
@@ -10380,6 +10381,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7270162450200644525}
     m_Modifications:
+    - target: {fileID: 82233218524446624, guid: 1c734b14f08a2483ea7857765d44389a,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Block - Oil (8)
+      objectReference: {fileID: 0}
     - target: {fileID: 82233218524446627, guid: 1c734b14f08a2483ea7857765d44389a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10435,16 +10441,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 82233218524446624, guid: 1c734b14f08a2483ea7857765d44389a,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Block - Oil (8)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1154356333585335824, guid: 1c734b14f08a2483ea7857765d44389a,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c734b14f08a2483ea7857765d44389a, type: 3}
 --- !u!4 &6711157426912338294 stripped
@@ -10460,6 +10456,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (22)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10515,11 +10516,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (22)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &8552985006999873748 stripped
@@ -10535,6 +10531,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (63)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10590,11 +10591,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (63)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &8509320078653058507 stripped
@@ -10610,6 +10606,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (64)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10665,11 +10666,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (64)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &8635736927444013329 stripped
@@ -10685,6 +10681,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (156)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10740,11 +10741,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (156)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &2218255491415088358 stripped
@@ -10760,6 +10756,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (28)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10815,11 +10816,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (28)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &8479245606214204623 stripped
@@ -10835,6 +10831,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (102)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10890,11 +10891,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (102)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &2290842863433043295 stripped
@@ -10910,6 +10906,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7270162450200644525}
     m_Modifications:
+    - target: {fileID: 82233218524446624, guid: 1c734b14f08a2483ea7857765d44389a,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Block - Oil (12)
+      objectReference: {fileID: 0}
     - target: {fileID: 82233218524446627, guid: 1c734b14f08a2483ea7857765d44389a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10965,16 +10966,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 82233218524446624, guid: 1c734b14f08a2483ea7857765d44389a,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Block - Oil (12)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1154356333585335824, guid: 1c734b14f08a2483ea7857765d44389a,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c734b14f08a2483ea7857765d44389a, type: 3}
 --- !u!4 &6844663719414668806 stripped
@@ -10990,6 +10981,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (23)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11045,11 +11041,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (23)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &5403202218340559168 stripped
@@ -11065,6 +11056,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (55)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11120,11 +11116,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (55)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &5454183414049573158 stripped
@@ -11140,6 +11131,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Vertical) (9)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11194,11 +11190,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Vertical) (9)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eab28ebf877f47f9b3d7cf5054239bf, type: 3}
@@ -11290,6 +11281,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (92)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11345,11 +11341,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (92)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &2484847627380647058 stripped
@@ -11365,6 +11356,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (60)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11420,11 +11416,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (60)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &2455049990028713546 stripped
@@ -11440,6 +11431,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7270162450200644525}
     m_Modifications:
+    - target: {fileID: 318595627495073414, guid: 6222f6600020e4660b29de56189db4b7,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Block (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 318595627495073413, guid: 6222f6600020e4660b29de56189db4b7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11495,20 +11491,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 318595627495073414, guid: 6222f6600020e4660b29de56189db4b7,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Block (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 6845225752565563702, guid: 6222f6600020e4660b29de56189db4b7,
         type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6638637574544461908, guid: 6222f6600020e4660b29de56189db4b7,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6222f6600020e4660b29de56189db4b7, type: 3}
@@ -11525,6 +11511,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (68)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11579,11 +11570,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (68)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
@@ -11675,6 +11661,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11730,11 +11721,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (1)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &5485568783875416797 stripped
@@ -11750,6 +11736,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (4)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11805,11 +11796,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (4)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &5606732369766252795 stripped
@@ -11825,6 +11811,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Vertical) (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11879,11 +11870,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Vertical) (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eab28ebf877f47f9b3d7cf5054239bf, type: 3}
@@ -11960,21 +11946,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 7720087653242347127, guid: e59a573a719694b06ab045a951ca7eaf,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7720087653242347127, guid: e59a573a719694b06ab045a951ca7eaf,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4081438774739526605, guid: e59a573a719694b06ab045a951ca7eaf,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e59a573a719694b06ab045a951ca7eaf, type: 3}
 --- !u!4 &123210603743611562 stripped
@@ -11990,6 +11961,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12045,11 +12021,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (2)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &4616017367065834532 stripped
@@ -12065,6 +12036,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (9)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12120,11 +12096,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (9)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &4749509074624561841 stripped
@@ -12140,6 +12111,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (151)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12195,11 +12171,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (151)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &3138394778738694441 stripped
@@ -12215,6 +12186,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (72)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12270,11 +12246,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (72)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &3177627699057307949 stripped
@@ -12290,6 +12261,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (121)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12345,11 +12321,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (121)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &3213892556079644995 stripped
@@ -12365,6 +12336,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (158)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12420,11 +12396,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (158)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &3279780946016295845 stripped
@@ -12440,6 +12411,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (75)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12495,11 +12471,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (75)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &3331998118054753386 stripped
@@ -12515,6 +12486,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Vertical) (11)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12570,11 +12546,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Vertical) (11)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eab28ebf877f47f9b3d7cf5054239bf, type: 3}
 --- !u!4 &8953084678069042701 stripped
@@ -12590,6 +12561,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (38)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12645,11 +12621,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (38)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &6550494817345084830 stripped
@@ -12665,6 +12636,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (6)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12720,11 +12696,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (6)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &6552795832469823442 stripped
@@ -12740,6 +12711,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Vertical) (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12795,11 +12771,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Vertical) (2)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eab28ebf877f47f9b3d7cf5054239bf, type: 3}
 --- !u!4 &9057849940389403261 stripped
@@ -12815,6 +12786,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Vertical) (4)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12870,11 +12846,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Vertical) (4)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eab28ebf877f47f9b3d7cf5054239bf, type: 3}
 --- !u!4 &9076111262832037310 stripped
@@ -12890,6 +12861,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (48)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12945,11 +12921,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (48)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &6377158112007809576 stripped
@@ -12965,6 +12936,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (89)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13019,11 +12995,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (89)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
@@ -13115,6 +13086,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (47)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13170,11 +13146,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (47)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &6479726529433201193 stripped
@@ -13190,6 +13161,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (90)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13245,11 +13221,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (90)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &3676436756358141244 stripped
@@ -13265,6 +13236,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7270162450200644525}
     m_Modifications:
+    - target: {fileID: 8784824791208458044, guid: d017948bddf3d47538607b6a4966af3a,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Block QS - Up Wind (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 8784824791208458047, guid: d017948bddf3d47538607b6a4966af3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13320,26 +13296,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 8784824791208458047, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8784824791208458047, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8784824791208458044, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Block QS - Up Wind (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2423846037150548462, guid: d017948bddf3d47538607b6a4966af3a,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d017948bddf3d47538607b6a4966af3a, type: 3}
 --- !u!4 &770538346751371561 stripped
@@ -13355,6 +13311,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (29)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13410,11 +13371,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (29)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &6460881344395617112 stripped
@@ -13430,6 +13386,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (25)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13485,11 +13446,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (25)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &6787970309704455057 stripped
@@ -13505,6 +13461,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (11)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13560,11 +13521,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (11)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &6908899624023879900 stripped
@@ -13580,6 +13536,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Horizontal) (4)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13635,11 +13596,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Horizontal) (4)
-      objectReference: {fileID: 0}
     - target: {fileID: 5727832149436050047, guid: 4b303fe27c4336f4cb566a5753c4b0c7,
         type: 3}
       propertyPath: m_Constraints
@@ -13660,6 +13616,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (40)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13715,11 +13676,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (40)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &6763504447568782091 stripped
@@ -13735,6 +13691,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6433278371053016333}
     m_Modifications:
+    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
+        type: 3}
+      propertyPath: m_Name
+      value: Moving Wall Cube Parent (Vertical) (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 873125832120934738, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13790,11 +13751,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 873125832120934751, guid: 3eab28ebf877f47f9b3d7cf5054239bf,
-        type: 3}
-      propertyPath: m_Name
-      value: Moving Wall Cube Parent (Vertical) (1)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eab28ebf877f47f9b3d7cf5054239bf, type: 3}
 --- !u!4 &8886265254048610979 stripped
@@ -13810,6 +13766,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (26)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13864,11 +13825,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (26)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
@@ -13960,6 +13916,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (50)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14015,11 +13976,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (50)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &5770385868765223273 stripped
@@ -14035,6 +13991,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (157)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14090,11 +14051,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (157)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &4335362424406586356 stripped
@@ -14110,6 +14066,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (161)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14165,11 +14126,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (161)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
 --- !u!4 &4466862987565721610 stripped
@@ -14185,6 +14141,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3796133161516565231}
     m_Modifications:
+    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Cube (Rechargeable) (65)
+      objectReference: {fileID: 0}
     - target: {fileID: 3081520675165631668, guid: 37ce1aa2fc510fc47b629f2edac243e4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14240,11 +14201,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3081520675165631671, guid: 37ce1aa2fc510fc47b629f2edac243e4,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Cube (Rechargeable) (65)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37ce1aa2fc510fc47b629f2edac243e4, type: 3}
 --- !u!4 &6113501823689749718 stripped
@@ -14260,6 +14216,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391986312787537870}
     m_Modifications:
+    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
+        type: 3}
+      propertyPath: m_Name
+      value: Blue Block (67)
+      objectReference: {fileID: 0}
     - target: {fileID: 4630741522489968100, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14314,11 +14275,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8567028569384106029, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6,
-        type: 3}
-      propertyPath: m_Name
-      value: Blue Block (67)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7d4e2bd131d4491bf2b0f5f5372fe6, type: 3}
