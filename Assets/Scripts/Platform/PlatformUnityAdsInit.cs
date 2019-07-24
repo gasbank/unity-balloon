@@ -11,7 +11,9 @@ public class PlatformUnityAdsInit : MonoBehaviour {
 #endif
     void Start() {
         SushiDebug.Log("PlatformUnityAdsInit.Start()");
+#if UNITY_ANDROID || UNITY_IOS
         //Advertisement.debugMode = true;
         Advertisement.Initialize(gameID, false);
+#endif
     }
 }

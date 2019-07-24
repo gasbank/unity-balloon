@@ -68,6 +68,10 @@ public class Bootstrap : MonoBehaviour {
 
     void Awake() {
         LoadStageScene(LastPlayedStageNumber);
+#if UNITY_ANDROID || UNITY_IOS
+#else
+        Screen.SetResolution(1080, 1920, FullScreenMode.Windowed, 60);
+#endif
     }
 
     static public void ReloadCurrentScene() {

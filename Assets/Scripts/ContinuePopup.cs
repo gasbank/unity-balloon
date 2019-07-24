@@ -110,7 +110,7 @@ public class ContinuePopup : MonoBehaviour {
         } else {
             // 에디터에서 테스트하기 쉽도록 에디터에서는 Unity Ads를,
             // 실제 기기에서는 Google AdMob을 쓴다.
-            if (Application.isEditor) {
+            if (Application.isEditor || Application.isMobilePlatform == false) {
                 PlatformUnityAds.TryShowRewardedAd(null, null);
             } else {
                 PlatformAdMobAds.TryShowRewardedAd(null, null);

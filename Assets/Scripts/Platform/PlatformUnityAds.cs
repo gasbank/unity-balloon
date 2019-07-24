@@ -6,14 +6,23 @@ public class PlatformUnityAds {
     private static ShopProductData shopProductData;
     
     public static void TryShowRewardedAd(ShopProductEntry shopProductEntry, ShopProductData shopProductData) {
+#if UNITY_ANDROID || UNITY_IOS
         TryShowAd("rewardedVideo", shopProductEntry, shopProductData, new ShowOptions { resultCallback = HandleShowResult_RewardedVideo });
+#else
+        PlatformAds.HandleRewarded_RewardedVideo(shopProductEntry, shopProductData, PlatformAds.AdsType.UnityAds);
+#endif
     }
 
     public static void TryShowInterstitialAd(ShopProductEntry shopProductEntry, ShopProductData shopProductData, int stageNumber) {
         PlatformAds.stageNumber = stageNumber;
+#if UNITY_ANDROID || UNITY_IOS
         TryShowAd("video", shopProductEntry, shopProductData, new ShowOptions { resultCallback = HandleShowResult_Video });
+#else
+        PlatformAds.HandleRewarded_Video(shopProductEntry, shopProductData, PlatformAds.AdsType.UnityAds);
+#endif
     }
 
+#if UNITY_ANDROID || UNITY_IOS
     private static void TryShowAd(string placementId, ShopProductEntry shopProductEntry, ShopProductData shopProductData, ShowOptions options) {
         if (Application.internetReachability == NetworkReachability.NotReachable) {
             ConfirmPopup.instance.Open(string.Format("\\광고를 보기 위해서는 인터넷 연결이 필요합니다.".Localized()));
@@ -61,4 +70,5 @@ public class PlatformUnityAds {
     static void ShowAdsErrorPopup() {
         ConfirmPopup.instance.Open(string.Format("\\$Unity Ads 광고 볼 수 없는 사유 설명$".Localized()));
     }
+#endif
 }

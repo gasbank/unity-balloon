@@ -35,8 +35,8 @@ public class BackgroundCanvas : MonoBehaviour {
             InstantiateImageMaterialAndSetup();
         }
 
-        testBackgroundImage.gameObject.SetActive(PlatformAds.stageNumber == 1);
-        image.gameObject.SetActive(PlatformAds.stageNumber != 1);
+        //testBackgroundImage.gameObject.SetActive(PlatformAds.stageNumber == 1);
+        //image.gameObject.SetActive(PlatformAds.stageNumber != 1);
     }
 
     public void UpdateReferences() {
@@ -62,6 +62,6 @@ public class BackgroundCanvas : MonoBehaviour {
     }
 
     void LateUpdate() {
-        testBackgroundImage.transform.position = new Vector3(testBackgroundImage.transform.position.x, -100 - hotairBalloon.Y, testBackgroundImage.transform.position.z);
+        //testBackgroundImage.transform.position = new Vector3(testBackgroundImage.transform.position.x, -100 - hotairBalloon.Y, testBackgroundImage.transform.position.z);
     }
 }

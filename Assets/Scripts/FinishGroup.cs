@@ -33,7 +33,7 @@ public class FinishGroup : MonoBehaviour {
         if (PlatformIapManager.instance.NoAdsPurchased) {
             PlatformAds.LoadStageFromStart(NextStageNumber);
         } else {
-            if (Application.isEditor) {
+            if (Application.isEditor || Application.isMobilePlatform == false) {
                 PlatformUnityAds.TryShowInterstitialAd(null, null, NextStageNumber);
             } else {
                 PlatformAdMobAds.TryShowInterstitialAd(null, null, NextStageNumber);
