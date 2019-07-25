@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1150009637441678419}
   - component: {fileID: 5025187411503339018}
   - component: {fileID: 7064150792628833036}
-  - component: {fileID: 548588528273096126}
   m_Layer: 0
   m_Name: Astroid 3
   m_TagString: Untagged
@@ -78,20 +77,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &548588528273096126
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063158200609155992}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &2243412115985530223
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,7 +88,6 @@ GameObject:
   - component: {fileID: 1882467686407667431}
   - component: {fileID: 6612454950137403569}
   - component: {fileID: 628139214821857763}
-  - component: {fileID: 720989633380433980}
   m_Layer: 0
   m_Name: Astroid 2
   m_TagString: Untagged
@@ -170,20 +154,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &720989633380433980
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2243412115985530223}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &5083224772697989972
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +165,6 @@ GameObject:
   - component: {fileID: 722348959800124771}
   - component: {fileID: 2283574165453902630}
   - component: {fileID: 4535375032767068877}
-  - component: {fileID: 5725201397526284960}
   m_Layer: 0
   m_Name: Astroid 4
   m_TagString: Untagged
@@ -262,20 +231,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &5725201397526284960
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5083224772697989972}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &5507368216765189863
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1461508095325346586}
   m_Layer: 0
-  m_Name: Background B 1
+  m_Name: Background D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -321,7 +276,6 @@ GameObject:
   - component: {fileID: 2593839501299376123}
   - component: {fileID: 3749871973812098201}
   - component: {fileID: 5959877941320439518}
-  - component: {fileID: 591100365773644344}
   m_Layer: 0
   m_Name: Astroid 1
   m_TagString: Untagged
@@ -388,17 +342,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &591100365773644344
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8553374845577360448}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
