@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class Bootstrap : MonoBehaviour {
     static readonly string LAST_PLAYED_STAGE_NUMBER = "LAST_PLAYED_STAGE_NUMBER";
-    static readonly int LAST_MANUAL_STAGE_NUMBER = 26; // 손수 만든 마지막 스테이지 번호 (Stage 01 ~ Stage 25). 이 이후부터는 자동 생성된 스테이지를 이용한다.
+    static readonly int LAST_MANUAL_STAGE_NUMBER = 31; // 손수 만든 마지막 스테이지 번호 (Stage 01 ~ Stage 25). 이 이후부터는 자동 생성된 스테이지를 이용한다.
     
     public static string GetStageSceneName(int stageNumber) {
         return $"Stage {stageNumber:d2}";
