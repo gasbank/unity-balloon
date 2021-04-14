@@ -21,7 +21,7 @@ SpriteAtlas:
       crunchedCompression: 0
       sRGB: 1
     platformSettings:
-    - serializedVersion: 2
+    - serializedVersion: 3
       m_BuildTarget: DefaultTexturePlatform
       m_MaxTextureSize: 2048
       m_ResizeAlgorithm: 0
@@ -32,6 +32,7 @@ SpriteAtlas:
       m_AllowsAlphaSplitting: 0
       m_Overridden: 0
       m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 1
     packingSettings:
       serializedVersion: 2
       padding: 4
@@ -39,11 +40,14 @@ SpriteAtlas:
       allowAlphaSplitting: 0
       enableRotation: 0
       enableTightPacking: 0
+    secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 04357d9ae8e20df4bbad930568864951, type: 3}
-    totalSpriteSurfaceArea: 5429126
+    totalSpriteSurfaceArea: 5613766
     bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: fb3ce7c03caf34a4fa05efee4875306d, type: 3}
@@ -62,8 +66,10 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 965da048a7b4f4929b080caa6a30c1b5, type: 3}
   - {fileID: 21300000, guid: 99137979c3f0a45979a194adb315e6d6, type: 3}
   - {fileID: 21300000, guid: 1e3adfd9754ed48ecbd6b908a0e6bd5b, type: 3}
+  - {fileID: 21300000, guid: 490a6be9ebb544ce38f348bec32f5353, type: 3}
   - {fileID: 21300000, guid: 95b1ce0a17c93464ca728faaf707e67f, type: 3}
   - {fileID: 21300000, guid: 5213212c7d4af4f888e428e974ae7f01, type: 3}
+  - {fileID: 21300000, guid: b4042a2dbfec34e2eb1d3908234e8f84, type: 3}
   - {fileID: 21300000, guid: 492b91cea79e043feb195c918d4a269c, type: 3}
   - {fileID: 21300000, guid: dba619defcd9b4fe799d6cc7b44e31ea, type: 3}
   - {fileID: 21300000, guid: 528f9c4f589404cb7bb84332df466822, type: 3}
@@ -84,10 +90,13 @@ SpriteAtlas:
   - white-donut-thick-512-transparent
   - origami_meteor
   - desktop-cursor
+  - Junk4
   - white-circle-512-transparent
   - hole
+  - junk_03
   - fever-swipe-arrow
   - astroid1
   - white-up-arrow
+  m_RenderDataMap: {}
   m_Tag: Sprites Atlas
   m_IsVariant: 0
