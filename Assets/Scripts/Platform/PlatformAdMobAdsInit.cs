@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections;
+#if UNITY_IOS
+using Unity.Advertisement.IosSupport;
+#endif
 using UnityEngine;
 #if GOOGLE_MOBILE_ADS
 using GoogleMobileAds.Api;
@@ -104,6 +107,24 @@ public class PlatformAdMobAdsInit : MonoBehaviour
             // Called when the ad click caused the user to leave the application.
             interstitial.OnAdLeavingApplication += HandleOnAdLeavingApplication;
         }
+        
+#if UNITY_IOS
+        var trackingStatus = ATTrackingStatusBinding.GetAuthorizationTrackingStatus();
+        Debug.Log($"ATTrackingStatusBinding.GetAuthorizationTrackingStatus()={trackingStatus}");
+        switch (trackingStatus)
+        {
+            case ATTrackingStatusBinding.AuthorizationTrackingStatus.NOT_DETERMINED:
+                ATTrackingStatusBinding.RequestAuthorizationTracking();
+                break;
+            case ATTrackingStatusBinding.AuthorizationTrackingStatus.AUTHORIZED:
+                //AudienceNetwork.AdSettings.SetAdvertiserTrackingEnabled(true);
+                break;
+            case ATTrackingStatusBinding.AuthorizationTrackingStatus.RESTRICTED:
+            case ATTrackingStatusBinding.AuthorizationTrackingStatus.DENIED:
+                //AudienceNetwork.AdSettings.SetAdvertiserTrackingEnabled(false);
+                break;
+        }
+#endif
     }
 
     void HandleRewardBasedVideoLoaded(object sender, EventArgs args)
