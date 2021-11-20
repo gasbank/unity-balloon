@@ -1,11 +1,12 @@
-﻿using UnityEngine;
-
-public class PlatformLocalNotification {
-    static public void RegisterAllRepeatingNotifications() {
+﻿public class PlatformLocalNotification
+{
+    public static void RegisterAllRepeatingNotifications()
+    {
         SushiDebug.Log("RegisterAllRepeatingNotifications");
     }
 
-    static public void RemoveAllRepeatingNotifications() {
+    public static void RemoveAllRepeatingNotifications()
+    {
         Platform.instance.ClearAllNotifications();
         SushiDebug.Log("RemoveAllRepeatingNotifications");
     }

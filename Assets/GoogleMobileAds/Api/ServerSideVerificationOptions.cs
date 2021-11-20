@@ -12,30 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using System.Collections.Generic;
-
 namespace GoogleMobileAds.Api
 {
     public class ServerSideVerificationOptions
     {
-        public string UserId { get; private set; }
-        public string CustomData { get; private set; }
-
-        private ServerSideVerificationOptions(Builder builder)
+        ServerSideVerificationOptions(Builder builder)
         {
             UserId = builder.UserId;
             CustomData = builder.CustomData;
         }
 
+        public string UserId { get; }
+        public string CustomData { get; }
+
         public class Builder
         {
             internal string UserId { get; private set; }
             internal string CustomData { get; private set; }
-
-            public Builder()
-            {
-            }
 
             public Builder SetUserId(string userId)
             {
@@ -56,4 +49,3 @@ namespace GoogleMobileAds.Api
         }
     }
 }
-

@@ -1,6 +1,5 @@
 ﻿#if !UNITY_WSA
 #if !NET_STANDARD_2_0
-
 using System;
 using MessagePack.Formatters;
 using MessagePack.Internal;
@@ -67,7 +66,8 @@ namespace MessagePack.Resolvers
                     {
                         return;
                     }
-                    formatter = (IMessagePackFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(ti.AsType()), new object[] { innerFormatter });
+                    formatter =
+ (IMessagePackFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(ti.AsType()), new object[] { innerFormatter });
                     return;
                 }
                 else if (!ti.IsEnum)
@@ -85,11 +85,13 @@ namespace MessagePack.Resolvers
             var underlyingType = Enum.GetUnderlyingType(enumType);
             var formatterType = typeof(IMessagePackFormatter<>).MakeGenericType(enumType);
 
-            var typeBuilder = assembly.DefineType("MessagePack.Formatters." + enumType.FullName.Replace(".", "_") + "Formatter" + Interlocked.Increment(ref nameSequence), TypeAttributes.Public | TypeAttributes.Sealed, null, new[] { formatterType });
+            var typeBuilder =
+ assembly.DefineType("MessagePack.Formatters." + enumType.FullName.Replace(".", "_") + "Formatter" + Interlocked.Increment(ref nameSequence), TypeAttributes.Public | TypeAttributes.Sealed, null, new[] { formatterType });
 
             // int Serialize(ref byte[] bytes, int offset, T value, IFormatterResolver formatterResolver);
             {
-                var method = typeBuilder.DefineMethod("Serialize", MethodAttributes.Public | MethodAttributes.Final | MethodAttributes.Virtual,
+                var method =
+ typeBuilder.DefineMethod("Serialize", MethodAttributes.Public | MethodAttributes.Final | MethodAttributes.Virtual,
                     typeof(int),
                     new Type[] { typeof(byte[]).MakeByRefType(), typeof(int), enumType, typeof(IFormatterResolver) });
 
@@ -103,7 +105,8 @@ namespace MessagePack.Resolvers
 
             // T Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize);
             {
-                var method = typeBuilder.DefineMethod("Deserialize", MethodAttributes.Public | MethodAttributes.Final | MethodAttributes.Virtual,
+                var method =
+ typeBuilder.DefineMethod("Deserialize", MethodAttributes.Public | MethodAttributes.Final | MethodAttributes.Virtual,
                     enumType,
                     new Type[] { typeof(byte[]), typeof(int), typeof(IFormatterResolver), typeof(int).MakeByRefType() });
 

@@ -1,5 +1,4 @@
 ﻿#if NETSTANDARD
-
 using System.Runtime.CompilerServices;
 
 namespace MessagePack.Internal

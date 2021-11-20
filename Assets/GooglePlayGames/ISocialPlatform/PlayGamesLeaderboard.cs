@@ -14,32 +14,79 @@
 //    limitations under the License.
 // </copyright>
 
+using System;
+using System.Collections.Generic;
+using GooglePlayGames.BasicApi;
+using GooglePlayGames.OurUtils;
+using UnityEngine.SocialPlatforms;
+
 #if UNITY_ANDROID
 
 namespace GooglePlayGames
 {
-    using System.Collections.Generic;
-    using GooglePlayGames.BasicApi;
-    using UnityEngine;
-    using UnityEngine.SocialPlatforms;
-
     public class PlayGamesLeaderboard : ILeaderboard
     {
-        private string mId;
-        private UserScope mUserScope;
-        private Range mRange;
-        private TimeScope mTimeScope;
-        private string[] mFilteredUserIds;
-        private bool mLoading;
+        string[] mFilteredUserIds;
 
-        private IScore mLocalUserScore;
-        private uint mMaxRange;
-        private List<PlayGamesScore> mScoreList = new List<PlayGamesScore>();
-        private string mTitle;
+        Range mRange;
+        readonly List<PlayGamesScore> mScoreList = new List<PlayGamesScore>();
 
         public PlayGamesLeaderboard(string id)
         {
-            mId = id;
+            this.id = id;
+        }
+
+        public int ScoreCount => mScoreList.Count;
+
+        internal bool SetFromData(LeaderboardScoreData data)
+        {
+            if (data.Valid)
+            {
+                Logger.d("Setting leaderboard from: " + data);
+                SetMaxRange(data.ApproximateCount);
+                SetTitle(data.Title);
+                SetLocalUserScore((PlayGamesScore) data.PlayerScore);
+                foreach (var score in data.Scores) AddScore((PlayGamesScore) score);
+
+                loading = data.Scores.Length == 0 || HasAllScores();
+            }
+
+            return data.Valid;
+        }
+
+        internal void SetMaxRange(ulong val)
+        {
+            maxRange = (uint) val;
+        }
+
+        internal void SetTitle(string value)
+        {
+            title = value;
+        }
+
+        internal void SetLocalUserScore(PlayGamesScore score)
+        {
+            localUserScore = score;
+        }
+
+        internal int AddScore(PlayGamesScore score)
+        {
+            if (mFilteredUserIds == null || mFilteredUserIds.Length == 0)
+                mScoreList.Add(score);
+            else
+                foreach (var fid in mFilteredUserIds)
+                    if (fid.Equals(score.userID))
+                    {
+                        mScoreList.Add(score);
+                        break;
+                    }
+
+            return mScoreList.Count;
+        }
+
+        internal bool HasAllScores()
+        {
+            return mScoreList.Count >= mRange.count || mScoreList.Count >= maxRange;
         }
 
         #region ILeaderboard implementation
@@ -49,132 +96,42 @@ namespace GooglePlayGames
             mFilteredUserIds = userIDs;
         }
 
-        public void LoadScores(System.Action<bool> callback)
+        public void LoadScores(Action<bool> callback)
         {
             PlayGamesPlatform.Instance.LoadScores(this, callback);
         }
 
-        public bool loading
-        {
-            get { return mLoading; }
-            internal set { mLoading = value; }
-        }
+        public bool loading { get; internal set; }
 
-        public string id
-        {
-            get { return mId; }
-            set { mId = value; }
-        }
+        public string id { get; set; }
 
-        public UserScope userScope
-        {
-            get { return mUserScope; }
-            set { mUserScope = value; }
-        }
+        public UserScope userScope { get; set; }
 
         public Range range
         {
-            get { return mRange; }
-            set { mRange = value; }
+            get => mRange;
+            set => mRange = value;
         }
 
-        public TimeScope timeScope
-        {
-            get { return mTimeScope; }
-            set { mTimeScope = value; }
-        }
+        public TimeScope timeScope { get; set; }
 
-        public IScore localUserScore
-        {
-            get { return mLocalUserScore; }
-        }
+        public IScore localUserScore { get; set; }
 
-        public uint maxRange
-        {
-            get { return mMaxRange; }
-        }
+        public uint maxRange { get; set; }
 
         public IScore[] scores
         {
             get
             {
-                PlayGamesScore[] arr = new PlayGamesScore[mScoreList.Count];
+                var arr = new PlayGamesScore[mScoreList.Count];
                 mScoreList.CopyTo(arr);
                 return arr;
             }
         }
 
-        public string title
-        {
-            get { return mTitle; }
-        }
+        public string title { get; set; }
 
         #endregion
-
-        internal bool SetFromData(LeaderboardScoreData data)
-        {
-            if (data.Valid)
-            {
-                OurUtils.Logger.d("Setting leaderboard from: " + data);
-                SetMaxRange(data.ApproximateCount);
-                SetTitle(data.Title);
-                SetLocalUserScore((PlayGamesScore) data.PlayerScore);
-                foreach (IScore score in data.Scores)
-                {
-                    AddScore((PlayGamesScore) score);
-                }
-
-                mLoading = data.Scores.Length == 0 || HasAllScores();
-            }
-
-            return data.Valid;
-        }
-
-        internal void SetMaxRange(ulong val)
-        {
-            mMaxRange = (uint) val;
-        }
-
-        internal void SetTitle(string value)
-        {
-            mTitle = value;
-        }
-
-        internal void SetLocalUserScore(PlayGamesScore score)
-        {
-            mLocalUserScore = score;
-        }
-
-        internal int AddScore(PlayGamesScore score)
-        {
-            if (mFilteredUserIds == null || mFilteredUserIds.Length == 0)
-            {
-                mScoreList.Add(score);
-            }
-            else
-            {
-                foreach (string fid in mFilteredUserIds)
-                {
-                    if (fid.Equals(score.userID))
-                    {
-                        mScoreList.Add(score);
-                        break;
-                    }
-                }
-            }
-
-            return mScoreList.Count;
-        }
-
-        public int ScoreCount
-        {
-            get { return mScoreList.Count; }
-        }
-
-        internal bool HasAllScores()
-        {
-            return mScoreList.Count >= mRange.count || mScoreList.Count >= maxRange;
-        }
     }
 }
 #endif

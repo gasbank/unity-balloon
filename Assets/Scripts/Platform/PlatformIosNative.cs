@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using UnityEngine;
-using System.Runtime.InteropServices;
+﻿using System;
+using System.Collections;
 using System.IO;
+using UnityEngine;
 
 [DisallowMultipleComponent]
-public class PlatformIosNative : MonoBehaviour {
+public class PlatformIosNative : MonoBehaviour
+{
 #if UNITY_IOS
 	[DllImport ("__Internal")]
 	public static extern void saveToCloudPrivate(string playerID, string data, string loginErrorTitle, string loginErrorMessage, string confirmMessage);
@@ -15,8 +16,9 @@ public class PlatformIosNative : MonoBehaviour {
 	[DllImport ("__Internal")]
     public static extern void sendMail(string title, string body, string recipient, string attachment);
 #endif
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
 #if UNITY_IOS
 		UnityEngine.iOS.NotificationServices.RegisterForNotifications(UnityEngine.iOS.NotificationType.Alert | UnityEngine.iOS.NotificationType.Badge | UnityEngine.iOS.NotificationType.Sound);
 #if !UNITY_EDITOR
@@ -24,11 +26,12 @@ public class PlatformIosNative : MonoBehaviour {
 		loadFromCloudPrivate("testplayerid", "test login error title", "test login error message", "test confirm message");
 #endif
 #endif
-	}
+    }
 
-	void OnApplicationPause(bool pauseStatus)
+    void OnApplicationPause(bool pauseStatus)
     {
-		if (pauseStatus == false) {
+        if (pauseStatus == false)
+        {
 #if UNITY_IOS && !UNITY_EDITOR
 			UnityEngine.iOS.NotificationServices.ClearLocalNotifications();
 			UnityEngine.iOS.NotificationServices.CancelAllLocalNotifications();
@@ -37,9 +40,10 @@ public class PlatformIosNative : MonoBehaviour {
         }
     }
 
-	void OnApplicationFocus(bool hasFocus)
+    void OnApplicationFocus(bool hasFocus)
     {
-        if (hasFocus) {
+        if (hasFocus)
+        {
 #if UNITY_IOS && !UNITY_EDITOR
 			UnityEngine.iOS.NotificationServices.ClearLocalNotifications();
 			UnityEngine.iOS.NotificationServices.CancelAllLocalNotifications();
@@ -48,20 +52,16 @@ public class PlatformIosNative : MonoBehaviour {
         }
     }
 
-	public void ScheduleNotification()
-	{
-		var notificationDate0000 = System.DateTime.Today;
-		var now = System.DateTime.Now;
-		var notificationDate1200 = notificationDate0000.AddHours(12);
-		var notificationDate1800 = notificationDate0000.AddHours(18);
-		if (notificationDate1200 < now) {
-			notificationDate1200 = notificationDate1200.AddDays(1);
-		}
-		if (notificationDate1800 < now) {
-			notificationDate1800 = notificationDate1800.AddDays(1);
-		}
-		SushiDebug.LogFormat("Notification Time 1: {0}", notificationDate1200);
-		SushiDebug.LogFormat("Notification Time 2: {0}", notificationDate1800);
+    public void ScheduleNotification()
+    {
+        var notificationDate0000 = DateTime.Today;
+        var now = DateTime.Now;
+        var notificationDate1200 = notificationDate0000.AddHours(12);
+        var notificationDate1800 = notificationDate0000.AddHours(18);
+        if (notificationDate1200 < now) notificationDate1200 = notificationDate1200.AddDays(1);
+        if (notificationDate1800 < now) notificationDate1800 = notificationDate1800.AddDays(1);
+        SushiDebug.LogFormat("Notification Time 1: {0}", notificationDate1200);
+        SushiDebug.LogFormat("Notification Time 2: {0}", notificationDate1800);
 #if UNITY_IOS
 		SushiDebug.Log("Schedule Local Notification");
 		UnityEngine.iOS.NotificationServices.ClearLocalNotifications();
@@ -86,43 +86,49 @@ public class PlatformIosNative : MonoBehaviour {
 		notification1800.repeatInterval = UnityEngine.iOS.CalendarUnit.Day;
 		UnityEngine.iOS.NotificationServices.ScheduleLocalNotification(notification1800);
 #endif
-	}
-	
-	void OnIosSaveResult(string result) {
-		SushiDebug.LogFormat("OnIosSaveResult: {0}", result);
-	}
+    }
 
-	void OnIosLoadResult(string result) {
-		SushiDebug.LogFormat("OnIosLoadResult: {0}", result);
-	}
+    void OnIosSaveResult(string result)
+    {
+        SushiDebug.LogFormat("OnIosSaveResult: {0}", result);
+    }
 
-	public void CaptureScreenshot() {
-		StartCoroutine(CaptureScreenshotCoro());
-	}
+    void OnIosLoadResult(string result)
+    {
+        SushiDebug.LogFormat("OnIosLoadResult: {0}", result);
+    }
 
-	string filename = "ss3.png";
-	IEnumerator CaptureScreenshotCoro() {
-		
-		if (Application.isEditor) {
-			ScreenCapture.CaptureScreenshot(Application.persistentDataPath + "/" + filename);
-		} else {
-			ScreenCapture.CaptureScreenshot(filename);
-		}
-		SushiDebug.LogFormat("Captured!");
-		FileInfo info = new FileInfo(Application.persistentDataPath + "/" + filename);
-		while(info == null || info.Exists == false){
-             info = new FileInfo(Application.persistentDataPath + "/" + filename);
-             yield return null;
+    public void CaptureScreenshot()
+    {
+        StartCoroutine(CaptureScreenshotCoro());
+    }
+
+    readonly string filename = "ss3.png";
+
+    IEnumerator CaptureScreenshotCoro()
+    {
+        if (Application.isEditor)
+            ScreenCapture.CaptureScreenshot(Application.persistentDataPath + "/" + filename);
+        else
+            ScreenCapture.CaptureScreenshot(filename);
+        SushiDebug.LogFormat("Captured!");
+        var info = new FileInfo(Application.persistentDataPath + "/" + filename);
+        while (info == null || info.Exists == false)
+        {
+            info = new FileInfo(Application.persistentDataPath + "/" + filename);
+            yield return null;
         }
-		SushiDebug.LogFormat("Screenshot saved successfully! Size={0}, Path={1}", info.Length, info.FullName);
+
+        SushiDebug.LogFormat("Screenshot saved successfully! Size={0}, Path={1}", info.Length, info.FullName);
 #if !UNITY_EDITOR
 		NativeShare.Share("body", info.FullName, null, "subject", "image/png", true, "Select sharing app");
 #endif
-	}
+    }
 
-	public void SendBugReportMail() {
+    public void SendBugReportMail()
+    {
 #if UNITY_IOS && !UNITY_EDITOR
 		sendMail("Title", "Body", "gasbank@gmail.com", Application.persistentDataPath + "/" + filename);
 #endif
-	}
+    }
 }

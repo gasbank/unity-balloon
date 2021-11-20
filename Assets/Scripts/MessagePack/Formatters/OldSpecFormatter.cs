@@ -3,7 +3,7 @@
 namespace MessagePack.Formatters
 {
     /// <summary>
-    /// Serialize by .NET native DateTime binary format.
+    ///     Serialize by .NET native DateTime binary format.
     /// </summary>
     public sealed class NativeDateTimeFormatter : IMessagePackFormatter<DateTime>
     {
@@ -18,9 +18,7 @@ namespace MessagePack.Formatters
         public DateTime Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
             if (MessagePackBinary.GetMessagePackType(bytes, offset) == MessagePackType.Extension)
-            {
                 return DateTimeFormatter.Instance.Deserialize(bytes, offset, formatterResolver, out readSize);
-            }
 
             var dateData = MessagePackBinary.ReadInt64(bytes, offset, out readSize);
             return DateTime.FromBinary(dateData);
@@ -33,21 +31,14 @@ namespace MessagePack.Formatters
 
         public int Serialize(ref byte[] bytes, int offset, DateTime[] value, IFormatterResolver formatterResolver)
         {
-            if (value == null)
-            {
-                return MessagePackBinary.WriteNil(ref bytes, offset);
-            }
-            else
-            {
-                var startOffset = offset;
-                offset += MessagePackBinary.WriteArrayHeader(ref bytes, offset, value.Length);
-                for (int i = 0; i < value.Length; i++)
-                {
-                    offset += MessagePackBinary.WriteInt64(ref bytes, offset, value[i].ToBinary());
-                }
+            if (value == null) return MessagePackBinary.WriteNil(ref bytes, offset);
 
-                return offset - startOffset;
-            }
+            var startOffset = offset;
+            offset += MessagePackBinary.WriteArrayHeader(ref bytes, offset, value.Length);
+            for (var i = 0; i < value.Length; i++)
+                offset += MessagePackBinary.WriteInt64(ref bytes, offset, value[i].ToBinary());
+
+            return offset - startOffset;
         }
 
         public DateTime[] Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
@@ -57,22 +48,21 @@ namespace MessagePack.Formatters
                 readSize = 1;
                 return null;
             }
-            else
-            {
-                var startOffset = offset;
 
-                var len = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var startOffset = offset;
+
+            var len = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            offset += readSize;
+            var array = new DateTime[len];
+            for (var i = 0; i < array.Length; i++)
+            {
+                var dateData = MessagePackBinary.ReadInt64(bytes, offset, out readSize);
+                array[i] = DateTime.FromBinary(dateData);
                 offset += readSize;
-                var array = new DateTime[len];
-                for (int i = 0; i < array.Length; i++)
-                {
-                    var dateData = MessagePackBinary.ReadInt64(bytes, offset, out readSize);
-                    array[i] = DateTime.FromBinary(dateData);
-                    offset += readSize;
-                }
-                readSize = offset - startOffset;
-                return array;
             }
+
+            readSize = offset - startOffset;
+            return array;
         }
     }
 
@@ -82,7 +72,7 @@ namespace MessagePack.Formatters
     // https://github.com/msgpack/msgpack/blob/master/spec-old.md
 
     /// <summary>
-    /// Old-MessagePack spec's string formatter.
+    ///     Old-MessagePack spec's string formatter.
     /// </summary>
     public sealed class OldSpecStringFormatter : IMessagePackFormatter<string>
     {
@@ -97,17 +87,11 @@ namespace MessagePack.Formatters
 
             int useOffset;
             if (value.Length <= MessagePackRange.MaxFixStringLength)
-            {
                 useOffset = 1;
-            }
             else if (value.Length <= ushort.MaxValue)
-            {
                 useOffset = 3;
-            }
             else
-            {
                 useOffset = 5;
-            }
 
             // skip length area
             var writeBeginOffset = offset + useOffset;
@@ -116,39 +100,29 @@ namespace MessagePack.Formatters
             // move body and write prefix
             if (byteCount <= MessagePackRange.MaxFixStringLength)
             {
-                if (useOffset != 1)
-                {
-                    Buffer.BlockCopy(bytes, writeBeginOffset, bytes, offset + 1, byteCount);
-                }
-                bytes[offset] = (byte)(MessagePackCode.MinFixStr | byteCount);
+                if (useOffset != 1) Buffer.BlockCopy(bytes, writeBeginOffset, bytes, offset + 1, byteCount);
+                bytes[offset] = (byte) (MessagePackCode.MinFixStr | byteCount);
                 return byteCount + 1;
             }
-            else if (byteCount <= ushort.MaxValue)
+
+            if (byteCount <= ushort.MaxValue)
             {
-                if (useOffset != 3)
-                {
-                    Buffer.BlockCopy(bytes, writeBeginOffset, bytes, offset + 3, byteCount);
-                }
+                if (useOffset != 3) Buffer.BlockCopy(bytes, writeBeginOffset, bytes, offset + 3, byteCount);
 
                 bytes[offset] = MessagePackCode.Str16;
-                bytes[offset + 1] = unchecked((byte)(byteCount >> 8));
-                bytes[offset + 2] = unchecked((byte)byteCount);
+                bytes[offset + 1] = unchecked((byte) (byteCount >> 8));
+                bytes[offset + 2] = unchecked((byte) byteCount);
                 return byteCount + 3;
             }
-            else
-            {
-                if (useOffset != 5)
-                {
-                    Buffer.BlockCopy(bytes, writeBeginOffset, bytes, offset + 5, byteCount);
-                }
 
-                bytes[offset] = MessagePackCode.Str32;
-                bytes[offset + 1] = unchecked((byte)(byteCount >> 24));
-                bytes[offset + 2] = unchecked((byte)(byteCount >> 16));
-                bytes[offset + 3] = unchecked((byte)(byteCount >> 8));
-                bytes[offset + 4] = unchecked((byte)byteCount);
-                return byteCount + 5;
-            }
+            if (useOffset != 5) Buffer.BlockCopy(bytes, writeBeginOffset, bytes, offset + 5, byteCount);
+
+            bytes[offset] = MessagePackCode.Str32;
+            bytes[offset + 1] = unchecked((byte) (byteCount >> 24));
+            bytes[offset + 2] = unchecked((byte) (byteCount >> 16));
+            bytes[offset + 3] = unchecked((byte) (byteCount >> 8));
+            bytes[offset + 4] = unchecked((byte) byteCount);
+            return byteCount + 5;
         }
 
         public string Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
@@ -158,7 +132,7 @@ namespace MessagePack.Formatters
     }
 
     /// <summary>
-    /// Old-MessagePack spec's binary formatter.
+    ///     Old-MessagePack spec's binary formatter.
     /// </summary>
     public sealed class OldSpecBinaryFormatter : IMessagePackFormatter<byte[]>
     {
@@ -174,32 +148,31 @@ namespace MessagePack.Formatters
             {
                 MessagePackBinary.EnsureCapacity(ref bytes, offset, byteCount + 1);
 
-                bytes[offset] = (byte)(MessagePackCode.MinFixStr | byteCount);
+                bytes[offset] = (byte) (MessagePackCode.MinFixStr | byteCount);
                 Buffer.BlockCopy(value, 0, bytes, offset + 1, byteCount);
                 return byteCount + 1;
             }
-            else if (byteCount <= ushort.MaxValue)
+
+            if (byteCount <= ushort.MaxValue)
             {
                 MessagePackBinary.EnsureCapacity(ref bytes, offset, byteCount + 3);
 
                 bytes[offset] = MessagePackCode.Str16;
-                bytes[offset + 1] = unchecked((byte)(byteCount >> 8));
-                bytes[offset + 2] = unchecked((byte)byteCount);
+                bytes[offset + 1] = unchecked((byte) (byteCount >> 8));
+                bytes[offset + 2] = unchecked((byte) byteCount);
                 Buffer.BlockCopy(value, 0, bytes, offset + 3, byteCount);
                 return byteCount + 3;
             }
-            else
-            {
-                MessagePackBinary.EnsureCapacity(ref bytes, offset, byteCount + 5);
 
-                bytes[offset] = MessagePackCode.Str32;
-                bytes[offset + 1] = unchecked((byte)(byteCount >> 24));
-                bytes[offset + 2] = unchecked((byte)(byteCount >> 16));
-                bytes[offset + 3] = unchecked((byte)(byteCount >> 8));
-                bytes[offset + 4] = unchecked((byte)byteCount);
-                Buffer.BlockCopy(value, 0, bytes, offset + 5, byteCount);
-                return byteCount + 5;
-            }
+            MessagePackBinary.EnsureCapacity(ref bytes, offset, byteCount + 5);
+
+            bytes[offset] = MessagePackCode.Str32;
+            bytes[offset + 1] = unchecked((byte) (byteCount >> 24));
+            bytes[offset + 2] = unchecked((byte) (byteCount >> 16));
+            bytes[offset + 3] = unchecked((byte) (byteCount >> 8));
+            bytes[offset + 4] = unchecked((byte) byteCount);
+            Buffer.BlockCopy(value, 0, bytes, offset + 5, byteCount);
+            return byteCount + 5;
         }
 
         public byte[] Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
@@ -210,11 +183,10 @@ namespace MessagePack.Formatters
                 readSize = 1;
                 return null;
             }
-            else if (type == MessagePackType.Binary)
-            {
-                return MessagePackBinary.ReadBytes(bytes, offset, out readSize);
-            }
-            else if (type == MessagePackType.String)
+
+            if (type == MessagePackType.Binary) return MessagePackBinary.ReadBytes(bytes, offset, out readSize);
+
+            if (type == MessagePackType.String)
             {
                 var code = bytes[offset];
                 unchecked
@@ -227,25 +199,29 @@ namespace MessagePack.Formatters
                         Buffer.BlockCopy(bytes, offset + 1, result, 0, result.Length);
                         return result;
                     }
-                    else if (code == MessagePackCode.Str8)
+
+                    if (code == MessagePackCode.Str8)
                     {
-                        var length = (int)bytes[offset + 1];
+                        var length = (int) bytes[offset + 1];
                         readSize = length + 2;
                         var result = new byte[length];
                         Buffer.BlockCopy(bytes, offset + 2, result, 0, result.Length);
                         return result;
                     }
-                    else if (code == MessagePackCode.Str16)
+
+                    if (code == MessagePackCode.Str16)
                     {
-                        var length = (bytes[offset + 1] << 8) + (bytes[offset + 2]);
+                        var length = (bytes[offset + 1] << 8) + bytes[offset + 2];
                         readSize = length + 3;
                         var result = new byte[length];
                         Buffer.BlockCopy(bytes, offset + 3, result, 0, result.Length);
                         return result;
                     }
-                    else if (code == MessagePackCode.Str32)
+
+                    if (code == MessagePackCode.Str32)
                     {
-                        var length = (int)((uint)(bytes[offset + 1] << 24) | (uint)(bytes[offset + 2] << 16) | (uint)(bytes[offset + 3] << 8) | (uint)bytes[offset + 4]);
+                        var length = (int) ((uint) (bytes[offset + 1] << 24) | (uint) (bytes[offset + 2] << 16) |
+                                            (uint) (bytes[offset + 3] << 8) | bytes[offset + 4]);
                         readSize = length + 5;
                         var result = new byte[length];
                         Buffer.BlockCopy(bytes, offset + 5, result, 0, result.Length);
@@ -254,7 +230,8 @@ namespace MessagePack.Formatters
                 }
             }
 
-            throw new InvalidOperationException(string.Format("code is invalid. code:{0} format:{1}", bytes[offset], MessagePackCode.ToFormatName(bytes[offset])));
+            throw new InvalidOperationException(string.Format("code is invalid. code:{0} format:{1}", bytes[offset],
+                MessagePackCode.ToFormatName(bytes[offset])));
         }
     }
 }

@@ -1,16 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class WindMaterial : MonoBehaviour {
-    [SerializeField] Renderer planeRenderer = null;
-    [SerializeField] WindRegion windRegion = null;
+public class WindMaterial : MonoBehaviour
+{
+    [SerializeField]
+    Renderer planeRenderer;
 
-    void Awake() {
+    [SerializeField]
+    WindRegion windRegion;
+
+    void Awake()
+    {
         planeRenderer.material = Instantiate(planeRenderer.material);
     }
 
-    void Update() {
+    void Update()
+    {
         planeRenderer.material.SetFloat("_Center", 1.0f - Mathf.Repeat(Time.time * windRegion.Power / 10, 1.0f));
         planeRenderer.material.SetFloat("_Alpha", windRegion.CapacityRatio);
     }

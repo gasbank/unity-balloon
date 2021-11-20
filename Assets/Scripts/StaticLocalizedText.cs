@@ -1,31 +1,38 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using TMProText = TMPro.TextMeshProUGUI;
 
 [DisallowMultipleComponent]
-public class StaticLocalizedText : MonoBehaviour {
-    [SerializeField] private TMProText text = null;
-    [SerializeField] private string strRef = "";
-    public string StrRef { get { return strRef; } }
+public class StaticLocalizedText : MonoBehaviour
+{
+    [SerializeField]
+    TMProText text;
 
-    public static string ToLiteral(string input) {
+    [field: SerializeField]
+    public string StrRef { get; set; } = "";
+
+    public static string ToLiteral(string input)
+    {
         return input.Replace("\n", @"\n");
     }
 
-    private void OnValidate() {
+    void OnValidate()
+    {
         UpdateStrRef();
     }
 
-    private void UpdateStrRef() {
+    void UpdateStrRef()
+    {
         text = GetComponent<TMProText>();
-        strRef = ToLiteral(text.text);
+        StrRef = ToLiteral(text.text);
     }
 
-    void OnEnable() {
+    void OnEnable()
+    {
         UpdateText();
     }
 
-    public void UpdateText() {
-        text.text = Data.dataSet != null ? FontManager.instance.ToLocalizedCurrent("\\" + strRef) : strRef;
+    public void UpdateText()
+    {
+        text.text = Data.dataSet != null ? FontManager.instance.ToLocalizedCurrent("\\" + StrRef) : StrRef;
     }
 }

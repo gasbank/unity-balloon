@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Purchasing;
+﻿using UnityEngine;
 
-public class NoAdsIapButton : MonoBehaviour {
-    public void Purchase() {
+public class NoAdsIapButton : MonoBehaviour
+{
+    public void Purchase()
+    {
         PlatformIapManager.instance.PurchaseNoAds();
     }
 
-    public void ResetSaveData() {
+    public void ResetSaveData()
+    {
         PlayerPrefs.DeleteAll();
     }
 }

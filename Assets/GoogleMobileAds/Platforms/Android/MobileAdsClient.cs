@@ -14,44 +14,34 @@
 
 #if UNITY_ANDROID
 
-using System;
-using UnityEngine;
-
-using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
+using UnityEngine;
 
 namespace GoogleMobileAds.Android
 {
     public class MobileAdsClient :
-    IMobileAdsClient
+        IMobileAdsClient
     {
-        private static MobileAdsClient instance = new MobileAdsClient();
-
-        public static MobileAdsClient Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        public static MobileAdsClient Instance { get; } = new MobileAdsClient();
 
         public void Initialize(string appId)
         {
-            AndroidJavaClass playerClass = new AndroidJavaClass(Utils.UnityActivityClassName);
-            AndroidJavaObject activity =
-                    playerClass.GetStatic<AndroidJavaObject>("currentActivity");
-            AndroidJavaClass mobileAdsClass = new AndroidJavaClass(Utils.MobileAdsClassName);
+            var playerClass = new AndroidJavaClass(Utils.UnityActivityClassName);
+            var activity =
+                playerClass.GetStatic<AndroidJavaObject>("currentActivity");
+            var mobileAdsClass = new AndroidJavaClass(Utils.MobileAdsClassName);
             mobileAdsClass.CallStatic("initialize", activity, appId);
         }
+
         public void SetApplicationVolume(float volume)
         {
-            AndroidJavaClass mobileAdsClass = new AndroidJavaClass(Utils.MobileAdsClassName);
+            var mobileAdsClass = new AndroidJavaClass(Utils.MobileAdsClassName);
             mobileAdsClass.CallStatic("setAppVolume", volume);
         }
 
         public void SetApplicationMuted(bool muted)
         {
-            AndroidJavaClass mobileAdsClass = new AndroidJavaClass(Utils.MobileAdsClassName);
+            var mobileAdsClass = new AndroidJavaClass(Utils.MobileAdsClassName);
             mobileAdsClass.CallStatic("setAppMuted", muted);
         }
 

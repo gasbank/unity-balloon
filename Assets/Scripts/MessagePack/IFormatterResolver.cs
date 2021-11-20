@@ -1,7 +1,6 @@
-﻿
-using MessagePack.Formatters;
-using System;
+﻿using System;
 using System.Reflection;
+using MessagePack.Formatters;
 
 namespace MessagePack
 {
@@ -22,18 +21,15 @@ namespace MessagePack
             catch (TypeInitializationException ex)
             {
                 Exception inner = ex;
-                while (inner.InnerException != null)
-                {
-                    inner = inner.InnerException;
-                }
+                while (inner.InnerException != null) inner = inner.InnerException;
 
                 throw inner;
             }
 
             if (formatter == null)
-            {
-                throw new FormatterNotRegisteredException(typeof(T).FullName + " is not registered in this resolver. resolver:" + resolver.GetType().Name);
-            }
+                throw new FormatterNotRegisteredException(typeof(T).FullName +
+                                                          " is not registered in this resolver. resolver:" +
+                                                          resolver.GetType().Name);
 
             return formatter;
         }

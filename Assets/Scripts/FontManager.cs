@@ -1,57 +1,72 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
-using UnityEngine.UI;
 
-public class FontManager : MonoBehaviour {
+public class FontManager : MonoBehaviour
+{
     public static FontManager instance;
-    [SerializeField] private Font koreanFont = null;
-    [SerializeField] private Font japaneseFont = null;
-    [SerializeField][FormerlySerializedAs("chineseFont")] private Font simplifiedChineseFont = null;
-    [SerializeField] private Font traditionalChineseFont = null;
 
-    public Font getKoreanFont() {
+    [SerializeField]
+    Font japaneseFont;
+
+    [SerializeField]
+    Font koreanFont;
+
+    [SerializeField]
+    [FormerlySerializedAs("chineseFont")]
+    Font simplifiedChineseFont;
+
+    [SerializeField]
+    Font traditionalChineseFont;
+
+    public Font getKoreanFont()
+    {
         return koreanFont;
     }
 
-    bool ParseStrRef(string strRef, out string key, out int index) {
+    bool ParseStrRef(string strRef, out string key, out int index)
+    {
         key = "";
         index = -1;
-        if (strRef.Length < 2) {
-            return false;
-        }
-        if (strRef.StartsWith("\\")) {
+        if (strRef.Length < 2) return false;
+        if (strRef.StartsWith("\\"))
+        {
             var sharpIndex = strRef.LastIndexOf("#");
-            if (sharpIndex >= 2 && sharpIndex < strRef.Length - 1) {
+            if (sharpIndex >= 2 && sharpIndex < strRef.Length - 1)
+            {
                 key = strRef.Substring(1, sharpIndex - 1);
-                if (int.TryParse(strRef.Substring(sharpIndex + 1), out index)) {
-                    return true;
-                }
-            } else {
+                if (int.TryParse(strRef.Substring(sharpIndex + 1), out index)) return true;
+            }
+            else
+            {
                 // # 뒤의 인덱스가 없으면 #1로 간주
                 key = strRef.Substring(1, strRef.Length - 1);
                 index = 1;
                 return true;
             }
         }
+
         return false;
     }
 
-    public string ToLocalizedCurrent(string strRef) {
+    public string ToLocalizedCurrent(string strRef)
+    {
         return ToLocalized(strRef, Data.instance.CurrentLanguageCode);
     }
 
-    public string ToLocalizedCurrent(string strRef, params object[] args) {
+    public string ToLocalizedCurrent(string strRef, params object[] args)
+    {
         return ToLocalized(strRef, Data.instance.CurrentLanguageCode, args);
     }
 
-    public string ToLocalized(string strRef, BalloonLanguageCode languageCode, params object[] args) {
+    public string ToLocalized(string strRef, BalloonLanguageCode languageCode, params object[] args)
+    {
         var key = "";
         var index = -1;
         var ret = strRef;
-        if (ParseStrRef(strRef, out key, out index)) {
-            switch (languageCode) {
+        if (ParseStrRef(strRef, out key, out index))
+            switch (languageCode)
+            {
                 case BalloonLanguageCode.En:
                     ret = LookupLocalizedDictionary(key, index, Data.dataSet.StrEnData, strRef, languageCode);
                     break;
@@ -60,32 +75,38 @@ public class FontManager : MonoBehaviour {
                     ret = LookupLocalizedDictionary(key, index, Data.dataSet.StrKoData, strRef, languageCode);
                     break;
             }
-        } else {
-            UnityEngine.Debug.LogWarningFormat("Localized string ref cannot be parsed: {0}", strRef);
-        }
-        if (args != null && args.Length > 0) {
+        else
+            Debug.LogWarningFormat("Localized string ref cannot be parsed: {0}", strRef);
+
+        if (args != null && args.Length > 0)
             return string.Format(ret, args);
-        } else {
-            return ret;
-        }
+        return ret;
     }
 
-    string LookupLocalizedDictionary<T>(string key, int index, Dictionary<ScString, T> strBaseData, string strRef, BalloonLanguageCode languageCode) where T : StrBaseData {
+    string LookupLocalizedDictionary<T>(string key, int index, Dictionary<ScString, T> strBaseData, string strRef,
+        BalloonLanguageCode languageCode) where T : StrBaseData
+    {
         T strData;
-        if (strBaseData.TryGetValue(key, out strData)) {
-            if (index - 1 >= 0 && index - 1 < strData.str.Length) {
-                return ((string)strData.str[index - 1]).Replace(@"\n", "\n");
-            } else {
-                UnityEngine.Debug.LogErrorFormat("Invalid localized string index: key:{0} index:{1} on language code {2}.", key, index, languageCode);
-            }
-        } else {
-            UnityEngine.Debug.LogWarningFormat("Invalid localized string key: key:{0}/index:{1} on language code {2}", key, index, languageCode);
+        if (strBaseData.TryGetValue(key, out strData))
+        {
+            if (index - 1 >= 0 && index - 1 < strData.str.Length)
+                return ((string) strData.str[index - 1]).Replace(@"\n", "\n");
+            Debug.LogErrorFormat("Invalid localized string index: key:{0} index:{1} on language code {2}.", key, index,
+                languageCode);
         }
+        else
+        {
+            Debug.LogWarningFormat("Invalid localized string key: key:{0}/index:{1} on language code {2}", key, index,
+                languageCode);
+        }
+
         return strRef;
     }
 
-    public Font GetLanguageFont(BalloonLanguageCode languageCode) {
-        switch (languageCode) {
+    public Font GetLanguageFont(BalloonLanguageCode languageCode)
+    {
+        switch (languageCode)
+        {
             case BalloonLanguageCode.Ko:
                 return koreanFont;
             case BalloonLanguageCode.Ja:

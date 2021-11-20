@@ -11,7 +11,6 @@
 // limitations under the License.
 
 using System;
-
 using GoogleMobileAds.Api;
 
 namespace GoogleMobileAds.Common

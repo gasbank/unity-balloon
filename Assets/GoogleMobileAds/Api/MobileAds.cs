@@ -14,20 +14,20 @@
 
 using System;
 using System.Reflection;
-
 using GoogleMobileAds.Common;
 
 namespace GoogleMobileAds.Api
 {
     public class MobileAds
     {
-        private static readonly IMobileAdsClient client = GetMobileAdsClient();
+        static readonly IMobileAdsClient client = GetMobileAdsClient();
 
         public static void Initialize(string appId)
         {
             client.Initialize(appId);
             MobileAdsEventExecutor.Initialize();
         }
+
         public static void SetApplicationMuted(bool muted)
         {
             client.SetApplicationMuted(muted);
@@ -43,14 +43,14 @@ namespace GoogleMobileAds.Api
             client.SetiOSAppPauseOnBackground(pause);
         }
 
-        private static IMobileAdsClient GetMobileAdsClient()
+        static IMobileAdsClient GetMobileAdsClient()
         {
-            Type googleMobileAdsClientFactory = Type.GetType(
+            var googleMobileAdsClientFactory = Type.GetType(
                 "GoogleMobileAds.GoogleMobileAdsClientFactory,Assembly-CSharp");
-            MethodInfo method = googleMobileAdsClientFactory.GetMethod(
+            var method = googleMobileAdsClientFactory.GetMethod(
                 "MobileAdsInstance",
                 BindingFlags.Static | BindingFlags.Public);
-            return (IMobileAdsClient)method.Invoke(null, null);
+            return (IMobileAdsClient) method.Invoke(null, null);
         }
     }
 }

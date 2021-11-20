@@ -1,18 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMProText = TMPro.TextMeshProUGUI;
 
-public class TestStageButton : MonoBehaviour {
-    [SerializeField] TMProText text = null;
-    [SerializeField] string sceneName = "";
+public class TestStageButton : MonoBehaviour
+{
+    [SerializeField]
+    string sceneName = "";
 
-    void OnValidate() {
+    [SerializeField]
+    TMProText text;
+
+    void OnValidate()
+    {
         text.text = sceneName;
     }
 
-    public void GoToStage() {
+    public void GoToStage()
+    {
         SceneManager.LoadScene(sceneName);
     }
 }

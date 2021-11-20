@@ -1,35 +1,32 @@
+using System;
+using GooglePlayGames.BasicApi.Nearby;
+using UnityEngine;
+
 #if UNITY_ANDROID
 
 namespace GooglePlayGames.OurUtils
 {
-    using BasicApi.Nearby;
-    using System;
-    using UnityEngine;
-
     public class NearbyHelperObject : MonoBehaviour
     {
         // our (singleton) instance
-        private static NearbyHelperObject instance = null;
+        static NearbyHelperObject instance;
 
         // timers to keep track of discovery and advertising
-        private static double mAdvertisingRemaining = 0;
-        private static double mDiscoveryRemaining = 0;
+        static double mAdvertisingRemaining;
+        static double mDiscoveryRemaining;
 
         // nearby client to stop discovery and to stop advertising
-        private static INearbyConnectionClient mClient = null;
+        static INearbyConnectionClient mClient;
 
         public static void CreateObject(INearbyConnectionClient client)
         {
-            if (instance != null)
-            {
-                return;
-            }
+            if (instance != null) return;
 
             mClient = client;
             if (Application.isPlaying)
             {
                 // add an invisible game object to the scene
-                GameObject obj = new GameObject("PlayGames_NearbyHelper");
+                var obj = new GameObject("PlayGames_NearbyHelper");
                 DontDestroyOnLoad(obj);
                 instance = obj.AddComponent<NearbyHelperObject>();
             }
@@ -39,17 +36,11 @@ namespace GooglePlayGames.OurUtils
             }
         }
 
-        private static double ToSeconds(TimeSpan? span)
+        static double ToSeconds(TimeSpan? span)
         {
-            if (!span.HasValue)
-            {
-                return 0;
-            }
+            if (!span.HasValue) return 0;
 
-            if (span.Value.TotalSeconds < 0)
-            {
-                return 0;
-            }
+            if (span.Value.TotalSeconds < 0) return 0;
 
             return span.Value.TotalSeconds;
         }
@@ -71,10 +62,7 @@ namespace GooglePlayGames.OurUtils
 
         public void OnDisable()
         {
-            if (instance == this)
-            {
-                instance = null;
-            }
+            if (instance == this) instance = null;
         }
 
         public void Update()
@@ -83,20 +71,14 @@ namespace GooglePlayGames.OurUtils
             if (mAdvertisingRemaining > 0)
             {
                 mAdvertisingRemaining -= Time.deltaTime;
-                if (mAdvertisingRemaining < 0)
-                {
-                    mClient.StopAdvertising();
-                }
+                if (mAdvertisingRemaining < 0) mClient.StopAdvertising();
             }
 
             // check if currently discovering
             if (mDiscoveryRemaining > 0)
             {
                 mDiscoveryRemaining -= Time.deltaTime;
-                if (mDiscoveryRemaining < 0)
-                {
-                    mClient.StopDiscovery(mClient.GetServiceId());
-                }
+                if (mDiscoveryRemaining < 0) mClient.StopDiscovery(mClient.GetServiceId());
             }
         }
     }

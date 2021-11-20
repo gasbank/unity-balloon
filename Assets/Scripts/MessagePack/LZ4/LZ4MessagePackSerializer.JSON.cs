@@ -1,10 +1,9 @@
-﻿using MessagePack.Formatters;
-using MessagePack.Internal;
-using MessagePack.LZ4;
-using System;
+﻿using System;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using MessagePack.Internal;
+using MessagePack.LZ4;
 
 namespace MessagePack
 {
@@ -12,7 +11,7 @@ namespace MessagePack
     public static partial class LZ4MessagePackSerializer
     {
         /// <summary>
-        /// Dump to JSON string.
+        ///     Dump to JSON string.
         /// </summary>
         public static string ToJson<T>(T obj)
         {
@@ -20,7 +19,7 @@ namespace MessagePack
         }
 
         /// <summary>
-        /// Dump to JSON string.
+        ///     Dump to JSON string.
         /// </summary>
         public static string ToJson<T>(T obj, IFormatterResolver resolver)
         {
@@ -28,7 +27,7 @@ namespace MessagePack
         }
 
         /// <summary>
-        /// Dump message-pack binary to JSON string.
+        ///     Dump message-pack binary to JSON string.
         /// </summary>
         public static string ToJson(byte[] bytes)
         {
@@ -46,10 +45,7 @@ namespace MessagePack
                     offset += readSize;
 
                     var buffer = LZ4MemoryPool.GetBuffer();
-                    if (buffer.Length < length)
-                    {
-                        buffer = new byte[length];
-                    }
+                    if (buffer.Length < length) buffer = new byte[length];
 
                     // LZ4 Decode
                     LZ4Codec.Decode(bytes, offset, bytes.Length - offset, buffer, 0, length);
@@ -72,12 +68,12 @@ namespace MessagePack
         }
 
         /// <summary>
-        /// From Json String to LZ4MessagePack binary
+        ///     From Json String to LZ4MessagePack binary
         /// </summary>
         public static byte[] FromJson(TextReader reader)
         {
             var buffer = MessagePackSerializer.FromJsonUnsafe(reader); // offset is guranteed from 0
-            return LZ4MessagePackSerializer.ToLZ4Binary(buffer);
+            return ToLZ4Binary(buffer);
         }
 
         static int ToJsonCore(byte[] bytes, int offset, StringBuilder builder)
@@ -88,16 +84,26 @@ namespace MessagePack
             {
                 case MessagePackType.Integer:
                     var code = bytes[offset];
-                    if (MessagePackCode.MinNegativeFixInt <= code && code <= MessagePackCode.MaxNegativeFixInt) builder.Append(MessagePackBinary.ReadSByte(bytes, offset, out readSize));
-                    else if (MessagePackCode.MinFixInt <= code && code <= MessagePackCode.MaxFixInt) builder.Append(MessagePackBinary.ReadByte(bytes, offset, out readSize));
-                    else if (code == MessagePackCode.Int8) builder.Append(MessagePackBinary.ReadSByte(bytes, offset, out readSize));
-                    else if (code == MessagePackCode.Int16) builder.Append(MessagePackBinary.ReadInt16(bytes, offset, out readSize));
-                    else if (code == MessagePackCode.Int32) builder.Append(MessagePackBinary.ReadInt32(bytes, offset, out readSize));
-                    else if (code == MessagePackCode.Int64) builder.Append(MessagePackBinary.ReadInt64(bytes, offset, out readSize));
-                    else if (code == MessagePackCode.UInt8) builder.Append(MessagePackBinary.ReadByte(bytes, offset, out readSize));
-                    else if (code == MessagePackCode.UInt16) builder.Append(MessagePackBinary.ReadUInt16(bytes, offset, out readSize));
-                    else if (code == MessagePackCode.UInt32) builder.Append(MessagePackBinary.ReadUInt32(bytes, offset, out readSize));
-                    else if (code == MessagePackCode.UInt64) builder.Append(MessagePackBinary.ReadUInt64(bytes, offset, out readSize));
+                    if (MessagePackCode.MinNegativeFixInt <= code && code <= MessagePackCode.MaxNegativeFixInt)
+                        builder.Append(MessagePackBinary.ReadSByte(bytes, offset, out readSize));
+                    else if (MessagePackCode.MinFixInt <= code && code <= MessagePackCode.MaxFixInt)
+                        builder.Append(MessagePackBinary.ReadByte(bytes, offset, out readSize));
+                    else if (code == MessagePackCode.Int8)
+                        builder.Append(MessagePackBinary.ReadSByte(bytes, offset, out readSize));
+                    else if (code == MessagePackCode.Int16)
+                        builder.Append(MessagePackBinary.ReadInt16(bytes, offset, out readSize));
+                    else if (code == MessagePackCode.Int32)
+                        builder.Append(MessagePackBinary.ReadInt32(bytes, offset, out readSize));
+                    else if (code == MessagePackCode.Int64)
+                        builder.Append(MessagePackBinary.ReadInt64(bytes, offset, out readSize));
+                    else if (code == MessagePackCode.UInt8)
+                        builder.Append(MessagePackBinary.ReadByte(bytes, offset, out readSize));
+                    else if (code == MessagePackCode.UInt16)
+                        builder.Append(MessagePackBinary.ReadUInt16(bytes, offset, out readSize));
+                    else if (code == MessagePackCode.UInt32)
+                        builder.Append(MessagePackBinary.ReadUInt32(bytes, offset, out readSize));
+                    else if (code == MessagePackCode.UInt64)
+                        builder.Append(MessagePackBinary.ReadUInt64(bytes, offset, out readSize));
                     break;
                 case MessagePackType.Boolean:
                     builder.Append(MessagePackBinary.ReadBoolean(bytes, offset, out readSize) ? "true" : "false");
@@ -105,84 +111,80 @@ namespace MessagePack
                 case MessagePackType.Float:
                     var floatCode = bytes[offset];
                     if (floatCode == MessagePackCode.Float32)
-                    {
-                        builder.Append(MessagePackBinary.ReadSingle(bytes, offset, out readSize).ToString(System.Globalization.CultureInfo.InvariantCulture));
-                    }
+                        builder.Append(MessagePackBinary.ReadSingle(bytes, offset, out readSize)
+                            .ToString(CultureInfo.InvariantCulture));
                     else
-                    {
-                        builder.Append(MessagePackBinary.ReadDouble(bytes, offset, out readSize).ToString(System.Globalization.CultureInfo.InvariantCulture));
-                    }
+                        builder.Append(MessagePackBinary.ReadDouble(bytes, offset, out readSize)
+                            .ToString(CultureInfo.InvariantCulture));
                     break;
                 case MessagePackType.String:
                     WriteJsonString(MessagePackBinary.ReadString(bytes, offset, out readSize), builder);
                     break;
                 case MessagePackType.Binary:
-                    builder.Append("\"" + Convert.ToBase64String(MessagePackBinary.ReadBytes(bytes, offset, out readSize)) + "\"");
+                    builder.Append(
+                        "\"" + Convert.ToBase64String(MessagePackBinary.ReadBytes(bytes, offset, out readSize)) + "\"");
                     break;
                 case MessagePackType.Array:
+                {
+                    var length = MessagePackBinary.ReadArrayHeaderRaw(bytes, offset, out readSize);
+                    var totalReadSize = readSize;
+                    offset += readSize;
+                    builder.Append("[");
+                    for (var i = 0; i < length; i++)
                     {
-                        var length = MessagePackBinary.ReadArrayHeaderRaw(bytes, offset, out readSize);
-                        var totalReadSize = readSize;
+                        readSize = ToJsonCore(bytes, offset, builder);
                         offset += readSize;
-                        builder.Append("[");
-                        for (int i = 0; i < length; i++)
+                        totalReadSize += readSize;
+
+                        if (i != length - 1) builder.Append(",");
+                    }
+
+                    builder.Append("]");
+
+                    return totalReadSize;
+                }
+                case MessagePackType.Map:
+                {
+                    var length = MessagePackBinary.ReadMapHeaderRaw(bytes, offset, out readSize);
+                    var totalReadSize = readSize;
+                    offset += readSize;
+                    builder.Append("{");
+                    for (var i = 0; i < length; i++)
+                    {
+                        // write key
+                        {
+                            var keyType = MessagePackBinary.GetMessagePackType(bytes, offset);
+                            if (keyType == MessagePackType.String || keyType == MessagePackType.Binary)
+                            {
+                                readSize = ToJsonCore(bytes, offset, builder);
+                            }
+                            else
+                            {
+                                builder.Append("\"");
+                                readSize = ToJsonCore(bytes, offset, builder);
+                                builder.Append("\"");
+                            }
+
+                            offset += readSize;
+                            totalReadSize += readSize;
+                        }
+
+                        builder.Append(":");
+
+                        // write body
                         {
                             readSize = ToJsonCore(bytes, offset, builder);
                             offset += readSize;
                             totalReadSize += readSize;
-
-                            if (i != length - 1)
-                            {
-                                builder.Append(",");
-                            }
                         }
-                        builder.Append("]");
 
-                        return totalReadSize;
+                        if (i != length - 1) builder.Append(",");
                     }
-                case MessagePackType.Map:
-                    {
-                        var length = MessagePackBinary.ReadMapHeaderRaw(bytes, offset, out readSize);
-                        var totalReadSize = readSize;
-                        offset += readSize;
-                        builder.Append("{");
-                        for (int i = 0; i < length; i++)
-                        {
-                            // write key
-                            {
-                                var keyType = MessagePackBinary.GetMessagePackType(bytes, offset);
-                                if (keyType == MessagePackType.String || keyType == MessagePackType.Binary)
-                                {
-                                    readSize = ToJsonCore(bytes, offset, builder);
-                                }
-                                else
-                                {
-                                    builder.Append("\"");
-                                    readSize = ToJsonCore(bytes, offset, builder);
-                                    builder.Append("\"");
-                                }
-                                offset += readSize;
-                                totalReadSize += readSize;
-                            }
 
-                            builder.Append(":");
+                    builder.Append("}");
 
-                            // write body
-                            {
-                                readSize = ToJsonCore(bytes, offset, builder);
-                                offset += readSize;
-                                totalReadSize += readSize;
-                            }
-
-                            if (i != length - 1)
-                            {
-                                builder.Append(",");
-                            }
-                        }
-                        builder.Append("}");
-
-                        return totalReadSize;
-                    }
+                    return totalReadSize;
+                }
                 case MessagePackType.Extension:
                     var extHeader = MessagePackBinary.ReadExtensionFormatHeader(bytes, offset, out readSize);
                     if (extHeader.TypeCode == ReservedMessagePackExtensionTypeCode.DateTime)
@@ -236,6 +238,7 @@ namespace MessagePack
                         builder.Append("\"");
                         builder.Append("]");
                     }
+
                     break;
                 case MessagePackType.Unknown:
                 case MessagePackType.Nil:
@@ -254,7 +257,7 @@ namespace MessagePack
             builder.Append('\"');
 
             var len = value.Length;
-            for (int i = 0; i < len; i++)
+            for (var i = 0; i < len; i++)
             {
                 var c = value[i];
                 switch (c)

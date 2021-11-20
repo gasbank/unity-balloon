@@ -14,7 +14,6 @@
 
 using System;
 using System.Collections.Generic;
-
 using GoogleMobileAds.Api.Mediation;
 
 namespace GoogleMobileAds.Api
@@ -24,47 +23,47 @@ namespace GoogleMobileAds.Api
         public const string Version = "3.17.0";
         public const string TestDeviceSimulator = "SIMULATOR";
 
-        private AdRequest(Builder builder)
+        AdRequest(Builder builder)
         {
-            this.TestDevices = new List<string>(builder.TestDevices);
-            this.Keywords = new HashSet<string>(builder.Keywords);
-            this.Birthday = builder.Birthday;
-            this.Gender = builder.Gender;
-            this.TagForChildDirectedTreatment = builder.ChildDirectedTreatmentTag;
-            this.Extras = new Dictionary<string, string>(builder.Extras);
-            this.MediationExtras = builder.MediationExtras;
+            TestDevices = new List<string>(builder.TestDevices);
+            Keywords = new HashSet<string>(builder.Keywords);
+            Birthday = builder.Birthday;
+            Gender = builder.Gender;
+            TagForChildDirectedTreatment = builder.ChildDirectedTreatmentTag;
+            Extras = new Dictionary<string, string>(builder.Extras);
+            MediationExtras = builder.MediationExtras;
         }
 
-        public List<string> TestDevices { get; private set; }
+        public List<string> TestDevices { get; }
 
-        public HashSet<string> Keywords { get; private set; }
+        public HashSet<string> Keywords { get; }
 
-        public DateTime? Birthday { get; private set; }
+        public DateTime? Birthday { get; }
 
-        public Gender? Gender { get; private set; }
+        public Gender? Gender { get; }
 
-        public bool? TagForChildDirectedTreatment { get; private set; }
+        public bool? TagForChildDirectedTreatment { get; }
 
-        public Dictionary<string, string> Extras { get; private set; }
+        public Dictionary<string, string> Extras { get; }
 
-        public List<MediationExtras> MediationExtras { get; private set; }
+        public List<MediationExtras> MediationExtras { get; }
 
         public class Builder
         {
             public Builder()
             {
-                this.TestDevices = new List<string>();
-                this.Keywords = new HashSet<string>();
-                this.Birthday = null;
-                this.Gender = null;
-                this.ChildDirectedTreatmentTag = null;
-                this.Extras = new Dictionary<string, string>();
-                this.MediationExtras = new List<MediationExtras>();
+                TestDevices = new List<string>();
+                Keywords = new HashSet<string>();
+                Birthday = null;
+                Gender = null;
+                ChildDirectedTreatmentTag = null;
+                Extras = new Dictionary<string, string>();
+                MediationExtras = new List<MediationExtras>();
             }
 
-            internal List<string> TestDevices { get; private set; }
+            internal List<string> TestDevices { get; }
 
-            internal HashSet<string> Keywords { get; private set; }
+            internal HashSet<string> Keywords { get; }
 
             internal DateTime? Birthday { get; private set; }
 
@@ -72,19 +71,19 @@ namespace GoogleMobileAds.Api
 
             internal bool? ChildDirectedTreatmentTag { get; private set; }
 
-            internal Dictionary<string, string> Extras { get; private set; }
+            internal Dictionary<string, string> Extras { get; }
 
-            internal List<MediationExtras> MediationExtras { get; private set; }
+            internal List<MediationExtras> MediationExtras { get; }
 
             public Builder AddKeyword(string keyword)
             {
-                this.Keywords.Add(keyword);
+                Keywords.Add(keyword);
                 return this;
             }
 
             public Builder AddTestDevice(string deviceId)
             {
-                this.TestDevices.Add(deviceId);
+                TestDevices.Add(deviceId);
                 return this;
             }
 
@@ -95,31 +94,31 @@ namespace GoogleMobileAds.Api
 
             public Builder SetBirthday(DateTime birthday)
             {
-                this.Birthday = birthday;
+                Birthday = birthday;
                 return this;
             }
 
             public Builder SetGender(Gender gender)
             {
-                this.Gender = gender;
+                Gender = gender;
                 return this;
             }
 
             public Builder AddMediationExtras(MediationExtras extras)
             {
-                this.MediationExtras.Add(extras);
+                MediationExtras.Add(extras);
                 return this;
             }
 
             public Builder TagForChildDirectedTreatment(bool tagForChildDirectedTreatment)
             {
-                this.ChildDirectedTreatmentTag = tagForChildDirectedTreatment;
+                ChildDirectedTreatmentTag = tagForChildDirectedTreatment;
                 return this;
             }
 
             public Builder AddExtra(string key, string value)
             {
-                this.Extras.Add(key, value);
+                Extras.Add(key, value);
                 return this;
             }
         }

@@ -16,80 +16,55 @@
 
 namespace GooglePlayGames.BasicApi.Video
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using GooglePlayGames.OurUtils;
-
     /// <summary>
-    /// Represents the video recording capabilities.
+    ///     Represents the video recording capabilities.
     /// </summary>
     public class VideoCaptureState
     {
-        private bool mIsCapturing;
-        private VideoCaptureMode mCaptureMode;
-        private VideoQualityLevel mQualityLevel;
-        private bool mIsOverlayVisible;
-        private bool mIsPaused;
-
         internal VideoCaptureState(bool isCapturing, VideoCaptureMode captureMode,
             VideoQualityLevel qualityLevel, bool isOverlayVisible, bool isPaused)
         {
-            mIsCapturing = isCapturing;
-            mCaptureMode = captureMode;
-            mQualityLevel = qualityLevel;
-            mIsOverlayVisible = isOverlayVisible;
-            mIsPaused = isPaused;
+            IsCapturing = isCapturing;
+            CaptureMode = captureMode;
+            QualityLevel = qualityLevel;
+            IsOverlayVisible = isOverlayVisible;
+            IsPaused = isPaused;
         }
 
         /// <summary>Returns whether the service is currently capturing or not.</summary>
-        public bool IsCapturing
-        {
-            get { return mIsCapturing; }
-        }
+        public bool IsCapturing { get; }
 
         /// <summary>Returns the capture mode of the current capture.</summary>
-        public VideoCaptureMode CaptureMode
-        {
-            get { return mCaptureMode; }
-        }
+        public VideoCaptureMode CaptureMode { get; }
 
         /// <summary>Returns the quality level of the current capture.</summary>
-        public VideoQualityLevel QualityLevel
-        {
-            get { return mQualityLevel; }
-        }
+        public VideoQualityLevel QualityLevel { get; }
 
         /// <summary>
-        /// Returns whether the capture overlay is currently visible or not.
+        ///     Returns whether the capture overlay is currently visible or not.
         /// </summary>
         /// <remarks>
-        /// This also indicates the capture overlay is being used by the user and background capture will fail.
+        ///     This also indicates the capture overlay is being used by the user and background capture will fail.
         /// </remarks>
-        public bool IsOverlayVisible
-        {
-            get { return mIsOverlayVisible; }
-        }
+        public bool IsOverlayVisible { get; }
 
         /// <summary>
-        /// Returns whether the capture is currently paused or not.
+        ///     Returns whether the capture is currently paused or not.
         /// </summary>
         /// <remarks>
-        /// Will always be <code>false</code> if <code>IsCapturing</code> if <code>false</code>.
+        ///     Will always be <code>false</code> if <code>IsCapturing</code> if <code>false</code>.
         /// </remarks>
-        public bool IsPaused
-        {
-            get { return mIsPaused; }
-        }
+        public bool IsPaused { get; }
 
         public override string ToString()
         {
             return string.Format("[VideoCaptureState: mIsCapturing={0}, mCaptureMode={1}, mQualityLevel={2}, " +
                                  "mIsOverlayVisible={3}, mIsPaused={4}]",
-                mIsCapturing,
-                mCaptureMode.ToString(),
-                mQualityLevel.ToString(),
-                mIsOverlayVisible,
-                mIsPaused);
+                IsCapturing,
+                CaptureMode.ToString(),
+                QualityLevel.ToString(),
+                IsOverlayVisible,
+                IsPaused);
         }
     }
 }

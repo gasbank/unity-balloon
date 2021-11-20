@@ -11,15 +11,15 @@ namespace MessagePack
     internal enum TinyJsonToken
     {
         None,
-        StartObject,  // {
-        EndObject,    // }
-        StartArray,   // [
-        EndArray,     // ]
-        Number,       // -0~9
-        String,       // "___"
-        True,         // true
-        False,        // false
-        Null,         // null
+        StartObject, // {
+        EndObject, // }
+        StartArray, // [
+        EndArray, // ]
+        Number, // -0~9
+        String, // "___"
+        True, // true
+        False, // false
+        Null // null
     }
 
     internal enum ValueType : byte
@@ -38,15 +38,20 @@ namespace MessagePack
     {
         public TinyJsonException(string message) : base(message)
         {
-
         }
     }
 
     internal class TinyJsonReader : IDisposable
     {
-        readonly TextReader reader;
         readonly bool disposeInnerReader;
+        readonly TextReader reader;
         StringBuilder reusableBuilder;
+
+        public TinyJsonReader(TextReader reader, bool disposeInnerReader = true)
+        {
+            this.reader = reader;
+            this.disposeInnerReader = disposeInnerReader;
+        }
 
         public TinyJsonToken TokenType { get; private set; }
         public ValueType ValueType { get; private set; }
@@ -56,10 +61,11 @@ namespace MessagePack
         public decimal DecimalValue { get; private set; }
         public string StringValue { get; private set; }
 
-        public TinyJsonReader(TextReader reader, bool disposeInnerReader = true)
+        public void Dispose()
         {
-            this.reader = reader;
-            this.disposeInnerReader = disposeInnerReader;
+            if (reader != null && disposeInnerReader) reader.Dispose();
+            TokenType = TinyJsonToken.None;
+            ValueType = ValueType.Null;
         }
 
         public bool Read()
@@ -69,20 +75,10 @@ namespace MessagePack
             return TokenType != TinyJsonToken.None;
         }
 
-        public void Dispose()
-        {
-            if (reader != null && disposeInnerReader)
-            {
-                reader.Dispose();
-            }
-            TokenType = TinyJsonToken.None;
-            ValueType = ValueType.Null;
-        }
-
         void SkipWhiteSpace()
         {
             var c = reader.Peek();
-            while (c != -1 && Char.IsWhiteSpace((char)c))
+            while (c != -1 && char.IsWhiteSpace((char) c))
             {
                 reader.Read();
                 c = reader.Peek();
@@ -91,7 +87,7 @@ namespace MessagePack
 
         char ReadChar()
         {
-            return (char)reader.Read();
+            return (char) reader.Read();
         }
 
         static bool IsWordBreak(char c)
@@ -123,7 +119,7 @@ namespace MessagePack
                 return;
             }
 
-            var c = (char)intChar;
+            var c = (char) intChar;
             switch (c)
             {
                 case '{':
@@ -236,7 +232,7 @@ namespace MessagePack
 
             var isDouble = false;
             var intChar = reader.Peek();
-            while (intChar != -1 && !IsWordBreak((char)intChar))
+            while (intChar != -1 && !IsWordBreak((char) intChar))
             {
                 var c = ReadChar();
                 numberWord.Append(c);
@@ -248,14 +244,17 @@ namespace MessagePack
             if (isDouble)
             {
                 double parsedDouble;
-                Double.TryParse(number, NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite | NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands | NumberStyles.AllowExponent, System.Globalization.CultureInfo.InvariantCulture, out parsedDouble);
+                double.TryParse(number,
+                    NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite | NumberStyles.AllowLeadingSign |
+                    NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands | NumberStyles.AllowExponent,
+                    CultureInfo.InvariantCulture, out parsedDouble);
                 ValueType = ValueType.Double;
                 DoubleValue = parsedDouble;
             }
             else
             {
                 long parsedInt;
-                if (Int64.TryParse(number, NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out parsedInt))
+                if (long.TryParse(number, NumberStyles.Integer, CultureInfo.InvariantCulture, out parsedInt))
                 {
                     ValueType = ValueType.Long;
                     LongValue = parsedInt;
@@ -263,19 +262,18 @@ namespace MessagePack
                 }
 
                 ulong parsedULong;
-                if (ulong.TryParse(number, NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out parsedULong))
+                if (ulong.TryParse(number, NumberStyles.Integer, CultureInfo.InvariantCulture, out parsedULong))
                 {
                     ValueType = ValueType.ULong;
                     ULongValue = parsedULong;
                     return;
                 }
 
-                Decimal parsedDecimal;
-                if (decimal.TryParse(number, NumberStyles.Number, System.Globalization.CultureInfo.InvariantCulture, out parsedDecimal))
+                decimal parsedDecimal;
+                if (decimal.TryParse(number, NumberStyles.Number, CultureInfo.InvariantCulture, out parsedDecimal))
                 {
                     ValueType = ValueType.Decimal;
                     DecimalValue = parsedDecimal;
-                    return;
                 }
             }
         }
@@ -337,9 +335,10 @@ namespace MessagePack
                                 hex[1] = ReadChar();
                                 hex[2] = ReadChar();
                                 hex[3] = ReadChar();
-                                sb.Append((char)Convert.ToInt32(new string(hex), 16));
+                                sb.Append((char) Convert.ToInt32(new string(hex), 16));
                                 break;
                         }
+
                         break;
                     default: // string
                         sb.Append(c);

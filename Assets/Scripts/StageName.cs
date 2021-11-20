@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StageName : MonoBehaviour {
-    [SerializeField] TextMeshProUGUI text = null;
+public class StageName : MonoBehaviour
+{
+    [SerializeField]
+    TextMeshProUGUI text;
 
     // void OnValidate() {
     //     if (gameObject.scene.rootCount != 0) {
@@ -14,14 +13,14 @@ public class StageName : MonoBehaviour {
     //     }
     // }
 
-    void Awake() {
+    void Awake()
+    {
         SetStageName(SceneManager.GetActiveScene().name);
     }
 
-    public void SetStageName(string stageName) {
-        if (stageName.StartsWith("Levels/")) {
-            stageName = stageName.Substring("Levels/".Length);
-        }
+    public void SetStageName(string stageName)
+    {
+        if (stageName.StartsWith("Levels/")) stageName = stageName.Substring("Levels/".Length);
         text.text = stageName;
     }
 }

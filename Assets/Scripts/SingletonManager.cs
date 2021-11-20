@@ -1,22 +1,39 @@
 ﻿using UnityEngine;
 
 [DisallowMultipleComponent]
-public class SingletonManager : MonoBehaviour {
-    [SerializeField] private ConfirmPopup confirmPopup = null;
-    [SerializeField] private ConfigPopup configPopup = null;
-    [SerializeField] private ProgressMessage progressMessage = null;
-    [SerializeField] private FontManager fontManager = null;
-    [SerializeField] private PlatformIapManager platformIapManager = null;
-    [SerializeField] private PlatformAdMobAdsInit platformAdMobAdsInit = null;
-    [SerializeField] private PurchasingInProgress purchasingInProgress = null;
-    [SerializeField] private Data data = null;
+public class SingletonManager : MonoBehaviour
+{
+    [SerializeField]
+    ConfigPopup configPopup;
 
-    void Awake() {
-        confirmPopup = GameObject.FindObjectOfType<ConfirmPopup>();
-        configPopup = GameObject.FindObjectOfType<ConfigPopup>();
-        progressMessage = GameObject.FindObjectOfType<ProgressMessage>();
-        purchasingInProgress = GameObject.FindObjectOfType<PurchasingInProgress>();
-        
+    [SerializeField]
+    ConfirmPopup confirmPopup;
+
+    [SerializeField]
+    Data data;
+
+    [SerializeField]
+    FontManager fontManager;
+
+    [SerializeField]
+    PlatformAdMobAdsInit platformAdMobAdsInit;
+
+    [SerializeField]
+    PlatformIapManager platformIapManager;
+
+    [SerializeField]
+    ProgressMessage progressMessage;
+
+    [SerializeField]
+    PurchasingInProgress purchasingInProgress;
+
+    void Awake()
+    {
+        confirmPopup = FindObjectOfType<ConfirmPopup>();
+        configPopup = FindObjectOfType<ConfigPopup>();
+        progressMessage = FindObjectOfType<ProgressMessage>();
+        purchasingInProgress = FindObjectOfType<PurchasingInProgress>();
+
         ConfirmPopup.instance = confirmPopup;
         ConfigPopup.instance = configPopup;
         ProgressMessage.instance = progressMessage;

@@ -5,13 +5,13 @@ namespace GooglePlayGames.BasicApi
 {
     public class SignInHelper
     {
-        private static int True = 0;
-        private static int False = 1;
-        private const string PromptSignInKey = "prompt_sign_in";
+        const string PromptSignInKey = "prompt_sign_in";
+        static readonly int True = 0;
+        static readonly int False = 1;
 
         public static SignInStatus ToSignInStatus(int code)
         {
-            Dictionary<int, SignInStatus> dictionary = new Dictionary<int, SignInStatus>()
+            var dictionary = new Dictionary<int, SignInStatus>
             {
                 {
                     /* CommonUIStatus.UI_BUSY */ -12, SignInStatus.AlreadyInProgress
@@ -45,15 +45,15 @@ namespace GooglePlayGames.BasicApi
                 },
                 {
                     /* GoogleSignInStatusCodes.SIGN_IN_CURRENTLY_IN_PROGRESS */ 12502, SignInStatus.AlreadyInProgress
-                },
+                }
             };
 
             return dictionary.ContainsKey(code) ? dictionary[code] : SignInStatus.Failed;
         }
 
         /// <summary>
-        /// Used during authentication to save if the user should be prompted to interactive sign in next time they
-        /// try to authenticate with SignInInteractivity.CanPromptOnce.
+        ///     Used during authentication to save if the user should be prompted to interactive sign in next time they
+        ///     try to authenticate with SignInInteractivity.CanPromptOnce.
         /// </summary>
         /// <param name="value"></param>
         public static void SetPromptUiSignIn(bool value)
@@ -62,14 +62,13 @@ namespace GooglePlayGames.BasicApi
         }
 
         /// <summary>
-        /// Used during authentication with SignInInteractivity.CanPromptOnce to understand whether or not the user should be
-        /// prompted to interactive sign in.
+        ///     Used during authentication with SignInInteractivity.CanPromptOnce to understand whether or not the user should be
+        ///     prompted to interactive sign in.
         /// </summary>
         /// <returns></returns>
         public static bool ShouldPromptUiSignIn()
         {
             return PlayerPrefs.GetInt(PromptSignInKey, True) != False;
         }
-
     }
 }

@@ -14,13 +14,13 @@
 //    limitations under the License.
 // </copyright>
 
+using GooglePlayGames.OurUtils;
+
 namespace GooglePlayGames.BasicApi.Nearby
 {
-    using GooglePlayGames.OurUtils;
-
     public struct ConnectionResponse
     {
-        private static readonly byte[] EmptyPayload = new byte[0];
+        static readonly byte[] EmptyPayload = new byte[0];
 
         public enum Status
         {
@@ -32,39 +32,22 @@ namespace GooglePlayGames.BasicApi.Nearby
             ErrorAlreadyConnected
         }
 
-        private readonly long mLocalClientId;
-        private readonly string mRemoteEndpointId;
-        private readonly Status mResponseStatus;
-        private readonly byte[] mPayload;
-
-        private ConnectionResponse(long localClientId, string remoteEndpointId, Status code,
+        ConnectionResponse(long localClientId, string remoteEndpointId, Status code,
             byte[] payload)
         {
-            this.mLocalClientId = localClientId;
-            this.mRemoteEndpointId = Misc.CheckNotNull(remoteEndpointId);
-            this.mResponseStatus = code;
-            this.mPayload = Misc.CheckNotNull(payload);
+            LocalClientId = localClientId;
+            RemoteEndpointId = Misc.CheckNotNull(remoteEndpointId);
+            ResponseStatus = code;
+            Payload = Misc.CheckNotNull(payload);
         }
 
-        public long LocalClientId
-        {
-            get { return mLocalClientId; }
-        }
+        public long LocalClientId { get; }
 
-        public string RemoteEndpointId
-        {
-            get { return mRemoteEndpointId; }
-        }
+        public string RemoteEndpointId { get; }
 
-        public Status ResponseStatus
-        {
-            get { return mResponseStatus; }
-        }
+        public Status ResponseStatus { get; }
 
-        public byte[] Payload
-        {
-            get { return mPayload; }
-        }
+        public byte[] Payload { get; }
 
         public static ConnectionResponse Rejected(long localClientId, string remoteEndpointId)
         {

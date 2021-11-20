@@ -13,30 +13,25 @@
 // limitations under the License.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 
 namespace GoogleMobileAds.Common
 {
     public class MobileAdsEventExecutor : MonoBehaviour
     {
-        public static MobileAdsEventExecutor instance = null;
+        public static MobileAdsEventExecutor instance;
 
-        private static List<Action> adEventsQueue = new List<Action>();
+        static readonly List<Action> adEventsQueue = new List<Action>();
 
-        private volatile static bool adEventsQueueEmpty = true;
+        static volatile bool adEventsQueueEmpty = true;
 
         public static void Initialize()
         {
-            if (IsActive())
-            {
-                return;
-            }
+            if (IsActive()) return;
 
             // Add an invisible game object to the scene
-            GameObject obj = new GameObject("MobileAdsMainThreadExecuter");
+            var obj = new GameObject("MobileAdsMainThreadExecuter");
             obj.hideFlags = HideFlags.HideAndDontSave;
             DontDestroyOnLoad(obj);
             instance = obj.AddComponent<MobileAdsEventExecutor>();
@@ -60,14 +55,12 @@ namespace GoogleMobileAds.Common
                 adEventsQueueEmpty = false;
             }
         }
+
         public void Update()
         {
-            if (adEventsQueueEmpty)
-            {
-                return;
-            }
+            if (adEventsQueueEmpty) return;
 
-            List<Action> stagedAdEventsQueue = new List<Action>();
+            var stagedAdEventsQueue = new List<Action>();
 
             lock (adEventsQueue)
             {
@@ -76,10 +69,7 @@ namespace GoogleMobileAds.Common
                 adEventsQueueEmpty = true;
             }
 
-            foreach (Action stagedEvent in stagedAdEventsQueue)
-            {
-                stagedEvent.Invoke();
-            }
+            foreach (var stagedEvent in stagedAdEventsQueue) stagedEvent.Invoke();
         }
 
         public void OnDisable()

@@ -21,58 +21,37 @@ namespace GooglePlayGames.BasicApi
     public enum ScorePageDirection
     {
         Forward = 1,
-        Backward = 2,
+        Backward = 2
     }
 
     /// <summary>
-    /// Score page token. This holds the internal token used
-    /// to page through the score pages.  The id, collection, and
-    /// timespan are added as a convience, and not actually part of the
-    /// page token returned from the SDK.
+    ///     Score page token. This holds the internal token used
+    ///     to page through the score pages.  The id, collection, and
+    ///     timespan are added as a convience, and not actually part of the
+    ///     page token returned from the SDK.
     /// </summary>
     public class ScorePageToken
     {
-        private string mId;
-        private object mInternalObject;
-        private LeaderboardCollection mCollection;
-        private LeaderboardTimeSpan mTimespan;
-        private ScorePageDirection mDirection;
-
         internal ScorePageToken(object internalObject, string id,
             LeaderboardCollection collection, LeaderboardTimeSpan timespan,
             ScorePageDirection direction)
         {
-            mInternalObject = internalObject;
-            mId = id;
-            mCollection = collection;
-            mTimespan = timespan;
-            mDirection = direction;
+            InternalObject = internalObject;
+            LeaderboardId = id;
+            Collection = collection;
+            TimeSpan = timespan;
+            Direction = direction;
         }
 
-        public LeaderboardCollection Collection
-        {
-            get { return mCollection; }
-        }
+        public LeaderboardCollection Collection { get; }
 
-        public LeaderboardTimeSpan TimeSpan
-        {
-            get { return mTimespan; }
-        }
+        public LeaderboardTimeSpan TimeSpan { get; }
 
-        public ScorePageDirection Direction
-        {
-            get { return mDirection; }
-        }
+        public ScorePageDirection Direction { get; }
 
-        public string LeaderboardId
-        {
-            get { return mId; }
-        }
+        public string LeaderboardId { get; }
 
-        internal object InternalObject
-        {
-            get { return mInternalObject; }
-        }
+        internal object InternalObject { get; }
     }
 }
 #endif

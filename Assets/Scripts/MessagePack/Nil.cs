@@ -36,7 +36,6 @@ namespace MessagePack.Formatters
 
         NilFormatter()
         {
-
         }
 
         public int Serialize(ref byte[] bytes, int offset, Nil value, IFormatterResolver typeResolver)
@@ -57,7 +56,6 @@ namespace MessagePack.Formatters
 
         NullableNilFormatter()
         {
-
         }
 
         public int Serialize(ref byte[] bytes, int offset, Nil? value, IFormatterResolver typeResolver)

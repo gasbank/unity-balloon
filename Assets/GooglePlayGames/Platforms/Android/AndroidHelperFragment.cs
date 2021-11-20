@@ -14,19 +14,18 @@
 //  limitations under the License.
 // </copyright>
 
+using System;
+using GooglePlayGames.BasicApi;
+using GooglePlayGames.BasicApi.SavedGame;
+using UnityEngine;
+using Logger = GooglePlayGames.OurUtils.Logger;
+
 #if UNITY_ANDROID
 namespace GooglePlayGames.Android
 {
-    using GooglePlayGames.BasicApi;
-    using GooglePlayGames.BasicApi.SavedGame;
-    using OurUtils;
-    using UnityEngine;
-    using System;
-    using System.Collections.Generic;
-
     internal class AndroidHelperFragment
     {
-        private const string HelperFragmentClass = "com.google.games.bridge.HelperFragment";
+        const string HelperFragmentClass = "com.google.games.bridge.HelperFragment";
 
         public static AndroidJavaObject GetActivity()
         {
@@ -39,7 +38,7 @@ namespace GooglePlayGames.Android
         public static AndroidJavaObject GetDefaultPopupView()
         {
             using (var helperFragment = new AndroidJavaClass(HelperFragmentClass))
-            using (var activity = AndroidHelperFragment.GetActivity())
+            using (var activity = GetActivity())
             {
                 return helperFragment.CallStatic<AndroidJavaObject>("getDecorView", activity);
             }
@@ -49,13 +48,13 @@ namespace GooglePlayGames.Android
         {
             using (var helperFragment = new AndroidJavaClass(HelperFragmentClass))
             using (var task =
-                helperFragment.CallStatic<AndroidJavaObject>("showAchievementUi", AndroidHelperFragment.GetActivity()))
+                helperFragment.CallStatic<AndroidJavaObject>("showAchievementUi", GetActivity()))
             {
                 AndroidTaskUtils.AddOnSuccessListener<int>(
                     task,
                     uiCode =>
                     {
-                        OurUtils.Logger.d("ShowAchievementsUI result " + uiCode);
+                        Logger.d("ShowAchievementsUI result " + uiCode);
                         cb.Invoke((UIStatus) uiCode);
                     });
 
@@ -63,7 +62,7 @@ namespace GooglePlayGames.Android
                     task,
                     exception =>
                     {
-                        OurUtils.Logger.e("ShowAchievementsUI failed with exception");
+                        Logger.e("ShowAchievementsUI failed with exception");
                         cb.Invoke(UIStatus.InternalError);
                     });
             }
@@ -73,7 +72,7 @@ namespace GooglePlayGames.Android
         {
             using (var helperFragment = new AndroidJavaClass(HelperFragmentClass))
             {
-                helperFragment.CallStatic("showCaptureOverlayUi", AndroidHelperFragment.GetActivity());
+                helperFragment.CallStatic("showCaptureOverlayUi", GetActivity());
             }
         }
 
@@ -82,13 +81,13 @@ namespace GooglePlayGames.Android
             using (var helperFragment = new AndroidJavaClass(HelperFragmentClass))
             using (var task =
                 helperFragment.CallStatic<AndroidJavaObject>("showAllLeaderboardsUi",
-                    AndroidHelperFragment.GetActivity()))
+                    GetActivity()))
             {
                 AndroidTaskUtils.AddOnSuccessListener<int>(
                     task,
                     uiCode =>
                     {
-                        OurUtils.Logger.d("ShowAllLeaderboardsUI result " + uiCode);
+                        Logger.d("ShowAllLeaderboardsUI result " + uiCode);
                         cb.Invoke((UIStatus) uiCode);
                     });
 
@@ -96,7 +95,7 @@ namespace GooglePlayGames.Android
                     task,
                     exception =>
                     {
-                        OurUtils.Logger.e("ShowAllLeaderboardsUI failed with exception");
+                        Logger.e("ShowAllLeaderboardsUI failed with exception");
                         cb.Invoke(UIStatus.InternalError);
                     });
             }
@@ -106,14 +105,14 @@ namespace GooglePlayGames.Android
         {
             using (var helperFragment = new AndroidJavaClass(HelperFragmentClass))
             using (var task = helperFragment.CallStatic<AndroidJavaObject>("showLeaderboardUi",
-                AndroidHelperFragment.GetActivity(), leaderboardId,
+                GetActivity(), leaderboardId,
                 AndroidJavaConverter.ToLeaderboardVariantTimeSpan(timeSpan)))
             {
                 AndroidTaskUtils.AddOnSuccessListener<int>(
                     task,
                     uiCode =>
                     {
-                        OurUtils.Logger.d("ShowLeaderboardUI result " + uiCode);
+                        Logger.d("ShowLeaderboardUI result " + uiCode);
                         cb.Invoke((UIStatus) uiCode);
                     });
 
@@ -121,7 +120,7 @@ namespace GooglePlayGames.Android
                     task,
                     exception =>
                     {
-                        OurUtils.Logger.e("ShowLeaderboardUI failed with exception");
+                        Logger.e("ShowLeaderboardUI failed with exception");
                         cb.Invoke(UIStatus.InternalError);
                     });
             }
@@ -135,17 +134,17 @@ namespace GooglePlayGames.Android
             using (
                 var task = helperFragment.CallStatic<AndroidJavaObject>(
                     "showCompareProfileWithAlternativeNameHintsUI",
-                    AndroidHelperFragment.GetActivity(), playerId, otherPlayerInGameName,
+                    GetActivity(), playerId, otherPlayerInGameName,
                     currentPlayerInGameName))
             {
                 AndroidTaskUtils.AddOnSuccessListener<int>(task, uiCode =>
                 {
-                    OurUtils.Logger.d("ShowCompareProfileWithAlternativeNameHintsUI result " + uiCode);
+                    Logger.d("ShowCompareProfileWithAlternativeNameHintsUI result " + uiCode);
                     cb.Invoke((UIStatus) uiCode);
                 });
                 AndroidTaskUtils.AddOnFailureListener(task, exception =>
                 {
-                    OurUtils.Logger.e("ShowCompareProfileWithAlternativeNameHintsUI failed with exception");
+                    Logger.e("ShowCompareProfileWithAlternativeNameHintsUI failed with exception");
                     cb.Invoke(UIStatus.InternalError);
                 });
             }
@@ -168,18 +167,18 @@ namespace GooglePlayGames.Android
             using (var helperFragment = new AndroidJavaClass(HelperFragmentClass))
             using (
                 var task = helperFragment.CallStatic<AndroidJavaObject>(
-                    "askForLoadFriendsResolution", AndroidHelperFragment.GetActivity(),
+                    "askForLoadFriendsResolution", GetActivity(),
                     friendsSharingConsentException))
             {
                 AndroidTaskUtils.AddOnSuccessListener<int>(task, uiCode =>
                 {
-                    OurUtils.Logger.d("AskForLoadFriendsResolution result " + uiCode);
+                    Logger.d("AskForLoadFriendsResolution result " + uiCode);
                     cb.Invoke((UIStatus) uiCode);
                 });
 
                 AndroidTaskUtils.AddOnFailureListener(task, exception =>
                 {
-                    OurUtils.Logger.e("AskForLoadFriendsResolution failed with exception");
+                    Logger.e("AskForLoadFriendsResolution failed with exception");
                     cb.Invoke(UIStatus.InternalError);
                 });
             }
@@ -190,18 +189,18 @@ namespace GooglePlayGames.Android
         {
             using (var helperFragment = new AndroidJavaClass(HelperFragmentClass))
             using (var task = helperFragment.CallStatic<AndroidJavaObject>("showSelectSnapshotUi",
-                AndroidHelperFragment.GetActivity(), uiTitle, showCreateSaveUI, showDeleteSaveUI,
+                GetActivity(), uiTitle, showCreateSaveUI, showDeleteSaveUI,
                 maxDisplayedSavedGames))
             {
                 AndroidTaskUtils.AddOnSuccessListener<AndroidJavaObject>(
                     task,
                     result =>
                     {
-                        SelectUIStatus status = (SelectUIStatus) result.Get<int>("status");
-                        OurUtils.Logger.d("ShowSelectSnapshotUI result " + status);
+                        var status = (SelectUIStatus) result.Get<int>("status");
+                        Logger.d("ShowSelectSnapshotUI result " + status);
 
-                        AndroidJavaObject javaMetadata = result.Get<AndroidJavaObject>("metadata");
-                        AndroidSnapshotMetadata metadata =
+                        var javaMetadata = result.Get<AndroidJavaObject>("metadata");
+                        var metadata =
                             javaMetadata == null
                                 ? null
                                 : new AndroidSnapshotMetadata(javaMetadata, /* contents= */null);
@@ -213,7 +212,7 @@ namespace GooglePlayGames.Android
                     task,
                     exception =>
                     {
-                        OurUtils.Logger.e("ShowSelectSnapshotUI failed with exception");
+                        Logger.e("ShowSelectSnapshotUI failed with exception");
                         cb.Invoke(SelectUIStatus.InternalError, null);
                     });
             }

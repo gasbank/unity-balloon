@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MessagePack.Internal
+﻿namespace MessagePack.Internal
 {
     public static class ByteArrayComparer
     {
 #if ENABLE_UNSAFE_MSGPACK
-
 #if NETSTANDARD
 
         static readonly bool Is32Bit = (IntPtr.Size == 4);
@@ -102,15 +97,11 @@ namespace MessagePack.Internal
 #endif
         public static bool Equals(byte[] xs, int xsOffset, int xsCount, byte[] ys)
         {
-            if (xs == null || ys == null || xsCount != ys.Length)
-            {
-                return false;
-            }
+            if (xs == null || ys == null || xsCount != ys.Length) return false;
 
-            for (int i = 0; i < ys.Length; i++)
-            {
-                if (xs[xsOffset++] != ys[i]) return false;
-            }
+            for (var i = 0; i < ys.Length; i++)
+                if (xs[xsOffset++] != ys[i])
+                    return false;
 
             return true;
         }
@@ -120,20 +111,15 @@ namespace MessagePack.Internal
 #endif
         public static bool Equals(byte[] xs, int xsOffset, int xsCount, byte[] ys, int ysOffset, int ysCount)
         {
-            if (xs == null || ys == null || xsCount != ysCount)
-            {
-                return false;
-            }
+            if (xs == null || ys == null || xsCount != ysCount) return false;
 
-            for (int i = 0; i < xsCount; i++)
-            {
-                if (xs[xsOffset++] != ys[ysOffset++]) return false;
-            }
+            for (var i = 0; i < xsCount; i++)
+                if (xs[xsOffset++] != ys[ysOffset++])
+                    return false;
 
             return true;
         }
 
 #endif
-
     }
 }

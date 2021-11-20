@@ -8,7 +8,6 @@ namespace MessagePack.Resolvers
 
         PrimitiveObjectResolver()
         {
-
         }
 
         public IMessagePackFormatter<T> GetFormatter<T>()
@@ -22,8 +21,8 @@ namespace MessagePack.Resolvers
 
             static FormatterCache()
             {
-                formatter = (typeof(T) == typeof(object))
-                    ? (IMessagePackFormatter<T>)(object)PrimitiveObjectFormatter.Instance
+                formatter = typeof(T) == typeof(object)
+                    ? (IMessagePackFormatter<T>) PrimitiveObjectFormatter.Instance
                     : null;
             }
         }

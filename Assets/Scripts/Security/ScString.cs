@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Text;
 
 public class ScStringConverter : TypeConverter
@@ -9,9 +10,9 @@ public class ScStringConverter : TypeConverter
         return sourceType == typeof(string);
     }
 
-    public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+    public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
     {
-        return (ScString)(value as string);
+        return (ScString) (value as string);
     }
 }
 
@@ -19,77 +20,85 @@ public class ScStringConverter : TypeConverter
 [Serializable]
 public class ScString
 {
-	public static readonly byte[] k = { 0x19, 0x87, 0x06, 0x22 };
-	public byte[] value;
+    public static readonly byte[] k = {0x19, 0x87, 0x06, 0x22};
+    public byte[] value;
 
-	static bool ByteArrayCompare(byte[] a1, byte[] a2)
-	{
+    public ScString(byte[] value)
+    {
+        this.value = value;
+    }
+
+    public ScString(string value)
+    {
+        this.value = Encoding.UTF8.GetBytes(value);
+        for (var i = 0; i < this.value.Length; i++) this.value[i] ^= k[i % k.Length];
+    }
+
+    static bool ByteArrayCompare(byte[] a1, byte[] a2)
+    {
         if (a1 == a2)
             return true;
         if (a1 == null && a2 != null)
             return false;
         if (a1 != null && a2 == null)
             return false;
-        
+
         if (a1.Length != a2.Length)
-			return false;
+            return false;
 
-		for (int i = 0; i < a1.Length; i++)
-			if (a1[i] != a2[i])
-				return false;
+        for (var i = 0; i < a1.Length; i++)
+            if (a1[i] != a2[i])
+                return false;
 
-		return true;
-	}
-
-    public ScString(byte[] value) {
-        this.value = value;
+        return true;
     }
 
-    public ScString(string value)
-	{
-		this.value = Encoding.UTF8.GetBytes(value);
-		for (int i = 0; i < this.value.Length; i++)
-		{
-			this.value[i] ^= k[i % k.Length];
-		}
-	}
+    // Implicit conversion from string to ScString.
+    public static implicit operator ScString(string x)
+    {
+        return new ScString(x);
+    }
 
-	// Implicit conversion from string to ScString.
-	public static implicit operator ScString(string x) { return new ScString(x); }
-	
-	public static bool operator ==(ScString x, ScString y) { return ByteArrayCompare(x?.value ?? null, y?.value ?? null); }
-	public static bool operator !=(ScString x, ScString y) { return !(x == y); }
+    public static bool operator ==(ScString x, ScString y)
+    {
+        return ByteArrayCompare(x?.value ?? null, y?.value ?? null);
+    }
 
-	// Overload the conversion from ScString to string:
-	public static implicit operator string(ScString x)
-	{
-		byte[] xClone = (byte[])x.value.Clone();
-		for (int i = 0; i < x.value.Length; i++)
-		{
-			xClone[i] ^= k[i % k.Length];
-		}
-		return Encoding.UTF8.GetString(xClone);
-	}
+    public static bool operator !=(ScString x, ScString y)
+    {
+        return !(x == y);
+    }
 
-	// Override the Object.Equals(object o) method:
-	public override bool Equals(object o)
-	{
-		try
-		{
-			return ByteArrayCompare(value, ((ScString)o).value);
-		}
-		catch
-		{
-			return false;
-		}
-	}
+    // Overload the conversion from ScString to string:
+    public static implicit operator string(ScString x)
+    {
+        var xClone = (byte[]) x.value.Clone();
+        for (var i = 0; i < x.value.Length; i++) xClone[i] ^= k[i % k.Length];
+        return Encoding.UTF8.GetString(xClone);
+    }
 
-	// Override the Object.GetHashCode() method:
-	public override int GetHashCode()
-	{
-		return ToString().GetHashCode();
-	}
+    // Override the Object.Equals(object o) method:
+    public override bool Equals(object o)
+    {
+        try
+        {
+            return ByteArrayCompare(value, ((ScString) o).value);
+        }
+        catch
+        {
+            return false;
+        }
+    }
 
-	// Override the ToString method to convert DBBool to a string:
-	public override string ToString() { return this; }
+    // Override the Object.GetHashCode() method:
+    public override int GetHashCode()
+    {
+        return ToString().GetHashCode();
+    }
+
+    // Override the ToString method to convert DBBool to a string:
+    public override string ToString()
+    {
+        return this;
+    }
 }

@@ -21,92 +21,92 @@ namespace GoogleMobileAds
     {
         public static IBannerClient BuildBannerClient()
         {
-            #if UNITY_EDITOR
-                // Testing UNITY_EDITOR first because the editor also responds to the currently
-                // selected platform.
-                return new GoogleMobileAds.Common.DummyClient();
-            #elif UNITY_ANDROID
+#if UNITY_EDITOR
+            // Testing UNITY_EDITOR first because the editor also responds to the currently
+            // selected platform.
+            return new DummyClient();
+#elif UNITY_ANDROID
                 return new GoogleMobileAds.Android.BannerClient();
-            #elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
+#elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
                 return new GoogleMobileAds.iOS.BannerClient();
-            #else
+#else
                 return new GoogleMobileAds.Common.DummyClient();
-            #endif
+#endif
         }
 
         public static IInterstitialClient BuildInterstitialClient()
         {
-            #if UNITY_EDITOR
-                // Testing UNITY_EDITOR first because the editor also responds to the currently
-                // selected platform.
-                return new GoogleMobileAds.Common.DummyClient();
-            #elif UNITY_ANDROID
+#if UNITY_EDITOR
+            // Testing UNITY_EDITOR first because the editor also responds to the currently
+            // selected platform.
+            return new DummyClient();
+#elif UNITY_ANDROID
                 return new GoogleMobileAds.Android.InterstitialClient();
-            #elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
+#elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
                 return new GoogleMobileAds.iOS.InterstitialClient();
-            #else
+#else
                 return new GoogleMobileAds.Common.DummyClient();
-            #endif
+#endif
         }
 
         public static IRewardBasedVideoAdClient BuildRewardBasedVideoAdClient()
         {
-            #if UNITY_EDITOR
-                // Testing UNITY_EDITOR first because the editor also responds to the currently
-                // selected platform.
-                return new GoogleMobileAds.Common.DummyClient();
-            #elif UNITY_ANDROID
+#if UNITY_EDITOR
+            // Testing UNITY_EDITOR first because the editor also responds to the currently
+            // selected platform.
+            return new DummyClient();
+#elif UNITY_ANDROID
                 return new GoogleMobileAds.Android.RewardBasedVideoAdClient();
-            #elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
+#elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
                 return new GoogleMobileAds.iOS.RewardBasedVideoAdClient();
-            #else
+#else
                 return new GoogleMobileAds.Common.DummyClient();
-            #endif
+#endif
         }
 
         public static IRewardedAdClient BuildRewardedAdClient()
         {
-            #if UNITY_EDITOR
-                // Testing UNITY_EDITOR first because the editor also responds to the currently
-                // selected platform.
-                return new GoogleMobileAds.Common.RewardedAdDummyClient();
-            #elif UNITY_ANDROID
+#if UNITY_EDITOR
+            // Testing UNITY_EDITOR first because the editor also responds to the currently
+            // selected platform.
+            return new RewardedAdDummyClient();
+#elif UNITY_ANDROID
                 return new GoogleMobileAds.Android.RewardedAdClient();
-            #elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
+#elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
                 return new GoogleMobileAds.iOS.RewardedAdClient();
-            #else
+#else
                 return new GoogleMobileAds.Common.RewardedAdDummyClient();
-            #endif
+#endif
         }
 
         public static IAdLoaderClient BuildAdLoaderClient(AdLoader adLoader)
         {
-            #if UNITY_EDITOR
-                // Testing UNITY_EDITOR first because the editor also responds to the currently
-                // selected platform.
-                return new GoogleMobileAds.Common.DummyClient();
-            #elif UNITY_ANDROID
+#if UNITY_EDITOR
+            // Testing UNITY_EDITOR first because the editor also responds to the currently
+            // selected platform.
+            return new DummyClient();
+#elif UNITY_ANDROID
                 return new GoogleMobileAds.Android.AdLoaderClient(adLoader);
-            #elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
+#elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
                 return new GoogleMobileAds.iOS.AdLoaderClient(adLoader);
-            #else
+#else
                 return new GoogleMobileAds.Common.DummyClient();
-            #endif
+#endif
         }
 
         public static IMobileAdsClient MobileAdsInstance()
         {
-            #if UNITY_EDITOR
-                // Testing UNITY_EDITOR first because the editor also responds to the currently
-                // selected platform.
-                return new GoogleMobileAds.Common.DummyClient();
-            #elif UNITY_ANDROID
+#if UNITY_EDITOR
+            // Testing UNITY_EDITOR first because the editor also responds to the currently
+            // selected platform.
+            return new DummyClient();
+#elif UNITY_ANDROID
                 return GoogleMobileAds.Android.MobileAdsClient.Instance;
-            #elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
+#elif (UNITY_5 && UNITY_IOS) || UNITY_IPHONE
                 return GoogleMobileAds.iOS.MobileAdsClient.Instance;
-            #else
+#else
                 return new GoogleMobileAds.Common.DummyClient();
-            #endif
+#endif
         }
     }
 }

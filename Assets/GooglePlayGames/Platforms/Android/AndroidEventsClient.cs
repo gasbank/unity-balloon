@@ -1,17 +1,18 @@
+using System;
+using System.Collections.Generic;
+using GooglePlayGames.BasicApi;
+using GooglePlayGames.BasicApi.Events;
+using GooglePlayGames.OurUtils;
+using UnityEngine;
+using Event = GooglePlayGames.BasicApi.Events.Event;
+
 #if UNITY_ANDROID
 
 namespace GooglePlayGames.Android
 {
-    using System;
-    using System.Collections.Generic;
-    using GooglePlayGames.BasicApi;
-    using GooglePlayGames.BasicApi.Events;
-    using GooglePlayGames.OurUtils;
-    using UnityEngine;
-
     internal class AndroidEventsClient : IEventsClient
     {
-        private volatile AndroidJavaObject mEventsClient;
+        volatile AndroidJavaObject mEventsClient;
 
         public AndroidEventsClient(AndroidJavaObject account)
         {
@@ -34,15 +35,13 @@ namespace GooglePlayGames.Android
                     {
                         using (var buffer = annotatedData.Call<AndroidJavaObject>("get"))
                         {
-                            int count = buffer.Call<int>("getCount");
-                            List<IEvent> result = new List<IEvent>();
-                            for (int i = 0; i < count; ++i)
-                            {
+                            var count = buffer.Call<int>("getCount");
+                            var result = new List<IEvent>();
+                            for (var i = 0; i < count; ++i)
                                 using (var eventJava = buffer.Call<AndroidJavaObject>("get", i))
                                 {
                                     result.Add(CreateEvent(eventJava));
                                 }
-                            }
 
                             buffer.Call("release");
                             callback.Invoke(
@@ -67,7 +66,7 @@ namespace GooglePlayGames.Android
         public void FetchEvent(DataSource source, string eventId, Action<ResponseStatus, IEvent> callback)
         {
             callback = ToOnGameThread(callback);
-            string[] ids = new string[1];
+            var ids = new string[1];
             ids[0] = eventId;
             using (var task = mEventsClient.Call<AndroidJavaObject>("loadByIds",
                 source == DataSource.ReadNetworkOnly ? true : false, ids))
@@ -78,9 +77,8 @@ namespace GooglePlayGames.Android
                     {
                         using (var buffer = annotatedData.Call<AndroidJavaObject>("get"))
                         {
-                            int count = buffer.Call<int>("getCount");
+                            var count = buffer.Call<int>("getCount");
                             if (count > 0)
-                            {
                                 using (var eventJava = buffer.Call<AndroidJavaObject>("get", 0))
                                 {
                                     callback.Invoke(
@@ -90,16 +88,13 @@ namespace GooglePlayGames.Android
                                         CreateEvent(eventJava)
                                     );
                                 }
-                            }
                             else
-                            {
                                 callback.Invoke(
                                     annotatedData.Call<bool>("isStale")
                                         ? ResponseStatus.SuccessWithStale
                                         : ResponseStatus.Success,
                                     null
                                 );
-                            }
 
                             buffer.Call("release");
                         }
@@ -120,22 +115,22 @@ namespace GooglePlayGames.Android
             mEventsClient.Call("increment", eventId, (int) stepsToIncrement);
         }
 
-        private static Action<T1, T2> ToOnGameThread<T1, T2>(Action<T1, T2> toConvert)
+        static Action<T1, T2> ToOnGameThread<T1, T2>(Action<T1, T2> toConvert)
         {
             return (val1, val2) => PlayGamesHelperObject.RunOnGameThread(() => toConvert(val1, val2));
         }
 
-        private static BasicApi.Events.Event CreateEvent(AndroidJavaObject eventJava)
+        static Event CreateEvent(AndroidJavaObject eventJava)
         {
-            string id = eventJava.Call<string>("getEventId");
-            string name = eventJava.Call<string>("getName");
-            string description = eventJava.Call<string>("getDescription");
-            string imageUrl = eventJava.Call<string>("getIconImageUrl");
-            ulong currentCount = (ulong) eventJava.Call<long>("getValue");
-            EventVisibility visibility = eventJava.Call<bool>("isVisible")
+            var id = eventJava.Call<string>("getEventId");
+            var name = eventJava.Call<string>("getName");
+            var description = eventJava.Call<string>("getDescription");
+            var imageUrl = eventJava.Call<string>("getIconImageUrl");
+            var currentCount = (ulong) eventJava.Call<long>("getValue");
+            var visibility = eventJava.Call<bool>("isVisible")
                 ? EventVisibility.Revealed
                 : EventVisibility.Hidden;
-            return new BasicApi.Events.Event(id, name, description, imageUrl, currentCount, visibility);
+            return new Event(id, name, description, imageUrl, currentCount, visibility);
         }
     }
 }

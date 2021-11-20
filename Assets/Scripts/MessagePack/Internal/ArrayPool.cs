@@ -16,29 +16,23 @@ namespace MessagePack.Internal
     {
         readonly int bufferLength;
         readonly object gate;
-        int index;
         T[][] buffers;
+        int index;
 
         public ArrayPool(int bufferLength)
         {
             this.bufferLength = bufferLength;
-            this.buffers = new T[4][];
-            this.gate = new object();
+            buffers = new T[4][];
+            gate = new object();
         }
 
         public T[] Rent()
         {
             lock (gate)
             {
-                if (index >= buffers.Length)
-                {
-                    Array.Resize(ref buffers, buffers.Length * 2);
-                }
+                if (index >= buffers.Length) Array.Resize(ref buffers, buffers.Length * 2);
 
-                if (buffers[index] == null)
-                {
-                    buffers[index] = new T[bufferLength];
-                }
+                if (buffers[index] == null) buffers[index] = new T[bufferLength];
 
                 var buffer = buffers[index];
                 buffers[index] = null;
@@ -50,17 +44,11 @@ namespace MessagePack.Internal
 
         public void Return(T[] array)
         {
-            if (array.Length != bufferLength)
-            {
-                throw new InvalidOperationException("return buffer is not from pool");
-            }
+            if (array.Length != bufferLength) throw new InvalidOperationException("return buffer is not from pool");
 
             lock (gate)
             {
-                if (index != 0)
-                {
-                    buffers[--index] = array;
-                }
+                if (index != 0) buffers[--index] = array;
             }
         }
     }

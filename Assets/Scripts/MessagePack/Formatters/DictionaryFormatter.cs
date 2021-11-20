@@ -1,7 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 
 #if NETSTANDARD
 using System.Collections.Concurrent;
@@ -10,7 +7,6 @@ using System.Collections.Concurrent;
 namespace MessagePack.Formatters
 {
 #if NETSTANDARD
-
     // unfortunately, can't use IDictionary<KVP> because supports IReadOnlyDictionary.
     public abstract class DictionaryFormatterBase<TKey, TValue, TIntermediate, TEnumerator, TDictionary> : IMessagePackFormatter<TDictionary>
         where TDictionary : IEnumerable<KeyValuePair<TKey, TValue>>
@@ -276,42 +272,38 @@ namespace MessagePack.Formatters
 
 #else
 
-    public abstract class DictionaryFormatterBase<TKey, TValue, TIntermediate, TDictionary> : IMessagePackFormatter<TDictionary>
+    public abstract class
+        DictionaryFormatterBase<TKey, TValue, TIntermediate, TDictionary> : IMessagePackFormatter<TDictionary>
         where TDictionary : IDictionary<TKey, TValue>
     {
         public int Serialize(ref byte[] bytes, int offset, TDictionary value, IFormatterResolver formatterResolver)
         {
-            if (value == null)
+            if (value == null) return MessagePackBinary.WriteNil(ref bytes, offset);
+
+            var startOffset = offset;
+            var keyFormatter = formatterResolver.GetFormatterWithVerify<TKey>();
+            var valueFormatter = formatterResolver.GetFormatterWithVerify<TValue>();
+
+            var count = value.Count;
+
+            offset += MessagePackBinary.WriteMapHeader(ref bytes, offset, count);
+
+            var e = value.GetEnumerator();
+            try
             {
-                return MessagePackBinary.WriteNil(ref bytes, offset);
+                while (e.MoveNext())
+                {
+                    var item = e.Current;
+                    offset += keyFormatter.Serialize(ref bytes, offset, item.Key, formatterResolver);
+                    offset += valueFormatter.Serialize(ref bytes, offset, item.Value, formatterResolver);
+                }
             }
-            else
+            finally
             {
-                var startOffset = offset;
-                var keyFormatter = formatterResolver.GetFormatterWithVerify<TKey>();
-                var valueFormatter = formatterResolver.GetFormatterWithVerify<TValue>();
-
-                var count = value.Count;
-
-                offset += MessagePackBinary.WriteMapHeader(ref bytes, offset, count);
-
-                var e = value.GetEnumerator();
-                try
-                {
-                    while (e.MoveNext())
-                    {
-                        var item = e.Current;
-                        offset += keyFormatter.Serialize(ref bytes, offset, item.Key, formatterResolver);
-                        offset += valueFormatter.Serialize(ref bytes, offset, item.Value, formatterResolver);
-                    }
-                }
-                finally
-                {
-                    e.Dispose();
-                }
-
-                return offset - startOffset;
+                e.Dispose();
             }
+
+            return offset - startOffset;
         }
 
         public TDictionary Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
@@ -319,32 +311,31 @@ namespace MessagePack.Formatters
             if (MessagePackBinary.IsNil(bytes, offset))
             {
                 readSize = 1;
-                return default(TDictionary);
+                return default;
             }
-            else
-            {
-                var startOffset = offset;
-                var keyFormatter = formatterResolver.GetFormatterWithVerify<TKey>();
-                var valueFormatter = formatterResolver.GetFormatterWithVerify<TValue>();
 
-                var len = MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
+            var startOffset = offset;
+            var keyFormatter = formatterResolver.GetFormatterWithVerify<TKey>();
+            var valueFormatter = formatterResolver.GetFormatterWithVerify<TValue>();
+
+            var len = MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
+            offset += readSize;
+
+            var dict = Create(len);
+            for (var i = 0; i < len; i++)
+            {
+                var key = keyFormatter.Deserialize(bytes, offset, formatterResolver, out readSize);
                 offset += readSize;
 
-                var dict = Create(len);
-                for (int i = 0; i < len; i++)
-                {
-                    var key = keyFormatter.Deserialize(bytes, offset, formatterResolver, out readSize);
-                    offset += readSize;
+                var value = valueFormatter.Deserialize(bytes, offset, formatterResolver, out readSize);
+                offset += readSize;
 
-                    var value = valueFormatter.Deserialize(bytes, offset, formatterResolver, out readSize);
-                    offset += readSize;
-
-                    Add(dict, i, key, value);
-                }
-                readSize = offset - startOffset;
-
-                return Complete(dict);
+                Add(dict, i, key, value);
             }
+
+            readSize = offset - startOffset;
+
+            return Complete(dict);
         }
 
         // abstraction for deserialize
@@ -353,7 +344,8 @@ namespace MessagePack.Formatters
         protected abstract TDictionary Complete(TIntermediate intermediateCollection);
     }
 
-    public sealed class DictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, Dictionary<TKey, TValue>, Dictionary<TKey, TValue>>
+    public sealed class DictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue,
+        Dictionary<TKey, TValue>, Dictionary<TKey, TValue>>
     {
         protected override void Add(Dictionary<TKey, TValue> collection, int index, TKey key, TValue value)
         {
@@ -371,7 +363,9 @@ namespace MessagePack.Formatters
         }
     }
 
-    public sealed class GenericDictionaryFormatter<TKey, TValue, TDictionary> : DictionaryFormatterBase<TKey, TValue, TDictionary, TDictionary>
+    public sealed class
+        GenericDictionaryFormatter<TKey, TValue, TDictionary> : DictionaryFormatterBase<TKey, TValue, TDictionary,
+            TDictionary>
         where TDictionary : IDictionary<TKey, TValue>, new()
     {
         protected override void Add(TDictionary collection, int index, TKey key, TValue value)
@@ -390,7 +384,8 @@ namespace MessagePack.Formatters
         }
     }
 
-    public sealed class InterfaceDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, Dictionary<TKey, TValue>, IDictionary<TKey, TValue>>
+    public sealed class InterfaceDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue,
+        Dictionary<TKey, TValue>, IDictionary<TKey, TValue>>
     {
         protected override void Add(Dictionary<TKey, TValue> collection, int index, TKey key, TValue value)
         {
@@ -408,7 +403,8 @@ namespace MessagePack.Formatters
         }
     }
 
-    public sealed class SortedListFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, SortedList<TKey, TValue>,  SortedList<TKey, TValue>>
+    public sealed class SortedListFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue,
+        SortedList<TKey, TValue>, SortedList<TKey, TValue>>
     {
         protected override void Add(SortedList<TKey, TValue> collection, int index, TKey key, TValue value)
         {
@@ -426,14 +422,16 @@ namespace MessagePack.Formatters
         }
     }
 
-    public sealed class SortedDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue, SortedDictionary<TKey, TValue>, SortedDictionary<TKey, TValue>>
+    public sealed class SortedDictionaryFormatter<TKey, TValue> : DictionaryFormatterBase<TKey, TValue,
+        SortedDictionary<TKey, TValue>, SortedDictionary<TKey, TValue>>
     {
         protected override void Add(SortedDictionary<TKey, TValue> collection, int index, TKey key, TValue value)
         {
             collection.Add(key, value);
         }
 
-        protected override SortedDictionary<TKey, TValue> Complete(SortedDictionary<TKey, TValue> intermediateCollection)
+        protected override SortedDictionary<TKey, TValue> Complete(
+            SortedDictionary<TKey, TValue> intermediateCollection)
         {
             return intermediateCollection;
         }
@@ -445,5 +443,4 @@ namespace MessagePack.Formatters
     }
 
 #endif
-
 }

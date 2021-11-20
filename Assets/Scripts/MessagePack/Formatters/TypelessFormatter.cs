@@ -1,5 +1,4 @@
 ﻿#if NETSTANDARD
-
 using MessagePack.Internal;
 using System;
 using System.Collections;
@@ -18,17 +17,21 @@ namespace MessagePack.Formatters
     {
         public const sbyte ExtensionTypeCode = 100;
 
-        static readonly Regex SubtractFullNameRegex = new Regex(@", Version=\d+.\d+.\d+.\d+, Culture=\w+, PublicKeyToken=\w+", RegexOptions.Compiled);
+        static readonly Regex SubtractFullNameRegex =
+ new Regex(@", Version=\d+.\d+.\d+.\d+, Culture=\w+, PublicKeyToken=\w+", RegexOptions.Compiled);
 
         delegate int SerializeMethod(object dynamicContractlessFormatter, ref byte[] bytes, int offset, object value, IFormatterResolver formatterResolver);
         delegate object DeserializeMethod(object dynamicContractlessFormatter, byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize);
 
         public static readonly IMessagePackFormatter<object> Instance = new TypelessFormatter();
 
-        static readonly ThreadsafeTypeKeyHashTable<KeyValuePair<object, SerializeMethod>> serializers = new ThreadsafeTypeKeyHashTable<KeyValuePair<object, SerializeMethod>>();
-        static readonly ThreadsafeTypeKeyHashTable<KeyValuePair<object, DeserializeMethod>> deserializers = new ThreadsafeTypeKeyHashTable<KeyValuePair<object, DeserializeMethod>>();
+        static readonly ThreadsafeTypeKeyHashTable<KeyValuePair<object, SerializeMethod>> serializers =
+ new ThreadsafeTypeKeyHashTable<KeyValuePair<object, SerializeMethod>>();
+        static readonly ThreadsafeTypeKeyHashTable<KeyValuePair<object, DeserializeMethod>> deserializers =
+ new ThreadsafeTypeKeyHashTable<KeyValuePair<object, DeserializeMethod>>();
         static readonly ThreadsafeTypeKeyHashTable<byte[]> typeNameCache = new ThreadsafeTypeKeyHashTable<byte[]>();
-        static readonly AsymmetricKeyHashTable<byte[], ArraySegment<byte>, Type> typeCache = new AsymmetricKeyHashTable<byte[], ArraySegment<byte>, Type>(new StringArraySegmentByteAscymmetricEqualityComparer());
+        static readonly AsymmetricKeyHashTable<byte[], ArraySegment<byte>, Type> typeCache =
+ new AsymmetricKeyHashTable<byte[], ArraySegment<byte>, Type>(new StringArraySegmentByteAscymmetricEqualityComparer());
 
         static readonly HashSet<string> blacklistCheck;
         static readonly HashSet<Type> useBuiltinTypes = new HashSet<Type>()
@@ -191,7 +194,8 @@ namespace MessagePack.Formatters
                         var param3 = Expression.Parameter(typeof(object), "value");
                         var param4 = Expression.Parameter(typeof(IFormatterResolver), "formatterResolver");
 
-                        var serializeMethodInfo = formatterType.GetRuntimeMethod("Serialize", new[] { typeof(byte[]).MakeByRefType(), typeof(int), type, typeof(IFormatterResolver) });
+                        var serializeMethodInfo =
+ formatterType.GetRuntimeMethod("Serialize", new[] { typeof(byte[]).MakeByRefType(), typeof(int), type, typeof(IFormatterResolver) });
 
                         var body = Expression.Call(
                             Expression.Convert(param0, formatterType),
@@ -201,7 +205,8 @@ namespace MessagePack.Formatters
                             ti.IsValueType ? Expression.Unbox(param3, type) : Expression.Convert(param3, type),
                             param4);
 
-                        var lambda = Expression.Lambda<SerializeMethod>(body, param0, param1, param2, param3, param4).Compile();
+                        var lambda =
+ Expression.Lambda<SerializeMethod>(body, param0, param1, param2, param3, param4).Compile();
 
                         formatterAndDelegate = new KeyValuePair<object, SerializeMethod>(formatter, lambda);
                         serializers.TryAdd(type, formatterAndDelegate);
@@ -304,7 +309,8 @@ namespace MessagePack.Formatters
                         var param3 = Expression.Parameter(typeof(IFormatterResolver), "formatterResolver");
                         var param4 = Expression.Parameter(typeof(int).MakeByRefType(), "readSize");
 
-                        var deserializeMethodInfo = formatterType.GetRuntimeMethod("Deserialize", new[] { typeof(byte[]), typeof(int), typeof(IFormatterResolver), typeof(int).MakeByRefType() });
+                        var deserializeMethodInfo =
+ formatterType.GetRuntimeMethod("Deserialize", new[] { typeof(byte[]), typeof(int), typeof(IFormatterResolver), typeof(int).MakeByRefType() });
 
                         var deserialize = Expression.Call(
                             Expression.Convert(param0, formatterType),
@@ -317,7 +323,8 @@ namespace MessagePack.Formatters
                         Expression body = deserialize;
                         if (ti.IsValueType)
                             body = Expression.Convert(deserialize, typeof(object));
-                        var lambda = Expression.Lambda<DeserializeMethod>(body, param0, param1, param2, param3, param4).Compile();
+                        var lambda =
+ Expression.Lambda<DeserializeMethod>(body, param0, param1, param2, param3, param4).Compile();
 
                         formatterAndDelegate = new KeyValuePair<object, DeserializeMethod>(formatter, lambda);
                         deserializers.TryAdd(type, formatterAndDelegate);

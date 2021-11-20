@@ -1,12 +1,13 @@
-﻿using MessagePack.Formatters;
-using System;
+﻿using System;
 using System.Reflection;
-using System.Linq; // require UNITY_WSA
+using MessagePack.Formatters;
+
+// require UNITY_WSA
 
 namespace MessagePack.Resolvers
 {
     /// <summary>
-    /// Get formatter from [MessaegPackFromatter] attribute.
+    ///     Get formatter from [MessaegPackFromatter] attribute.
     /// </summary>
     public sealed class AttributeFormatterResolver : IFormatterResolver
     {
@@ -14,7 +15,6 @@ namespace MessagePack.Resolvers
 
         AttributeFormatterResolver()
         {
-
         }
 
         public IMessagePackFormatter<T> GetFormatter<T>()
@@ -29,23 +29,17 @@ namespace MessagePack.Resolvers
             static FormatterCache()
             {
 #if UNITY_WSA && !NETFX_CORE
-                var attr = (MessagePackFormatterAttribute)typeof(T).GetCustomAttributes(typeof(MessagePackFormatterAttribute), true).FirstOrDefault();
+                var attr =
+ (MessagePackFormatterAttribute)typeof(T).GetCustomAttributes(typeof(MessagePackFormatterAttribute), true).FirstOrDefault();
 #else
                 var attr = typeof(T).GetTypeInfo().GetCustomAttribute<MessagePackFormatterAttribute>();
 #endif
-                if (attr == null)
-                {
-                    return;
-                }
+                if (attr == null) return;
 
                 if (attr.Arguments == null)
-                {
-                    formatter = (IMessagePackFormatter<T>)Activator.CreateInstance(attr.FormatterType);
-                }
+                    formatter = (IMessagePackFormatter<T>) Activator.CreateInstance(attr.FormatterType);
                 else
-                {
-                    formatter = (IMessagePackFormatter<T>)Activator.CreateInstance(attr.FormatterType, attr.Arguments);
-                }
+                    formatter = (IMessagePackFormatter<T>) Activator.CreateInstance(attr.FormatterType, attr.Arguments);
             }
         }
     }

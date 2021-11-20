@@ -1,46 +1,67 @@
 ﻿using UnityEngine;
 
 [ExecuteInEditMode]
-public class HotairBalloonCamera : MonoBehaviour {
-    [SerializeField] Transform followTarget = null;
-    [SerializeField] HotairBalloon hotairBalloon = null;
-    [SerializeField] Vector3 followVelocity;
-    [SerializeField] float followSmoothMaxTime = 0.35f;
-    [SerializeField] Camera cam = null;
-    [SerializeField] GameObject limitCubeRight = null;
+public class HotairBalloonCamera : MonoBehaviour
+{
+    [SerializeField]
+    Camera cam;
 
-    void OnValidate() {
+    [SerializeField]
+    float followSmoothMaxTime = 0.35f;
+
+    [SerializeField]
+    Transform followTarget;
+
+    [SerializeField]
+    Vector3 followVelocity;
+
+    [SerializeField]
+    HotairBalloon hotairBalloon;
+
+    [SerializeField]
+    GameObject limitCubeRight;
+
+    void OnValidate()
+    {
         UpdateLimitCubeRightReference();
     }
 
-    private void UpdateLimitCubeRightReference() {
+    void UpdateLimitCubeRightReference()
+    {
         limitCubeRight = GameObject.Find("Limit Cube Group/Limit Cube (Right)");
     }
 
-    void Awake() {
+    void Awake()
+    {
         UpdateLimitCubeRightReference();
     }
 
-    void Start() {
+    void Start()
+    {
         UpdateHotairBalloon();
     }
 
-    public void UpdateHotairBalloon() {
-        hotairBalloon = GameObject.FindObjectOfType<HotairBalloon>();
+    public void UpdateHotairBalloon()
+    {
+        hotairBalloon = FindObjectOfType<HotairBalloon>();
 
-        if (hotairBalloon != null) {
+        if (hotairBalloon != null)
+        {
             var balloonCameraTarget = hotairBalloon.transform.Find("Balloon/Balloon Camera Target");
-            if (balloonCameraTarget != null) {
-                followTarget = balloonCameraTarget.transform;
-            }
+            if (balloonCameraTarget != null) followTarget = balloonCameraTarget.transform;
         }
     }
 
-    void LateUpdate() {
-        if (followTarget != null && hotairBalloon != null) {
+    void LateUpdate()
+    {
+        if (followTarget != null && hotairBalloon != null)
+        {
             var followTargetPosition = new Vector3(transform.position.x, followTarget.position.y, transform.position.z);
-            var followSmoothTime = hotairBalloon.InFeverGaugeNotEmpty ? hotairBalloon.FeverGaugeRatio * followSmoothMaxTime : 0;
-            transform.position = Vector3.SmoothDamp(transform.position, followTargetPosition, ref followVelocity, followSmoothTime);
+            var followSmoothTime = hotairBalloon.InFeverGaugeNotEmpty
+                ? hotairBalloon.FeverGaugeRatio * followSmoothMaxTime
+                : 0;
+            transform.position = Vector3.SmoothDamp(transform.position, followTargetPosition, ref followVelocity,
+                followSmoothTime);
         }
 
         var fovYDeg = cam.fieldOfView;
@@ -48,7 +69,8 @@ public class HotairBalloonCamera : MonoBehaviour {
 
         //SushiDebug.Log($"fovYDeg = {fovYDeg}, fovXDeg = {fovXDeg}, aspect = {cam.aspect}");
 
-        if (limitCubeRight != null) {
+        if (limitCubeRight != null)
+        {
             var l = limitCubeRight.GetComponent<Collider>().bounds.min.x;
             var d = Mathf.Abs(limitCubeRight.transform.position.z - transform.position.z);
             var targetFovXDeg = 2 * Mathf.Atan(l / d) * Mathf.Rad2Deg;
@@ -57,11 +79,13 @@ public class HotairBalloonCamera : MonoBehaviour {
         }
     }
 
-    public static float GetFovXDegFromFovYDeg(float fovYDeg, float aspect) {
+    public static float GetFovXDegFromFovYDeg(float fovYDeg, float aspect)
+    {
         return 2 * Mathf.Atan(Mathf.Tan(fovYDeg * Mathf.Deg2Rad / 2) * aspect) * Mathf.Rad2Deg;
     }
 
-    public static float GetFovYDegFromFovXDeg(float fovXDeg, float aspect) {
+    public static float GetFovYDegFromFovXDeg(float fovXDeg, float aspect)
+    {
         return 2 * Mathf.Atan(Mathf.Tan(fovXDeg * Mathf.Deg2Rad / 2) / aspect) * Mathf.Rad2Deg;
     }
 }

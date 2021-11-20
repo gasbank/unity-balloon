@@ -14,93 +14,65 @@
 //    limitations under the License.
 // </copyright>
 
+using System;
+using UnityEngine;
+
 namespace GooglePlayGames.OurUtils
 {
-    using System;
-    using UnityEngine;
-
     public static class Misc
     {
         public static bool BuffersAreIdentical(byte[] a, byte[] b)
         {
             if (a == b)
-            {
                 // not only identical but the very same!
                 return true;
-            }
 
             if (a == null || b == null)
-            {
                 // one of them is null, the other one isn't
                 return false;
-            }
 
-            if (a.Length != b.Length)
-            {
-                return false;
-            }
+            if (a.Length != b.Length) return false;
 
-            for (int i = 0; i < a.Length; i++)
-            {
+            for (var i = 0; i < a.Length; i++)
                 if (a[i] != b[i])
-                {
                     return false;
-                }
-            }
 
             return true;
         }
 
         public static byte[] GetSubsetBytes(byte[] array, int offset, int length)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException("array");
-            }
+            if (array == null) throw new ArgumentNullException("array");
 
-            if (offset < 0 || offset >= array.Length)
-            {
-                throw new ArgumentOutOfRangeException("offset");
-            }
+            if (offset < 0 || offset >= array.Length) throw new ArgumentOutOfRangeException("offset");
 
-            if (length < 0 || (array.Length - offset) < length)
-            {
-                throw new ArgumentOutOfRangeException("length");
-            }
+            if (length < 0 || array.Length - offset < length) throw new ArgumentOutOfRangeException("length");
 
-            if (offset == 0 && length == array.Length)
-            {
-                return array;
-            }
+            if (offset == 0 && length == array.Length) return array;
 
-            byte[] piece = new byte[length];
+            var piece = new byte[length];
             Array.Copy(array, offset, piece, 0, length);
             return piece;
         }
 
         public static T CheckNotNull<T>(T value)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException();
-            }
+            if (value == null) throw new ArgumentNullException();
 
             return value;
         }
 
         public static T CheckNotNull<T>(T value, string paramName)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(paramName);
-            }
+            if (value == null) throw new ArgumentNullException(paramName);
 
             return value;
         }
 
-        public static bool IsApiException(AndroidJavaObject exception) {
+        public static bool IsApiException(AndroidJavaObject exception)
+        {
             var exceptionClassName = exception.Call<AndroidJavaObject>("getClass")
-                .Call<String>("getName");
+                .Call<string>("getName");
             return exceptionClassName == "com.google.android.gms.common.api.ApiException";
         }
     }

@@ -1,5 +1,4 @@
 ﻿#if NETSTANDARD
-
 using System;
 using System.Runtime.CompilerServices;
 

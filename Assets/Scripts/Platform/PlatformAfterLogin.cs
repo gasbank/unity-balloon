@@ -2,59 +2,54 @@
 using System.Collections;
 using System.Text;
 using GooglePlayGames;
-//using GooglePlayGames.BasicApi;
 using GooglePlayGames.BasicApi.SavedGame;
 using UnityEngine;
 using UnityEngine.UI;
+//using GooglePlayGames.BasicApi;
 
 [DisallowMultipleComponent]
 public class PlatformAfterLogin : MonoBehaviour
 {
-    public int leaderboardScore1;
-    public int leaderboardScore2;
     public int daysPlayed;
+    public int leaderboardScore1;
+
+    public int leaderboardScore2;
+
     //public CanvasGroup rootCanvasGroup;
     //public CanvasGroup afterLoginCanvasGroup;
     public Text loginStateText;
 
-    private void Awake()
+    void Awake()
     {
         //afterLoginCanvasGroup.interactable = false;
     }
 
     IEnumerator Start()
     {
-        if (loginStateText)
-        {
-            loginStateText.text = "INIT";
-        }
+        if (loginStateText) loginStateText.text = "INIT";
 
         while (true)
         {
             yield return new WaitUntil(() => Social.localUser.authenticated);
 
-            if (loginStateText)
-            {
-                loginStateText.text = "LOGGED IN";
-            }
+            if (loginStateText) loginStateText.text = "LOGGED IN";
             //afterLoginCanvasGroup.interactable = true;
 
             yield return new WaitUntil(() => !Social.localUser.authenticated);
 
-            if (loginStateText)
-            {
-                loginStateText.text = "LOGGED OUT";
-            }
+            if (loginStateText) loginStateText.text = "LOGGED OUT";
             //afterLoginCanvasGroup.interactable = false;
         }
     }
 
     public void ShowLeaderboard()
     {
-        if (Platform.instance.CheckLoadSavePrecondition(TextHelper.GetText("platform_logging_in"), () => PlatformSaveUtil.StartLoginAndDoSomething(() => { ConfirmPopup.instance.Close(); ExecuteShowLeaderboard(); }), ShowLoginFailed) == false)
-        {
-            return;
-        }
+        if (Platform.instance.CheckLoadSavePrecondition(TextHelper.GetText("platform_logging_in"), () =>
+                PlatformSaveUtil.StartLoginAndDoSomething(() =>
+                {
+                    ConfirmPopup.instance.Close();
+                    ExecuteShowLeaderboard();
+                }), ShowLoginFailed) == false) return;
 
         ExecuteShowLeaderboard();
         ProgressMessage.instance.Close();
@@ -63,11 +58,10 @@ public class PlatformAfterLogin : MonoBehaviour
     void ExecuteShowLeaderboard()
     {
         BalloonLogManager.Add(BalloonLogEntry.Type.GameOpenLeaderboard, 0, 0);
-        if (Application.isEditor) {
+        if (Application.isEditor)
             ShortMessage.instance.Show("Leaderboard not supported in Editor");
-        } else {
+        else
             Social.ShowLeaderboardUI();
-        }
     }
 
     void ShowLoginFailed()
@@ -77,32 +71,31 @@ public class PlatformAfterLogin : MonoBehaviour
 
     public void ShowAchievements()
     {
-        if (Platform.instance.CheckLoadSavePrecondition(TextHelper.GetText("platform_logging_in"), () => PlatformSaveUtil.StartLoginAndDoSomething(() => { ConfirmPopup.instance.Close(); ExecuteShowAchievements(); }), ShowLoginFailed) == false)
-        {
-            return;
-        }
+        if (Platform.instance.CheckLoadSavePrecondition(TextHelper.GetText("platform_logging_in"), () =>
+                PlatformSaveUtil.StartLoginAndDoSomething(() =>
+                {
+                    ConfirmPopup.instance.Close();
+                    ExecuteShowAchievements();
+                }), ShowLoginFailed) == false) return;
 
         ExecuteShowAchievements();
         ProgressMessage.instance.Close();
     }
 
-    void ExecuteShowAchievements() {
+    void ExecuteShowAchievements()
+    {
         BalloonLogManager.Add(BalloonLogEntry.Type.GameOpenAchievements, 0, 0);
         if (Application.isEditor)
-        {
             ShortMessage.instance.Show("Achievements not supported in Editor");
-        }
         else
-        {
             Social.ShowAchievementsUI();
-        }
     }
 
     public void UnlockAchievement1()
     {
         //rootCanvasGroup.interactable = false;
-        string id = Application.platform == RuntimePlatform.Android ? "CgkI87XJzNYNEAIQAQ" : "finishTutorial1";
-        Social.ReportProgress(id, 100.0f, (bool success) =>
+        var id = Application.platform == RuntimePlatform.Android ? "CgkI87XJzNYNEAIQAQ" : "finishTutorial1";
+        Social.ReportProgress(id, 100.0f, success =>
         {
             SushiDebug.LogFormat("Unlock achievement 1 result: {0}", success);
             //rootCanvasGroup.interactable = true;
@@ -112,8 +105,8 @@ public class PlatformAfterLogin : MonoBehaviour
     public void UnlockAchievement2()
     {
         //rootCanvasGroup.interactable = false;
-        string id = Application.platform == RuntimePlatform.Android ? "CgkI87XJzNYNEAIQAQ" : "share_screenshot2";
-        Social.ReportProgress(id, 100.0f, (bool success) =>
+        var id = Application.platform == RuntimePlatform.Android ? "CgkI87XJzNYNEAIQAQ" : "share_screenshot2";
+        Social.ReportProgress(id, 100.0f, success =>
         {
             SushiDebug.LogFormat("Unlock achievement 2 result: {0}", success);
             //rootCanvasGroup.interactable = true;
@@ -124,7 +117,7 @@ public class PlatformAfterLogin : MonoBehaviour
     {
         //rootCanvasGroup.interactable = false;
         leaderboardScore1++;
-        Social.ReportScore(leaderboardScore1, "CgkI87XJzNYNEAIQAw", (bool success) =>
+        Social.ReportScore(leaderboardScore1, "CgkI87XJzNYNEAIQAw", success =>
         {
             SushiDebug.LogFormat("PostLeaderboardScore1 result: {0}, score: {1}", success, leaderboardScore1);
             //rootCanvasGroup.interactable = true;
@@ -135,7 +128,7 @@ public class PlatformAfterLogin : MonoBehaviour
     {
         //rootCanvasGroup.interactable = false;
         leaderboardScore2++;
-        Social.ReportScore(leaderboardScore2, "CgkI87XJzNYNEAIQBA", (bool success) =>
+        Social.ReportScore(leaderboardScore2, "CgkI87XJzNYNEAIQBA", success =>
         {
             SushiDebug.LogFormat("PostLeaderboardScore2 result: {0}, score: {1}", success, leaderboardScore2);
             //rootCanvasGroup.interactable = true;
@@ -144,7 +137,8 @@ public class PlatformAfterLogin : MonoBehaviour
 
     public void ShowSavedGameSelectUI()
     {
-        if (Application.isEditor || Application.platform != RuntimePlatform.Android) {
+        if (Application.isEditor || Application.platform != RuntimePlatform.Android)
+        {
             ShortMessage.instance.Show("Saved Game Select UI not supported!");
             return;
         }
@@ -152,23 +146,24 @@ public class PlatformAfterLogin : MonoBehaviour
         //rootCanvasGroup.interactable = false;
 
         uint maxNumToDisplay = 5;
-        bool allowCreateNew = false; // 새로운 세이브 파일 만드는 것 지원하지 않는다.
-        bool allowDelete = true; // 삭제는 지원하자.
+        var allowCreateNew = false; // 새로운 세이브 파일 만드는 것 지원하지 않는다.
+        var allowDelete = true; // 삭제는 지원하자.
 
-        if (PlayGamesPlatform.Instance != null) {
-            ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+        if (PlayGamesPlatform.Instance != null)
+        {
+            var savedGameClient = PlayGamesPlatform.Instance.SavedGame;
             if (savedGameClient != null)
-            {
                 savedGameClient.ShowSelectSavedGameUI(
                     "Select saved game",
                     maxNumToDisplay,
                     allowCreateNew,
                     allowDelete,
                     OnSavedGameSelected);
-            } else {
+            else
                 Debug.LogWarning("PlayGamesPlatform.Instance.SavedGame null");
-            }
-        } else {
+        }
+        else
+        {
             Debug.LogWarning("PlayGamesPlatform.Instance null");
         }
 #endif
@@ -188,6 +183,7 @@ public class PlatformAfterLogin : MonoBehaviour
             // handle cancel or error
             SushiDebug.LogFormat("Save game selection canceled! - {0}", status);
         }
+
         //rootCanvasGroup.interactable = true;
     }
 
@@ -206,26 +202,20 @@ public class PlatformAfterLogin : MonoBehaviour
     void OpenSavedGameAndWrite(string filename)
     {
 #if !NO_GPGS
-        ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+        var savedGameClient = PlayGamesPlatform.Instance.SavedGame;
         if (savedGameClient != null)
-        {
             PlatformAndroid.Open(
                 savedGameClient,
                 true,
                 null,
                 OnSavedGameOpenedAndWrite);
-        }
-        else
-        {
-            //rootCanvasGroup.interactable = true;
-        }
 #endif
     }
 
     void OpenSavedGameAndRead(string filename)
     {
 #if !NO_GPGS
-        ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+        var savedGameClient = PlayGamesPlatform.Instance.SavedGame;
         if (savedGameClient != null)
         {
             PlatformAndroid.Open(
@@ -233,10 +223,6 @@ public class PlatformAfterLogin : MonoBehaviour
                 true,
                 null,
                 OnSavedGameOpenedAndRead);
-        }
-        else
-        {
-            //rootCanvasGroup.interactable = true;
         }
 #endif
     }
@@ -251,7 +237,8 @@ public class PlatformAfterLogin : MonoBehaviour
 
             daysPlayed++;
 
-            SaveGame(game, Encoding.UTF8.GetBytes("Hello save file world!" + DateTime.Now), TimeSpan.FromDays(daysPlayed));
+            SaveGame(game, Encoding.UTF8.GetBytes("Hello save file world!" + DateTime.Now),
+                TimeSpan.FromDays(daysPlayed));
         }
         else
         {
@@ -287,9 +274,9 @@ public class PlatformAfterLogin : MonoBehaviour
     void SaveGame(ISavedGameMetadata game, byte[] savedData, TimeSpan totalPlaytime)
     {
 #if !NO_GPGS
-        ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+        var savedGameClient = PlayGamesPlatform.Instance.SavedGame;
 
-        SavedGameMetadataUpdate.Builder builder = new SavedGameMetadataUpdate.Builder();
+        var builder = new SavedGameMetadataUpdate.Builder();
         builder = builder
             .WithUpdatedPlayedTime(totalPlaytime)
             .WithUpdatedDescription("Saved game at " + DateTime.Now);
@@ -301,10 +288,11 @@ public class PlatformAfterLogin : MonoBehaviour
             // and that you have already called a function equivalent to
             // getScreenshot() to set savedImage
             // NOTE: see sample definition of getScreenshot() method below
-            byte[] pngData = savedImage.EncodeToPNG();
+            var pngData = savedImage.EncodeToPNG();
             builder = builder.WithUpdatedPngCoverImage(pngData);
         }
-        SavedGameMetadataUpdate updatedMetadata = builder.Build();
+
+        var updatedMetadata = builder.Build();
         savedGameClient.CommitUpdate(game, updatedMetadata, savedData, OnSavedGameWritten);
 #endif
     }
@@ -312,17 +300,13 @@ public class PlatformAfterLogin : MonoBehaviour
     public void OnSavedGameWritten(SavedGameRequestStatus status, ISavedGameMetadata game)
     {
         if (status == SavedGameRequestStatus.Success)
-        {
             // handle reading or writing of saved game.
 
             SushiDebug.LogFormat("OnSavedGameWritten success!");
-        }
         else
-        {
             // handle error
 
             SushiDebug.LogFormat("OnSavedGameWritten failed! - {0}", status);
-        }
 
         //rootCanvasGroup.interactable = true;
     }
@@ -331,12 +315,12 @@ public class PlatformAfterLogin : MonoBehaviour
     {
         // Create a 2D texture that is 1024x700 pixels from which the PNG will be
         // extracted
-        Texture2D screenShot = new Texture2D(1024, 700);
+        var screenShot = new Texture2D(1024, 700);
 
         // Takes the screenshot from top left hand corner of screen and maps to top
         // left hand corner of screenShot texture
         screenShot.ReadPixels(
-            new Rect(0, 0, Screen.width, (Screen.width / 1024) * 700), 0, 0);
+            new Rect(0, 0, Screen.width, Screen.width / 1024 * 700), 0, 0);
 
         return screenShot;
     }
@@ -344,7 +328,7 @@ public class PlatformAfterLogin : MonoBehaviour
     public void LoadGameData(ISavedGameMetadata game)
     {
 #if !NO_GPGS
-        ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+        var savedGameClient = PlayGamesPlatform.Instance.SavedGame;
         savedGameClient.ReadBinaryData(game, OnSavedGameDataRead);
 #endif
     }
@@ -352,17 +336,13 @@ public class PlatformAfterLogin : MonoBehaviour
     public void OnSavedGameDataRead(SavedGameRequestStatus status, byte[] data)
     {
         if (status == SavedGameRequestStatus.Success)
-        {
             // handle processing the byte array data
 
             SushiDebug.LogFormat("OnSavedGameDataRead success! - Data: " + Encoding.UTF8.GetString(data));
-        }
         else
-        {
             // handle error
 
             SushiDebug.LogFormat("OnSavedGameDataRead failed! - {0}", status);
-        }
 
         //rootCanvasGroup.interactable = true;
     }
@@ -380,11 +360,10 @@ public class PlatformAfterLogin : MonoBehaviour
 #if !NO_GPGS
         if (status == SavedGameRequestStatus.Success)
         {
-            ISavedGameClient savedGameClient = PlayGamesPlatform.Instance.SavedGame;
+            var savedGameClient = PlayGamesPlatform.Instance.SavedGame;
             savedGameClient.Delete(game);
 
             SushiDebug.LogFormat("DeleteSavedGame success!");
-
         }
         else
         {

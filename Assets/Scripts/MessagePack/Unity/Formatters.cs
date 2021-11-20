@@ -1,36 +1,33 @@
 ﻿using System;
-using MessagePack;
+using MessagePack.Formatters;
+using UnityEngine;
 
 namespace MessagePack.Unity
 {
-    public sealed class Vector2Formatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.Vector2>
+    public sealed class Vector2Formatter : IMessagePackFormatter<Vector2>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.Vector2 value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, Vector2 value, IFormatterResolver formatterResolver)
         {
-
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.x);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.y);
             return offset - startOffset;
         }
 
-        public global::UnityEngine.Vector2 Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public Vector2 Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
+            if (MessagePackBinary.IsNil(bytes, offset))
                 throw new InvalidOperationException("typecode is null, struct not supported");
-            }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var x = default(float);
             var y = default(float);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
@@ -43,50 +40,47 @@ namespace MessagePack.Unity
                         y = MessagePackBinary.ReadSingle(bytes, offset, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var result = new global::UnityEngine.Vector2(x, y);
+            var result = new Vector2(x, y);
             return result;
         }
     }
 
 
-    public sealed class Vector3Formatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.Vector3>
+    public sealed class Vector3Formatter : IMessagePackFormatter<Vector3>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.Vector3 value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, Vector3 value, IFormatterResolver formatterResolver)
         {
-
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 3);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 3);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.x);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.y);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.z);
             return offset - startOffset;
         }
 
-        public global::UnityEngine.Vector3 Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public Vector3 Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
+            if (MessagePackBinary.IsNil(bytes, offset))
                 throw new InvalidOperationException("typecode is null, struct not supported");
-            }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var x = default(float);
             var y = default(float);
             var z = default(float);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
@@ -102,28 +96,27 @@ namespace MessagePack.Unity
                         z = MessagePackBinary.ReadSingle(bytes, offset, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var result = new global::UnityEngine.Vector3(x, y, z);
+            var result = new Vector3(x, y, z);
             return result;
         }
     }
 
 
-    public sealed class Vector4Formatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.Vector4>
+    public sealed class Vector4Formatter : IMessagePackFormatter<Vector4>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.Vector4 value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, Vector4 value, IFormatterResolver formatterResolver)
         {
-
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.x);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.y);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.z);
@@ -131,15 +124,13 @@ namespace MessagePack.Unity
             return offset - startOffset;
         }
 
-        public global::UnityEngine.Vector4 Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public Vector4 Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
+            if (MessagePackBinary.IsNil(bytes, offset))
                 throw new InvalidOperationException("typecode is null, struct not supported");
-            }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var x = default(float);
@@ -147,7 +138,7 @@ namespace MessagePack.Unity
             var z = default(float);
             var w = default(float);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
@@ -166,28 +157,27 @@ namespace MessagePack.Unity
                         w = MessagePackBinary.ReadSingle(bytes, offset, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var result = new global::UnityEngine.Vector4(x, y, z, w);
+            var result = new Vector4(x, y, z, w);
             return result;
         }
     }
 
 
-    public sealed class QuaternionFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.Quaternion>
+    public sealed class QuaternionFormatter : IMessagePackFormatter<Quaternion>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.Quaternion value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, Quaternion value, IFormatterResolver formatterResolver)
         {
-
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.x);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.y);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.z);
@@ -195,15 +185,13 @@ namespace MessagePack.Unity
             return offset - startOffset;
         }
 
-        public global::UnityEngine.Quaternion Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public Quaternion Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
+            if (MessagePackBinary.IsNil(bytes, offset))
                 throw new InvalidOperationException("typecode is null, struct not supported");
-            }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var x = default(float);
@@ -211,7 +199,7 @@ namespace MessagePack.Unity
             var z = default(float);
             var w = default(float);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
@@ -230,28 +218,27 @@ namespace MessagePack.Unity
                         w = MessagePackBinary.ReadSingle(bytes, offset, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var result = new global::UnityEngine.Quaternion(x, y, z, w);
+            var result = new Quaternion(x, y, z, w);
             return result;
         }
     }
 
 
-    public sealed class ColorFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.Color>
+    public sealed class ColorFormatter : IMessagePackFormatter<Color>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.Color value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, Color value, IFormatterResolver formatterResolver)
         {
-
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.r);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.g);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.b);
@@ -259,15 +246,13 @@ namespace MessagePack.Unity
             return offset - startOffset;
         }
 
-        public global::UnityEngine.Color Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public Color Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
+            if (MessagePackBinary.IsNil(bytes, offset))
                 throw new InvalidOperationException("typecode is null, struct not supported");
-            }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var r = default(float);
@@ -275,7 +260,7 @@ namespace MessagePack.Unity
             var b = default(float);
             var a = default(float);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
@@ -294,82 +279,82 @@ namespace MessagePack.Unity
                         a = MessagePackBinary.ReadSingle(bytes, offset, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var result = new global::UnityEngine.Color(r, g, b, a);
+            var result = new Color(r, g, b, a);
             return result;
         }
     }
 
 
-    public sealed class BoundsFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.Bounds>
+    public sealed class BoundsFormatter : IMessagePackFormatter<Bounds>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.Bounds value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, Bounds value, IFormatterResolver formatterResolver)
         {
-
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
-            offset += formatterResolver.GetFormatterWithVerify<global::UnityEngine.Vector3>().Serialize(ref bytes, offset, value.center, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<global::UnityEngine.Vector3>().Serialize(ref bytes, offset, value.size, formatterResolver);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
+            offset += formatterResolver.GetFormatterWithVerify<Vector3>()
+                .Serialize(ref bytes, offset, value.center, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<Vector3>()
+                .Serialize(ref bytes, offset, value.size, formatterResolver);
             return offset - startOffset;
         }
 
-        public global::UnityEngine.Bounds Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public Bounds Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
+            if (MessagePackBinary.IsNil(bytes, offset))
                 throw new InvalidOperationException("typecode is null, struct not supported");
-            }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
-            var center = default(global::UnityEngine.Vector3);
-            var size = default(global::UnityEngine.Vector3);
+            var center = default(Vector3);
+            var size = default(Vector3);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
                 switch (key)
                 {
                     case 0:
-                        center = formatterResolver.GetFormatterWithVerify<global::UnityEngine.Vector3>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        center = formatterResolver.GetFormatterWithVerify<Vector3>()
+                            .Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     case 1:
-                        size = formatterResolver.GetFormatterWithVerify<global::UnityEngine.Vector3>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        size = formatterResolver.GetFormatterWithVerify<Vector3>()
+                            .Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var result = new global::UnityEngine.Bounds(center, size);
+            var result = new Bounds(center, size);
             return result;
         }
     }
 
 
-    public sealed class RectFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.Rect>
+    public sealed class RectFormatter : IMessagePackFormatter<Rect>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.Rect value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, Rect value, IFormatterResolver formatterResolver)
         {
-
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.x);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.y);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.width);
@@ -377,15 +362,13 @@ namespace MessagePack.Unity
             return offset - startOffset;
         }
 
-        public global::UnityEngine.Rect Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public Rect Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
+            if (MessagePackBinary.IsNil(bytes, offset))
                 throw new InvalidOperationException("typecode is null, struct not supported");
-            }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var x = default(float);
@@ -393,7 +376,7 @@ namespace MessagePack.Unity
             var width = default(float);
             var height = default(float);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
@@ -412,55 +395,55 @@ namespace MessagePack.Unity
                         height = MessagePackBinary.ReadSingle(bytes, offset, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var result = new global::UnityEngine.Rect(x, y, width, height);
+            var result = new Rect(x, y, width, height);
             return result;
         }
     }
 
     // additional
 
-    public sealed class WrapModeFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.WrapMode>
+    public sealed class WrapModeFormatter : IMessagePackFormatter<WrapMode>
     {
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.WrapMode value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, WrapMode value, IFormatterResolver formatterResolver)
         {
-            return MessagePackBinary.WriteInt32(ref bytes, offset, (Int32)value);
+            return MessagePackBinary.WriteInt32(ref bytes, offset, (int) value);
         }
 
-        public global::UnityEngine.WrapMode Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public WrapMode Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            return (global::UnityEngine.WrapMode)MessagePackBinary.ReadInt32(bytes, offset, out readSize);
+            return (WrapMode) MessagePackBinary.ReadInt32(bytes, offset, out readSize);
         }
     }
 
-    public sealed class GradientModeFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.GradientMode>
+    public sealed class GradientModeFormatter : IMessagePackFormatter<GradientMode>
     {
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.GradientMode value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, GradientMode value, IFormatterResolver formatterResolver)
         {
-            return MessagePackBinary.WriteInt32(ref bytes, offset, (Int32)value);
+            return MessagePackBinary.WriteInt32(ref bytes, offset, (int) value);
         }
 
-        public global::UnityEngine.GradientMode Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public GradientMode Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver,
+            out int readSize)
         {
-            return (global::UnityEngine.GradientMode)MessagePackBinary.ReadInt32(bytes, offset, out readSize);
+            return (GradientMode) MessagePackBinary.ReadInt32(bytes, offset, out readSize);
         }
     }
 
-    public sealed class KeyframeFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.Keyframe>
+    public sealed class KeyframeFormatter : IMessagePackFormatter<Keyframe>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.Keyframe value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, Keyframe value, IFormatterResolver formatterResolver)
         {
-
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.time);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.value);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.inTangent);
@@ -468,15 +451,13 @@ namespace MessagePack.Unity
             return offset - startOffset;
         }
 
-        public global::UnityEngine.Keyframe Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public Keyframe Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
+            if (MessagePackBinary.IsNil(bytes, offset))
                 throw new InvalidOperationException("typecode is null, struct not supported");
-            }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __time__ = default(float);
@@ -484,7 +465,7 @@ namespace MessagePack.Unity
             var __inTangent__ = default(float);
             var __outTangent__ = default(float);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
@@ -503,15 +484,16 @@ namespace MessagePack.Unity
                         __outTangent__ = MessagePackBinary.ReadSingle(bytes, offset, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var ____result = new global::UnityEngine.Keyframe(__time__, __value__, __inTangent__, __outTangent__);
+            var ____result = new Keyframe(__time__, __value__, __inTangent__, __outTangent__);
             ____result.time = __time__;
             ____result.value = __value__;
             ____result.inTangent = __inTangent__;
@@ -521,65 +503,69 @@ namespace MessagePack.Unity
     }
 
 
-    public sealed class AnimationCurveFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.AnimationCurve>
+    public sealed class AnimationCurveFormatter : IMessagePackFormatter<AnimationCurve>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.AnimationCurve value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, AnimationCurve value, IFormatterResolver formatterResolver)
         {
-            if (value == null)
-            {
-                return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
-            }
+            if (value == null) return MessagePackBinary.WriteNil(ref bytes, offset);
 
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 3);
-            offset += formatterResolver.GetFormatterWithVerify<global::UnityEngine.Keyframe[]>().Serialize(ref bytes, offset, value.keys, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<global::UnityEngine.WrapMode>().Serialize(ref bytes, offset, value.postWrapMode, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<global::UnityEngine.WrapMode>().Serialize(ref bytes, offset, value.preWrapMode, formatterResolver);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 3);
+            offset += formatterResolver.GetFormatterWithVerify<Keyframe[]>()
+                .Serialize(ref bytes, offset, value.keys, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<WrapMode>()
+                .Serialize(ref bytes, offset, value.postWrapMode, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<WrapMode>()
+                .Serialize(ref bytes, offset, value.preWrapMode, formatterResolver);
             return offset - startOffset;
         }
 
-        public global::UnityEngine.AnimationCurve Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public AnimationCurve Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver,
+            out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
+            if (MessagePackBinary.IsNil(bytes, offset))
             {
                 readSize = 1;
                 return null;
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
-            var __keys__ = default(global::UnityEngine.Keyframe[]);
-            var __postWrapMode__ = default(global::UnityEngine.WrapMode);
-            var __preWrapMode__ = default(global::UnityEngine.WrapMode);
+            var __keys__ = default(Keyframe[]);
+            var __postWrapMode__ = default(WrapMode);
+            var __preWrapMode__ = default(WrapMode);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
                 switch (key)
                 {
                     case 0:
-                        __keys__ = formatterResolver.GetFormatterWithVerify<global::UnityEngine.Keyframe[]>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        __keys__ = formatterResolver.GetFormatterWithVerify<Keyframe[]>()
+                            .Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     case 1:
-                        __postWrapMode__ = formatterResolver.GetFormatterWithVerify<global::UnityEngine.WrapMode>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        __postWrapMode__ = formatterResolver.GetFormatterWithVerify<WrapMode>()
+                            .Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     case 2:
-                        __preWrapMode__ = formatterResolver.GetFormatterWithVerify<global::UnityEngine.WrapMode>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        __preWrapMode__ = formatterResolver.GetFormatterWithVerify<WrapMode>()
+                            .Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var ____result = new global::UnityEngine.AnimationCurve();
+            var ____result = new AnimationCurve();
             ____result.keys = __keys__;
             ____result.postWrapMode = __postWrapMode__;
             ____result.preWrapMode = __preWrapMode__;
@@ -587,14 +573,12 @@ namespace MessagePack.Unity
         }
     }
 
-    public sealed class Matrix4x4Formatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.Matrix4x4>
+    public sealed class Matrix4x4Formatter : IMessagePackFormatter<Matrix4x4>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.Matrix4x4 value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, Matrix4x4 value, IFormatterResolver formatterResolver)
         {
-
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteArrayHeader(ref bytes, offset, 16);
+            offset += MessagePackBinary.WriteArrayHeader(ref bytes, offset, 16);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.m00);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.m10);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.m20);
@@ -614,15 +598,13 @@ namespace MessagePack.Unity
             return offset - startOffset;
         }
 
-        public global::UnityEngine.Matrix4x4 Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public Matrix4x4 Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
+            if (MessagePackBinary.IsNil(bytes, offset))
                 throw new InvalidOperationException("typecode is null, struct not supported");
-            }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __m00__ = default(float);
@@ -642,7 +624,7 @@ namespace MessagePack.Unity
             var __m23__ = default(float);
             var __m33__ = default(float);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
@@ -697,15 +679,16 @@ namespace MessagePack.Unity
                         __m33__ = MessagePackBinary.ReadSingle(bytes, offset, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var ____result = new global::UnityEngine.Matrix4x4();
+            var ____result = new Matrix4x4();
             ____result.m00 = __m00__;
             ____result.m10 = __m10__;
             ____result.m20 = __m20__;
@@ -727,55 +710,55 @@ namespace MessagePack.Unity
     }
 
 
-    public sealed class GradientColorKeyFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.GradientColorKey>
+    public sealed class GradientColorKeyFormatter : IMessagePackFormatter<GradientColorKey>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.GradientColorKey value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, GradientColorKey value, IFormatterResolver formatterResolver)
         {
-
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
-            offset += formatterResolver.GetFormatterWithVerify<global::UnityEngine.Color>().Serialize(ref bytes, offset, value.color, formatterResolver);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
+            offset += formatterResolver.GetFormatterWithVerify<Color>()
+                .Serialize(ref bytes, offset, value.color, formatterResolver);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.time);
             return offset - startOffset;
         }
 
-        public global::UnityEngine.GradientColorKey Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public GradientColorKey Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver,
+            out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
+            if (MessagePackBinary.IsNil(bytes, offset))
                 throw new InvalidOperationException("typecode is null, struct not supported");
-            }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
-            var __color__ = default(global::UnityEngine.Color);
+            var __color__ = default(Color);
             var __time__ = default(float);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
                 switch (key)
                 {
                     case 0:
-                        __color__ = formatterResolver.GetFormatterWithVerify<global::UnityEngine.Color>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        __color__ = formatterResolver.GetFormatterWithVerify<Color>()
+                            .Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     case 1:
                         __time__ = MessagePackBinary.ReadSingle(bytes, offset, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var ____result = new global::UnityEngine.GradientColorKey(__color__, __time__);
+            var ____result = new GradientColorKey(__color__, __time__);
             ____result.color = __color__;
             ____result.time = __time__;
             return ____result;
@@ -783,34 +766,31 @@ namespace MessagePack.Unity
     }
 
 
-    public sealed class GradientAlphaKeyFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.GradientAlphaKey>
+    public sealed class GradientAlphaKeyFormatter : IMessagePackFormatter<GradientAlphaKey>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.GradientAlphaKey value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, GradientAlphaKey value, IFormatterResolver formatterResolver)
         {
-
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.alpha);
             offset += MessagePackBinary.WriteSingle(ref bytes, offset, value.time);
             return offset - startOffset;
         }
 
-        public global::UnityEngine.GradientAlphaKey Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public GradientAlphaKey Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver,
+            out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
+            if (MessagePackBinary.IsNil(bytes, offset))
                 throw new InvalidOperationException("typecode is null, struct not supported");
-            }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __alpha__ = default(float);
             var __time__ = default(float);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
@@ -823,15 +803,16 @@ namespace MessagePack.Unity
                         __time__ = MessagePackBinary.ReadSingle(bytes, offset, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var ____result = new global::UnityEngine.GradientAlphaKey(__alpha__, __time__);
+            var ____result = new GradientAlphaKey(__alpha__, __time__);
             ____result.alpha = __alpha__;
             ____result.time = __time__;
             return ____result;
@@ -839,65 +820,68 @@ namespace MessagePack.Unity
     }
 
 
-    public sealed class GradientFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.Gradient>
+    public sealed class GradientFormatter : IMessagePackFormatter<Gradient>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.Gradient value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, Gradient value, IFormatterResolver formatterResolver)
         {
-            if (value == null)
-            {
-                return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
-            }
+            if (value == null) return MessagePackBinary.WriteNil(ref bytes, offset);
 
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 3);
-            offset += formatterResolver.GetFormatterWithVerify<global::UnityEngine.GradientColorKey[]>().Serialize(ref bytes, offset, value.colorKeys, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<global::UnityEngine.GradientAlphaKey[]>().Serialize(ref bytes, offset, value.alphaKeys, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<global::UnityEngine.GradientMode>().Serialize(ref bytes, offset, value.mode, formatterResolver);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 3);
+            offset += formatterResolver.GetFormatterWithVerify<GradientColorKey[]>()
+                .Serialize(ref bytes, offset, value.colorKeys, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<GradientAlphaKey[]>()
+                .Serialize(ref bytes, offset, value.alphaKeys, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<GradientMode>()
+                .Serialize(ref bytes, offset, value.mode, formatterResolver);
             return offset - startOffset;
         }
 
-        public global::UnityEngine.Gradient Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public Gradient Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
+            if (MessagePackBinary.IsNil(bytes, offset))
             {
                 readSize = 1;
                 return null;
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
-            var __colorKeys__ = default(global::UnityEngine.GradientColorKey[]);
-            var __alphaKeys__ = default(global::UnityEngine.GradientAlphaKey[]);
-            var __mode__ = default(global::UnityEngine.GradientMode);
+            var __colorKeys__ = default(GradientColorKey[]);
+            var __alphaKeys__ = default(GradientAlphaKey[]);
+            var __mode__ = default(GradientMode);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
                 switch (key)
                 {
                     case 0:
-                        __colorKeys__ = formatterResolver.GetFormatterWithVerify<global::UnityEngine.GradientColorKey[]>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        __colorKeys__ = formatterResolver.GetFormatterWithVerify<GradientColorKey[]>()
+                            .Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     case 1:
-                        __alphaKeys__ = formatterResolver.GetFormatterWithVerify<global::UnityEngine.GradientAlphaKey[]>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        __alphaKeys__ = formatterResolver.GetFormatterWithVerify<GradientAlphaKey[]>()
+                            .Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     case 2:
-                        __mode__ = formatterResolver.GetFormatterWithVerify<global::UnityEngine.GradientMode>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        __mode__ = formatterResolver.GetFormatterWithVerify<GradientMode>()
+                            .Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var ____result = new global::UnityEngine.Gradient();
+            var ____result = new Gradient();
             ____result.colorKeys = __colorKeys__;
             ____result.alphaKeys = __alphaKeys__;
             ____result.mode = __mode__;
@@ -906,14 +890,12 @@ namespace MessagePack.Unity
     }
 
 
-    public sealed class Color32Formatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.Color32>
+    public sealed class Color32Formatter : IMessagePackFormatter<Color32>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.Color32 value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, Color32 value, IFormatterResolver formatterResolver)
         {
-
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.r);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.g);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.b);
@@ -921,15 +903,13 @@ namespace MessagePack.Unity
             return offset - startOffset;
         }
 
-        public global::UnityEngine.Color32 Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public Color32 Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
+            if (MessagePackBinary.IsNil(bytes, offset))
                 throw new InvalidOperationException("typecode is null, struct not supported");
-            }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __r__ = default(byte);
@@ -937,7 +917,7 @@ namespace MessagePack.Unity
             var __b__ = default(byte);
             var __a__ = default(byte);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
@@ -956,15 +936,16 @@ namespace MessagePack.Unity
                         __a__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var ____result = new global::UnityEngine.Color32(__r__, __g__, __b__, __a__);
+            var ____result = new Color32(__r__, __g__, __b__, __a__);
             ____result.r = __r__;
             ____result.g = __g__;
             ____result.b = __b__;
@@ -974,18 +955,14 @@ namespace MessagePack.Unity
     }
 
 
-    public sealed class RectOffsetFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.RectOffset>
+    public sealed class RectOffsetFormatter : IMessagePackFormatter<RectOffset>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.RectOffset value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, RectOffset value, IFormatterResolver formatterResolver)
         {
-            if (value == null)
-            {
-                return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
-            }
+            if (value == null) return MessagePackBinary.WriteNil(ref bytes, offset);
 
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.left);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.right);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.top);
@@ -993,16 +970,16 @@ namespace MessagePack.Unity
             return offset - startOffset;
         }
 
-        public global::UnityEngine.RectOffset Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public RectOffset Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
+            if (MessagePackBinary.IsNil(bytes, offset))
             {
                 readSize = 1;
                 return null;
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __left__ = default(int);
@@ -1010,7 +987,7 @@ namespace MessagePack.Unity
             var __top__ = default(int);
             var __bottom__ = default(int);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
@@ -1029,15 +1006,16 @@ namespace MessagePack.Unity
                         __bottom__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var ____result = new global::UnityEngine.RectOffset();
+            var ____result = new RectOffset();
             ____result.left = __left__;
             ____result.right = __right__;
             ____result.top = __top__;
@@ -1047,32 +1025,28 @@ namespace MessagePack.Unity
     }
 
 
-    public sealed class LayerMaskFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.LayerMask>
+    public sealed class LayerMaskFormatter : IMessagePackFormatter<LayerMask>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.LayerMask value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, LayerMask value, IFormatterResolver formatterResolver)
         {
-
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 1);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 1);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.value);
             return offset - startOffset;
         }
 
-        public global::UnityEngine.LayerMask Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public LayerMask Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
+            if (MessagePackBinary.IsNil(bytes, offset))
                 throw new InvalidOperationException("typecode is null, struct not supported");
-            }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __value__ = default(int);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
@@ -1082,15 +1056,16 @@ namespace MessagePack.Unity
                         __value__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var ____result = new global::UnityEngine.LayerMask();
+            var ____result = new LayerMask();
             ____result.value = __value__;
             return ____result;
         }
@@ -1098,34 +1073,30 @@ namespace MessagePack.Unity
 
 #if UNITY_2017_2_OR_NEWER
 
-    public sealed class Vector2IntFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.Vector2Int>
+    public sealed class Vector2IntFormatter : IMessagePackFormatter<Vector2Int>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.Vector2Int value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, Vector2Int value, IFormatterResolver formatterResolver)
         {
-
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.x);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.y);
             return offset - startOffset;
         }
 
-        public global::UnityEngine.Vector2Int Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public Vector2Int Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
+            if (MessagePackBinary.IsNil(bytes, offset))
                 throw new InvalidOperationException("typecode is null, struct not supported");
-            }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __x__ = default(int);
             var __y__ = default(int);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
@@ -1138,15 +1109,16 @@ namespace MessagePack.Unity
                         __y__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var ____result = new global::UnityEngine.Vector2Int(__x__, __y__);
+            var ____result = new Vector2Int(__x__, __y__);
             ____result.x = __x__;
             ____result.y = __y__;
             return ____result;
@@ -1154,36 +1126,32 @@ namespace MessagePack.Unity
     }
 
 
-    public sealed class Vector3IntFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.Vector3Int>
+    public sealed class Vector3IntFormatter : IMessagePackFormatter<Vector3Int>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.Vector3Int value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, Vector3Int value, IFormatterResolver formatterResolver)
         {
-
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 3);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 3);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.x);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.y);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.z);
             return offset - startOffset;
         }
 
-        public global::UnityEngine.Vector3Int Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public Vector3Int Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
+            if (MessagePackBinary.IsNil(bytes, offset))
                 throw new InvalidOperationException("typecode is null, struct not supported");
-            }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __x__ = default(int);
             var __y__ = default(int);
             var __z__ = default(int);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
@@ -1199,15 +1167,16 @@ namespace MessagePack.Unity
                         __z__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var ____result = new global::UnityEngine.Vector3Int(__x__, __y__, __z__);
+            var ____result = new Vector3Int(__x__, __y__, __z__);
             ____result.x = __x__;
             ____result.y = __y__;
             ____result.z = __z__;
@@ -1216,34 +1185,30 @@ namespace MessagePack.Unity
     }
 
 
-    public sealed class RangeIntFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.RangeInt>
+    public sealed class RangeIntFormatter : IMessagePackFormatter<RangeInt>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.RangeInt value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, RangeInt value, IFormatterResolver formatterResolver)
         {
-
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.start);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.length);
             return offset - startOffset;
         }
 
-        public global::UnityEngine.RangeInt Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public RangeInt Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
+            if (MessagePackBinary.IsNil(bytes, offset))
                 throw new InvalidOperationException("typecode is null, struct not supported");
-            }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __start__ = default(int);
             var __length__ = default(int);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
@@ -1256,15 +1221,16 @@ namespace MessagePack.Unity
                         __length__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var ____result = new global::UnityEngine.RangeInt(__start__, __length__);
+            var ____result = new RangeInt(__start__, __length__);
             ____result.start = __start__;
             ____result.length = __length__;
             return ____result;
@@ -1272,14 +1238,12 @@ namespace MessagePack.Unity
     }
 
 
-    public sealed class RectIntFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.RectInt>
+    public sealed class RectIntFormatter : IMessagePackFormatter<RectInt>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.RectInt value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, RectInt value, IFormatterResolver formatterResolver)
         {
-
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.x);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.y);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.width);
@@ -1287,15 +1251,13 @@ namespace MessagePack.Unity
             return offset - startOffset;
         }
 
-        public global::UnityEngine.RectInt Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public RectInt Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
+            if (MessagePackBinary.IsNil(bytes, offset))
                 throw new InvalidOperationException("typecode is null, struct not supported");
-            }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __x__ = default(int);
@@ -1303,7 +1265,7 @@ namespace MessagePack.Unity
             var __width__ = default(int);
             var __height__ = default(int);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
@@ -1322,15 +1284,16 @@ namespace MessagePack.Unity
                         __height__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var ____result = new global::UnityEngine.RectInt(__x__, __y__, __width__, __height__);
+            var ____result = new RectInt(__x__, __y__, __width__, __height__);
             ____result.x = __x__;
             ____result.y = __y__;
             ____result.width = __width__;
@@ -1340,55 +1303,56 @@ namespace MessagePack.Unity
     }
 
 
-    public sealed class BoundsIntFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::UnityEngine.BoundsInt>
+    public sealed class BoundsIntFormatter : IMessagePackFormatter<BoundsInt>
     {
-
-        public int Serialize(ref byte[] bytes, int offset, global::UnityEngine.BoundsInt value, global::MessagePack.IFormatterResolver formatterResolver)
+        public int Serialize(ref byte[] bytes, int offset, BoundsInt value, IFormatterResolver formatterResolver)
         {
-
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
-            offset += formatterResolver.GetFormatterWithVerify<global::UnityEngine.Vector3Int>().Serialize(ref bytes, offset, value.position, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<global::UnityEngine.Vector3Int>().Serialize(ref bytes, offset, value.size, formatterResolver);
+            offset += MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
+            offset += formatterResolver.GetFormatterWithVerify<Vector3Int>()
+                .Serialize(ref bytes, offset, value.position, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<Vector3Int>()
+                .Serialize(ref bytes, offset, value.size, formatterResolver);
             return offset - startOffset;
         }
 
-        public global::UnityEngine.BoundsInt Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        public BoundsInt Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
+            if (MessagePackBinary.IsNil(bytes, offset))
                 throw new InvalidOperationException("typecode is null, struct not supported");
-            }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
-            var __position__ = default(global::UnityEngine.Vector3Int);
-            var __size__ = default(global::UnityEngine.Vector3Int);
+            var __position__ = default(Vector3Int);
+            var __size__ = default(Vector3Int);
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 var key = i;
 
                 switch (key)
                 {
                     case 0:
-                        __position__ = formatterResolver.GetFormatterWithVerify<global::UnityEngine.Vector3Int>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        __position__ = formatterResolver.GetFormatterWithVerify<Vector3Int>()
+                            .Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     case 1:
-                        __size__ = formatterResolver.GetFormatterWithVerify<global::UnityEngine.Vector3Int>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        __size__ = formatterResolver.GetFormatterWithVerify<Vector3Int>()
+                            .Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var ____result = new global::UnityEngine.BoundsInt(__position__, __size__);
+            var ____result = new BoundsInt(__position__, __size__);
             ____result.position = __position__;
             ____result.size = __size__;
             return ____result;

@@ -1,5 +1,4 @@
 ﻿#if NETSTANDARD
-
 using System;
 
 namespace MessagePack.Internal
@@ -151,7 +150,8 @@ namespace MessagePack.Internal
                 else
                 {
                     resultingValue = valueFactory(newKey);
-                    VolatileWrite(ref buckets[h & (buckets.Length - 1)], new Entry { Key = newKey, Value = resultingValue, Hash = h });
+                    VolatileWrite(ref buckets[h & (buckets.Length - 1)], new Entry { Key = newKey, Value =
+ resultingValue, Hash = h });
                 }
             }
             else
@@ -175,7 +175,8 @@ namespace MessagePack.Internal
                         else
                         {
                             resultingValue = valueFactory(newKey);
-                            VolatileWrite(ref searchLastEntry.Next, new Entry { Key = newKey, Value = resultingValue, Hash = h });
+                            VolatileWrite(ref searchLastEntry.Next, new Entry { Key = newKey, Value =
+ resultingValue, Hash = h });
                         }
                         break;
                     }

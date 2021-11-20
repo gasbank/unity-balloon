@@ -19,8 +19,8 @@
 namespace GooglePlayGames.BasicApi
 {
     /// <summary>
-    /// Common status codes.
-    /// See https://developers.google.com/android/reference/com/google/android/gms/common/api/CommonStatusCodes
+    ///     Common status codes.
+    ///     See https://developers.google.com/android/reference/com/google/android/gms/common/api/CommonStatusCodes
     /// </summary>
     public enum CommonStatusCodes
     {

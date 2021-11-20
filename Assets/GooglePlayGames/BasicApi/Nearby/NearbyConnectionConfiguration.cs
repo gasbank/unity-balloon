@@ -14,11 +14,11 @@
 //    limitations under the License.
 // </copyright>
 
+using System;
+using GooglePlayGames.OurUtils;
+
 namespace GooglePlayGames.BasicApi.Nearby
 {
-    using System;
-    using GooglePlayGames.OurUtils;
-
     public enum InitializationStatus
     {
         Success,
@@ -31,24 +31,15 @@ namespace GooglePlayGames.BasicApi.Nearby
         public const int MaxUnreliableMessagePayloadLength = 1168;
         public const int MaxReliableMessagePayloadLength = 4096;
 
-        private readonly Action<InitializationStatus> mInitializationCallback;
-        private readonly long mLocalClientId;
-
         public NearbyConnectionConfiguration(Action<InitializationStatus> callback,
             long localClientId)
         {
-            this.mInitializationCallback = Misc.CheckNotNull(callback);
-            this.mLocalClientId = localClientId;
+            InitializationCallback = Misc.CheckNotNull(callback);
+            LocalClientId = localClientId;
         }
 
-        public long LocalClientId
-        {
-            get { return mLocalClientId; }
-        }
+        public long LocalClientId { get; }
 
-        public Action<InitializationStatus> InitializationCallback
-        {
-            get { return mInitializationCallback; }
-        }
+        public Action<InitializationStatus> InitializationCallback { get; }
     }
 }

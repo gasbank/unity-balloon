@@ -1,19 +1,22 @@
-﻿using MessagePack.Formatters;
-using System.Linq;
+﻿using System.Linq;
+using MessagePack.Formatters;
 using MessagePack.Internal;
 using MessagePack.Resolvers;
+using MessagePack.Unity;
 
 namespace MessagePack.Resolvers
 {
     /// <summary>
-    /// Default composited resolver, builtin -> attribute -> dynamic enum -> dynamic generic -> dynamic union -> dynamic object -> primitive.
+    ///     Default composited resolver, builtin -> attribute -> dynamic enum -> dynamic generic -> dynamic union -> dynamic
+    ///     object -> primitive.
     /// </summary>
     public sealed class StandardResolver : IFormatterResolver
     {
         public static readonly IFormatterResolver Instance = new StandardResolver();
 
 #if NETSTANDARD
-        public static readonly IMessagePackFormatter<object> ObjectFallbackFormatter = new DynamicObjectTypeFallbackFormatter(StandardResolverCore.Instance);
+        public static readonly IMessagePackFormatter<object> ObjectFallbackFormatter =
+ new DynamicObjectTypeFallbackFormatter(StandardResolverCore.Instance);
 #endif
 
         StandardResolver()
@@ -53,7 +56,8 @@ namespace MessagePack.Resolvers
         public static readonly IFormatterResolver Instance = new ContractlessStandardResolver();
 
 #if NETSTANDARD
-        public static readonly IMessagePackFormatter<object> ObjectFallbackFormatter = new DynamicObjectTypeFallbackFormatter(ContractlessStandardResolverCore.Instance);
+        public static readonly IMessagePackFormatter<object> ObjectFallbackFormatter =
+ new DynamicObjectTypeFallbackFormatter(ContractlessStandardResolverCore.Instance);
 #endif
 
         ContractlessStandardResolver()
@@ -93,7 +97,8 @@ namespace MessagePack.Resolvers
         public static readonly IFormatterResolver Instance = new StandardResolverAllowPrivate();
 
 #if NETSTANDARD
-        public static readonly IMessagePackFormatter<object> ObjectFallbackFormatter = new DynamicObjectTypeFallbackFormatter(StandardResolverAllowPrivateCore.Instance);
+        public static readonly IMessagePackFormatter<object> ObjectFallbackFormatter =
+ new DynamicObjectTypeFallbackFormatter(StandardResolverAllowPrivateCore.Instance);
 #endif
 
         StandardResolverAllowPrivate()
@@ -133,7 +138,8 @@ namespace MessagePack.Resolvers
         public static readonly IFormatterResolver Instance = new ContractlessStandardResolverAllowPrivate();
 
 #if NETSTANDARD
-        public static readonly IMessagePackFormatter<object> ObjectFallbackFormatter = new DynamicObjectTypeFallbackFormatter(ContractlessStandardResolverAllowPrivateCore.Instance);
+        public static readonly IMessagePackFormatter<object> ObjectFallbackFormatter =
+ new DynamicObjectTypeFallbackFormatter(ContractlessStandardResolverAllowPrivateCore.Instance);
 #endif
 
         ContractlessStandardResolverAllowPrivate()
@@ -173,17 +179,16 @@ namespace MessagePack.Internal
 {
     internal static class StandardResolverHelper
     {
-        public static readonly IFormatterResolver[] DefaultResolvers = new[]
+        public static readonly IFormatterResolver[] DefaultResolvers =
         {
             BuiltinResolver.Instance, // Try Builtin
             AttributeFormatterResolver.Instance, // Try use [MessagePackFormatter]
 
 #if !NETSTANDARD
-            MessagePack.Unity.UnityResolver.Instance,
+            UnityResolver.Instance,
 #endif
 
 #if !ENABLE_IL2CPP && !UNITY_WSA && !NET_STANDARD_2_0
-
             DynamicEnumResolver.Instance, // Try Enum
             DynamicGenericResolver.Instance, // Try Array, Tuple, Collection
             DynamicUnionResolver.Instance, // Try Union(Interface)
@@ -195,12 +200,13 @@ namespace MessagePack.Internal
     {
         public static readonly IFormatterResolver Instance = new StandardResolverCore();
 
-        static readonly IFormatterResolver[] resolvers = StandardResolverHelper.DefaultResolvers.Concat(new IFormatterResolver[]
-        {
+        static readonly IFormatterResolver[] resolvers = StandardResolverHelper.DefaultResolvers.Concat(
+            new IFormatterResolver[]
+            {
 #if !ENABLE_IL2CPP && !UNITY_WSA && !NET_STANDARD_2_0
             DynamicObjectResolver.Instance, // Try Object
 #endif
-        }).ToArray();
+            }).ToArray();
 
         StandardResolverCore()
         {
@@ -234,13 +240,14 @@ namespace MessagePack.Internal
     {
         public static readonly IFormatterResolver Instance = new ContractlessStandardResolverCore();
 
-        static readonly IFormatterResolver[] resolvers = StandardResolverHelper.DefaultResolvers.Concat(new IFormatterResolver[]
-        {
+        static readonly IFormatterResolver[] resolvers = StandardResolverHelper.DefaultResolvers.Concat(
+            new IFormatterResolver[]
+            {
 #if !ENABLE_IL2CPP && !UNITY_WSA && !NET_STANDARD_2_0
             DynamicObjectResolver.Instance, // Try Object
             DynamicContractlessObjectResolver.Instance, // Serializes keys as strings
 #endif
-        }).ToArray();
+            }).ToArray();
 
 
         ContractlessStandardResolverCore()
@@ -275,12 +282,13 @@ namespace MessagePack.Internal
     {
         public static readonly IFormatterResolver Instance = new StandardResolverAllowPrivateCore();
 
-        static readonly IFormatterResolver[] resolvers = StandardResolverHelper.DefaultResolvers.Concat(new IFormatterResolver[]
-        {
+        static readonly IFormatterResolver[] resolvers = StandardResolverHelper.DefaultResolvers.Concat(
+            new IFormatterResolver[]
+            {
 #if !ENABLE_IL2CPP && !UNITY_WSA && !NET_STANDARD_2_0
             DynamicObjectResolverAllowPrivate.Instance, // Try Object
 #endif
-        }).ToArray();
+            }).ToArray();
 
         StandardResolverAllowPrivateCore()
         {
@@ -314,13 +322,14 @@ namespace MessagePack.Internal
     {
         public static readonly IFormatterResolver Instance = new ContractlessStandardResolverAllowPrivateCore();
 
-        static readonly IFormatterResolver[] resolvers = StandardResolverHelper.DefaultResolvers.Concat(new IFormatterResolver[]
-        {
+        static readonly IFormatterResolver[] resolvers = StandardResolverHelper.DefaultResolvers.Concat(
+            new IFormatterResolver[]
+            {
 #if !ENABLE_IL2CPP && !UNITY_WSA && !NET_STANDARD_2_0
             DynamicObjectResolverAllowPrivate.Instance, // Try Object
             DynamicContractlessObjectResolverAllowPrivate.Instance, // Serializes keys as strings
 #endif
-        }).ToArray();
+            }).ToArray();
 
 
         ContractlessStandardResolverAllowPrivateCore()

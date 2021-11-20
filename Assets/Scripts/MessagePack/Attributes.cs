@@ -2,35 +2,35 @@
 
 namespace MessagePack
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
     public class MessagePackObjectAttribute : Attribute
     {
-        public bool KeyAsPropertyName { get; private set; }
-
         public MessagePackObjectAttribute(bool keyAsPropertyName = false)
         {
-            this.KeyAsPropertyName = keyAsPropertyName;
+            KeyAsPropertyName = keyAsPropertyName;
         }
+
+        public bool KeyAsPropertyName { get; }
     }
 
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class KeyAttribute : Attribute
     {
-        public int? IntKey { get; private set; }
-        public string StringKey { get; private set; }
-
         public KeyAttribute(int x)
         {
-            this.IntKey = x;
+            IntKey = x;
         }
 
         public KeyAttribute(string x)
         {
-            this.StringKey = x;
+            StringKey = x;
         }
+
+        public int? IntKey { get; }
+        public string StringKey { get; }
     }
 
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class IgnoreMemberAttribute : Attribute
     {
     }
@@ -38,38 +38,38 @@ namespace MessagePack
     [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
     public class UnionAttribute : Attribute
     {
-        public int Key { get; private set; }
-        public Type SubType { get; private set; }
-
         public UnionAttribute(int key, Type subType)
         {
-            this.Key = key;
-            this.SubType = subType;
+            Key = key;
+            SubType = subType;
         }
+
+        public int Key { get; }
+        public Type SubType { get; }
     }
 
-    [AttributeUsage(AttributeTargets.Constructor, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Constructor)]
     public class SerializationConstructorAttribute : Attribute
     {
-
     }
 
 
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Enum | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface |
+                    AttributeTargets.Enum | AttributeTargets.Field | AttributeTargets.Property)]
     public class MessagePackFormatterAttribute : Attribute
     {
-        public Type FormatterType { get; private set; }
-        public object[] Arguments { get; private set; }
-
         public MessagePackFormatterAttribute(Type formatterType)
         {
-            this.FormatterType = formatterType;
+            FormatterType = formatterType;
         }
 
         public MessagePackFormatterAttribute(Type formatterType, params object[] arguments)
         {
-            this.FormatterType = formatterType;
-            this.Arguments = arguments;
+            FormatterType = formatterType;
+            Arguments = arguments;
         }
+
+        public Type FormatterType { get; }
+        public object[] Arguments { get; }
     }
 }

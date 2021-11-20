@@ -1,5 +1,4 @@
 ﻿#if ENABLE_UNSAFE_MSGPACK
-
 using MessagePack.Formatters;
 using System;
 using System.Collections.Generic;
@@ -60,7 +59,8 @@ namespace MessagePack.Unity.Extension
             var byteLen = value.Length * StructLength;
 
             offset += MessagePackBinary.WriteExtensionFormatHeader(ref bytes, offset, TypeCode, byteLen);
-            offset += MessagePackBinary.WriteInt32(ref bytes, offset, byteLen); // write original header(not array header)
+            offset +=
+ MessagePackBinary.WriteInt32(ref bytes, offset, byteLen); // write original header(not array header)
             offset += MessagePackBinary.WriteBoolean(ref bytes, offset, BitConverter.IsLittleEndian);
 
             MessagePackBinary.EnsureCapacity(ref bytes, offset, byteLen);

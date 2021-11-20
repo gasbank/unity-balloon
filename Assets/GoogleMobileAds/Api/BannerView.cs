@@ -14,24 +14,23 @@
 
 using System;
 using System.Reflection;
-
 using GoogleMobileAds.Common;
 
 namespace GoogleMobileAds.Api
 {
     public class BannerView
     {
-        private IBannerClient client;
+        readonly IBannerClient client;
 
         // Creates a BannerView and adds it to the view hierarchy.
         public BannerView(string adUnitId, AdSize adSize, AdPosition position)
         {
-            Type googleMobileAdsClientFactory = Type.GetType(
+            var googleMobileAdsClientFactory = Type.GetType(
                 "GoogleMobileAds.GoogleMobileAdsClientFactory,Assembly-CSharp");
-            MethodInfo method = googleMobileAdsClientFactory.GetMethod(
+            var method = googleMobileAdsClientFactory.GetMethod(
                 "BuildBannerClient",
                 BindingFlags.Static | BindingFlags.Public);
-            this.client = (IBannerClient)method.Invoke(null, null);
+            client = (IBannerClient) method.Invoke(null, null);
             client.CreateBannerView(adUnitId, adSize, position);
 
             ConfigureBannerEvents();
@@ -40,12 +39,12 @@ namespace GoogleMobileAds.Api
         // Creates a BannerView with a custom position.
         public BannerView(string adUnitId, AdSize adSize, int x, int y)
         {
-            Type googleMobileAdsClientFactory = Type.GetType(
+            var googleMobileAdsClientFactory = Type.GetType(
                 "GoogleMobileAds.GoogleMobileAdsClientFactory,Assembly-CSharp");
-            MethodInfo method = googleMobileAdsClientFactory.GetMethod(
+            var method = googleMobileAdsClientFactory.GetMethod(
                 "BuildBannerClient",
                 BindingFlags.Static | BindingFlags.Public);
-            this.client = (IBannerClient)method.Invoke(null, null);
+            client = (IBannerClient) method.Invoke(null, null);
             client.CreateBannerView(adUnitId, adSize, x, y);
 
             ConfigureBannerEvents();
@@ -110,53 +109,38 @@ namespace GoogleMobileAds.Api
             client.SetPosition(x, y);
         }
 
-        private void ConfigureBannerEvents()
+        void ConfigureBannerEvents()
         {
-            this.client.OnAdLoaded += (sender, args) =>
+            client.OnAdLoaded += (sender, args) =>
             {
-                if (this.OnAdLoaded != null)
-                {
-                    this.OnAdLoaded(this, args);
-                }
+                if (OnAdLoaded != null) OnAdLoaded(this, args);
             };
 
-            this.client.OnAdFailedToLoad += (sender, args) =>
+            client.OnAdFailedToLoad += (sender, args) =>
             {
-                if (this.OnAdFailedToLoad != null)
-                {
-                    this.OnAdFailedToLoad(this, args);
-                }
+                if (OnAdFailedToLoad != null) OnAdFailedToLoad(this, args);
             };
 
-            this.client.OnAdOpening += (sender, args) =>
+            client.OnAdOpening += (sender, args) =>
             {
-                if (this.OnAdOpening != null)
-                {
-                    this.OnAdOpening(this, args);
-                }
+                if (OnAdOpening != null) OnAdOpening(this, args);
             };
 
-            this.client.OnAdClosed += (sender, args) =>
+            client.OnAdClosed += (sender, args) =>
             {
-                if (this.OnAdClosed != null)
-                {
-                    this.OnAdClosed(this, args);
-                }
+                if (OnAdClosed != null) OnAdClosed(this, args);
             };
 
-            this.client.OnAdLeavingApplication += (sender, args) =>
+            client.OnAdLeavingApplication += (sender, args) =>
             {
-                if (this.OnAdLeavingApplication != null)
-                {
-                    this.OnAdLeavingApplication(this, args);
-                }
+                if (OnAdLeavingApplication != null) OnAdLeavingApplication(this, args);
             };
         }
 
         // Returns the mediation adapter class name.
         public string MediationAdapterClassName()
         {
-            return this.client.MediationAdapterClassName();
+            return client.MediationAdapterClassName();
         }
     }
 }

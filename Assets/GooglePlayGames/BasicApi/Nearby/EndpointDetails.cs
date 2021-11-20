@@ -14,36 +14,23 @@
 //    limitations under the License.
 // </copyright>
 
+using GooglePlayGames.OurUtils;
+
 namespace GooglePlayGames.BasicApi.Nearby
 {
-    using GooglePlayGames.OurUtils;
-
     public struct EndpointDetails
     {
-        private readonly string mEndpointId;
-        private readonly string mName;
-        private readonly string mServiceId;
-
         public EndpointDetails(string endpointId, string name, string serviceId)
         {
-            this.mEndpointId = Misc.CheckNotNull(endpointId);
-            this.mName = Misc.CheckNotNull(name);
-            this.mServiceId = Misc.CheckNotNull(serviceId);
+            EndpointId = Misc.CheckNotNull(endpointId);
+            Name = Misc.CheckNotNull(name);
+            ServiceId = Misc.CheckNotNull(serviceId);
         }
 
-        public string EndpointId
-        {
-            get { return mEndpointId; }
-        }
+        public string EndpointId { get; }
 
-        public string Name
-        {
-            get { return mName; }
-        }
+        public string Name { get; }
 
-        public string ServiceId
-        {
-            get { return mServiceId; }
-        }
+        public string ServiceId { get; }
     }
 }

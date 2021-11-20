@@ -1,6 +1,6 @@
-﻿using MessagePack.Formatters;
+﻿using System;
+using MessagePack.Formatters;
 using MessagePack.Internal;
-using System;
 
 namespace MessagePack.Resolvers
 {
@@ -10,7 +10,6 @@ namespace MessagePack.Resolvers
 
         NativeDateTimeResolver()
         {
-
         }
 
         public IMessagePackFormatter<T> GetFormatter<T>()
@@ -24,7 +23,7 @@ namespace MessagePack.Resolvers
 
             static FormatterCache()
             {
-                formatter = (IMessagePackFormatter<T>)NativeDateTimeResolverGetFormatterHelper.GetFormatter(typeof(T));
+                formatter = (IMessagePackFormatter<T>) NativeDateTimeResolverGetFormatterHelper.GetFormatter(typeof(T));
             }
         }
     }
@@ -37,17 +36,10 @@ namespace MessagePack.Internal
         internal static object GetFormatter(Type t)
         {
             if (t == typeof(DateTime))
-            {
                 return NativeDateTimeFormatter.Instance;
-            }
-            else if (t == typeof(DateTime?))
-            {
+            if (t == typeof(DateTime?))
                 return new StaticNullableFormatter<DateTime>(NativeDateTimeFormatter.Instance);
-            }
-            else if (t == typeof(DateTime[]))
-            {
-                return NativeDateTimeArrayFormatter.Instance;
-            }
+            if (t == typeof(DateTime[])) return NativeDateTimeArrayFormatter.Instance;
 
             return null;
         }

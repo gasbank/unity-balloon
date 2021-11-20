@@ -1,12 +1,6 @@
-﻿using System;
-using MessagePack.Formatters;
-using System.Collections.Generic;
-using MessagePack.Internal;
-
-namespace MessagePack.Resolvers
+﻿namespace MessagePack.Resolvers
 {
 #if NETSTANDARD
-
     /// <summary>
     /// Used for `object` fields/collections, ex: var arr = new object[] { 1, "a", new Model() };
     /// The runtime type of value in object field, should be covered by one of resolvers in complex/standard resolver.

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [DisallowMultipleComponent]
 public class PlatformCallbackHandler : MonoBehaviour
@@ -13,18 +14,24 @@ public class PlatformCallbackHandler : MonoBehaviour
     // Unity API의 한계로 함수 인자는 string 하나만 쓸 수 있다.
     void OnIosLoadResult(string result)
     {
-        if (result.StartsWith("*****ERROR***** ")) {
+        if (result.StartsWith("*****ERROR***** "))
+        {
             Platform.instance.OnCloudLoadResult(result, null);
-        } else {
+        }
+        else
+        {
             SushiDebug.LogFormat("PlatformCallbackHandler.OnIosLoadResult: {0}", result != null ? result : "(null)");
             byte[] loadedDataBytes = null;
-            if (result != null) {
-                try {
-                    loadedDataBytes = System.Convert.FromBase64String(result);
-                } catch {
+            if (result != null)
+                try
+                {
+                    loadedDataBytes = Convert.FromBase64String(result);
+                }
+                catch
+                {
                     loadedDataBytes = null;
                 }
-            }
+
             Platform.instance.OnCloudLoadResult("OK", loadedDataBytes);
         }
     }

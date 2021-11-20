@@ -1,6 +1,6 @@
-﻿using MessagePack.Formatters;
-using System;
+﻿using System;
 using System.Reflection;
+using MessagePack.Formatters;
 
 namespace MessagePack.Resolvers
 {
@@ -8,7 +8,7 @@ namespace MessagePack.Resolvers
     {
         public static readonly CompositeResolver Instance = new CompositeResolver();
 
-        static bool isFreezed = false;
+        static bool isFreezed;
         static IMessagePackFormatter[] formatters = new IMessagePackFormatter[0];
         static IFormatterResolver[] resolvers = new IFormatterResolver[0];
 
@@ -16,12 +16,15 @@ namespace MessagePack.Resolvers
         {
         }
 
+        public IMessagePackFormatter<T> GetFormatter<T>()
+        {
+            return FormatterCache<T>.formatter;
+        }
+
         public static void Register(params IFormatterResolver[] resolvers)
         {
             if (isFreezed)
-            {
                 throw new InvalidOperationException("Register must call on startup(before use GetFormatter<T>).");
-            }
 
             CompositeResolver.resolvers = resolvers;
         }
@@ -29,9 +32,7 @@ namespace MessagePack.Resolvers
         public static void Register(params IMessagePackFormatter[] formatters)
         {
             if (isFreezed)
-            {
                 throw new InvalidOperationException("Register must call on startup(before use GetFormatter<T>).");
-            }
 
             CompositeResolver.formatters = formatters;
         }
@@ -39,9 +40,7 @@ namespace MessagePack.Resolvers
         public static void Register(IMessagePackFormatter[] formatters, IFormatterResolver[] resolvers)
         {
             if (isFreezed)
-            {
                 throw new InvalidOperationException("Register must call on startup(before use GetFormatter<T>).");
-            }
 
             CompositeResolver.resolvers = resolvers;
             CompositeResolver.formatters = formatters;
@@ -50,25 +49,20 @@ namespace MessagePack.Resolvers
         public static void RegisterAndSetAsDefault(params IFormatterResolver[] resolvers)
         {
             Register(resolvers);
-            MessagePack.MessagePackSerializer.SetDefaultResolver(CompositeResolver.Instance);
+            MessagePackSerializer.SetDefaultResolver(Instance);
         }
 
         public static void RegisterAndSetAsDefault(params IMessagePackFormatter[] formatters)
         {
             Register(formatters);
-            MessagePack.MessagePackSerializer.SetDefaultResolver(CompositeResolver.Instance);
+            MessagePackSerializer.SetDefaultResolver(Instance);
         }
 
         public static void RegisterAndSetAsDefault(IMessagePackFormatter[] formatters, IFormatterResolver[] resolvers)
         {
             Register(formatters);
             Register(resolvers);
-            MessagePack.MessagePackSerializer.SetDefaultResolver(CompositeResolver.Instance);
-        }
-
-        public IMessagePackFormatter<T> GetFormatter<T>()
-        {
-            return FormatterCache<T>.formatter;
+            MessagePackSerializer.SetDefaultResolver(Instance);
         }
 
         static class FormatterCache<T>
@@ -80,15 +74,13 @@ namespace MessagePack.Resolvers
                 isFreezed = true;
 
                 foreach (var item in formatters)
+                foreach (var implInterface in item.GetType().GetTypeInfo().ImplementedInterfaces)
                 {
-                    foreach (var implInterface in item.GetType().GetTypeInfo().ImplementedInterfaces)
+                    var ti = implInterface.GetTypeInfo();
+                    if (ti.IsGenericType && ti.GenericTypeArguments[0] == typeof(T))
                     {
-                        var ti = implInterface.GetTypeInfo();
-                        if (ti.IsGenericType && ti.GenericTypeArguments[0] == typeof(T))
-                        {
-                            formatter = (IMessagePackFormatter<T>)item;
-                            return;
-                        }
+                        formatter = (IMessagePackFormatter<T>) item;
+                        return;
                     }
                 }
 

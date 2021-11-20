@@ -12,47 +12,41 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#if UNITY_ANDROID
 
 using System;
 using System.Collections.Generic;
-using UnityEngine;
-
 using GoogleMobileAds.Api;
+#if UNITY_ANDROID
 using GoogleMobileAds.Common;
+using UnityEngine;
 
 namespace GoogleMobileAds.Android
 {
     public class AdLoaderClient : AndroidJavaProxy, IAdLoaderClient
     {
-        private AndroidJavaObject adLoader;
-        private Dictionary<string, Action<CustomNativeTemplateAd, string>> CustomNativeTemplateCallbacks
-        {
-            get; set;
-        }
-        public event EventHandler<AdFailedToLoadEventArgs> OnAdFailedToLoad;
-        public event EventHandler<CustomNativeEventArgs> OnCustomNativeTemplateAdLoaded;
+        readonly AndroidJavaObject adLoader;
 
         public AdLoaderClient(AdLoader unityAdLoader) : base(Utils.UnityAdLoaderListenerClassName)
         {
-            AndroidJavaClass playerClass = new AndroidJavaClass(Utils.UnityActivityClassName);
-            AndroidJavaObject activity =
+            var playerClass = new AndroidJavaClass(Utils.UnityActivityClassName);
+            var activity =
                 playerClass.GetStatic<AndroidJavaObject>("currentActivity");
             adLoader = new AndroidJavaObject(Utils.NativeAdLoaderClassName, activity,
                 unityAdLoader.AdUnitId, this);
 
-            this.CustomNativeTemplateCallbacks = unityAdLoader.CustomNativeTemplateClickHandlers;
+            CustomNativeTemplateCallbacks = unityAdLoader.CustomNativeTemplateClickHandlers;
 
             if (unityAdLoader.AdTypes.Contains(NativeAdType.CustomTemplate))
-            {
-                foreach (string templateId in unityAdLoader.TemplateIds)
-                {
+                foreach (var templateId in unityAdLoader.TemplateIds)
                     adLoader.Call("configureCustomNativeTemplateAd", templateId,
-                        this.CustomNativeTemplateCallbacks.ContainsKey(templateId));
-                }
-            }
+                        CustomNativeTemplateCallbacks.ContainsKey(templateId));
             adLoader.Call("create");
         }
+
+        Dictionary<string, Action<CustomNativeTemplateAd, string>> CustomNativeTemplateCallbacks { get; }
+
+        public event EventHandler<AdFailedToLoadEventArgs> OnAdFailedToLoad;
+        public event EventHandler<CustomNativeEventArgs> OnCustomNativeTemplateAdLoaded;
 
         public void LoadAd(AdRequest request)
         {
@@ -61,19 +55,19 @@ namespace GoogleMobileAds.Android
 
         public void onCustomTemplateAdLoaded(AndroidJavaObject ad)
         {
-            if (this.OnCustomNativeTemplateAdLoaded != null)
+            if (OnCustomNativeTemplateAdLoaded != null)
             {
-                CustomNativeEventArgs args = new CustomNativeEventArgs()
+                var args = new CustomNativeEventArgs
                 {
                     nativeAd = new CustomNativeTemplateAd(new CustomNativeTemplateClient(ad))
                 };
-                this.OnCustomNativeTemplateAdLoaded(this, args);
+                OnCustomNativeTemplateAdLoaded(this, args);
             }
         }
 
         void onAdFailedToLoad(string errorReason)
         {
-            AdFailedToLoadEventArgs args = new AdFailedToLoadEventArgs()
+            var args = new AdFailedToLoadEventArgs
             {
                 Message = errorReason
             };
@@ -82,9 +76,9 @@ namespace GoogleMobileAds.Android
 
         public void onCustomClick(AndroidJavaObject ad, string assetName)
         {
-            CustomNativeTemplateAd nativeAd = new CustomNativeTemplateAd(
-                    new CustomNativeTemplateClient(ad));
-            this.CustomNativeTemplateCallbacks[nativeAd.GetCustomTemplateId()](nativeAd, assetName);
+            var nativeAd = new CustomNativeTemplateAd(
+                new CustomNativeTemplateClient(ad));
+            CustomNativeTemplateCallbacks[nativeAd.GetCustomTemplateId()](nativeAd, assetName);
         }
     }
 }

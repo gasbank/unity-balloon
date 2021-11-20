@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
 
-public class BalloonOilSprite : MonoBehaviour {
-    [SerializeField] Transform cam;
+public class BalloonOilSprite : MonoBehaviour
+{
+    [SerializeField]
+    Transform cam;
 
-    void Awake() {
+    void Awake()
+    {
         cam = Camera.main.transform;
     }
 
-    void LateUpdate() {
+    void LateUpdate()
+    {
         transform.LookAt(cam);
     }
 }

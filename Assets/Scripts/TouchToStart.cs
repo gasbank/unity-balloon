@@ -1,12 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMProText = TMPro.TextMeshProUGUI;
 
-public class TouchToStart : MonoBehaviour {
-    [SerializeField] private TMProText text = null;
+public class TouchToStart : MonoBehaviour
+{
+    [SerializeField]
+    TMProText text;
 
-    void Update() {
+    void Update()
+    {
         text.color = new Color(text.color.r, text.color.g, text.color.b, Mathf.PingPong(Time.time * 3, 1.0f));
     }
 }

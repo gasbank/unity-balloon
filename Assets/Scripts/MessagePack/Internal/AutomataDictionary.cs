@@ -2,9 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Reflection;
 
 namespace MessagePack.Internal
 {
@@ -86,13 +83,9 @@ namespace MessagePack.Internal
                 var key = AutomataKeyGen.GetKeySafe(bytes, ref offset, ref rest);
 
                 if (rest == 0)
-                {
                     node = node.Add(key, value, str);
-                }
                 else
-                {
                     node = node.Add(key);
-                }
             }
         }
 
@@ -106,21 +99,16 @@ namespace MessagePack.Internal
             var offset = key.Offset;
             var rest = key.Count;
 
-            while (rest != 0 && node != null)
-            {
-                node = node.SearchNextSafe(bytes, ref offset, ref rest);
-            }
+            while (rest != 0 && node != null) node = node.SearchNextSafe(bytes, ref offset, ref rest);
 
             if (node == null)
             {
                 value = -1;
                 return false;
             }
-            else
-            {
-                value = node.Value;
-                return true;
-            }
+
+            value = node.Value;
+            return true;
         }
 
         // for debugging
@@ -135,10 +123,7 @@ namespace MessagePack.Internal
         {
             foreach (var item in nexts)
             {
-                if (depth != 0)
-                {
-                    sb.Append(' ', depth * 2);
-                }
+                if (depth != 0) sb.Append(' ', depth * 2);
                 sb.Append("[" + item.Key + "]");
                 if (item.Value != -1)
                 {
@@ -146,6 +131,7 @@ namespace MessagePack.Internal
                     sb.Append(" = ");
                     sb.Append(item.Value);
                 }
+
                 sb.AppendLine();
                 ToStringCore(item.YieldChildren(), sb, depth + 1);
             }
@@ -158,7 +144,7 @@ namespace MessagePack.Internal
 
         public IEnumerator<KeyValuePair<string, int>> GetEnumerator()
         {
-            return YieldCore(this.root.YieldChildren()).GetEnumerator();
+            return YieldCore(root.YieldChildren()).GetEnumerator();
         }
 
         static IEnumerable<KeyValuePair<string, int>> YieldCore(IEnumerable<AutomataNode> nexts)
@@ -173,7 +159,6 @@ namespace MessagePack.Internal
         // IL Emit
 
 #if !NET_STANDARD_2_0
-
         public void EmitMatch(ILGenerator il, LocalBuilder p, LocalBuilder rest, LocalBuilder key, Action<KeyValuePair<string, int>> onFound, Action onNotFound)
         {
             root.EmitSearchNext(il, p, rest, key, onFound, onNotFound);
@@ -186,7 +171,7 @@ namespace MessagePack.Internal
             static readonly AutomataNode[] emptyNodes = new AutomataNode[0];
             static readonly ulong[] emptyKeys = new ulong[0];
 
-            public ulong Key;
+            public readonly ulong Key;
             public int Value;
             public string originalKey;
 
@@ -194,16 +179,16 @@ namespace MessagePack.Internal
             ulong[] nextKeys;
             int count;
 
-            public bool HasChildren { get { return count != 0; } }
+            public bool HasChildren => count != 0;
 
             public AutomataNode(ulong key)
             {
-                this.Key = key;
-                this.Value = -1;
-                this.nexts = emptyNodes;
-                this.nextKeys = emptyKeys;
-                this.count = 0;
-                this.originalKey = null;
+                Key = key;
+                Value = -1;
+                nexts = emptyNodes;
+                nextKeys = emptyKeys;
+                count = 0;
+                originalKey = null;
             }
 
             public AutomataNode Add(ulong key)
@@ -213,9 +198,10 @@ namespace MessagePack.Internal
                 {
                     if (nexts.Length == count)
                     {
-                        Array.Resize<AutomataNode>(ref nexts, (count == 0) ? 4 : (count * 2));
-                        Array.Resize<ulong>(ref nextKeys, (count == 0) ? 4 : (count * 2));
+                        Array.Resize(ref nexts, count == 0 ? 4 : count * 2);
+                        Array.Resize(ref nextKeys, count == 0 ? 4 : count * 2);
                     }
+
                     count++;
 
                     var nextNode = new AutomataNode(key);
@@ -225,10 +211,8 @@ namespace MessagePack.Internal
                     Array.Sort(nextKeys, 0, count);
                     return nextNode;
                 }
-                else
-                {
-                    return nexts[index];
-                }
+
+                return nexts[index];
             }
 
             public AutomataNode Add(ulong key, int value, string originalKey)
@@ -240,7 +224,6 @@ namespace MessagePack.Internal
             }
 
 #if NETSTANDARD
-
             public unsafe AutomataNode SearchNext(ref byte* p, ref int rest)
             {
                 var key = AutomataKeyGen.GetKey(ref p, ref rest);
@@ -276,22 +259,15 @@ namespace MessagePack.Internal
                 if (count < 4)
                 {
                     // linear search
-                    for (int i = 0; i < count; i++)
-                    {
+                    for (var i = 0; i < count; i++)
                         if (nextKeys[i] == key)
-                        {
                             return nexts[i];
-                        }
-                    }
                 }
                 else
                 {
                     // binary search
                     var index = BinarySearch(nextKeys, 0, count, key);
-                    if (index >= 0)
-                    {
-                        return nexts[index];
-                    }
+                    if (index >= 0) return nexts[index];
                 }
 
                 return null;
@@ -299,11 +275,11 @@ namespace MessagePack.Internal
 
             internal static int BinarySearch(ulong[] array, int index, int length, ulong value)
             {
-                int lo = index;
-                int hi = index + length - 1;
+                var lo = index;
+                var hi = index + length - 1;
                 while (lo <= hi)
                 {
-                    int i = lo + ((hi - lo) >> 1);
+                    var i = lo + ((hi - lo) >> 1);
 
                     var arrayValue = array[i];
                     int order;
@@ -313,13 +289,9 @@ namespace MessagePack.Internal
 
                     if (order == 0) return i;
                     if (order < 0)
-                    {
                         lo = i + 1;
-                    }
                     else
-                    {
                         hi = i - 1;
-                    }
                 }
 
                 return ~lo;
@@ -327,19 +299,15 @@ namespace MessagePack.Internal
 
             public int CompareTo(AutomataNode other)
             {
-                return this.Key.CompareTo(other.Key);
+                return Key.CompareTo(other.Key);
             }
 
             public IEnumerable<AutomataNode> YieldChildren()
             {
-                for (int i = 0; i < count; i++)
-                {
-                    yield return nexts[i];
-                }
+                for (var i = 0; i < count; i++) yield return nexts[i];
             }
 
 #if !NET_STANDARD_2_0
-
             // SearchNext(ref byte* p, ref int rest, ref ulong key)
             public void EmitSearchNext(ILGenerator il, LocalBuilder p, LocalBuilder rest, LocalBuilder key, Action<KeyValuePair<string, int>> onFound, Action onNotFound)
             {
@@ -380,7 +348,8 @@ namespace MessagePack.Internal
                         }
                     }
                     {
-                        var ifValueNexts = Enumerable.Range(0, Math.Max(valueExists.Length - 1, 0)).Select(_ => il.DefineLabel()).ToArray();
+                        var ifValueNexts =
+ Enumerable.Range(0, Math.Max(valueExists.Length - 1, 0)).Select(_ => il.DefineLabel()).ToArray();
                         for (int i = 0; i < valueExists.Length; i++)
                         {
                             var notFoundLabel = il.DefineLabel();
@@ -409,7 +378,8 @@ namespace MessagePack.Internal
                     }
 
                     il.MarkLabel(gotoSearchNext);
-                    var ifRecNext = Enumerable.Range(0, Math.Max(childrenExists.Length - 1, 0)).Select(_ => il.DefineLabel()).ToArray();
+                    var ifRecNext =
+ Enumerable.Range(0, Math.Max(childrenExists.Length - 1, 0)).Select(_ => il.DefineLabel()).ToArray();
                     for (int i = 0; i < childrenExists.Length; i++)
                     {
                         var notFoundLabel = il.DefineLabel();
@@ -469,13 +439,13 @@ namespace MessagePack.Internal
         public delegate ulong PointerDelegate<T>(ref T p, ref int rest);
 
 #if NETSTANDARD
-        public static readonly MethodInfo GetKeyMethod = typeof(AutomataKeyGen).GetRuntimeMethod("GetKey", new[] { typeof(byte).MakePointerType().MakeByRefType(), typeof(int).MakeByRefType() });
+        public static readonly MethodInfo GetKeyMethod =
+ typeof(AutomataKeyGen).GetRuntimeMethod("GetKey", new[] { typeof(byte).MakePointerType().MakeByRefType(), typeof(int).MakeByRefType() });
 #endif
 
 #if !NETSTANDARD
 
 #if !NET_STANDARD_2_0
-
         static MethodInfo dynamicGetKeyMethod;
         static readonly object gate = new object();
         static DynamicAssembly dynamicAssembly;
@@ -489,9 +459,11 @@ namespace MessagePack.Internal
                     if (dynamicGetKeyMethod == null)
                     {
                         dynamicAssembly = new DynamicAssembly("AutomataKeyGenHelper");
-                        var helperType = dynamicAssembly.DefineType("AutomataKeyGen", TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.Abstract, null);
+                        var helperType =
+ dynamicAssembly.DefineType("AutomataKeyGen", TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.Abstract, null);
 
-                        var dm = helperType.DefineMethod("GetKey", MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig, typeof(ulong), new[] { typeof(byte).MakePointerType().MakeByRefType(), typeof(int).MakeByRefType() });
+                        var dm =
+ helperType.DefineMethod("GetKey", MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig, typeof(ulong), new[] { typeof(byte).MakePointerType().MakeByRefType(), typeof(int).MakeByRefType() });
 
                         var il = dm.GetILGenerator();
 
@@ -695,7 +667,6 @@ namespace MessagePack.Internal
 #endif
 
 #if NETSTANDARD
-
         public static unsafe ulong GetKey(ref byte* p, ref int rest)
         {
             int readSize;
@@ -782,13 +753,14 @@ namespace MessagePack.Internal
             ulong key;
 
             if (BitConverter.IsLittleEndian)
-            {
                 unchecked
                 {
                     if (rest >= 8)
                     {
-                        key = (ulong)bytes[offset] << 0 | (ulong)bytes[offset + 1] << 8 | (ulong)bytes[offset + 2] << 16 | (ulong)bytes[offset + 3] << 24
-                            | (ulong)bytes[offset + 4] << 32 | (ulong)bytes[offset + 5] << 40 | (ulong)bytes[offset + 6] << 48 | (ulong)bytes[offset + 7] << 56;
+                        key = ((ulong) bytes[offset] << 0) | ((ulong) bytes[offset + 1] << 8) |
+                              ((ulong) bytes[offset + 2] << 16) | ((ulong) bytes[offset + 3] << 24)
+                              | ((ulong) bytes[offset + 4] << 32) | ((ulong) bytes[offset + 5] << 40) |
+                              ((ulong) bytes[offset + 6] << 48) | ((ulong) bytes[offset + 7] << 56);
                         readSize = 8;
                     }
                     else
@@ -796,50 +768,56 @@ namespace MessagePack.Internal
                         switch (rest)
                         {
                             case 1:
-                                {
-                                    key = bytes[offset];
-                                    readSize = 1;
-                                    break;
-                                }
+                            {
+                                key = bytes[offset];
+                                readSize = 1;
+                                break;
+                            }
                             case 2:
-                                {
-                                    key = (ulong)bytes[offset] << 0 | (ulong)bytes[offset + 1] << 8;
-                                    readSize = 2;
-                                    break;
-                                }
+                            {
+                                key = ((ulong) bytes[offset] << 0) | ((ulong) bytes[offset + 1] << 8);
+                                readSize = 2;
+                                break;
+                            }
                             case 3:
-                                {
-                                    key = (ulong)bytes[offset] << 0 | (ulong)bytes[offset + 1] << 8 | (ulong)bytes[offset + 2] << 16;
-                                    readSize = 3;
-                                    break;
-                                }
+                            {
+                                key = ((ulong) bytes[offset] << 0) | ((ulong) bytes[offset + 1] << 8) |
+                                      ((ulong) bytes[offset + 2] << 16);
+                                readSize = 3;
+                                break;
+                            }
                             case 4:
-                                {
-                                    key = (ulong)bytes[offset] << 0 | (ulong)bytes[offset + 1] << 8 | (ulong)bytes[offset + 2] << 16 | (ulong)bytes[offset + 3] << 24;
-                                    readSize = 4;
-                                    break;
-                                }
+                            {
+                                key = ((ulong) bytes[offset] << 0) | ((ulong) bytes[offset + 1] << 8) |
+                                      ((ulong) bytes[offset + 2] << 16) | ((ulong) bytes[offset + 3] << 24);
+                                readSize = 4;
+                                break;
+                            }
                             case 5:
-                                {
-                                    key = (ulong)bytes[offset] << 0 | (ulong)bytes[offset + 1] << 8 | (ulong)bytes[offset + 2] << 16 | (ulong)bytes[offset + 3] << 24
-                                        | (ulong)bytes[offset + 4] << 32;
-                                    readSize = 5;
-                                    break;
-                                }
+                            {
+                                key = ((ulong) bytes[offset] << 0) | ((ulong) bytes[offset + 1] << 8) |
+                                      ((ulong) bytes[offset + 2] << 16) | ((ulong) bytes[offset + 3] << 24)
+                                      | ((ulong) bytes[offset + 4] << 32);
+                                readSize = 5;
+                                break;
+                            }
                             case 6:
-                                {
-                                    key = (ulong)bytes[offset] << 0 | (ulong)bytes[offset + 1] << 8 | (ulong)bytes[offset + 2] << 16 | (ulong)bytes[offset + 3] << 24
-                                        | (ulong)bytes[offset + 4] << 32 | (ulong)bytes[offset + 5] << 40;
-                                    readSize = 6;
-                                    break;
-                                }
+                            {
+                                key = ((ulong) bytes[offset] << 0) | ((ulong) bytes[offset + 1] << 8) |
+                                      ((ulong) bytes[offset + 2] << 16) | ((ulong) bytes[offset + 3] << 24)
+                                      | ((ulong) bytes[offset + 4] << 32) | ((ulong) bytes[offset + 5] << 40);
+                                readSize = 6;
+                                break;
+                            }
                             case 7:
-                                {
-                                    key = (ulong)bytes[offset] << 0 | (ulong)bytes[offset + 1] << 8 | (ulong)bytes[offset + 2] << 16 | (ulong)bytes[offset + 3] << 24
-                                        | (ulong)bytes[offset + 4] << 32 | (ulong)bytes[offset + 5] << 40 | (ulong)bytes[offset + 6] << 48;
-                                    readSize = 7;
-                                    break;
-                                }
+                            {
+                                key = ((ulong) bytes[offset] << 0) | ((ulong) bytes[offset + 1] << 8) |
+                                      ((ulong) bytes[offset + 2] << 16) | ((ulong) bytes[offset + 3] << 24)
+                                      | ((ulong) bytes[offset + 4] << 32) | ((ulong) bytes[offset + 5] << 40) |
+                                      ((ulong) bytes[offset + 6] << 48);
+                                readSize = 7;
+                                break;
+                            }
                             default:
                                 throw new InvalidOperationException("Not Supported Length");
                         }
@@ -849,75 +827,80 @@ namespace MessagePack.Internal
                     rest -= readSize;
                     return key;
                 }
-            }
-            else
-            {
-                unchecked
-                {
-                    if (rest >= 8)
-                    {
-                        key = (ulong)bytes[offset] << 56 | (ulong)bytes[offset + 1] << 48 | (ulong)bytes[offset + 2] << 40 | (ulong)bytes[offset + 3] << 32
-                            | (ulong)bytes[offset + 4] << 24 | (ulong)bytes[offset + 5] << 16 | (ulong)bytes[offset + 6] << 8 | (ulong)bytes[offset + 7];
-                        readSize = 8;
-                    }
-                    else
-                    {
-                        switch (rest)
-                        {
-                            case 1:
-                                {
-                                    key = bytes[offset];
-                                    readSize = 1;
-                                    break;
-                                }
-                            case 2:
-                                {
-                                    key = (ulong)bytes[offset] << 8 | (ulong)bytes[offset + 1] << 0;
-                                    readSize = 2;
-                                    break;
-                                }
-                            case 3:
-                                {
-                                    key = (ulong)bytes[offset] << 16 | (ulong)bytes[offset + 1] << 8 | (ulong)bytes[offset + 2] << 0;
-                                    readSize = 3;
-                                    break;
-                                }
-                            case 4:
-                                {
-                                    key = (ulong)bytes[offset] << 24 | (ulong)bytes[offset + 1] << 16 | (ulong)bytes[offset + 2] << 8 | (ulong)bytes[offset + 3] << 0;
-                                    readSize = 4;
-                                    break;
-                                }
-                            case 5:
-                                {
-                                    key = (ulong)bytes[offset] << 32 | (ulong)bytes[offset + 1] << 24 | (ulong)bytes[offset + 2] << 16 | (ulong)bytes[offset + 3] << 8
-                                        | (ulong)bytes[offset + 4] << 0;
-                                    readSize = 5;
-                                    break;
-                                }
-                            case 6:
-                                {
-                                    key = (ulong)bytes[offset] << 40 | (ulong)bytes[offset + 1] << 32 | (ulong)bytes[offset + 2] << 24 | (ulong)bytes[offset + 3] << 16
-                                        | (ulong)bytes[offset + 4] << 8 | (ulong)bytes[offset + 5] << 0;
-                                    readSize = 6;
-                                    break;
-                                }
-                            case 7:
-                                {
-                                    key = (ulong)bytes[offset] << 48 | (ulong)bytes[offset + 1] << 40 | (ulong)bytes[offset + 2] << 32 | (ulong)bytes[offset + 3] << 24
-                                        | (ulong)bytes[offset + 4] << 16 | (ulong)bytes[offset + 5] << 8 | (ulong)bytes[offset + 6] << 0;
-                                    readSize = 7;
-                                    break;
-                                }
-                            default:
-                                throw new InvalidOperationException("Not Supported Length");
-                        }
-                    }
 
-                    offset += readSize;
-                    rest -= readSize;
-                    return key;
+            unchecked
+            {
+                if (rest >= 8)
+                {
+                    key = ((ulong) bytes[offset] << 56) | ((ulong) bytes[offset + 1] << 48) |
+                          ((ulong) bytes[offset + 2] << 40) | ((ulong) bytes[offset + 3] << 32)
+                          | ((ulong) bytes[offset + 4] << 24) | ((ulong) bytes[offset + 5] << 16) |
+                          ((ulong) bytes[offset + 6] << 8) | bytes[offset + 7];
+                    readSize = 8;
                 }
+                else
+                {
+                    switch (rest)
+                    {
+                        case 1:
+                        {
+                            key = bytes[offset];
+                            readSize = 1;
+                            break;
+                        }
+                        case 2:
+                        {
+                            key = ((ulong) bytes[offset] << 8) | ((ulong) bytes[offset + 1] << 0);
+                            readSize = 2;
+                            break;
+                        }
+                        case 3:
+                        {
+                            key = ((ulong) bytes[offset] << 16) | ((ulong) bytes[offset + 1] << 8) |
+                                  ((ulong) bytes[offset + 2] << 0);
+                            readSize = 3;
+                            break;
+                        }
+                        case 4:
+                        {
+                            key = ((ulong) bytes[offset] << 24) | ((ulong) bytes[offset + 1] << 16) |
+                                  ((ulong) bytes[offset + 2] << 8) | ((ulong) bytes[offset + 3] << 0);
+                            readSize = 4;
+                            break;
+                        }
+                        case 5:
+                        {
+                            key = ((ulong) bytes[offset] << 32) | ((ulong) bytes[offset + 1] << 24) |
+                                  ((ulong) bytes[offset + 2] << 16) | ((ulong) bytes[offset + 3] << 8)
+                                  | ((ulong) bytes[offset + 4] << 0);
+                            readSize = 5;
+                            break;
+                        }
+                        case 6:
+                        {
+                            key = ((ulong) bytes[offset] << 40) | ((ulong) bytes[offset + 1] << 32) |
+                                  ((ulong) bytes[offset + 2] << 24) | ((ulong) bytes[offset + 3] << 16)
+                                  | ((ulong) bytes[offset + 4] << 8) | ((ulong) bytes[offset + 5] << 0);
+                            readSize = 6;
+                            break;
+                        }
+                        case 7:
+                        {
+                            key = ((ulong) bytes[offset] << 48) | ((ulong) bytes[offset + 1] << 40) |
+                                  ((ulong) bytes[offset + 2] << 32) | ((ulong) bytes[offset + 3] << 24)
+                                  | ((ulong) bytes[offset + 4] << 16) | ((ulong) bytes[offset + 5] << 8) |
+                                  ((ulong) bytes[offset + 6] << 0);
+                            readSize = 7;
+                            break;
+                        }
+                        default:
+                            throw new InvalidOperationException("Not Supported Length");
+                    }
+                }
+
+                offset += readSize;
+                rest -= readSize;
+                return key;
             }
         }
     }

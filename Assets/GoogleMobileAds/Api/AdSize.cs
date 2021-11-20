@@ -16,10 +16,6 @@ namespace GoogleMobileAds.Api
 {
     public class AdSize
     {
-        private bool isSmartBanner;
-        private int width;
-        private int height;
-
         public static readonly AdSize Banner = new AdSize(320, 50);
         public static readonly AdSize MediumRectangle = new AdSize(300, 250);
         public static readonly AdSize IABBanner = new AdSize(468, 60);
@@ -29,47 +25,29 @@ namespace GoogleMobileAds.Api
 
         public AdSize(int width, int height)
         {
-            isSmartBanner = false;
-            this.width = width;
-            this.height = height;
+            IsSmartBanner = false;
+            Width = width;
+            Height = height;
         }
 
-        private AdSize(bool isSmartBanner) : this(0, 0)
+        AdSize(bool isSmartBanner) : this(0, 0)
         {
-            this.isSmartBanner = isSmartBanner;
+            IsSmartBanner = isSmartBanner;
         }
 
-        public int Width
-        {
-            get
-            {
-                return width;
-            }
-        }
+        public int Width { get; }
 
-        public int Height
-        {
-            get
-            {
-                return height;
-            }
-        }
+        public int Height { get; }
 
-        public bool IsSmartBanner
-        {
-            get
-            {
-                return isSmartBanner;
-            }
-        }
+        public bool IsSmartBanner { get; }
 
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
                 return false;
 
-            AdSize other = (AdSize)obj;
-            return (width == other.width) && (height == other.height) && (isSmartBanner == other.isSmartBanner);
+            var other = (AdSize) obj;
+            return Width == other.Width && Height == other.Height && IsSmartBanner == other.IsSmartBanner;
         }
 
         public static bool operator ==(AdSize a, AdSize b)
@@ -84,13 +62,13 @@ namespace GoogleMobileAds.Api
 
         public override int GetHashCode()
         {
-            int hashBase = 71;
-            int hashMultiplier = 11;
+            var hashBase = 71;
+            var hashMultiplier = 11;
 
-            int hash = hashBase;
-            hash = (hash * hashMultiplier) ^ width.GetHashCode();
-            hash = (hash * hashMultiplier) ^ height.GetHashCode();
-            hash = (hash * hashMultiplier) ^ isSmartBanner.GetHashCode();
+            var hash = hashBase;
+            hash = (hash * hashMultiplier) ^ Width.GetHashCode();
+            hash = (hash * hashMultiplier) ^ Height.GetHashCode();
+            hash = (hash * hashMultiplier) ^ IsSmartBanner.GetHashCode();
             return hash;
         }
     }

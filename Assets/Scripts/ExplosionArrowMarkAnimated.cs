@@ -1,26 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ExplosionArrowMarkAnimated : MonoBehaviour {
-    [SerializeField] Material halfRingMaterialOriginal = null;
-    [SerializeField] Renderer halfRingRenderer = null;
-    static Material halfRingMaterialCopy = null;
+public class ExplosionArrowMarkAnimated : MonoBehaviour
+{
+    static Material halfRingMaterialCopy;
 
-    void Awake() {
-        if (halfRingMaterialOriginal != null) {
-            if (halfRingMaterialCopy == null) {
+    [SerializeField]
+    Material halfRingMaterialOriginal;
+
+    [SerializeField]
+    Renderer halfRingRenderer;
+
+    void Awake()
+    {
+        if (halfRingMaterialOriginal != null)
+            if (halfRingMaterialCopy == null)
                 halfRingMaterialCopy = Instantiate(halfRingMaterialOriginal);
-            }
-        }
-        if (halfRingRenderer != null) {
-            halfRingRenderer.material = halfRingMaterialCopy;
-        }
+        if (halfRingRenderer != null) halfRingRenderer.material = halfRingMaterialCopy;
     }
 
-    void Update() {
-        if (halfRingMaterialCopy != null) {
-            halfRingMaterialCopy.mainTextureOffset = new Vector2(1.5f * Time.time, 0);
-        }
+    void Update()
+    {
+        if (halfRingMaterialCopy != null) halfRingMaterialCopy.mainTextureOffset = new Vector2(1.5f * Time.time, 0);
     }
 }

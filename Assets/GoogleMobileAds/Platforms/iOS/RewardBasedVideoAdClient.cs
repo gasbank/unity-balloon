@@ -13,7 +13,6 @@
 // limitations under the License.
 
 #if UNITY_IOS
-
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;

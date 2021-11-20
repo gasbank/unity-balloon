@@ -1,6 +1,6 @@
-﻿using MessagePack.Formatters;
+﻿using System;
+using MessagePack.Formatters;
 using MessagePack.Internal;
-using System;
 
 namespace MessagePack.Resolvers
 {
@@ -10,7 +10,6 @@ namespace MessagePack.Resolvers
 
         OldSpecResolver()
         {
-
         }
 
         public IMessagePackFormatter<T> GetFormatter<T>()
@@ -24,7 +23,7 @@ namespace MessagePack.Resolvers
 
             static FormatterCache()
             {
-                formatter = (IMessagePackFormatter<T>)OldSpecResolverGetFormatterHelper.GetFormatter(typeof(T));
+                formatter = (IMessagePackFormatter<T>) OldSpecResolverGetFormatterHelper.GetFormatter(typeof(T));
             }
         }
     }
@@ -37,17 +36,10 @@ namespace MessagePack.Internal
         internal static object GetFormatter(Type t)
         {
             if (t == typeof(string))
-            {
                 return OldSpecStringFormatter.Instance;
-            }
-            else if (t == typeof(string[]))
-            {
+            if (t == typeof(string[]))
                 return new ArrayFormatter<string>();
-            }
-            else if (t == typeof(byte[]))
-            {
-                return OldSpecBinaryFormatter.Instance;
-            }
+            if (t == typeof(byte[])) return OldSpecBinaryFormatter.Instance;
 
             return null;
         }

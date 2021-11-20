@@ -1,9 +1,8 @@
-﻿#if !UNITY_WSA
-
+﻿using System;
 using MessagePack.Formatters;
-using MessagePack.Internal;
-using System;
+#if !UNITY_WSA
 using System.Reflection;
+using MessagePack.Internal;
 
 namespace MessagePack.Resolvers
 {
@@ -13,7 +12,6 @@ namespace MessagePack.Resolvers
 
         DynamicEnumAsStringResolver()
         {
-
         }
 
         public IMessagePackFormatter<T> GetFormatter<T>()
@@ -33,25 +31,21 @@ namespace MessagePack.Resolvers
                 {
                     // build underlying type and use wrapped formatter.
                     ti = ti.GenericTypeArguments[0].GetTypeInfo();
-                    if (!ti.IsEnum)
-                    {
-                        return;
-                    }
+                    if (!ti.IsEnum) return;
 
-                    var innerFormatter = DynamicEnumAsStringResolver.Instance.GetFormatterDynamic(ti.AsType());
-                    if (innerFormatter == null)
-                    {
-                        return;
-                    }
-                    formatter = (IMessagePackFormatter<T>)Activator.CreateInstance(typeof(StaticNullableFormatter<>).MakeGenericType(ti.AsType()), new object[] { innerFormatter });
+                    var innerFormatter = Instance.GetFormatterDynamic(ti.AsType());
+                    if (innerFormatter == null) return;
+                    formatter = (IMessagePackFormatter<T>) Activator.CreateInstance(
+                        typeof(StaticNullableFormatter<>).MakeGenericType(ti.AsType()), innerFormatter);
                     return;
                 }
-                else if (!ti.IsEnum)
+
+                if (!ti.IsEnum)
                 {
                     return;
                 }
 
-                formatter = (IMessagePackFormatter<T>)(object)new EnumAsStringFormatter<T>();
+                formatter = new EnumAsStringFormatter<T>();
             }
         }
     }

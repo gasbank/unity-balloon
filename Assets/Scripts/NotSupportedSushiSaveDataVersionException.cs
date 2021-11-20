@@ -1,6 +1,11 @@
-﻿public class NotSupportedBalloonSaveDataVersionException : System.NotSupportedException {
-    public int SaveFileVersion { get; }
-    public NotSupportedBalloonSaveDataVersionException(int saveFileVersion) {
+﻿using System;
+
+public class NotSupportedBalloonSaveDataVersionException : NotSupportedException
+{
+    public NotSupportedBalloonSaveDataVersionException(int saveFileVersion)
+    {
         SaveFileVersion = saveFileVersion;
     }
+
+    public int SaveFileVersion { get; }
 }

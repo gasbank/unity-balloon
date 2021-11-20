@@ -17,10 +17,10 @@ namespace MessagePack.Formatters
             nameValueMapping = new Dictionary<string, T>(names.Length);
             valueNameMapping = new Dictionary<T, string>(names.Length);
 
-            for (int i = 0; i < names.Length; i++)
+            for (var i = 0; i < names.Length; i++)
             {
-                nameValueMapping[names[i]] = (T)values.GetValue(i);
-                valueNameMapping[(T)values.GetValue(i)] = names[i];
+                nameValueMapping[names[i]] = (T) values.GetValue(i);
+                valueNameMapping[(T) values.GetValue(i)] = names[i];
             }
         }
 
@@ -28,9 +28,7 @@ namespace MessagePack.Formatters
         {
             string name;
             if (!valueNameMapping.TryGetValue(value, out name))
-            {
                 name = value.ToString(); // fallback for flags etc, But Enum.ToString is too slow.
-            }
 
             return MessagePackBinary.WriteString(ref bytes, offset, name);
         }
@@ -41,9 +39,7 @@ namespace MessagePack.Formatters
 
             T value;
             if (!nameValueMapping.TryGetValue(name, out value))
-            {
-                value = (T)Enum.Parse(typeof(T), name); // Enum.Parse is too slow
-            }
+                value = (T) Enum.Parse(typeof(T), name); // Enum.Parse is too slow
             return value;
         }
     }

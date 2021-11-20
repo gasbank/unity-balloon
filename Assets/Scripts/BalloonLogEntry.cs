@@ -1,8 +1,10 @@
 ﻿using System;
 
 [Serializable]
-public struct BalloonLogEntry {
-    public enum Type {
+public struct BalloonLogEntry
+{
+    public enum Type
+    {
         DummyLogRecord,
         GameCloudLoadBegin,
         GameCloudSaveBegin,
@@ -18,8 +20,9 @@ public struct BalloonLogEntry {
         GameLoaded,
         GameCriticalError,
         GemToZero,
-        GameReset,
+        GameReset
     }
+
     public long ticks;
     public int type;
     public int arg1;

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Purchasing;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
-using System.Linq;
+﻿using UnityEngine;
 
 [DisallowMultipleComponent]
-public class ShopProductEntry : MonoBehaviour {
+public class ShopProductEntry : MonoBehaviour
+{
     //[SerializeField] private Image productImage = null;
     //[SerializeField] private Text productDesc = null;
     //[SerializeField] private Text productPrice = null;
@@ -24,10 +18,12 @@ public class ShopProductEntry : MonoBehaviour {
     // **********************
     // 주의: 데이터시트에도 쓰이는 값이므로, 변경하게 되면 데이터시트 리로드 해야 한다.
     // **********************
-    public enum ShopProductType {
+    public enum ShopProductType
+    {
         inAppPurchaseBegin, // 인앱 결제상품 시작
         top_plusalpha_balloon_ads = inAppPurchaseBegin,
-        inAppPurchaseEnd, // 인앱 결제상품 끝
+        inAppPurchaseEnd // 인앱 결제상품 끝
     }
+
     //private ShopProductData shopProductData = null;
 }

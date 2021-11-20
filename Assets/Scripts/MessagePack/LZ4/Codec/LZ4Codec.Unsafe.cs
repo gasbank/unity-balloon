@@ -1,5 +1,4 @@
 ﻿#if ENABLE_UNSAFE_MSGPACK
-
 #region license
 
 /*

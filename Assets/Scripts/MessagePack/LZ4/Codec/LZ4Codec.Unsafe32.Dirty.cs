@@ -1,5 +1,4 @@
 ﻿#if ENABLE_UNSAFE_MSGPACK
-
 #region LZ4 original
 
 /*
@@ -255,7 +254,8 @@ namespace MessagePack.LZ4
                         }
 
                         // Fill table
-                        hash_table[((((*(uint*)(src_p - 2))) * 2654435761u) >> HASH_ADJUST)] = (uint)(src_p - 2 - src_base);
+                        hash_table[((((*(uint*)(src_p - 2))) * 2654435761u) >> HASH_ADJUST)] =
+ (uint)(src_p - 2 - src_base);
 
                         // Test next position
 
@@ -481,7 +481,8 @@ namespace MessagePack.LZ4
                         }
 
                         // Fill table
-                        hash_table[((((*(uint*)(src_p - 2))) * 2654435761u) >> HASH64K_ADJUST)] = (ushort)(src_p - 2 - src_base);
+                        hash_table[((((*(uint*)(src_p - 2))) * 2654435761u) >> HASH64K_ADJUST)] =
+ (ushort)(src_p - 2 - src_base);
 
                         // Test next position
 

@@ -14,13 +14,8 @@
 
 #if UNITY_ANDROID
 
-using UnityEngine;
-using System;
-using System.Collections.Generic;
-
 using GoogleMobileAds.Api;
-using GoogleMobileAds.Api.Mediation;
-using GoogleMobileAds.Common;
+using UnityEngine;
 
 namespace GoogleMobileAds.Android
 {
@@ -35,12 +30,12 @@ namespace GoogleMobileAds.Android
         public const string AdRequestClassName = "com.google.android.gms.ads.AdRequest";
 
         public const string AdRequestBuilderClassName =
-                "com.google.android.gms.ads.AdRequest$Builder";
+            "com.google.android.gms.ads.AdRequest$Builder";
 
         public const string AdSizeClassName = "com.google.android.gms.ads.AdSize";
 
         public const string AdMobExtrasClassName =
-                "com.google.android.gms.ads.mediation.admob.AdMobExtras";
+            "com.google.android.gms.ads.mediation.admob.AdMobExtras";
 
         public const string PlayStorePurchaseListenerClassName =
             "com.google.android.gms.ads.purchase.PlayStorePurchaseListener";
@@ -76,7 +71,8 @@ namespace GoogleMobileAds.Android
             "com.google.unity.ads.UnityRewardedAdCallback";
 
         public const string UnityAdapterStatusEnumName =
-                "com.google.android.gms.ads.initialization.AdapterStatus$State";
+            "com.google.android.gms.ads.initialization.AdapterStatus$State";
+
         public const string UnityAdLoaderListenerClassName =
             "com.google.unity.ads.UnityAdLoaderListener";
 
@@ -104,43 +100,33 @@ namespace GoogleMobileAds.Android
         public static AndroidJavaObject GetAdSizeJavaObject(AdSize adSize)
         {
             if (adSize.IsSmartBanner)
-            {
                 return new AndroidJavaClass(AdSizeClassName)
-                        .GetStatic<AndroidJavaObject>("SMART_BANNER");
-            }
-            else
-            {
-                return new AndroidJavaObject(AdSizeClassName, adSize.Width, adSize.Height);
-            }
+                    .GetStatic<AndroidJavaObject>("SMART_BANNER");
+            return new AndroidJavaObject(AdSizeClassName, adSize.Width, adSize.Height);
         }
 
         public static AndroidJavaObject GetAdRequestJavaObject(AdRequest request)
         {
-            AndroidJavaObject adRequestBuilder = new AndroidJavaObject(AdRequestBuilderClassName);
-            foreach (string keyword in request.Keywords)
-            {
-                adRequestBuilder.Call<AndroidJavaObject>("addKeyword", keyword);
-            }
+            var adRequestBuilder = new AndroidJavaObject(AdRequestBuilderClassName);
+            foreach (var keyword in request.Keywords) adRequestBuilder.Call<AndroidJavaObject>("addKeyword", keyword);
 
-            foreach (string deviceId in request.TestDevices)
-            {
+            foreach (var deviceId in request.TestDevices)
                 if (deviceId == AdRequest.TestDeviceSimulator)
                 {
-                    string emulatorDeviceId = new AndroidJavaClass(AdRequestClassName)
-                            .GetStatic<string>("DEVICE_ID_EMULATOR");
+                    var emulatorDeviceId = new AndroidJavaClass(AdRequestClassName)
+                        .GetStatic<string>("DEVICE_ID_EMULATOR");
                     adRequestBuilder.Call<AndroidJavaObject>("addTestDevice", emulatorDeviceId);
                 }
                 else
                 {
                     adRequestBuilder.Call<AndroidJavaObject>("addTestDevice", deviceId);
                 }
-            }
 
             if (request.Birthday.HasValue)
             {
-                DateTime birthday = request.Birthday.GetValueOrDefault();
-                AndroidJavaObject birthdayObject = new AndroidJavaObject(
-                        DateClassName, birthday.Year, birthday.Month, birthday.Day);
+                var birthday = request.Birthday.GetValueOrDefault();
+                var birthdayObject = new AndroidJavaObject(
+                    DateClassName, birthday.Year, birthday.Month, birthday.Day);
                 adRequestBuilder.Call<AndroidJavaObject>("setBirthday", birthdayObject);
             }
 
@@ -149,61 +135,50 @@ namespace GoogleMobileAds.Android
                 int? genderCode = null;
                 switch (request.Gender.GetValueOrDefault())
                 {
-                    case Api.Gender.Unknown:
+                    case Gender.Unknown:
                         genderCode = new AndroidJavaClass(AdRequestClassName)
-                                .GetStatic<int>("GENDER_UNKNOWN");
+                            .GetStatic<int>("GENDER_UNKNOWN");
                         break;
-                    case Api.Gender.Male:
+                    case Gender.Male:
                         genderCode = new AndroidJavaClass(AdRequestClassName)
-                                .GetStatic<int>("GENDER_MALE");
+                            .GetStatic<int>("GENDER_MALE");
                         break;
-                    case Api.Gender.Female:
+                    case Gender.Female:
                         genderCode = new AndroidJavaClass(AdRequestClassName)
-                                .GetStatic<int>("GENDER_FEMALE");
+                            .GetStatic<int>("GENDER_FEMALE");
                         break;
                 }
 
-                if (genderCode.HasValue)
-                {
-                    adRequestBuilder.Call<AndroidJavaObject>("setGender", genderCode);
-                }
+                if (genderCode.HasValue) adRequestBuilder.Call<AndroidJavaObject>("setGender", genderCode);
             }
 
             if (request.TagForChildDirectedTreatment.HasValue)
-            {
                 adRequestBuilder.Call<AndroidJavaObject>(
-                        "tagForChildDirectedTreatment",
-                        request.TagForChildDirectedTreatment.GetValueOrDefault());
-            }
+                    "tagForChildDirectedTreatment",
+                    request.TagForChildDirectedTreatment.GetValueOrDefault());
 
             // Denote that the request is coming from this Unity plugin.
             adRequestBuilder.Call<AndroidJavaObject>(
-                    "setRequestAgent",
-                    "unity-" + AdRequest.Version);
-            AndroidJavaObject bundle = new AndroidJavaObject(BundleClassName);
-            foreach (KeyValuePair<string, string> entry in request.Extras)
-            {
-                bundle.Call("putString", entry.Key, entry.Value);
-            }
+                "setRequestAgent",
+                "unity-" + AdRequest.Version);
+            var bundle = new AndroidJavaObject(BundleClassName);
+            foreach (var entry in request.Extras) bundle.Call("putString", entry.Key, entry.Value);
 
             bundle.Call("putString", "is_unity", "1");
 
-            AndroidJavaObject extras = new AndroidJavaObject(AdMobExtrasClassName, bundle);
+            var extras = new AndroidJavaObject(AdMobExtrasClassName, bundle);
             adRequestBuilder.Call<AndroidJavaObject>("addNetworkExtras", extras);
 
-            foreach (MediationExtras mediationExtra in request.MediationExtras)
+            foreach (var mediationExtra in request.MediationExtras)
             {
-                AndroidJavaObject mediationExtrasBundleBuilder =
+                var mediationExtrasBundleBuilder =
                     new AndroidJavaObject(mediationExtra.AndroidMediationExtraBuilderClassName);
-                AndroidJavaObject map = new AndroidJavaObject("java.util.HashMap");
+                var map = new AndroidJavaObject("java.util.HashMap");
 
-                foreach (KeyValuePair<string, string> entry in mediationExtra.Extras)
-                {
-                    map.Call<AndroidJavaObject>("put", entry.Key, entry.Value);
-                }
+                foreach (var entry in mediationExtra.Extras) map.Call<AndroidJavaObject>("put", entry.Key, entry.Value);
 
-                AndroidJavaObject mediationExtras =
-                        mediationExtrasBundleBuilder.Call<AndroidJavaObject>("buildExtras", map);
+                var mediationExtras =
+                    mediationExtrasBundleBuilder.Call<AndroidJavaObject>("buildExtras", map);
 
                 if (mediationExtras != null)
                 {
@@ -222,14 +197,19 @@ namespace GoogleMobileAds.Android
             return adRequestBuilder.Call<AndroidJavaObject>("build");
         }
 
-        public static AndroidJavaObject GetServerSideVerificationOptionsJavaObject(ServerSideVerificationOptions serverSideVerificationOptions)
+        public static AndroidJavaObject GetServerSideVerificationOptionsJavaObject(
+            ServerSideVerificationOptions serverSideVerificationOptions)
         {
-            AndroidJavaObject serverSideVerificationOptionsBuilder = new AndroidJavaObject(ServerSideVerificationOptionsBuilderClassName);
-            serverSideVerificationOptionsBuilder.Call<AndroidJavaObject>("setUserId", serverSideVerificationOptions.UserId);
-            serverSideVerificationOptionsBuilder.Call<AndroidJavaObject>("setCustomData", serverSideVerificationOptions.CustomData);
+            var serverSideVerificationOptionsBuilder =
+                new AndroidJavaObject(ServerSideVerificationOptionsBuilderClassName);
+            serverSideVerificationOptionsBuilder.Call<AndroidJavaObject>("setUserId",
+                serverSideVerificationOptions.UserId);
+            serverSideVerificationOptionsBuilder.Call<AndroidJavaObject>("setCustomData",
+                serverSideVerificationOptions.CustomData);
 
             return serverSideVerificationOptionsBuilder.Call<AndroidJavaObject>("build");
         }
+
         #endregion
     }
 }

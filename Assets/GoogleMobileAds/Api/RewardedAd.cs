@@ -14,73 +14,54 @@
 
 using System;
 using System.Reflection;
-
 using GoogleMobileAds.Common;
 
 namespace GoogleMobileAds.Api
 {
     public class RewardedAd
     {
-        private IRewardedAdClient client;
+        readonly IRewardedAdClient client;
 
         public RewardedAd(string adUnitId)
         {
             // GoogleMobileAdsClientFactory is not included in the compiled DLL due to
             // needing platform directives, so reflection is needed to call this method.
-            Type googleMobileAdsClientFactory = Type.GetType(
+            var googleMobileAdsClientFactory = Type.GetType(
                 "GoogleMobileAds.GoogleMobileAdsClientFactory,Assembly-CSharp");
-            MethodInfo method = googleMobileAdsClientFactory.GetMethod(
+            var method = googleMobileAdsClientFactory.GetMethod(
                 "BuildRewardedAdClient",
                 BindingFlags.Static | BindingFlags.Public);
-            this.client = (IRewardedAdClient)method.Invoke(null, null);
+            client = (IRewardedAdClient) method.Invoke(null, null);
             client.CreateRewardedAd(adUnitId);
 
-            this.client.OnAdLoaded += (sender, args) =>
+            client.OnAdLoaded += (sender, args) =>
             {
-                if (this.OnAdLoaded != null)
-                {
-                    this.OnAdLoaded(this, args);
-                }
+                if (OnAdLoaded != null) OnAdLoaded(this, args);
             };
 
-            this.client.OnAdFailedToLoad += (sender, args) =>
+            client.OnAdFailedToLoad += (sender, args) =>
             {
-                if (this.OnAdFailedToLoad != null)
-                {
-                    this.OnAdFailedToLoad(this, args);
-                }
+                if (OnAdFailedToLoad != null) OnAdFailedToLoad(this, args);
             };
 
-            this.client.OnAdFailedToShow += (sender, args) =>
+            client.OnAdFailedToShow += (sender, args) =>
             {
-                if (this.OnAdFailedToShow != null)
-                {
-                    this.OnAdFailedToShow(this, args);
-                }
+                if (OnAdFailedToShow != null) OnAdFailedToShow(this, args);
             };
 
-            this.client.OnAdOpening += (sender, args) =>
+            client.OnAdOpening += (sender, args) =>
             {
-                if (this.OnAdOpening != null)
-                {
-                    this.OnAdOpening(this, args);
-                }
+                if (OnAdOpening != null) OnAdOpening(this, args);
             };
 
-            this.client.OnAdClosed += (sender, args) =>
+            client.OnAdClosed += (sender, args) =>
             {
-                if (this.OnAdClosed != null)
-                {
-                    this.OnAdClosed(this, args);
-                }
+                if (OnAdClosed != null) OnAdClosed(this, args);
             };
 
-            this.client.OnUserEarnedReward += (sender, args) =>
+            client.OnUserEarnedReward += (sender, args) =>
             {
-                if (this.OnUserEarnedReward != null)
-                {
-                    this.OnUserEarnedReward(this, args);
-                }
+                if (OnUserEarnedReward != null) OnUserEarnedReward(this, args);
             };
         }
 
@@ -124,7 +105,7 @@ namespace GoogleMobileAds.Api
         // Returns the mediation adapter class name.
         public string MediationAdapterClassName()
         {
-            return this.client.MediationAdapterClassName();
+            return client.MediationAdapterClassName();
         }
     }
 }

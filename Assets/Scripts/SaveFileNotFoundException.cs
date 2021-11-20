@@ -1,1 +1,5 @@
-﻿public class SaveFileNotFoundException : System.Exception {}
+﻿using System;
+
+public class SaveFileNotFoundException : Exception
+{
+}

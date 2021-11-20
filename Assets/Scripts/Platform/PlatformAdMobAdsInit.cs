@@ -1,26 +1,25 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections;
-using System;
+using UnityEngine;
 #if GOOGLE_MOBILE_ADS
 using GoogleMobileAds.Api;
+
 #endif
 
 [DisallowMultipleComponent]
-public class PlatformAdMobAdsInit : MonoBehaviour {
+public class PlatformAdMobAdsInit : MonoBehaviour
+{
     public static PlatformAdMobAdsInit instance;
 
-    public void StartShowBanner() {
+    public void StartShowBanner()
+    {
 #if GOOGLE_MOBILE_ADS
-        if (bannerView == null) {
-            CreateBanner();
-        }
+        if (bannerView == null) CreateBanner();
 
-        if (isBannerViewLoaded) {
-            return;
-        }
+        if (isBannerViewLoaded) return;
 
         // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder()
+        var request = new AdRequest.Builder()
             //.AddTestDevice("F626104A61B1DF52DAFC0B5BE7F72B00") // Galaxy S6 Edge
             .Build();
 
@@ -30,26 +29,29 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
 #endif
     }
 
-    public void HideBanner() {
+    public void HideBanner()
+    {
 #if GOOGLE_MOBILE_ADS
-        if (bannerView != null) {
-            bannerView.Hide();
-        }
+        if (bannerView != null) bannerView.Hide();
 #endif
     }
 
 #if GOOGLE_MOBILE_ADS
-    private RewardBasedVideoAd rewardBasedVideo;
+    RewardBasedVideoAd rewardBasedVideo;
     public static InterstitialAd interstitial;
     bool shouldBeRewarded;
-    private BannerView bannerView;
+    BannerView bannerView;
     bool isBannerViewLoaded;
 
-    public void Start() {
+    public void Start()
+    {
         SushiDebug.Log("PlatformAdMobAdsInit.Start()");
-        if (PlatformIapManager.instance.NoAdsPurchased) {
+        if (PlatformIapManager.instance.NoAdsPurchased)
+        {
             Debug.Log("PlatformIapManager.NoAdsPurchased = true (thank you!)");
-        } else {
+        }
+        else
+        {
 #if BALLOON_TEST_ADS
 #if UNITY_ANDROID
             string appId = "ca-app-pub-3940256099942544~3347511713";
@@ -60,7 +62,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
 #endif
 #else
 #if UNITY_ANDROID
-            string appId = "ca-app-pub-5072035175916776~9742483955";
+            var appId = "ca-app-pub-5072035175916776~9742483955";
 #elif UNITY_IOS
             string appId = "ca-app-pub-5072035175916776~2508482457";
 #else
@@ -104,102 +106,118 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
         }
     }
 
-    void HandleRewardBasedVideoLoaded(object sender, EventArgs args) {
+    void HandleRewardBasedVideoLoaded(object sender, EventArgs args)
+    {
         // Workaround for processing result in main thread
         StartCoroutine(HandleRewardBasedVideoLoadedCoro(args));
     }
 
-    IEnumerator HandleRewardBasedVideoLoadedCoro(EventArgs args) {
+    IEnumerator HandleRewardBasedVideoLoadedCoro(EventArgs args)
+    {
         yield return null;
         SushiDebug.Log("HandleRewardBasedVideoLoaded event received");
     }
 
-    void HandleRewardBasedVideoFailedToLoad(object sender, AdFailedToLoadEventArgs args) {
+    void HandleRewardBasedVideoFailedToLoad(object sender, AdFailedToLoadEventArgs args)
+    {
         // Workaround for processing result in main thread
         StartCoroutine(HandleRewardBasedVideoFailedToLoadCoro(args));
     }
 
-    IEnumerator HandleRewardBasedVideoFailedToLoadCoro(AdFailedToLoadEventArgs args) {
+    IEnumerator HandleRewardBasedVideoFailedToLoadCoro(AdFailedToLoadEventArgs args)
+    {
         yield return null;
         SushiDebug.Log("HandleRewardBasedVideoFailedToLoad event received with message: " + args.Message);
         PlatformAdMobAds.HandleFailedToLoad();
     }
 
-    IEnumerator HandleRewarded() {
+    IEnumerator HandleRewarded()
+    {
         yield return null;
         PlatformAdMobAds.HandleRewarded();
     }
 
-    void HandleRewardBasedVideoOpened(object sender, EventArgs args) {
+    void HandleRewardBasedVideoOpened(object sender, EventArgs args)
+    {
         // Workaround for processing result in main thread
         StartCoroutine(HandleRewardBasedVideoOpenedCoro(args));
     }
 
-    IEnumerator HandleRewardBasedVideoOpenedCoro(EventArgs args) {
+    IEnumerator HandleRewardBasedVideoOpenedCoro(EventArgs args)
+    {
         yield return null;
         SushiDebug.Log("HandleRewardBasedVideoOpened event received");
         shouldBeRewarded = false;
         BalloonSound.instance.StopTimeAndMuteAudioMixer();
     }
 
-    void HandleRewardBasedVideoStarted(object sender, EventArgs args) {
+    void HandleRewardBasedVideoStarted(object sender, EventArgs args)
+    {
         // Workaround for processing result in main thread
         StartCoroutine(HandleRewardBasedVideoStartedCoro(args));
     }
 
-    IEnumerator HandleRewardBasedVideoStartedCoro(EventArgs args) {
+    IEnumerator HandleRewardBasedVideoStartedCoro(EventArgs args)
+    {
         yield return null;
         SushiDebug.Log("HandleRewardBasedVideoStarted event received");
     }
 
-    void HandleRewardBasedVideoClosed(object sender, EventArgs args) {
+    void HandleRewardBasedVideoClosed(object sender, EventArgs args)
+    {
         // Workaround for processing result in main thread
         StartCoroutine(HandleRewardBasedVideoClosedCoro(args));
     }
 
-    IEnumerator HandleRewardBasedVideoClosedCoro(EventArgs args) {
+    IEnumerator HandleRewardBasedVideoClosedCoro(EventArgs args)
+    {
         yield return null;
         SushiDebug.Log("HandleRewardBasedVideoClosed event received");
         RequestRewardBasedVideo();
-        if (shouldBeRewarded) {
-            // Workaround for processing result in main thread
+        if (shouldBeRewarded) // Workaround for processing result in main thread
             StartCoroutine(HandleRewarded());
-        }
         BalloonSound.instance.ResumeToNormalTimeAndResumeAudioMixer();
     }
 
-    IEnumerator HandleAdOpenedCoro(EventArgs args) {
+    IEnumerator HandleAdOpenedCoro(EventArgs args)
+    {
         yield return null;
         SushiDebug.Log("HandleAdClosedCoro event received");
         BalloonSound.instance.StopTimeAndMuteAudioMixer();
     }
 
-    void HandleRewardBasedVideoRewarded(object sender, Reward args) {
+    void HandleRewardBasedVideoRewarded(object sender, Reward args)
+    {
         // Workaround for processing result in main thread
         StartCoroutine(HandleRewardBasedVideoRewardedCoro(args));
     }
 
-    IEnumerator HandleRewardBasedVideoRewardedCoro(Reward args) {
+    IEnumerator HandleRewardBasedVideoRewardedCoro(Reward args)
+    {
         yield return null;
-        string type = args.Type;
-        double amount = args.Amount;
-        SushiDebug.Log("HandleRewardBasedVideoRewarded event received for " + amount.ToString() + " " + type);
+        var type = args.Type;
+        var amount = args.Amount;
+        SushiDebug.Log("HandleRewardBasedVideoRewarded event received for " + amount + " " + type);
         shouldBeRewarded = true;
     }
 
-    void HandleRewardBasedVideoLeftApplication(object sender, EventArgs args) {
+    void HandleRewardBasedVideoLeftApplication(object sender, EventArgs args)
+    {
         // Workaround for processing result in main thread
         StartCoroutine(HandleRewardBasedVideoLeftApplicationCoro(args));
     }
 
-    IEnumerator HandleRewardBasedVideoLeftApplicationCoro(EventArgs args) {
+    IEnumerator HandleRewardBasedVideoLeftApplicationCoro(EventArgs args)
+    {
         yield return null;
         SushiDebug.Log("HandleRewardBasedVideoLeftApplication event received");
     }
 
-    void OnDestroy() {
+    void OnDestroy()
+    {
         // Called when an ad request has successfully loaded.
-        if (rewardBasedVideo != null) {
+        if (rewardBasedVideo != null)
+        {
             rewardBasedVideo.OnAdLoaded -= HandleRewardBasedVideoLoaded;
             // Called when an ad request failed to load.
             rewardBasedVideo.OnAdFailedToLoad -= HandleRewardBasedVideoFailedToLoad;
@@ -215,7 +233,8 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
             rewardBasedVideo.OnAdLeavingApplication -= HandleRewardBasedVideoLeftApplication;
         }
 
-        if (interstitial != null) {
+        if (interstitial != null)
+        {
             // Called when an ad request has successfully loaded.
             interstitial.OnAdLoaded -= HandleOnAdLoaded;
             // Called when an ad request failed to load.
@@ -230,7 +249,8 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
             interstitial.Destroy();
         }
 
-        if (bannerView != null) {
+        if (bannerView != null)
+        {
             // Called when an ad request has successfully loaded.
             bannerView.OnAdLoaded -= HandleOnBannerAdLoaded;
             // Called when an ad request failed to load.
@@ -250,7 +270,8 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
         //.AddTestDevice("F626104A61B1DF52DAFC0B5BE7F72B00") // Galaxy S6 Edge
         .Build();
 
-    void RequestRewardBasedVideo() {
+    void RequestRewardBasedVideo()
+    {
 #if BALLOON_TEST_ADS
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-3940256099942544/5224354917";
@@ -261,7 +282,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
 #endif
 #else
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-5072035175916776/5803238943";
+        var adUnitId = "ca-app-pub-5072035175916776/5803238943";
 #elif UNITY_IOS
         string adUnitId = "ca-app-pub-5072035175916776/9016505898";
 #else
@@ -272,7 +293,8 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
         rewardBasedVideo.LoadAd(DefaultAdRequest, adUnitId);
     }
 
-    void RequestInterstitial() {
+    void RequestInterstitial()
+    {
 #if BALLOON_TEST_ADS
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-3940256099942544/1033173712";
@@ -283,7 +305,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
 #endif
 #else
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-5072035175916776/8453453014";
+        var adUnitId = "ca-app-pub-5072035175916776/8453453014";
 #elif UNITY_IPHONE
         string adUnitId = "ca-app-pub-5072035175916776/7626260968";
 #else
@@ -297,39 +319,46 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
         interstitial.LoadAd(DefaultAdRequest);
     }
 
-    public void HandleOnAdLoaded(object sender, EventArgs args) {
-        MonoBehaviour.print("HandleAdLoaded event received");
+    public void HandleOnAdLoaded(object sender, EventArgs args)
+    {
+        print("HandleAdLoaded event received");
     }
 
-    public void HandleOnAdFailedToLoad(object sender, AdFailedToLoadEventArgs args) {
-        MonoBehaviour.print("HandleFailedToReceiveAd event received with message: "
-                            + args.Message);
+    public void HandleOnAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
+    {
+        print("HandleFailedToReceiveAd event received with message: "
+              + args.Message);
     }
 
-    public void HandleOnAdOpened(object sender, EventArgs args) {
-        MonoBehaviour.print("HandleOnAdOpened event received");
+    public void HandleOnAdOpened(object sender, EventArgs args)
+    {
+        print("HandleOnAdOpened event received");
         // Workaround for processing result in main thread
         StartCoroutine(HandleAdOpenedCoro(args));
     }
 
-    public void HandleOnAdClosed(object sender, EventArgs args) {
-        MonoBehaviour.print("HandleOnAdClosed event received");
+    public void HandleOnAdClosed(object sender, EventArgs args)
+    {
+        print("HandleOnAdClosed event received");
         // Workaround for processing result in main thread
         StartCoroutine(HandleAdClosedCoro());
     }
 
-    IEnumerator HandleAdClosedCoro() {
+    IEnumerator HandleAdClosedCoro()
+    {
         yield return null;
         SushiDebug.Log("HandleAdClosedCoro event received");
         PlatformAds.HandleRewarded_Video(null, null, PlatformAds.AdsType.AdMob);
         BalloonSound.instance.ResumeToNormalTimeAndResumeAudioMixer();
     }
 
-    public void HandleOnAdLeavingApplication(object sender, EventArgs args) {
-        MonoBehaviour.print("HandleAdLeavingApplication event received");
+    public void HandleOnAdLeavingApplication(object sender, EventArgs args)
+    {
+        print("HandleAdLeavingApplication event received");
     }
 
-    private void CreateBanner() {
+    void CreateBanner()
+    {
 #if BALLOON_TEST_ADS
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-3940256099942544/6300978111";
@@ -340,7 +369,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
 #endif
 #else
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-5072035175916776/4198513232";
+        var adUnitId = "ca-app-pub-5072035175916776/4198513232";
 #elif UNITY_IPHONE
         string adUnitId = "ca-app-pub-5072035175916776/5602732856";
 #else
@@ -366,25 +395,30 @@ public class PlatformAdMobAdsInit : MonoBehaviour {
         //StartShowBanner();
     }
 
-    public void HandleOnBannerAdLoaded(object sender, EventArgs args) {
-        MonoBehaviour.print("HandleAdLoaded event received");
+    public void HandleOnBannerAdLoaded(object sender, EventArgs args)
+    {
+        print("HandleAdLoaded event received");
     }
 
-    public void HandleOnBannerAdFailedToLoad(object sender, AdFailedToLoadEventArgs args) {
-        MonoBehaviour.print("HandleFailedToReceiveAd event received with message: "
-                            + args.Message);
+    public void HandleOnBannerAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
+    {
+        print("HandleFailedToReceiveAd event received with message: "
+              + args.Message);
     }
 
-    public void HandleOnBannerAdOpened(object sender, EventArgs args) {
-        MonoBehaviour.print("HandleAdOpened event received");
+    public void HandleOnBannerAdOpened(object sender, EventArgs args)
+    {
+        print("HandleAdOpened event received");
     }
 
-    public void HandleOnBannerAdClosed(object sender, EventArgs args) {
-        MonoBehaviour.print("HandleAdClosed event received");
+    public void HandleOnBannerAdClosed(object sender, EventArgs args)
+    {
+        print("HandleAdClosed event received");
     }
 
-    public void HandleOnBannerAdLeavingApplication(object sender, EventArgs args) {
-        MonoBehaviour.print("HandleAdLeavingApplication event received");
+    public void HandleOnBannerAdLeavingApplication(object sender, EventArgs args)
+    {
+        print("HandleAdLeavingApplication event received");
     }
 #endif // #if GOOGLE_MOBILE_ADS
 }

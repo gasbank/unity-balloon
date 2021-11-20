@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MessagePack
+﻿namespace MessagePack
 {
     /// <summary>
-    /// https://github.com/msgpack/msgpack/blob/master/spec.md#serialization-type-to-format-conversion
+    ///     https://github.com/msgpack/msgpack/blob/master/spec.md#serialization-type-to-format-conversion
     /// </summary>
     public enum MessagePackType : byte
     {
@@ -19,11 +15,11 @@ namespace MessagePack
         Binary = 6,
         Array = 7,
         Map = 8,
-        Extension = 9,
+        Extension = 9
     }
 
     /// <summary>
-    /// https://github.com/msgpack/msgpack/blob/master/spec.md#overview
+    ///     https://github.com/msgpack/msgpack/blob/master/spec.md#overview
     /// </summary>
     public static class MessagePackCode
     {
@@ -81,16 +77,19 @@ namespace MessagePack
                 typeLookupTable[i] = MessagePackType.Integer;
                 formatNameTable[i] = "positive fixint";
             }
+
             for (int i = MinFixMap; i <= MaxFixMap; i++)
             {
                 typeLookupTable[i] = MessagePackType.Map;
                 formatNameTable[i] = "fixmap";
             }
+
             for (int i = MinFixArray; i <= MaxFixArray; i++)
             {
                 typeLookupTable[i] = MessagePackType.Array;
                 formatNameTable[i] = "fixarray";
             }
+
             for (int i = MinFixStr; i <= MaxFixStr; i++)
             {
                 typeLookupTable[i] = MessagePackType.String;

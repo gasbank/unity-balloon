@@ -23,53 +23,45 @@ namespace MessagePack.Internal
         public ByteArrayStringHashTable(int capacity, float loadFactor)
         {
             var tableSize = CalculateCapacity(capacity, loadFactor);
-            this.buckets = new Entry[tableSize][];
-            this.indexFor = (ulong)buckets.Length - 1;
+            buckets = new Entry[tableSize][];
+            indexFor = (ulong) buckets.Length - 1;
         }
 
         public void Add(string key, int value)
         {
             if (!TryAddInternal(Encoding.UTF8.GetBytes(key), value))
-            {
                 throw new ArgumentException("Key was already exists. Key:" + key);
-            }
         }
 
         public void Add(byte[] key, int value)
         {
-            if (!TryAddInternal(key, value))
-            {
-                throw new ArgumentException("Key was already exists. Key:" + key);
-            }
+            if (!TryAddInternal(key, value)) throw new ArgumentException("Key was already exists. Key:" + key);
         }
 
         bool TryAddInternal(byte[] key, int value)
         {
             var h = ByteArrayGetHashCode(key, 0, key.Length);
-            var entry = new Entry { Key = key, Value = value };
+            var entry = new Entry {Key = key, Value = value};
 
-            var array = buckets[h & (indexFor)];
+            var array = buckets[h & indexFor];
             if (array == null)
             {
-                buckets[h & (indexFor)] = new[] { entry };
+                buckets[h & indexFor] = new[] {entry};
             }
             else
             {
                 // check duplicate
-                for (int i = 0; i < array.Length; i++)
+                for (var i = 0; i < array.Length; i++)
                 {
                     var e = array[i].Key;
-                    if (ByteArrayComparer.Equals(key, 0, key.Length, e))
-                    {
-                        return false;
-                    }
+                    if (ByteArrayComparer.Equals(key, 0, key.Length, e)) return false;
                 }
 
                 var newArray = new Entry[array.Length + 1];
                 Array.Copy(array, newArray, array.Length);
                 array = newArray;
                 array[array.Length - 1] = entry;
-                buckets[h & (indexFor)] = array;
+                buckets[h & indexFor] = array;
             }
 
             return true;
@@ -96,7 +88,7 @@ namespace MessagePack.Internal
                 }
             }
 
-            for (int i = 1; i < entry.Length; i++)
+            for (var i = 1; i < entry.Length; i++)
             {
 #if NETSTANDARD
                 ref var v = ref entry[i];
@@ -111,7 +103,7 @@ namespace MessagePack.Internal
             }
 
             NOT_FOUND:
-            value = default(int);
+            value = default;
             return false;
         }
 
@@ -146,30 +138,21 @@ namespace MessagePack.Internal
                 var max = offset + count;
 
                 hash = 2166136261;
-                for (int i = offset; i < max; i++)
-                {
-                    hash = unchecked((x[i] ^ hash) * 16777619);
-                }
+                for (var i = offset; i < max; i++) hash = unchecked((x[i] ^ hash) * 16777619);
             }
 
-            return (ulong)hash;
+            return hash;
 
 #endif
         }
 
         static int CalculateCapacity(int collectionSize, float loadFactor)
         {
-            var initialCapacity = (int)(((float)collectionSize) / loadFactor);
+            var initialCapacity = (int) (collectionSize / loadFactor);
             var capacity = 1;
-            while (capacity < initialCapacity)
-            {
-                capacity <<= 1;
-            }
+            while (capacity < initialCapacity) capacity <<= 1;
 
-            if (capacity < 8)
-            {
-                return 8;
-            }
+            if (capacity < 8) return 8;
 
             return capacity;
         }
@@ -177,15 +160,13 @@ namespace MessagePack.Internal
         // only for Debug use
         public IEnumerator<KeyValuePair<string, int>> GetEnumerator()
         {
-            var b = this.buckets;
+            var b = buckets;
 
             foreach (var item in b)
             {
                 if (item == null) continue;
                 foreach (var item2 in item)
-                {
                     yield return new KeyValuePair<string, int>(Encoding.UTF8.GetString(item2.Key), item2.Value);
-                }
             }
         }
 

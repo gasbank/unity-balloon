@@ -1,13 +1,12 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 #if UNITY_IOS
 using UnityEngine.iOS;
 #endif
-using System.Collections.Generic;
-using System.Collections;
+
 public class PlatformScreenshot : MonoBehaviour
 {
-
     public static event Action screenShotEvent;
     //private static string fullClassName = "top.plusalpha.screenshot.Screenshot";
 
@@ -19,12 +18,13 @@ public class PlatformScreenshot : MonoBehaviour
     {
         StartCoroutine(TakeScreenShot());
     }
+
     //이런식으로 랜더링이 끝날때까지 기다린후에 스샷을 읽어야 에러가 안난다.
     IEnumerator TakeScreenShot()
     {
         yield return new WaitForEndOfFrame();
 
-        Texture2D screenshot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+        var screenshot = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
         screenshot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
         screenshot.Apply();
 

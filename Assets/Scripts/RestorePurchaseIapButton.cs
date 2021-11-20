@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Purchasing;
+﻿using UnityEngine;
 
-public class RestorePurchaseIapButton : MonoBehaviour {
-    void Awake() {
+public class RestorePurchaseIapButton : MonoBehaviour
+{
+    void Awake()
+    {
         gameObject.SetActive(Application.platform == RuntimePlatform.IPhonePlayer);
     }
-    
-    public void RestorePurchase() {
+
+    public void RestorePurchase()
+    {
         PlatformIapManager.instance.RestorePurchase();
     }
 }

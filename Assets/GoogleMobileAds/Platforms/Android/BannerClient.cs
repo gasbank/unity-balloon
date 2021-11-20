@@ -12,11 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#if UNITY_ANDROID
 
 using System;
-
 using GoogleMobileAds.Api;
+#if UNITY_ANDROID
 using GoogleMobileAds.Common;
 using UnityEngine;
 
@@ -24,14 +23,14 @@ namespace GoogleMobileAds.Android
 {
     public class BannerClient : AndroidJavaProxy, IBannerClient
     {
-        private AndroidJavaObject bannerView;
+        readonly AndroidJavaObject bannerView;
 
         public BannerClient() : base(Utils.UnityAdListenerClassName)
         {
-            AndroidJavaClass playerClass = new AndroidJavaClass(Utils.UnityActivityClassName);
-            AndroidJavaObject activity =
-                    playerClass.GetStatic<AndroidJavaObject>("currentActivity");
-            this.bannerView = new AndroidJavaObject(
+            var playerClass = new AndroidJavaClass(Utils.UnityActivityClassName);
+            var activity =
+                playerClass.GetStatic<AndroidJavaObject>("currentActivity");
+            bannerView = new AndroidJavaObject(
                 Utils.BannerViewClassName, activity, this);
         }
 
@@ -48,120 +47,106 @@ namespace GoogleMobileAds.Android
         // Creates a banner view.
         public void CreateBannerView(string adUnitId, AdSize adSize, AdPosition position)
         {
-            this.bannerView.Call(
-                    "create",
-                    new object[3] { adUnitId, Utils.GetAdSizeJavaObject(adSize), (int)position });
+            bannerView.Call(
+                "create", adUnitId, Utils.GetAdSizeJavaObject(adSize), (int) position);
         }
 
         // Creates a banner view with a custom position.
         public void CreateBannerView(string adUnitId, AdSize adSize, int x, int y)
         {
-            this.bannerView.Call(
-                "create",
-                new object[4] { adUnitId, Utils.GetAdSizeJavaObject(adSize), x, y });
+            bannerView.Call(
+                "create", adUnitId, Utils.GetAdSizeJavaObject(adSize), x, y);
         }
 
         // Loads an ad.
         public void LoadAd(AdRequest request)
         {
-            this.bannerView.Call("loadAd", Utils.GetAdRequestJavaObject(request));
+            bannerView.Call("loadAd", Utils.GetAdRequestJavaObject(request));
         }
 
         // Displays the banner view on the screen.
         public void ShowBannerView()
         {
-            this.bannerView.Call("show");
+            bannerView.Call("show");
         }
 
         // Hides the banner view from the screen.
         public void HideBannerView()
         {
-            this.bannerView.Call("hide");
+            bannerView.Call("hide");
         }
 
         // Destroys the banner view.
         public void DestroyBannerView()
         {
-            this.bannerView.Call("destroy");
+            bannerView.Call("destroy");
         }
 
         // Returns the height of the BannerView in pixels.
         public float GetHeightInPixels()
         {
-            return this.bannerView.Call<float>("getHeightInPixels");
+            return bannerView.Call<float>("getHeightInPixels");
         }
 
         // Returns the width of the BannerView in pixels.
         public float GetWidthInPixels()
         {
-            return this.bannerView.Call<float>("getWidthInPixels");
+            return bannerView.Call<float>("getWidthInPixels");
         }
 
         // Set the position of the banner view using standard position.
         public void SetPosition(AdPosition adPosition)
         {
-            this.bannerView.Call("setPosition", (int)adPosition);
+            bannerView.Call("setPosition", (int) adPosition);
         }
 
         // Set the position of the banner view using custom position.
         public void SetPosition(int x, int y)
         {
-            this.bannerView.Call("setPosition", x, y);
+            bannerView.Call("setPosition", x, y);
         }
 
         // Returns the mediation adapter class name.
         public string MediationAdapterClassName()
         {
-            return this.bannerView.Call<string>("getMediationAdapterClassName");
+            return bannerView.Call<string>("getMediationAdapterClassName");
         }
 
-#region Callbacks from UnityBannerAdListener.
+        #region Callbacks from UnityBannerAdListener.
 
         public void onAdLoaded()
         {
-            if (this.OnAdLoaded != null)
-            {
-                this.OnAdLoaded(this, EventArgs.Empty);
-            }
+            if (OnAdLoaded != null) OnAdLoaded(this, EventArgs.Empty);
         }
 
         public void onAdFailedToLoad(string errorReason)
         {
-            if (this.OnAdFailedToLoad != null)
+            if (OnAdFailedToLoad != null)
             {
-                AdFailedToLoadEventArgs args = new AdFailedToLoadEventArgs()
+                var args = new AdFailedToLoadEventArgs
                 {
                     Message = errorReason
                 };
-                this.OnAdFailedToLoad(this, args);
+                OnAdFailedToLoad(this, args);
             }
         }
 
         public void onAdOpened()
         {
-            if (this.OnAdOpening != null)
-            {
-                this.OnAdOpening(this, EventArgs.Empty);
-            }
+            if (OnAdOpening != null) OnAdOpening(this, EventArgs.Empty);
         }
 
         public void onAdClosed()
         {
-            if (this.OnAdClosed != null)
-            {
-                this.OnAdClosed(this, EventArgs.Empty);
-            }
+            if (OnAdClosed != null) OnAdClosed(this, EventArgs.Empty);
         }
 
         public void onAdLeftApplication()
         {
-            if (this.OnAdLeavingApplication != null)
-            {
-                this.OnAdLeavingApplication(this, EventArgs.Empty);
-            }
+            if (OnAdLeavingApplication != null) OnAdLeavingApplication(this, EventArgs.Empty);
         }
 
-#endregion
+        #endregion
     }
 }
 

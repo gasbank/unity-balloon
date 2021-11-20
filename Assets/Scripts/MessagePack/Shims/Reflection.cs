@@ -1,16 +1,10 @@
 ﻿#if !UNITY_METRO
 
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Text;
 
 namespace System.Reflection
 {
 #if !NET_4_6 && !NET_STANDARD_2_0
-
     public class TypeInfo
     {
         readonly Type type;
@@ -199,9 +193,7 @@ namespace System.Reflection
 
     public static class ReflectionExtensions
     {
-
 #if !NET_4_6 && !NET_STANDARD_2_0
-
         public static TypeInfo GetTypeInfo(this Type type)
         {
             return new TypeInfo(type);
@@ -281,7 +273,7 @@ namespace System.Reflection
     {
         public static T GetCustomAttribute<T>(MemberInfo memberInfo, bool inherit)
         {
-            return (T)memberInfo.GetCustomAttributes(typeof(T), inherit).FirstOrDefault();
+            return (T) memberInfo.GetCustomAttributes(typeof(T), inherit).FirstOrDefault();
         }
     }
 

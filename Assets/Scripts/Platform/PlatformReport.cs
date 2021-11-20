@@ -7,7 +7,7 @@ public class PlatformReport : MonoBehaviour
     // Visual Studio에서 참고(레퍼런스) 체크 시 검사되지 않음
     // 사용되지 않는 것이 아니므로 삭제하지 말 것...
     public static void ReportBugByMailSaveFileOnUiThread()
-    {   
+    {
         var reportPopupTitle = TextHelper.GetText("platform_report_popup_title");
         var mailTo = TextHelper.GetText("platform_report_mail");
         var subject = TextHelper.GetText("platform_report_subject");

@@ -1,11 +1,10 @@
-﻿using MessagePack.Formatters;
-using MessagePack.Internal;
-using MessagePack.Resolvers;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
+using System.Numerics;
 using System.Text;
+using MessagePack.Formatters;
+using MessagePack.Internal;
 
 namespace MessagePack.Resolvers
 {
@@ -15,7 +14,6 @@ namespace MessagePack.Resolvers
 
         BuiltinResolver()
         {
-
         }
 
         public IMessagePackFormatter<T> GetFormatter<T>()
@@ -30,7 +28,7 @@ namespace MessagePack.Resolvers
             static FormatterCache()
             {
                 // Reduce IL2CPP code generate size(don't write long code in <T>)
-                formatter = (IMessagePackFormatter<T>)BuiltinResolverGetFormatterHelper.GetFormatter(typeof(T));
+                formatter = (IMessagePackFormatter<T>) BuiltinResolverGetFormatterHelper.GetFormatter(typeof(T));
             }
         }
     }
@@ -40,38 +38,38 @@ namespace MessagePack.Internal
 {
     internal static class BuiltinResolverGetFormatterHelper
     {
-        static readonly Dictionary<Type, object> formatterMap = new Dictionary<Type, object>()
+        static readonly Dictionary<Type, object> formatterMap = new Dictionary<Type, object>
         {
             // Primitive
-            {typeof(Int16), Int16Formatter.Instance},
-            {typeof(Int32), Int32Formatter.Instance},
-            {typeof(Int64), Int64Formatter.Instance},
-            {typeof(UInt16), UInt16Formatter.Instance},
-            {typeof(UInt32), UInt32Formatter.Instance},
-            {typeof(UInt64), UInt64Formatter.Instance},
-            {typeof(Single), SingleFormatter.Instance},
-            {typeof(Double), DoubleFormatter.Instance},
+            {typeof(short), Int16Formatter.Instance},
+            {typeof(int), Int32Formatter.Instance},
+            {typeof(long), Int64Formatter.Instance},
+            {typeof(ushort), UInt16Formatter.Instance},
+            {typeof(uint), UInt32Formatter.Instance},
+            {typeof(ulong), UInt64Formatter.Instance},
+            {typeof(float), SingleFormatter.Instance},
+            {typeof(double), DoubleFormatter.Instance},
             {typeof(bool), BooleanFormatter.Instance},
             {typeof(byte), ByteFormatter.Instance},
             {typeof(sbyte), SByteFormatter.Instance},
             {typeof(DateTime), DateTimeFormatter.Instance},
             {typeof(char), CharFormatter.Instance},
-            
+
             // Nulllable Primitive
-            {typeof(Nullable<Int16>), NullableInt16Formatter.Instance},
-            {typeof(Nullable<Int32>), NullableInt32Formatter.Instance},
-            {typeof(Nullable<Int64>), NullableInt64Formatter.Instance},
-            {typeof(Nullable<UInt16>), NullableUInt16Formatter.Instance},
-            {typeof(Nullable<UInt32>), NullableUInt32Formatter.Instance},
-            {typeof(Nullable<UInt64>), NullableUInt64Formatter.Instance},
-            {typeof(Nullable<Single>), NullableSingleFormatter.Instance},
-            {typeof(Nullable<Double>), NullableDoubleFormatter.Instance},
-            {typeof(Nullable<bool>), NullableBooleanFormatter.Instance},
-            {typeof(Nullable<byte>), NullableByteFormatter.Instance},
-            {typeof(Nullable<sbyte>), NullableSByteFormatter.Instance},
-            {typeof(Nullable<DateTime>), NullableDateTimeFormatter.Instance},
-            {typeof(Nullable<char>), NullableCharFormatter.Instance},
-            
+            {typeof(short?), NullableInt16Formatter.Instance},
+            {typeof(int?), NullableInt32Formatter.Instance},
+            {typeof(long?), NullableInt64Formatter.Instance},
+            {typeof(ushort?), NullableUInt16Formatter.Instance},
+            {typeof(uint?), NullableUInt32Formatter.Instance},
+            {typeof(ulong?), NullableUInt64Formatter.Instance},
+            {typeof(float?), NullableSingleFormatter.Instance},
+            {typeof(double?), NullableDoubleFormatter.Instance},
+            {typeof(bool?), NullableBooleanFormatter.Instance},
+            {typeof(byte?), NullableByteFormatter.Instance},
+            {typeof(sbyte?), NullableSByteFormatter.Instance},
+            {typeof(DateTime?), NullableDateTimeFormatter.Instance},
+            {typeof(char?), NullableCharFormatter.Instance},
+
             // StandardClassLibraryFormatter
             {typeof(string), NullableStringFormatter.Instance},
             {typeof(decimal), DecimalFormatter.Instance},
@@ -86,50 +84,53 @@ namespace MessagePack.Internal
             {typeof(Version), VersionFormatter.Instance},
             {typeof(StringBuilder), StringBuilderFormatter.Instance},
             {typeof(BitArray), BitArrayFormatter.Instance},
-            
+
             // special primitive
             {typeof(byte[]), ByteArrayFormatter.Instance},
-            
+
             // Nil
             {typeof(Nil), NilFormatter.Instance},
             {typeof(Nil?), NullableNilFormatter.Instance},
-            
+
             // otpmitized primitive array formatter
-            {typeof(Int16[]), Int16ArrayFormatter.Instance},
-            {typeof(Int32[]), Int32ArrayFormatter.Instance},
-            {typeof(Int64[]), Int64ArrayFormatter.Instance},
-            {typeof(UInt16[]), UInt16ArrayFormatter.Instance},
-            {typeof(UInt32[]), UInt32ArrayFormatter.Instance},
-            {typeof(UInt64[]), UInt64ArrayFormatter.Instance},
-            {typeof(Single[]), SingleArrayFormatter.Instance},
-            {typeof(Double[]), DoubleArrayFormatter.Instance},
-            {typeof(Boolean[]), BooleanArrayFormatter.Instance},
-            {typeof(SByte[]), SByteArrayFormatter.Instance},
+            {typeof(short[]), Int16ArrayFormatter.Instance},
+            {typeof(int[]), Int32ArrayFormatter.Instance},
+            {typeof(long[]), Int64ArrayFormatter.Instance},
+            {typeof(ushort[]), UInt16ArrayFormatter.Instance},
+            {typeof(uint[]), UInt32ArrayFormatter.Instance},
+            {typeof(ulong[]), UInt64ArrayFormatter.Instance},
+            {typeof(float[]), SingleArrayFormatter.Instance},
+            {typeof(double[]), DoubleArrayFormatter.Instance},
+            {typeof(bool[]), BooleanArrayFormatter.Instance},
+            {typeof(sbyte[]), SByteArrayFormatter.Instance},
             {typeof(DateTime[]), DateTimeArrayFormatter.Instance},
-            {typeof(Char[]), CharArrayFormatter.Instance},
+            {typeof(char[]), CharArrayFormatter.Instance},
             {typeof(string[]), NullableStringArrayFormatter.Instance},
 
             // well known collections
-            {typeof(List<Int16>), new ListFormatter<Int16>()},
-            {typeof(List<Int32>), new ListFormatter<Int32>()},
-            {typeof(List<Int64>), new ListFormatter<Int64>()},
-            {typeof(List<UInt16>), new ListFormatter<UInt16>()},
-            {typeof(List<UInt32>), new ListFormatter<UInt32>()},
-            {typeof(List<UInt64>), new ListFormatter<UInt64>()},
-            {typeof(List<Single>), new ListFormatter<Single>()},
-            {typeof(List<Double>), new ListFormatter<Double>()},
-            {typeof(List<Boolean>), new ListFormatter<Boolean>()},
+            {typeof(List<short>), new ListFormatter<short>()},
+            {typeof(List<int>), new ListFormatter<int>()},
+            {typeof(List<long>), new ListFormatter<long>()},
+            {typeof(List<ushort>), new ListFormatter<ushort>()},
+            {typeof(List<uint>), new ListFormatter<uint>()},
+            {typeof(List<ulong>), new ListFormatter<ulong>()},
+            {typeof(List<float>), new ListFormatter<float>()},
+            {typeof(List<double>), new ListFormatter<double>()},
+            {typeof(List<bool>), new ListFormatter<bool>()},
             {typeof(List<byte>), new ListFormatter<byte>()},
-            {typeof(List<SByte>), new ListFormatter<SByte>()},
+            {typeof(List<sbyte>), new ListFormatter<sbyte>()},
             {typeof(List<DateTime>), new ListFormatter<DateTime>()},
-            {typeof(List<Char>), new ListFormatter<Char>()},
+            {typeof(List<char>), new ListFormatter<char>()},
             {typeof(List<string>), new ListFormatter<string>()},
 
-            { typeof(ArraySegment<byte>), ByteArraySegmentFormatter.Instance },
-            { typeof(ArraySegment<byte>?),new StaticNullableFormatter<ArraySegment<byte>>(ByteArraySegmentFormatter.Instance) },
+            {typeof(ArraySegment<byte>), ByteArraySegmentFormatter.Instance},
+            {
+                typeof(ArraySegment<byte>?),
+                new StaticNullableFormatter<ArraySegment<byte>>(ByteArraySegmentFormatter.Instance)
+            },
 
 
-            {typeof(System.Numerics.BigInteger), BigIntegerFormatter.Instance},
+            {typeof(BigInteger), BigIntegerFormatter.Instance},
 #if NETSTANDARD
             {typeof(System.Numerics.BigInteger?), new StaticNullableFormatter<System.Numerics.BigInteger>(BigIntegerFormatter.Instance)},
             {typeof(System.Numerics.Complex), ComplexFormatter.Instance},
@@ -141,10 +142,7 @@ namespace MessagePack.Internal
         internal static object GetFormatter(Type t)
         {
             object formatter;
-            if (formatterMap.TryGetValue(t, out formatter))
-            {
-                return formatter;
-            }
+            if (formatterMap.TryGetValue(t, out formatter)) return formatter;
 
             return null;
         }

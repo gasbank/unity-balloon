@@ -1,5 +1,4 @@
 ﻿#if NETSTANDARD
-
 using MessagePack.Resolvers;
 using System;
 using System.Collections.Generic;
@@ -13,7 +12,8 @@ namespace MessagePack.Formatters
     {
         delegate int SerializeMethod(object dynamicFormatter, ref byte[] bytes, int offset, object value, IFormatterResolver formatterResolver);
 
-        readonly MessagePack.Internal.ThreadsafeTypeKeyHashTable<KeyValuePair<object, SerializeMethod>> serializers = new Internal.ThreadsafeTypeKeyHashTable<KeyValuePair<object, SerializeMethod>>();
+        readonly MessagePack.Internal.ThreadsafeTypeKeyHashTable<KeyValuePair<object, SerializeMethod>> serializers =
+ new Internal.ThreadsafeTypeKeyHashTable<KeyValuePair<object, SerializeMethod>>();
 
         readonly IFormatterResolver[] innerResolvers;
 
@@ -65,7 +65,8 @@ namespace MessagePack.Formatters
                             var param3 = Expression.Parameter(typeof(object), "value");
                             var param4 = Expression.Parameter(typeof(IFormatterResolver), "formatterResolver");
 
-                            var serializeMethodInfo = formatterType.GetRuntimeMethod("Serialize", new[] { typeof(byte[]).MakeByRefType(), typeof(int), t, typeof(IFormatterResolver) });
+                            var serializeMethodInfo =
+ formatterType.GetRuntimeMethod("Serialize", new[] { typeof(byte[]).MakeByRefType(), typeof(int), t, typeof(IFormatterResolver) });
 
                             var body = Expression.Call(
                                 Expression.Convert(param0, formatterType),
@@ -75,7 +76,8 @@ namespace MessagePack.Formatters
                                 ti.IsValueType ? Expression.Unbox(param3, t) : Expression.Convert(param3, t),
                                 param4);
 
-                            var lambda = Expression.Lambda<SerializeMethod>(body, param0, param1, param2, param3, param4).Compile();
+                            var lambda =
+ Expression.Lambda<SerializeMethod>(body, param0, param1, param2, param3, param4).Compile();
 
                             formatterAndDelegate = new KeyValuePair<object, SerializeMethod>(formatter, lambda);
                         }

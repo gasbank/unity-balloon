@@ -1,14 +1,16 @@
-﻿using UnityEngine;
-
-public class PlatformAds {
-    public enum AdsType {
+﻿public class PlatformAds
+{
+    public enum AdsType
+    {
         AdMob,
-        UnityAds,
+        UnityAds
     }
 
     public static int stageNumber;
 
-    public static void HandleRewarded_RewardedVideo(ShopProductEntry shopProductEntry, ShopProductData shopProductData, AdsType adsType) {
+    public static void HandleRewarded_RewardedVideo(ShopProductEntry shopProductEntry, ShopProductData shopProductData,
+        AdsType adsType)
+    {
         SushiDebug.Log("The ad was successfully shown. (Rewarded Video)");
         SushiDebug.LogFormat("HandleShowResult: shopProductEntry: {0}", shopProductEntry);
         SushiDebug.LogFormat("HandleShowResult: shopProductData: {0}", shopProductData);
@@ -18,7 +20,9 @@ public class PlatformAds {
         Bootstrap.ReloadCurrentScene();
     }
 
-    public static void HandleRewarded_Video(ShopProductEntry shopProductEntry, ShopProductData shopProductData, AdsType adsType) {
+    public static void HandleRewarded_Video(ShopProductEntry shopProductEntry, ShopProductData shopProductData,
+        AdsType adsType)
+    {
         SushiDebug.Log("The ad was successfully shown. (Video)");
         SushiDebug.LogFormat("HandleShowResult: shopProductEntry: {0}", shopProductEntry);
         SushiDebug.LogFormat("HandleShowResult: shopProductData: {0}", shopProductData);
@@ -26,7 +30,8 @@ public class PlatformAds {
         LoadStageFromStart(stageNumber);
     }
 
-    public static void LoadStageFromStart(int nextStageNumber) {
+    public static void LoadStageFromStart(int nextStageNumber)
+    {
         HotairBalloon.InitialPositionY = 0;
         Bootstrap.LoadStageScene(nextStageNumber);
     }

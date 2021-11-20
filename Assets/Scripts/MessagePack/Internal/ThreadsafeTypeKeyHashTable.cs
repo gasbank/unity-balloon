@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Threading;
 
 namespace MessagePack.Internal
 {
     // Safe for multiple-read, single-write.
     internal class ThreadsafeTypeKeyHashTable<TValue>
     {
-        Entry[] buckets;
-        int size; // only use in writer lock
+        readonly float loadFactor;
 
         readonly object writerLock = new object();
-        readonly float loadFactor;
+        Entry[] buckets;
+        int size; // only use in writer lock
 
         // IEqualityComparer.Equals is overhead if key only Type, don't use it.
         // readonly IEqualityComparer<TKey> comparer;
@@ -17,7 +18,7 @@ namespace MessagePack.Internal
         public ThreadsafeTypeKeyHashTable(int capacity = 4, float loadFactor = 0.75f)
         {
             var tableSize = CalculateCapacity(capacity, loadFactor);
-            this.buckets = new Entry[tableSize];
+            buckets = new Entry[tableSize];
             this.loadFactor = loadFactor;
         }
 
@@ -42,12 +43,12 @@ namespace MessagePack.Internal
                 {
                     // rehash
                     var nextBucket = new Entry[nextCapacity];
-                    for (int i = 0; i < buckets.Length; i++)
+                    for (var i = 0; i < buckets.Length; i++)
                     {
                         var e = buckets[i];
                         while (e != null)
                         {
-                            var newEntry = new Entry { Key = e.Key, Value = e.Value, Hash = e.Hash };
+                            var newEntry = new Entry {Key = e.Key, Value = e.Value, Hash = e.Hash};
                             AddToBuckets(nextBucket, key, newEntry, null, out resultingValue);
                             e = e.Next;
                         }
@@ -72,9 +73,10 @@ namespace MessagePack.Internal
             }
         }
 
-        bool AddToBuckets(Entry[] buckets, Type newKey, Entry newEntryOrNull, Func<Type, TValue> valueFactory, out TValue resultingValue)
+        bool AddToBuckets(Entry[] buckets, Type newKey, Entry newEntryOrNull, Func<Type, TValue> valueFactory,
+            out TValue resultingValue)
         {
-            var h = (newEntryOrNull != null) ? newEntryOrNull.Hash : newKey.GetHashCode();
+            var h = newEntryOrNull != null ? newEntryOrNull.Hash : newKey.GetHashCode();
             if (buckets[h & (buckets.Length - 1)] == null)
             {
                 if (newEntryOrNull != null)
@@ -85,7 +87,8 @@ namespace MessagePack.Internal
                 else
                 {
                     resultingValue = valueFactory(newKey);
-                    VolatileWrite(ref buckets[h & (buckets.Length - 1)], new Entry { Key = newKey, Value = resultingValue, Hash = h });
+                    VolatileWrite(ref buckets[h & (buckets.Length - 1)],
+                        new Entry {Key = newKey, Value = resultingValue, Hash = h});
                 }
             }
             else
@@ -109,10 +112,13 @@ namespace MessagePack.Internal
                         else
                         {
                             resultingValue = valueFactory(newKey);
-                            VolatileWrite(ref searchLastEntry.Next, new Entry { Key = newKey, Value = resultingValue, Hash = h });
+                            VolatileWrite(ref searchLastEntry.Next,
+                                new Entry {Key = newKey, Value = resultingValue, Hash = h});
                         }
+
                         break;
                     }
+
                     searchLastEntry = searchLastEntry.Next;
                 }
             }
@@ -124,7 +130,7 @@ namespace MessagePack.Internal
         {
             var table = buckets;
             var hash = key.GetHashCode();
-            var entry = table[hash & table.Length - 1];
+            var entry = table[hash & (table.Length - 1)];
 
             if (entry == null) goto NOT_FOUND;
 
@@ -142,21 +148,19 @@ namespace MessagePack.Internal
                     value = next.Value;
                     return true;
                 }
+
                 next = next.Next;
             }
 
             NOT_FOUND:
-            value = default(TValue);
+            value = default;
             return false;
         }
 
         public TValue GetOrAdd(Type key, Func<Type, TValue> valueFactory)
         {
             TValue v;
-            if (TryGetValue(key, out v))
-            {
-                return v;
-            }
+            if (TryGetValue(key, out v)) return v;
 
             TryAddInternal(key, valueFactory, out v);
             return v;
@@ -164,17 +168,11 @@ namespace MessagePack.Internal
 
         static int CalculateCapacity(int collectionSize, float loadFactor)
         {
-            var initialCapacity = (int)(((float)collectionSize) / loadFactor);
+            var initialCapacity = (int) (collectionSize / loadFactor);
             var capacity = 1;
-            while (capacity < initialCapacity)
-            {
-                capacity <<= 1;
-            }
+            while (capacity < initialCapacity) capacity <<= 1;
 
-            if (capacity < 8)
-            {
-                return 8;
-            }
+            if (capacity < 8) return 8;
 
             return capacity;
         }
@@ -186,7 +184,7 @@ namespace MessagePack.Internal
 #elif UNITY_WSA || NET_4_6
             System.Threading.Volatile.Write(ref location, value);
 #else
-            System.Threading.Thread.MemoryBarrier();
+            Thread.MemoryBarrier();
             location = value;
 #endif
         }
@@ -198,17 +196,17 @@ namespace MessagePack.Internal
 #elif UNITY_WSA || NET_4_6
             System.Threading.Volatile.Write(ref location, value);
 #else
-            System.Threading.Thread.MemoryBarrier();
+            Thread.MemoryBarrier();
             location = value;
 #endif
         }
 
         class Entry
         {
-            public Type Key;
-            public TValue Value;
             public int Hash;
+            public Type Key;
             public Entry Next;
+            public TValue Value;
 
             // debug only
             public override string ToString()
@@ -225,6 +223,7 @@ namespace MessagePack.Internal
                     count++;
                     n = n.Next;
                 }
+
                 return count;
             }
         }

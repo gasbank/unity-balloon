@@ -14,89 +14,53 @@
 //    limitations under the License.
 // </copyright>
 
+using System.Collections.Generic;
+using UnityEngine.SocialPlatforms;
+
 #if UNITY_ANDROID
 
 namespace GooglePlayGames.BasicApi
 {
-    using System.Collections.Generic;
-    using UnityEngine.SocialPlatforms;
-
     /// <summary>
-    /// Leaderboard score data. This is the callback data
-    /// when loading leaderboard scores.  There are several SDK
-    /// API calls needed to be made to collect all the required data,
-    /// so this class is used to simplify the response.
+    ///     Leaderboard score data. This is the callback data
+    ///     when loading leaderboard scores.  There are several SDK
+    ///     API calls needed to be made to collect all the required data,
+    ///     so this class is used to simplify the response.
     /// </summary>
     public class LeaderboardScoreData
     {
-        private string mId;
-        private ResponseStatus mStatus;
-        private ulong mApproxCount;
-        private string mTitle;
-        private IScore mPlayerScore;
-        private ScorePageToken mPrevPage;
-        private ScorePageToken mNextPage;
-        private List<PlayGamesScore> mScores = new List<PlayGamesScore>();
+        readonly List<PlayGamesScore> mScores = new List<PlayGamesScore>();
 
         internal LeaderboardScoreData(string leaderboardId)
         {
-            mId = leaderboardId;
+            Id = leaderboardId;
         }
 
         internal LeaderboardScoreData(string leaderboardId, ResponseStatus status)
         {
-            mId = leaderboardId;
-            mStatus = status;
+            Id = leaderboardId;
+            Status = status;
         }
 
-        public bool Valid
-        {
-            get
-            {
-                return mStatus == ResponseStatus.Success ||
-                       mStatus == ResponseStatus.SuccessWithStale;
-            }
-        }
+        public bool Valid =>
+            Status == ResponseStatus.Success ||
+            Status == ResponseStatus.SuccessWithStale;
 
-        public ResponseStatus Status
-        {
-            get { return mStatus; }
+        public ResponseStatus Status { get; internal set; }
 
-            internal set { mStatus = value; }
-        }
+        public ulong ApproximateCount { get; internal set; }
 
-        public ulong ApproximateCount
-        {
-            get { return mApproxCount; }
+        public string Title { get; internal set; }
 
-            internal set { mApproxCount = value; }
-        }
+        public string Id { get; internal set; }
 
-        public string Title
-        {
-            get { return mTitle; }
+        public IScore PlayerScore { get; internal set; }
 
-            internal set { mTitle = value; }
-        }
+        public IScore[] Scores => mScores.ToArray();
 
-        public string Id
-        {
-            get { return mId; }
+        public ScorePageToken PrevPageToken { get; internal set; }
 
-            internal set { mId = value; }
-        }
-
-        public IScore PlayerScore
-        {
-            get { return mPlayerScore; }
-
-            internal set { mPlayerScore = value; }
-        }
-
-        public IScore[] Scores
-        {
-            get { return mScores.ToArray(); }
-        }
+        public ScorePageToken NextPageToken { get; internal set; }
 
         internal int AddScore(PlayGamesScore score)
         {
@@ -104,25 +68,11 @@ namespace GooglePlayGames.BasicApi
             return mScores.Count;
         }
 
-        public ScorePageToken PrevPageToken
-        {
-            get { return mPrevPage; }
-
-            internal set { mPrevPage = value; }
-        }
-
-        public ScorePageToken NextPageToken
-        {
-            get { return mNextPage; }
-
-            internal set { mNextPage = value; }
-        }
-
         public override string ToString()
         {
             return string.Format("[LeaderboardScoreData: mId={0}, " +
                                  " mStatus={1}, mApproxCount={2}, mTitle={3}]",
-                mId, mStatus, mApproxCount, mTitle);
+                Id, Status, ApproximateCount, Title);
         }
     }
 }

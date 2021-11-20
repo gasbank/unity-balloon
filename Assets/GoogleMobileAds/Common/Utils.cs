@@ -13,9 +13,6 @@
 // limitations under the License.
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
-
 using UnityEngine;
 
 namespace GoogleMobileAds.Common
@@ -25,11 +22,9 @@ namespace GoogleMobileAds.Common
         public static void CheckInitialization()
         {
             if (!MobileAdsEventExecutor.IsActive())
-            {
                 Debug.Log("You intitialized an ad object but have not yet called MobileAds.Initialize(). We " +
-                    "highly recommend you call MobileAds.Initialize() before interacting with the Google " +
-                    "Mobile Ads SDK.");
-            }
+                          "highly recommend you call MobileAds.Initialize() before interacting with the Google " +
+                          "Mobile Ads SDK.");
             MobileAdsEventExecutor.Initialize();
         }
 
@@ -37,12 +32,10 @@ namespace GoogleMobileAds.Common
         {
             // Create a texture. Texture size does not matter, since
             // LoadImage will replace with with incoming image size.
-            Texture2D nativeAdTexture = new Texture2D(1, 1);
+            var nativeAdTexture = new Texture2D(1, 1);
             if (!nativeAdTexture.LoadImage(img))
-            {
                 throw new InvalidOperationException(@"Could not load custom native template
                         image asset as texture");
-            }
 
             return nativeAdTexture;
         }

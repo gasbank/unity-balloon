@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [DisallowMultipleComponent]
 public class PlatformTestLocalNotification : MonoBehaviour
@@ -20,9 +18,10 @@ public class PlatformTestLocalNotification : MonoBehaviour
         ScheduleNotification(3, 120000, "icon1024_2_gray");
     }
 
-    private void ScheduleNotification(int id, int afterMs, string largeIcon)
+    void ScheduleNotification(int id, int afterMs, string largeIcon)
     {
-        Platform.instance.RegisterSingleNotification("Test", string.Format("ID: {0}, {1} ms after", id, afterMs), afterMs, largeIcon);
+        Platform.instance.RegisterSingleNotification("Test", string.Format("ID: {0}, {1} ms after", id, afterMs),
+            afterMs, largeIcon);
     }
 
     public void ClearNotification()

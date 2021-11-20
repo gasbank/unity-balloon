@@ -1,4 +1,6 @@
-﻿[System.Serializable]
-public class ShopProductData {
+﻿using System;
 
+[Serializable]
+public class ShopProductData
+{
 }

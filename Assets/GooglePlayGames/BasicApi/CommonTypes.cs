@@ -17,33 +17,36 @@
 namespace GooglePlayGames.BasicApi
 {
     /// <summary>
-    /// A enum describing where game data can be fetched from.
+    ///     A enum describing where game data can be fetched from.
     /// </summary>
     public enum DataSource
     {
         /// <summary>
-        /// Allow a read from either a local cache, or the network.
+        ///     Allow a read from either a local cache, or the network.
         /// </summary>
-        /// <remarks> Values from the cache may be
-        /// stale (potentially producing more write conflicts), but reading from cache may still
-        /// allow reads to succeed if the device does not have internet access and may complete more
-        /// quickly (as the reads can occur locally rather requiring network roundtrips).
+        /// <remarks>
+        ///     Values from the cache may be
+        ///     stale (potentially producing more write conflicts), but reading from cache may still
+        ///     allow reads to succeed if the device does not have internet access and may complete more
+        ///     quickly (as the reads can occur locally rather requiring network roundtrips).
         /// </remarks>
         ReadCacheOrNetwork,
 
         /// <summary>
-        /// Only allow reads from network.
+        ///     Only allow reads from network.
         /// </summary>
-        /// <remarks> This guarantees any returned values were current at the time
-        /// the read succeeded, but prevents reads from succeeding if the network is unavailable for
-        /// any reason.
+        /// <remarks>
+        ///     This guarantees any returned values were current at the time
+        ///     the read succeeded, but prevents reads from succeeding if the network is unavailable for
+        ///     any reason.
         /// </remarks>
         ReadNetworkOnly
     }
 
     /// <summary> Native response status codes</summary>
-    /// <remarks> These values are returned by the native SDK API.
-    /// NOTE: These values are different than the CommonStatusCodes.
+    /// <remarks>
+    ///     These values are returned by the native SDK API.
+    ///     NOTE: These values are different than the CommonStatusCodes.
     /// </remarks>
     public enum ResponseStatus
     {
@@ -68,15 +71,16 @@ namespace GooglePlayGames.BasicApi
         /// <summary>Timed out while awaiting the result.</summary>
         Timeout = -5,
 
-        ///< summary>
-        /// Constant indicating that the developer does not have access to the friends list, but can
-        /// call the AskForLoadFriendsResolution API to show a consent dialog.
-        ///</summary>
-        ResolutionRequired = -6,
+        /// < summary>
+        ///     Constant indicating that the developer does not have access to the friends list, but can
+        ///     call the AskForLoadFriendsResolution API to show a consent dialog.
+        /// </summary>
+        ResolutionRequired = -6
     }
 
     /// <summary> Native response status codes for UI operations.</summary>
-    /// <remarks> These values are returned by the native SDK API.
+    /// <remarks>
+    ///     These values are returned by the native SDK API.
     /// </remarks>
     public enum UIStatus
     {
@@ -100,7 +104,7 @@ namespace GooglePlayGames.BasicApi
         UiBusy = -12,
 
         /// <summary>An network error occurred.</summary>
-        NetworkError = -20,
+        NetworkError = -20
     }
 
     /// <summary>Values specifying the start location for fetching scores.</summary>
@@ -110,7 +114,7 @@ namespace GooglePlayGames.BasicApi
         TopScores = 1,
 
         /// <summary>Start fetching relative to the player's score.</summary>
-        PlayerCentered = 2,
+        PlayerCentered = 2
     }
 
     /// <summary>Values specifying which leaderboard timespan to use.</summary>
@@ -123,7 +127,7 @@ namespace GooglePlayGames.BasicApi
         Weekly = 2,
 
         /// <summary>All time scores.</summary>
-        AllTime = 3,
+        AllTime = 3
     }
 
     /// <summary>Values specifying which leaderboard collection to use.</summary>
@@ -133,40 +137,40 @@ namespace GooglePlayGames.BasicApi
         Public = 1,
 
         /// <summary>Social leaderboards contain the scores of players in the viewing player's circles.</summary>
-        Social = 2,
+        Social = 2
     }
 
     public enum FriendsListVisibilityStatus
     {
-        ///< summary>
-        /// Constant indicating that currently it's unknown if the friends list is visible to the
-        /// game, game can ask for permission from user.
-        ///</summary>
+        /// < summary>
+        ///     Constant indicating that currently it's unknown if the friends list is visible to the
+        ///     game, game can ask for permission from user.
+        /// </summary>
         Unknown = 0,
 
         /// Constant indicating that the friends list is currently visible to the game.
         Visible = 1,
 
-        ///< summary>
-        /// Constant indicating that the developer does not have access to the friends list, but can
-        /// call the AskForLoadFriendsResolution API to show a consent dialog.
-        ///</summary>
+        /// < summary>
+        ///     Constant indicating that the developer does not have access to the friends list, but can
+        ///     call the AskForLoadFriendsResolution API to show a consent dialog.
+        /// </summary>
         ResolutionRequired = 2,
 
-        ///< summary>
-        /// Constant indicating that the friends list is currently unavailable for this user, and it
-        /// is not possible to request access at this time, either because the user has permanently
-        /// declined or the friends feature is not available to them. In this state, any attempts to
-        /// request
-        /// access to the friends list will be unsuccessful.
-        ///</summary>
+        /// < summary>
+        ///     Constant indicating that the friends list is currently unavailable for this user, and it
+        ///     is not possible to request access at this time, either because the user has permanently
+        ///     declined or the friends feature is not available to them. In this state, any attempts to
+        ///     request
+        ///     access to the friends list will be unsuccessful.
+        /// </summary>
         Unavailable = 3,
 
         /// <summary>An network error occurred.</summary>
         NetworkError = -4,
 
         /// <summary>The player is not authorized to perform the operation.</summary>
-        NotAuthorized = -5,
+        NotAuthorized = -5
     }
 
     public enum LoadFriendsStatus
@@ -181,7 +185,7 @@ namespace GooglePlayGames.BasicApi
         LoadMore = 2,
 
         /// <summary>
-        /// The game doesn't have permission to access the player's friends list. No friends loaded.
+        ///     The game doesn't have permission to access the player's friends list. No friends loaded.
         /// </summary>
         ResolutionRequired = -3,
 
@@ -192,7 +196,7 @@ namespace GooglePlayGames.BasicApi
         NotAuthorized = -5,
 
         /// <summary>An network error occurred.</summary>
-        NetworkError = -6,
+        NetworkError = -6
     }
 
     public enum VideoCaptureMode
@@ -258,7 +262,7 @@ namespace GooglePlayGames.BasicApi
     {
         public static bool StatusIsSuccess(ResponseStatus status)
         {
-            return ((int) status) > 0;
+            return (int) status > 0;
         }
     }
 }

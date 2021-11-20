@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Ending : MonoBehaviour {
-    void Awake() {
+public class Ending : MonoBehaviour
+{
+    void Awake()
+    {
     }
 }

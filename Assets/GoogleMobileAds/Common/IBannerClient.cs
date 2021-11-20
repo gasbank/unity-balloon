@@ -13,20 +13,24 @@
 // limitations under the License.
 
 using System;
-
 using GoogleMobileAds.Api;
 
-namespace GoogleMobileAds.Common {
+namespace GoogleMobileAds.Common
+{
     public interface IBannerClient
     {
         // Ad event fired when the banner ad has been received.
         event EventHandler<EventArgs> OnAdLoaded;
+
         // Ad event fired when the banner ad has failed to load.
         event EventHandler<AdFailedToLoadEventArgs> OnAdFailedToLoad;
+
         // Ad event fired when the banner ad is opened.
         event EventHandler<EventArgs> OnAdOpening;
+
         // Ad event fired when the banner ad is closed.
         event EventHandler<EventArgs> OnAdClosed;
+
         // Ad event fired when the banner ad is leaving the application.
         event EventHandler<EventArgs> OnAdLeavingApplication;
 
@@ -54,7 +58,7 @@ namespace GoogleMobileAds.Common {
         // Returns the width of the BannerView in pixels.
         float GetWidthInPixels();
 
-      // Set the position of the banner view using standard position.
+        // Set the position of the banner view using standard position.
         void SetPosition(AdPosition adPosition);
 
         // Set the position of the banner view using custom position.

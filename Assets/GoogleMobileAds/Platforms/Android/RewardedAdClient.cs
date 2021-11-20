@@ -12,24 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#if UNITY_ANDROID
 
 using System;
-using UnityEngine;
-
 using GoogleMobileAds.Api;
+#if UNITY_ANDROID
 using GoogleMobileAds.Common;
+using UnityEngine;
 
 namespace GoogleMobileAds.Android
 {
     public class RewardedAdClient : AndroidJavaProxy, IRewardedAdClient
     {
-        private AndroidJavaObject androidRewardedAd;
+        readonly AndroidJavaObject androidRewardedAd;
 
         public RewardedAdClient() : base(Utils.UnityRewardedAdCallbackClassName)
         {
-            AndroidJavaClass playerClass = new AndroidJavaClass(Utils.UnityActivityClassName);
-            AndroidJavaObject activity =
+            var playerClass = new AndroidJavaClass(Utils.UnityActivityClassName);
+            var activity =
                 playerClass.GetStatic<AndroidJavaObject>("currentActivity");
             androidRewardedAd = new AndroidJavaObject(Utils.UnityRewardedAdClassName, activity, this);
         }
@@ -70,7 +69,8 @@ namespace GoogleMobileAds.Android
 
         public void SetServerSideVerificationOptions(ServerSideVerificationOptions serverSideVerificationOptions)
         {
-            androidRewardedAd.Call("setServerSideVerificationOptions", Utils.GetServerSideVerificationOptionsJavaObject(serverSideVerificationOptions));
+            androidRewardedAd.Call("setServerSideVerificationOptions",
+                Utils.GetServerSideVerificationOptionsJavaObject(serverSideVerificationOptions));
         }
 
         public void DestroyRewardBasedVideoAd()
@@ -81,7 +81,7 @@ namespace GoogleMobileAds.Android
         // Returns the mediation adapter class name.
         public string MediationAdapterClassName()
         {
-            return this.androidRewardedAd.Call<string>("getMediationAdapterClassName");
+            return androidRewardedAd.Call<string>("getMediationAdapterClassName");
         }
 
         #endregion
@@ -90,63 +90,54 @@ namespace GoogleMobileAds.Android
 
         void onRewardedAdLoaded()
         {
-            if (this.OnAdLoaded != null)
-            {
-                this.OnAdLoaded(this, EventArgs.Empty);
-            }
+            if (OnAdLoaded != null) OnAdLoaded(this, EventArgs.Empty);
         }
 
         void onRewardedAdFailedToLoad(string errorReason)
         {
-            if (this.OnAdFailedToLoad != null)
+            if (OnAdFailedToLoad != null)
             {
-                AdErrorEventArgs args = new AdErrorEventArgs()
+                var args = new AdErrorEventArgs
                 {
                     Message = errorReason
                 };
-                this.OnAdFailedToLoad(this, args);
+                OnAdFailedToLoad(this, args);
             }
         }
 
         void onRewardedAdFailedToShow(string errorReason)
         {
-            if (this.OnAdFailedToLoad != null)
+            if (OnAdFailedToLoad != null)
             {
-                AdErrorEventArgs args = new AdErrorEventArgs()
+                var args = new AdErrorEventArgs
                 {
                     Message = errorReason
                 };
-                this.OnAdFailedToShow(this, args);
+                OnAdFailedToShow(this, args);
             }
         }
 
         void onRewardedAdOpened()
         {
-            if (this.OnAdOpening != null)
-            {
-                this.OnAdOpening(this, EventArgs.Empty);
-            }
+            if (OnAdOpening != null) OnAdOpening(this, EventArgs.Empty);
         }
 
 
         void onRewardedAdClosed()
         {
-            if (this.OnAdClosed != null)
-            {
-                this.OnAdClosed(this, EventArgs.Empty);
-            }
+            if (OnAdClosed != null) OnAdClosed(this, EventArgs.Empty);
         }
 
         void onUserEarnedReward(string type, float amount)
         {
-            if (this.OnUserEarnedReward != null)
+            if (OnUserEarnedReward != null)
             {
-                Reward args = new Reward()
+                var args = new Reward
                 {
                     Type = type,
                     Amount = amount
                 };
-                this.OnUserEarnedReward(this, args);
+                OnUserEarnedReward(this, args);
             }
         }
 

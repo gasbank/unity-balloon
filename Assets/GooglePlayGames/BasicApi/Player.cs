@@ -13,14 +13,15 @@
 //  See the License for the specific language governing permissions and
 //    limitations under the License.
 // </copyright>
+
 #if UNITY_ANDROID
 namespace GooglePlayGames.BasicApi
 {
     /// <summary>
-    /// Represents a player. A player is different from a participant! The participant is
-    /// an entity that takes part in a particular match; a Player is a real-world person
-    /// (tied to a Games account). The player exists across matches, the Participant
-    /// only exists in the context of a particular match.
+    ///     Represents a player. A player is different from a participant! The participant is
+    ///     an entity that takes part in a particular match; a Player is a real-world person
+    ///     (tied to a Games account). The player exists across matches, the Participant
+    ///     only exists in the context of a particular match.
     /// </summary>
     public class Player : PlayGamesUserProfile
     {

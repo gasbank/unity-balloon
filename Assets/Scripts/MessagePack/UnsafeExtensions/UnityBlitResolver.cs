@@ -1,5 +1,4 @@
 ﻿#if ENABLE_UNSAFE_MSGPACK
-
 using MessagePack.Formatters;
 using System;
 using System.Collections.Generic;
@@ -57,7 +56,8 @@ namespace MessagePack.Unity.Extension
 
             static FormatterCache()
             {
-                formatter = (IMessagePackFormatter<T>)UnityBlitWithPrimitiveResolverGetFormatterHelper.GetFormatter(typeof(T));
+                formatter =
+ (IMessagePackFormatter<T>)UnityBlitWithPrimitiveResolverGetFormatterHelper.GetFormatter(typeof(T));
                 if (formatter == null)
                 {
                     formatter = UnityBlitResolver.Instance.GetFormatter<T>();

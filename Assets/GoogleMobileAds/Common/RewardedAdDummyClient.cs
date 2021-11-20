@@ -14,7 +14,6 @@
 
 using System;
 using System.Reflection;
-
 using GoogleMobileAds.Api;
 using UnityEngine;
 
@@ -26,23 +25,6 @@ namespace GoogleMobileAds.Common
         {
             Debug.Log("Dummy " + MethodBase.GetCurrentMethod().Name);
         }
-
-        // Disable warnings for unused dummy ad events.
-#pragma warning disable 67
-
-        public event EventHandler<EventArgs> OnAdLoaded;
-
-        public event EventHandler<AdErrorEventArgs> OnAdFailedToLoad;
-
-        public event EventHandler<AdErrorEventArgs> OnAdFailedToShow;
-
-        public event EventHandler<EventArgs> OnAdOpening;
-
-        public event EventHandler<EventArgs> OnAdClosed;
-
-        public event EventHandler<Reward> OnUserEarnedReward;
-
-#pragma warning restore 67
 
         public void CreateRewardedAd(string adUnitId)
         {
@@ -75,6 +57,22 @@ namespace GoogleMobileAds.Common
         {
             Debug.Log("Dummy " + MethodBase.GetCurrentMethod().Name);
         }
+
+        // Disable warnings for unused dummy ad events.
+#pragma warning disable 67
+
+        public event EventHandler<EventArgs> OnAdLoaded;
+
+        public event EventHandler<AdErrorEventArgs> OnAdFailedToLoad;
+
+        public event EventHandler<AdErrorEventArgs> OnAdFailedToShow;
+
+        public event EventHandler<EventArgs> OnAdOpening;
+
+        public event EventHandler<EventArgs> OnAdClosed;
+
+        public event EventHandler<Reward> OnUserEarnedReward;
+
+#pragma warning restore 67
     }
 }
-

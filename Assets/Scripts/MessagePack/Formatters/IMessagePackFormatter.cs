@@ -1,10 +1,8 @@
-﻿
-namespace MessagePack.Formatters
+﻿namespace MessagePack.Formatters
 {
     // marker
     public interface IMessagePackFormatter
     {
-
     }
 
     public interface IMessagePackFormatter<T> : IMessagePackFormatter

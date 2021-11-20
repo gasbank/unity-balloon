@@ -18,5 +18,7 @@ using System;
 // to generate the code necessary to support native iOS code calling back into C# code.
 public sealed class MonoPInvokeCallbackAttribute : Attribute
 {
-    public MonoPInvokeCallbackAttribute(Type type) {}
+    public MonoPInvokeCallbackAttribute(Type type)
+    {
+    }
 }

@@ -1,5 +1,4 @@
 ﻿#if NETSTANDARD
-
 using System;
 
 namespace MessagePack.Formatters

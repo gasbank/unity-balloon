@@ -11,53 +11,93 @@ namespace MessagePack.Internal
 
         [FieldOffset(0)]
         public readonly byte Byte0;
+
         [FieldOffset(1)]
         public readonly byte Byte1;
+
         [FieldOffset(2)]
         public readonly byte Byte2;
+
         [FieldOffset(3)]
         public readonly byte Byte3;
+
         [FieldOffset(4)]
         public readonly byte Byte4;
+
         [FieldOffset(5)]
         public readonly byte Byte5;
+
         [FieldOffset(6)]
         public readonly byte Byte6;
+
         [FieldOffset(7)]
         public readonly byte Byte7;
+
         [FieldOffset(8)]
         public readonly byte Byte8;
+
         [FieldOffset(9)]
         public readonly byte Byte9;
+
         [FieldOffset(10)]
         public readonly byte Byte10;
+
         [FieldOffset(11)]
         public readonly byte Byte11;
+
         [FieldOffset(12)]
         public readonly byte Byte12;
+
         [FieldOffset(13)]
         public readonly byte Byte13;
+
         [FieldOffset(14)]
         public readonly byte Byte14;
+
         [FieldOffset(15)]
         public readonly byte Byte15;
 
         // string.Join(", ", Enumerable.Range(0, 256).Select(x => (int)BitConverter.ToString(new byte[] { (byte)x }).ToLower()[0]))
-        static byte[] byteToHexStringHigh = new byte[256] { 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 56, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102 };
+        static readonly byte[] byteToHexStringHigh = new byte[256]
+        {
+            48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49,
+            49, 49, 49, 49, 49, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 51, 51, 51, 51, 51, 51,
+            51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 52, 53,
+            53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54, 54,
+            54, 54, 54, 54, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 55, 56, 56, 56, 56, 56, 56, 56,
+            56, 56, 56, 56, 56, 56, 56, 56, 56, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 57, 97, 97,
+            97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 97, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98, 98,
+            98, 98, 98, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 100, 100, 100, 100, 100, 100,
+            100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101,
+            101, 101, 101, 101, 101, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102
+        };
 
         // string.Join(", ", Enumerable.Range(0, 256).Select(x => (int)BitConverter.ToString(new byte[] { (byte)x }).ToLower()[1]))
-        static byte[] byteToHexStringLow = new byte[256] { 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102 };
+        static readonly byte[] byteToHexStringLow = new byte[256]
+        {
+            48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+            97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50,
+            51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99,
+            100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53,
+            54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101,
+            102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56,
+            57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49,
+            50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98,
+            99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52,
+            53, 54, 55, 56, 57, 97, 98, 99, 100, 101, 102, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 97, 98, 99, 100, 101,
+            102
+        };
 
         public GuidBits(ref Guid value)
         {
-            this = default(GuidBits);
-            this.Value = value;
+            this = default;
+            Value = value;
         }
 
         // 4-pattern, lower/upper and '-' or no
         public GuidBits(ArraySegment<byte> utf8string)
         {
-            this = default(GuidBits);
+            this = default;
 
             var array = utf8string.Array;
             var offset = utf8string.Offset;
@@ -67,92 +107,94 @@ namespace MessagePack.Internal
             {
                 if (BitConverter.IsLittleEndian)
                 {
-                    this.Byte0 = Parse(array, offset + 6);
-                    this.Byte1 = Parse(array, offset + 4);
-                    this.Byte2 = Parse(array, offset + 2);
-                    this.Byte3 = Parse(array, offset + 0);
+                    Byte0 = Parse(array, offset + 6);
+                    Byte1 = Parse(array, offset + 4);
+                    Byte2 = Parse(array, offset + 2);
+                    Byte3 = Parse(array, offset + 0);
 
-                    this.Byte4 = Parse(array, offset + 10);
-                    this.Byte5 = Parse(array, offset + 8);
+                    Byte4 = Parse(array, offset + 10);
+                    Byte5 = Parse(array, offset + 8);
 
-                    this.Byte6 = Parse(array, offset + 14);
-                    this.Byte7 = Parse(array, offset + 12);
+                    Byte6 = Parse(array, offset + 14);
+                    Byte7 = Parse(array, offset + 12);
                 }
                 else
                 {
-                    this.Byte0 = Parse(array, offset + 0);
-                    this.Byte1 = Parse(array, offset + 2);
-                    this.Byte2 = Parse(array, offset + 4);
-                    this.Byte3 = Parse(array, offset + 6);
+                    Byte0 = Parse(array, offset + 0);
+                    Byte1 = Parse(array, offset + 2);
+                    Byte2 = Parse(array, offset + 4);
+                    Byte3 = Parse(array, offset + 6);
 
-                    this.Byte4 = Parse(array, offset + 8);
-                    this.Byte5 = Parse(array, offset + 10);
+                    Byte4 = Parse(array, offset + 8);
+                    Byte5 = Parse(array, offset + 10);
 
-                    this.Byte6 = Parse(array, offset + 12);
-                    this.Byte7 = Parse(array, offset + 14);
+                    Byte6 = Parse(array, offset + 12);
+                    Byte7 = Parse(array, offset + 14);
                 }
-                this.Byte8 = Parse(array, offset + 16);
-                this.Byte9 = Parse(array, offset + 18);
 
-                this.Byte10 = Parse(array, offset + 20);
-                this.Byte11 = Parse(array, offset + 22);
-                this.Byte12 = Parse(array, offset + 24);
-                this.Byte13 = Parse(array, offset + 26);
-                this.Byte14 = Parse(array, offset + 28);
-                this.Byte15 = Parse(array, offset + 30);
+                Byte8 = Parse(array, offset + 16);
+                Byte9 = Parse(array, offset + 18);
+
+                Byte10 = Parse(array, offset + 20);
+                Byte11 = Parse(array, offset + 22);
+                Byte12 = Parse(array, offset + 24);
+                Byte13 = Parse(array, offset + 26);
+                Byte14 = Parse(array, offset + 28);
+                Byte15 = Parse(array, offset + 30);
                 return;
             }
-            else if (utf8string.Count == 36)
+
+            if (utf8string.Count == 36)
             {
                 // '-' => 45
                 if (BitConverter.IsLittleEndian)
                 {
-                    this.Byte0 = Parse(array, offset + 6);
-                    this.Byte1 = Parse(array, offset + 4);
-                    this.Byte2 = Parse(array, offset + 2);
-                    this.Byte3 = Parse(array, offset + 0);
+                    Byte0 = Parse(array, offset + 6);
+                    Byte1 = Parse(array, offset + 4);
+                    Byte2 = Parse(array, offset + 2);
+                    Byte3 = Parse(array, offset + 0);
 
                     if (array[offset + 8] != '-') goto ERROR;
 
-                    this.Byte4 = Parse(array, offset + 11);
-                    this.Byte5 = Parse(array, offset + 9);
+                    Byte4 = Parse(array, offset + 11);
+                    Byte5 = Parse(array, offset + 9);
 
                     if (array[offset + 13] != '-') goto ERROR;
 
-                    this.Byte6 = Parse(array, offset + 16);
-                    this.Byte7 = Parse(array, offset + 14);
+                    Byte6 = Parse(array, offset + 16);
+                    Byte7 = Parse(array, offset + 14);
                 }
                 else
                 {
-                    this.Byte0 = Parse(array, offset + 0);
-                    this.Byte1 = Parse(array, offset + 2);
-                    this.Byte2 = Parse(array, offset + 4);
-                    this.Byte3 = Parse(array, offset + 6);
+                    Byte0 = Parse(array, offset + 0);
+                    Byte1 = Parse(array, offset + 2);
+                    Byte2 = Parse(array, offset + 4);
+                    Byte3 = Parse(array, offset + 6);
 
                     if (array[offset + 8] != '-') goto ERROR;
 
-                    this.Byte4 = Parse(array, offset + 9);
-                    this.Byte5 = Parse(array, offset + 11);
+                    Byte4 = Parse(array, offset + 9);
+                    Byte5 = Parse(array, offset + 11);
 
                     if (array[offset + 13] != '-') goto ERROR;
 
-                    this.Byte6 = Parse(array, offset + 14);
-                    this.Byte7 = Parse(array, offset + 16);
+                    Byte6 = Parse(array, offset + 14);
+                    Byte7 = Parse(array, offset + 16);
                 }
 
                 if (array[offset + 18] != '-') goto ERROR;
 
-                this.Byte8 = Parse(array, offset + 19);
-                this.Byte9 = Parse(array, offset + 21);
+                Byte8 = Parse(array, offset + 19);
+                Byte9 = Parse(array, offset + 21);
 
                 if (array[offset + 23] != '-') goto ERROR;
 
-                this.Byte10 = Parse(array, offset + 24);
-                this.Byte11 = Parse(array, offset + 26);
-                this.Byte12 = Parse(array, offset + 28);
-                this.Byte13 = Parse(array, offset + 30);
-                this.Byte14 = Parse(array, offset + 32);
-                this.Byte15 = Parse(array, offset + 34);
+                Byte10 = Parse(array, offset + 24);
+                Byte11 = Parse(array, offset + 26);
+                Byte12 = Parse(array, offset + 28);
+                Byte13 = Parse(array, offset + 30);
+                Byte14 = Parse(array, offset + 32);
+                Byte15 = Parse(array, offset + 34);
                 return;
             }
 
@@ -165,7 +207,7 @@ namespace MessagePack.Internal
 #endif
         static byte Parse(byte[] bytes, int highOffset)
         {
-            return unchecked((byte)(SwitchParse(bytes[highOffset]) * 16 + SwitchParse(bytes[highOffset + 1])));
+            return unchecked((byte) (SwitchParse(bytes[highOffset]) * 16 + SwitchParse(bytes[highOffset + 1])));
         }
 
 #if NETSTANDARD
@@ -188,21 +230,21 @@ namespace MessagePack.Internal
                 case 55:
                 case 56:
                 case 57:
-                    return unchecked((byte)((b - 48)));
+                    return unchecked((byte) (b - 48));
                 case 65:
                 case 66:
                 case 67:
                 case 68:
                 case 69:
                 case 70:
-                    return unchecked((byte)((b - 55)));
+                    return unchecked((byte) (b - 55));
                 case 97:
                 case 98:
                 case 99:
                 case 100:
                 case 101:
                 case 102:
-                    return unchecked((byte)((b - 87)));
+                    return unchecked((byte) (b - 87));
                 case 0:
                 case 1:
                 case 2:
@@ -304,7 +346,7 @@ namespace MessagePack.Internal
                 buffer[offset + 0] = byteToHexStringHigh[Byte3];
                 buffer[offset + 1] = byteToHexStringLow[Byte3];
 
-                buffer[offset + 8] = (byte)'-';
+                buffer[offset + 8] = (byte) '-';
 
                 // short(_b)
                 buffer[offset + 11] = byteToHexStringHigh[Byte4];
@@ -312,7 +354,7 @@ namespace MessagePack.Internal
                 buffer[offset + 9] = byteToHexStringHigh[Byte5];
                 buffer[offset + 10] = byteToHexStringLow[Byte5];
 
-                buffer[offset + 13] = (byte)'-';
+                buffer[offset + 13] = (byte) '-';
 
                 // short(_c)
                 buffer[offset + 16] = byteToHexStringHigh[Byte6];
@@ -331,14 +373,14 @@ namespace MessagePack.Internal
                 buffer[offset + 6] = byteToHexStringHigh[Byte3];
                 buffer[offset + 7] = byteToHexStringLow[Byte3];
 
-                buffer[offset + 8] = (byte)'-';
+                buffer[offset + 8] = (byte) '-';
 
                 buffer[offset + 9] = byteToHexStringHigh[Byte4];
                 buffer[offset + 10] = byteToHexStringLow[Byte4];
                 buffer[offset + 11] = byteToHexStringHigh[Byte5];
                 buffer[offset + 12] = byteToHexStringLow[Byte5];
 
-                buffer[offset + 13] = (byte)'-';
+                buffer[offset + 13] = (byte) '-';
 
                 buffer[offset + 14] = byteToHexStringHigh[Byte6];
                 buffer[offset + 15] = byteToHexStringLow[Byte6];
@@ -346,14 +388,14 @@ namespace MessagePack.Internal
                 buffer[offset + 17] = byteToHexStringLow[Byte7];
             }
 
-            buffer[offset + 18] = (byte)'-';
+            buffer[offset + 18] = (byte) '-';
 
             buffer[offset + 19] = byteToHexStringHigh[Byte8];
             buffer[offset + 20] = byteToHexStringLow[Byte8];
             buffer[offset + 21] = byteToHexStringHigh[Byte9];
             buffer[offset + 22] = byteToHexStringLow[Byte9];
 
-            buffer[offset + 23] = (byte)'-';
+            buffer[offset + 23] = (byte) '-';
 
             buffer[offset + 24] = byteToHexStringHigh[Byte10];
             buffer[offset + 25] = byteToHexStringLow[Byte10];

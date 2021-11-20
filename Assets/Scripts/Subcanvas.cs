@@ -4,33 +4,43 @@ using UnityEngine.UI;
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Canvas))]
 [RequireComponent(typeof(GraphicRaycaster))]
-public class Subcanvas : MonoBehaviour {
-    [SerializeField] Canvas canvas = null;
-    public bool IsOpen { get { return canvas.enabled; } }
+public class Subcanvas : MonoBehaviour
+{
+    [SerializeField]
+    Canvas canvas;
 
-    void OnValidate() {
+    public bool IsOpen => canvas.enabled;
+
+    void OnValidate()
+    {
         canvas = GetComponent<Canvas>();
     }
 
-    void SendPopupEventMessage() {
+    void SendPopupEventMessage()
+    {
         SendMessage(canvas.enabled ? "OpenPopup" : "ClosePopup");
     }
 
-    public void Toggle() {
+    public void Toggle()
+    {
         canvas.enabled = !canvas.enabled;
         SendPopupEventMessage();
     }
 
-    public void Open() {
-        if (canvas.enabled == false) {
+    public void Open()
+    {
+        if (canvas.enabled == false)
+        {
             canvas.enabled = true;
             SendPopupEventMessage();
         }
     }
 
-    public void Close() {
+    public void Close()
+    {
         SushiDebug.Log("Subcanvas.Close()");
-        if (canvas.enabled) {
+        if (canvas.enabled)
+        {
             canvas.enabled = false;
             SendPopupEventMessage();
         }

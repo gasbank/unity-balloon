@@ -1,19 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 using TMProText = TMPro.TextMeshProUGUI;
 
-public class StageButton : MonoBehaviour {
-    [SerializeField] TMProText text = null;
+public class StageButton : MonoBehaviour
+{
+    [SerializeField]
+    TMProText text;
 
     int ButtonStageNumber => transform.GetSiblingIndex() + 1;
 
-    void Awake() {
+    void Awake()
+    {
         text.text = "\\스테이지 {0}".Localized(ButtonStageNumber);
     }
 
-    public void GoToStage() {
+    public void GoToStage()
+    {
         //SceneManager.LoadScene(Bootstrap.GetStageSceneName(ButtonStageNumber));
         HotairBalloon.InitialPositionY = 0;
         StageCommon.awaken = false;

@@ -2,14 +2,18 @@
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class ResourceManager : MonoBehaviour {
+public class ResourceManager : MonoBehaviour
+{
+    public static ResourceManager instance;
 
-	public static ResourceManager instance;
+    public Dictionary<string, int> RedeemedCouponCode = new Dictionary<string, int>();
 
-	public int accountLevel { get { return BalloonSpawner.instance.LastBalloonLevel; } }
-	public int accountLevelExp { get { return 1; } } // unused
-	public int accountGem { get { return BalloonSpawner.instance.Gem; } }
-	public int accountRiceRate { get { return BalloonSpawner.instance.RiceGatheringAmountPerSec; } }
+    public int accountLevel => BalloonSpawner.instance.LastBalloonLevel;
 
-	public Dictionary<string, int> RedeemedCouponCode = new Dictionary<string, int>();
+    public int accountLevelExp // unused
+        =>
+            1;
+
+    public int accountGem => BalloonSpawner.instance.Gem;
+    public int accountRiceRate => BalloonSpawner.instance.RiceGatheringAmountPerSec;
 }

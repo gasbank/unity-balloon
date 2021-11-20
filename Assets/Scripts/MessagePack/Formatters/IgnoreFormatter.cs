@@ -10,7 +10,7 @@
         public T Deserialize(byte[] bytes, int offset, IFormatterResolver formatterResolver, out int readSize)
         {
             readSize = MessagePackBinary.ReadNextBlock(bytes, offset);
-            return default(T);
+            return default;
         }
     }
 }

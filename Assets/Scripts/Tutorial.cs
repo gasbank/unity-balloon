@@ -1,59 +1,81 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Tutorial : MonoBehaviour {
-    [SerializeField] CanvasGroup holdToThrustVertically = null;
-    [SerializeField] CanvasGroup dragToSteerHorizontally = null;
-    [SerializeField] CanvasGroup takeGas = null;
-    [SerializeField] CanvasGroup hitRepulsive = null;
-    [SerializeField] HotairBalloon hotairBalloon = null;
-    [SerializeField] int tutorialTemplate = 1;
+public class Tutorial : MonoBehaviour
+{
+    [SerializeField]
+    CanvasGroup dragToSteerHorizontally;
 
-    public int TutorialTemplate {
-        get => tutorialTemplate;
-        set => tutorialTemplate = value;
-    }
+    [SerializeField]
+    CanvasGroup hitRepulsive;
 
-    void Start() {
+    [SerializeField]
+    CanvasGroup holdToThrustVertically;
+
+    [SerializeField]
+    HotairBalloon hotairBalloon;
+
+    [SerializeField]
+    CanvasGroup takeGas;
+
+    [field: SerializeField]
+    public int TutorialTemplate { get; set; } = 1;
+
+    void Start()
+    {
         UpdateReferences();
         hotairBalloon.VerticallyStationary = true;
     }
 
-    public void UpdateReferences() {
-        hotairBalloon = GameObject.FindObjectOfType<HotairBalloon>();
+    public void UpdateReferences()
+    {
+        hotairBalloon = FindObjectOfType<HotairBalloon>();
     }
 
-    void Update() {
-        if (TutorialTemplate == 1) {
-            if (hotairBalloon.IsTitleVisible == false) {
-                if (hotairBalloon.IsGameOver == false) {
+    void Update()
+    {
+        if (TutorialTemplate == 1)
+        {
+            if (hotairBalloon.IsTitleVisible == false)
+            {
+                if (hotairBalloon.IsGameOver == false)
+                {
                     holdToThrustVertically.alpha = Mathf.Clamp(12.0f - hotairBalloon.Y, 0, 0.8f);
-                    dragToSteerHorizontally.alpha = Mathf.Clamp(1.0f - Mathf.Abs((hotairBalloon.Y - 20.0f) / 10.0f), 0, 0.8f);
+                    dragToSteerHorizontally.alpha =
+                        Mathf.Clamp(1.0f - Mathf.Abs((hotairBalloon.Y - 20.0f) / 10.0f), 0, 0.8f);
                     takeGas.alpha = Mathf.Clamp(1.0f - Mathf.Abs((hotairBalloon.Y - 40.0f) / 10.0f), 0, 0.8f);
                     hitRepulsive.alpha = 0;
-                } else {
+                }
+                else
+                {
                     holdToThrustVertically.alpha = 0;
                     dragToSteerHorizontally.alpha = 0;
                     takeGas.alpha = 0;
                     hitRepulsive.alpha = 0;
                 }
             }
-        } else if (TutorialTemplate == 2) {
-            if (hotairBalloon.IsTitleVisible == false) {
-                if (hotairBalloon.IsGameOver == false) {
+        }
+        else if (TutorialTemplate == 2)
+        {
+            if (hotairBalloon.IsTitleVisible == false)
+            {
+                if (hotairBalloon.IsGameOver == false)
+                {
                     holdToThrustVertically.alpha = 0;
                     dragToSteerHorizontally.alpha = 0;
                     takeGas.alpha = 0;
                     hitRepulsive.alpha = Mathf.Clamp(12.0f - hotairBalloon.Y, 0, 0.8f);
-                } else {
+                }
+                else
+                {
                     holdToThrustVertically.alpha = 0;
                     dragToSteerHorizontally.alpha = 0;
                     takeGas.alpha = 0;
                     hitRepulsive.alpha = 0;
                 }
             }
-        } else {
+        }
+        else
+        {
             holdToThrustVertically.alpha = 0;
             dragToSteerHorizontally.alpha = 0;
             takeGas.alpha = 0;

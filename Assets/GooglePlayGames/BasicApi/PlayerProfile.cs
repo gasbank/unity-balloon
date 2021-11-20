@@ -19,7 +19,7 @@
 namespace GooglePlayGames.BasicApi
 {
     /// <summary>
-    /// Represents a player, a real-world person (tied to a Games account).
+    ///     Represents a player, a real-world person (tied to a Games account).
     /// </summary>
     public class PlayerProfile : PlayGamesUserProfile
     {
