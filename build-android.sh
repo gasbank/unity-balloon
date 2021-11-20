@@ -1,6 +1,6 @@
 #!/bin/bash
 
-UNITY_VERSION=2019.1.8f1
+UNITY_VERSION=`cat ProjectSettings/ProjectVersion.txt | head -n1 | awk '{print $2;}'`
 UNAME_OUT="$(uname -s)"
 case "${UNAME_OUT}" in
     Linux*)     UNITY_EDITOR="/home/gb/Unity/Hub/Editor/${UNITY_VERSION}/Editor/Unity";;
