@@ -17,6 +17,11 @@
 #if UNITY_ANDROID
 namespace GooglePlayGames.OurUtils
 {
+#if !UNITY_EDITOR
+    using UnityEngine;
+    using System;
+#endif
+    
     public static class PlatformUtils
     {
         /// <summary>
