@@ -4,14 +4,15 @@
 
 cd build
 
+pod install
+
 xcodebuild \
     -workspace Unity-iPhone.xcworkspace \
     -scheme Unity-iPhone \
     archive \
     -archivePath build \
-    CODE_SIGN_STYLE="Manual" \
-    PROVISIONING_PROFILE_SPECIFIER="Balloon iOS Distribution" \
-    CODE_SIGN_IDENTITY="iPhone Distribution: GEOYEOB KIM (TG9MHV97AH)"
+    PROVISIONING_PROFILE_SPECIFIER="Balloon App Store" \
+    CODE_SIGN_IDENTITY="Apple Distribution: GEOYEOB KIM (TG9MHV97AH)"
 
 xcodebuild \
     -exportArchive \
