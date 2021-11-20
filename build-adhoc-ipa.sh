@@ -9,13 +9,10 @@ xcodebuild \
     -scheme Unity-iPhone \
     archive \
     -archivePath build \
-    CODE_SIGN_STYLE="Manual" \
-    PROVISIONING_PROFILE_SPECIFIER="Balloon Ad Hoc" \
-    CODE_SIGN_IDENTITY="iPhone Distribution: GEOYEOB KIM (TG9MHV97AH)"
+    ENABLE_BITCODE="NO"
 
 xcodebuild \
     -exportArchive \
     -exportOptionsPlist ../exportoptions.plist \
     -archivePath "build.xcarchive" \
     -exportPath "build"
-
