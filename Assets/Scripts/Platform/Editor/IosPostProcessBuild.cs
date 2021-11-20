@@ -50,6 +50,17 @@ public static class DisableBitcode
             // Copy entitlements file
             System.IO.File.Copy("balloon.entitlements", path + "/balloon.entitlements", true);
 #endif
+            // https://stackoverflow.com/questions/55419956/how-to-fix-pod-does-not-support-provisioning-profiles-in-azure-devops-build
+            var podfileAppend = @"
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['CODE_SIGN_STYLE'] = ""Automatic"";
+        end
+    end
+end
+";
+            File.AppendAllText($"{path}/Podfile", podfileAppend);
         }
     }
 }
