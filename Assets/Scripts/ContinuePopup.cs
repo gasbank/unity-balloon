@@ -4,7 +4,6 @@ using Text = TMPro.TextMeshProUGUI;
 
 public class ContinuePopup : MonoBehaviour
 {
-    [SerializeField]
     static readonly float defaultFixedDeltaTime = 0.02f;
 
     [SerializeField]
@@ -45,6 +44,9 @@ public class ContinuePopup : MonoBehaviour
 
     [SerializeField]
     Slider waitTimeSlider;
+
+    [SerializeField]
+    Text continueAdsButtonText;
 
     float WaitTimeValue
     {
@@ -95,6 +97,12 @@ public class ContinuePopup : MonoBehaviour
             waitTimeSlider.value = totalWaitTime;
             noThanksCanvasGroup.interactable = false;
             noThanksCanvasGroup.alpha = 0;
+        }
+
+        continueAdsButtonText.text = "\\마지막 체크포인트부터 시작".Localized();
+        if (PlatformIapManager.instance.NoAdsPurchased == false)
+        {
+            continueAdsButtonText.text += "\n" + "\\(광고 시청)".Localized();
         }
 
         waitRemainTime.text = "";
