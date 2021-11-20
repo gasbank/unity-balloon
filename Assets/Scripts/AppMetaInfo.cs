@@ -6,6 +6,8 @@ public class AppMetaInfo : ScriptableObject
     public string buildNumber;
     public string buildStartDateTime;
     public string iosBuildNumber; // Only for iOS
+    
+    public const string TemporaryBuildNumber = "<?>";
 
     public string GetAppMetaInfo()
     {
