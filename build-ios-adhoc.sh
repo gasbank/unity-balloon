@@ -12,12 +12,14 @@ if [ -z "${BUILD_NUMBER}" ]; then
   BUILD_NUMBER="<NO ENV>"
 fi
 
-${UNITY_EDITOR} \
+/Applications/Unity/Hub/Editor/${UNITY_VERSION}/Unity.app/Contents/MacOS/Unity \
     -quit \
     -batchmode \
-    -executeMethod BalloonBuild.PerformIosBuild \
+    -executeMethod BalloonBuild.PerformIosAdHocBuild \
     -logfile build.log \
     -projectPath `pwd` \
     -buildTarget iOS \
     -buildNumber ${BUILD_NUMBER} \
-    -noGraphics
+    -noGraphics \
+    -username ${UNITY_USERNAME} \
+    -password ${UNITY_PASSWORD}
