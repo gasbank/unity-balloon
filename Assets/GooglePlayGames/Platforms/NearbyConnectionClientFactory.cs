@@ -17,7 +17,9 @@
 // Android only feature
 
 using System;
+#if (UNITY_ANDROID)
 using GooglePlayGames.Android;
+#endif
 using GooglePlayGames.BasicApi.Nearby;
 using UnityEngine;
 using Logger = GooglePlayGames.OurUtils.Logger;

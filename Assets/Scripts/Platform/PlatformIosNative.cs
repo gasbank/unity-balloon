@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.IO;
+#if UNITY_IOS
+using System.Runtime.InteropServices;
+#endif
 using UnityEngine;
 
 [DisallowMultipleComponent]

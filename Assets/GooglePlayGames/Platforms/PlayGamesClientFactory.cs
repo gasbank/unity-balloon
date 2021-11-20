@@ -14,7 +14,9 @@
 //    limitations under the License.
 // </copyright>
 
+#if (UNITY_ANDROID)
 using GooglePlayGames.Android;
+#endif
 using GooglePlayGames.BasicApi;
 using UnityEngine;
 using Logger = GooglePlayGames.OurUtils.Logger;
