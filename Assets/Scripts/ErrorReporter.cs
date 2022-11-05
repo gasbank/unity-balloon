@@ -272,7 +272,7 @@ public class ErrorReporter : MonoBehaviour
         {
             yield return request.SendWebRequest();
             ProgressMessage.instance.Close();
-            if (request.isNetworkError)
+            if (request.result == UnityWebRequest.Result.ConnectionError)
             {
                 ShortMessage.instance.ShowLocalized("\\복구 정보 수신에 실패했습니다.".Localized());
             }
@@ -367,7 +367,7 @@ public class ErrorReporter : MonoBehaviour
         {
             yield return request.SendWebRequest();
             ProgressMessage.instance.Close();
-            if (request.isNetworkError)
+            if (request.result == UnityWebRequest.Result.ConnectionError)
             {
                 ShortMessage.instance.ShowLocalized("\\복구 정보 수신에 실패했습니다.");
             }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 #if UNITY_IOS
 using Unity.Advertisement.IosSupport;
 #endif
 using UnityEngine;
 #if GOOGLE_MOBILE_ADS
 using GoogleMobileAds.Api;
-
 #endif
 
 [DisallowMultipleComponent]
@@ -40,7 +40,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour
     }
 
 #if GOOGLE_MOBILE_ADS
-    RewardBasedVideoAd rewardBasedVideo;
+    public RewardedAd rewardBasedVideo;
     public static InterstitialAd interstitial;
     bool shouldBeRewarded;
     BannerView bannerView;
@@ -55,28 +55,21 @@ public class PlatformAdMobAdsInit : MonoBehaviour
         }
         else
         {
-#if BALLOON_TEST_ADS
-#if UNITY_ANDROID
-            string appId = "ca-app-pub-3940256099942544~3347511713";
-#elif UNITY_IPHONE
-            string appId = "ca-app-pub-3940256099942544~1458002511";
-#else
-            string appId = "unexpected_platform";
-#endif
-#else
-#if UNITY_ANDROID
-            var appId = "ca-app-pub-5072035175916776~9742483955";
-#elif UNITY_IOS
-            string appId = "ca-app-pub-5072035175916776~2508482457";
-#else
-            string appId = "unexpected_platform";
-#endif
-#endif
             // Initialize the Google Mobile Ads SDK.
-            MobileAds.Initialize(appId);
+            MobileAds.Initialize(_ => { });
+
+            var testDeviceList = new List<string>
+            {
+                //"751709a03251817c6a3d7d3f7072ec57" // iPhone 6s
+            };
+            var requestConfiguration = new RequestConfiguration.Builder().SetTestDeviceIds(testDeviceList).build();
+            MobileAds.SetRequestConfiguration(requestConfiguration);
+
+            // 광고 사운드 끄기
+            MobileAds.SetApplicationMuted(true);
 
             // Get singleton reward based video ad reference.
-            rewardBasedVideo = RewardBasedVideoAd.Instance;
+            rewardBasedVideo = new(RewardedAdUnitId);
 
             // Called when an ad request has successfully loaded.
             rewardBasedVideo.OnAdLoaded += HandleRewardBasedVideoLoaded;
@@ -85,16 +78,16 @@ public class PlatformAdMobAdsInit : MonoBehaviour
             // Called when an ad is shown.
             rewardBasedVideo.OnAdOpening += HandleRewardBasedVideoOpened;
             // Called when the ad starts to play.
-            rewardBasedVideo.OnAdStarted += HandleRewardBasedVideoStarted;
+            rewardBasedVideo.OnAdOpening += HandleRewardBasedVideoStarted;
             // Called when the user should be rewarded for watching a video.
-            rewardBasedVideo.OnAdRewarded += HandleRewardBasedVideoRewarded;
+            rewardBasedVideo.OnUserEarnedReward += HandleRewardBasedVideoRewarded;
             // Called when the ad is closed.
             rewardBasedVideo.OnAdClosed += HandleRewardBasedVideoClosed;
-            // Called when the ad click caused the user to leave the application.
-            rewardBasedVideo.OnAdLeavingApplication += HandleRewardBasedVideoLeftApplication;
 
             RequestRewardBasedVideo();
-            RequestInterstitial();
+
+            // Initialize an InterstitialAd.
+            interstitial = new(InterstitialAdUnitId);
 
             // Called when an ad request has successfully loaded.
             interstitial.OnAdLoaded += HandleOnAdLoaded;
@@ -104,10 +97,10 @@ public class PlatformAdMobAdsInit : MonoBehaviour
             interstitial.OnAdOpening += HandleOnAdOpened;
             // Called when the ad is closed.
             interstitial.OnAdClosed += HandleOnAdClosed;
-            // Called when the ad click caused the user to leave the application.
-            interstitial.OnAdLeavingApplication += HandleOnAdLeavingApplication;
+
+            RequestInterstitial();
         }
-        
+
 #if UNITY_IOS
         var trackingStatus = ATTrackingStatusBinding.GetAuthorizationTrackingStatus();
         Debug.Log($"ATTrackingStatusBinding.GetAuthorizationTrackingStatus()={trackingStatus}");
@@ -147,8 +140,9 @@ public class PlatformAdMobAdsInit : MonoBehaviour
 
     IEnumerator HandleRewardBasedVideoFailedToLoadCoro(AdFailedToLoadEventArgs args)
     {
+        var errorStr = args.LoadAdError.ToString();
         yield return null;
-        SushiDebug.Log("HandleRewardBasedVideoFailedToLoad event received with message: " + args.Message);
+        SushiDebug.Log("HandleRewardBasedVideoFailedToLoad event received with message: " + errorStr);
         PlatformAdMobAds.HandleFailedToLoad();
     }
 
@@ -222,18 +216,6 @@ public class PlatformAdMobAdsInit : MonoBehaviour
         shouldBeRewarded = true;
     }
 
-    void HandleRewardBasedVideoLeftApplication(object sender, EventArgs args)
-    {
-        // Workaround for processing result in main thread
-        StartCoroutine(HandleRewardBasedVideoLeftApplicationCoro(args));
-    }
-
-    IEnumerator HandleRewardBasedVideoLeftApplicationCoro(EventArgs args)
-    {
-        yield return null;
-        SushiDebug.Log("HandleRewardBasedVideoLeftApplication event received");
-    }
-
     void OnDestroy()
     {
         // Called when an ad request has successfully loaded.
@@ -245,13 +227,11 @@ public class PlatformAdMobAdsInit : MonoBehaviour
             // Called when an ad is shown.
             rewardBasedVideo.OnAdOpening -= HandleRewardBasedVideoOpened;
             // Called when the ad starts to play.
-            rewardBasedVideo.OnAdStarted -= HandleRewardBasedVideoStarted;
+            rewardBasedVideo.OnAdOpening -= HandleRewardBasedVideoStarted;
             // Called when the user should be rewarded for watching a video.
-            rewardBasedVideo.OnAdRewarded -= HandleRewardBasedVideoRewarded;
+            rewardBasedVideo.OnUserEarnedReward -= HandleRewardBasedVideoRewarded;
             // Called when the ad is closed.
             rewardBasedVideo.OnAdClosed -= HandleRewardBasedVideoClosed;
-            // Called when the ad click caused the user to leave the application.
-            rewardBasedVideo.OnAdLeavingApplication -= HandleRewardBasedVideoLeftApplication;
         }
 
         if (interstitial != null)
@@ -264,8 +244,6 @@ public class PlatformAdMobAdsInit : MonoBehaviour
             interstitial.OnAdOpening -= HandleOnAdOpened;
             // Called when the ad is closed.
             interstitial.OnAdClosed -= HandleOnAdClosed;
-            // Called when the ad click caused the user to leave the application.
-            interstitial.OnAdLeavingApplication -= HandleOnAdLeavingApplication;
 
             interstitial.Destroy();
         }
@@ -280,8 +258,6 @@ public class PlatformAdMobAdsInit : MonoBehaviour
             bannerView.OnAdOpening -= HandleOnBannerAdOpened;
             // Called when the user returned from the app after an ad click.
             bannerView.OnAdClosed -= HandleOnBannerAdClosed;
-            // Called when the ad click caused the user to leave the application.
-            bannerView.OnAdLeavingApplication -= HandleOnBannerAdLeavingApplication;
 
             bannerView.Destroy();
         }
@@ -291,51 +267,64 @@ public class PlatformAdMobAdsInit : MonoBehaviour
         //.AddTestDevice("F626104A61B1DF52DAFC0B5BE7F72B00") // Galaxy S6 Edge
         .Build();
 
-    void RequestRewardBasedVideo()
+    string RewardedAdUnitId
     {
+        get
+        {
 #if BALLOON_TEST_ADS
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-3940256099942544/5224354917";
+            const string adUnitId = "ca-app-pub-3940256099942544/5224354917";
 #elif UNITY_IPHONE
-        string adUnitId = "ca-app-pub-3940256099942544/1712485313";
+            const string adUnitId = "ca-app-pub-3940256099942544/1712485313";
 #else
-        string adUnitId = "unexpected_platform";
+            const string adUnitId = "unexpected_platform";
 #endif
 #else
 #if UNITY_ANDROID
-        var adUnitId = "ca-app-pub-5072035175916776/5803238943";
+            const string adUnitId = "ca-app-pub-5072035175916776/5803238943";
 #elif UNITY_IOS
-        string adUnitId = "ca-app-pub-5072035175916776/9016505898";
+            const string  adUnitId = "ca-app-pub-5072035175916776/9016505898";
 #else
-        string adUnitId = "unexpected_platform";
+            const string adUnitId = "unexpected_platform";
 #endif
 #endif
+            return adUnitId;
+        }
+    }
+
+    void RequestRewardBasedVideo()
+    {
         // Load the rewarded video ad with the request.
-        rewardBasedVideo.LoadAd(DefaultAdRequest, adUnitId);
+        rewardBasedVideo.LoadAd(DefaultAdRequest);
+    }
+
+    string InterstitialAdUnitId
+    {
+        get
+        {
+#if BALLOON_TEST_ADS
+#if UNITY_ANDROID
+            const string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+#elif UNITY_IPHONE
+            const string adUnitId = "ca-app-pub-3940256099942544/4411468910";
+#else
+            const string adUnitId = "unexpected_platform";
+#endif
+#else
+#if UNITY_ANDROID
+            const string adUnitId = "ca-app-pub-5072035175916776/8453453014";
+#elif UNITY_IPHONE
+            const string adUnitId = "ca-app-pub-5072035175916776/7626260968";
+#else
+            const string adUnitId = "unexpected_platform";
+#endif
+#endif
+            return adUnitId;
+        }
     }
 
     void RequestInterstitial()
     {
-#if BALLOON_TEST_ADS
-#if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-3940256099942544/1033173712";
-#elif UNITY_IPHONE
-        string adUnitId = "ca-app-pub-3940256099942544/4411468910";
-#else
-        string adUnitId = "unexpected_platform";
-#endif
-#else
-#if UNITY_ANDROID
-        var adUnitId = "ca-app-pub-5072035175916776/8453453014";
-#elif UNITY_IPHONE
-        string adUnitId = "ca-app-pub-5072035175916776/7626260968";
-#else
-        string adUnitId = "unexpected_platform";
-#endif
-#endif
-        // Initialize an InterstitialAd.
-        interstitial = new InterstitialAd(adUnitId);
-
         // Load the interstitial with the request.
         interstitial.LoadAd(DefaultAdRequest);
     }
@@ -347,8 +336,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour
 
     public void HandleOnAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
     {
-        print("HandleFailedToReceiveAd event received with message: "
-              + args.Message);
+        print("HandleFailedToReceiveAd event received with message: " + args.LoadAdError);
     }
 
     public void HandleOnAdOpened(object sender, EventArgs args)
@@ -408,8 +396,6 @@ public class PlatformAdMobAdsInit : MonoBehaviour
         bannerView.OnAdOpening += HandleOnBannerAdOpened;
         // Called when the user returned from the app after an ad click.
         bannerView.OnAdClosed += HandleOnBannerAdClosed;
-        // Called when the ad click caused the user to leave the application.
-        bannerView.OnAdLeavingApplication += HandleOnBannerAdLeavingApplication;
 
         // 나중에 인앱 결제 상품 현황 보고 광고를 띄울지 말지를 결정해야 한다.
         // 여기서 무조건 띄우지 말자.
@@ -423,8 +409,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour
 
     public void HandleOnBannerAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
     {
-        print("HandleFailedToReceiveAd event received with message: "
-              + args.Message);
+        print("HandleFailedToReceiveAd event received with message: " + args.LoadAdError);
     }
 
     public void HandleOnBannerAdOpened(object sender, EventArgs args)

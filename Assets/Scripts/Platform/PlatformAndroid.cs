@@ -199,11 +199,6 @@ public class PlatformAndroid : IPlatformBase
     public void PreAuthenticate()
     {
 #if !NO_GPGS
-        var config = new PlayGamesClientConfiguration.Builder()
-            .EnableSavedGames()
-            .Build();
-
-        PlayGamesPlatform.InitializeInstance(config);
         //PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
 #endif

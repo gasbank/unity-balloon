@@ -99,14 +99,14 @@ public class DataUpdater : MonoBehaviour
                 new DownloadHandlerBuffer(); // DownloadHandlerFile(Path.Combine(Application.persistentDataPath, "Balloon.bytes"));
 
             var downloadAsync = www.SendWebRequest();
-            while (downloadAsync.isDone == false && www.isNetworkError == false && www.isHttpError == false)
+            while (downloadAsync.isDone == false && www.result != UnityWebRequest.Result.ConnectionError)
             {
                 SushiDebug.LogFormat("Downloading...{0:f0}%", downloadAsync.progress * 100.0f);
                 onProgress(downloadAsync.progress);
                 yield return null;
             }
 
-            if (www.isNetworkError || www.isHttpError)
+            if (www.result == UnityWebRequest.Result.ConnectionError)
             {
                 SushiDebug.Log(www.error);
                 onNetworkFail(www.error);

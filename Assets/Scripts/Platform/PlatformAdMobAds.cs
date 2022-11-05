@@ -10,7 +10,7 @@ public class PlatformAdMobAds
     {
 #if GOOGLE_MOBILE_ADS
         // Get singleton reward based video ad reference.
-        var rewardBasedVideo = RewardBasedVideoAd.Instance;
+        var rewardBasedVideo = PlatformAdMobAdsInit.instance.rewardBasedVideo;
 
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
