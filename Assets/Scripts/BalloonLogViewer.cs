@@ -4,7 +4,6 @@ using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using MessagePack.LZ4;
 using MiniJSON;
 using UnityEngine;
 using UnityEngine.UI;
@@ -118,18 +117,6 @@ public class BalloonLogViewer : MonoBehaviour
         RefreshCurrentPage();
     }
 
-    public void LoadRemoteLog()
-    {
-        ConfirmPopup.instance.OpenInputFieldPopup("Play Log Error Device ID", async () =>
-        {
-            ConfirmPopup.instance.Close();
-            var remoteLogSource = new BalloonRemoteLogSource();
-            await remoteLogSource.LoadPlayLogAsync(ConfirmPopup.instance.InputFieldText);
-            logSource = remoteLogSource;
-            UpdateToPage(0);
-        }, () => { ConfirmPopup.instance.Close(); }, "Remote Log", ConfirmPopup.Header.Normal, "", "");
-    }
-
     public interface IBalloonLogSource
     {
         List<BalloonLogEntry> Read(int logEntryStartIndex, int count);
@@ -172,61 +159,6 @@ public class BalloonLogViewer : MonoBehaviour
             }
 
             return logEntryList;
-        }
-
-        public async Task LoadPlayLogAsync(string playLogCode)
-        {
-            var saveDbUrl = ConfigPopup.BaseUrl + "/playLog";
-            ProgressMessage.instance.Open("Loading play log");
-            playLogCode = playLogCode.Trim();
-            var url = string.Format("{0}/{1}", saveDbUrl, playLogCode);
-            SushiDebug.LogFormat("URL: {0}", url);
-
-            try
-            {
-                using (var httpClient = new HttpClient())
-                {
-                    var getTask = await httpClient.GetAsync(url);
-                    if (getTask.IsSuccessStatusCode)
-                    {
-                        var text = await getTask.Content.ReadAsStringAsync();
-                        var userPlayLogDataRoot = Json.Deserialize(text) as Dict;
-                        var userPlayLogDataFields = userPlayLogDataRoot["fields"] as Dict;
-                        var userPlayLogDataFieldsSaveData = userPlayLogDataFields["playLogData"] as Dict;
-                        var userPlayLogDataFieldsSaveDataStringValue =
-                            userPlayLogDataFieldsSaveData["bytesValue"] as string;
-                        var userPlayLogUncompressedSizeData =
-                            userPlayLogDataFields["playLogUncompressedSizeData"] as Dict;
-                        var userPlayLogUncompressedSizeDataIntegerValue =
-                            int.Parse(userPlayLogUncompressedSizeData["integerValue"] as string);
-
-                        var playLogDataBase64 = userPlayLogDataFieldsSaveDataStringValue;
-                        var playLogData = Convert.FromBase64String(playLogDataBase64);
-                        var playLogUncompressedData = new byte[userPlayLogUncompressedSizeDataIntegerValue];
-                        LZ4Codec.Decode(playLogData, 0, playLogData.Length, playLogUncompressedData, 0,
-                            playLogUncompressedData.Length);
-
-                        readLogStream = new MemoryStream(playLogUncompressedData);
-
-                        SushiDebug.LogFormat("Play Log Data Base64 ({0} bytes): {1}",
-                            playLogDataBase64 != null ? playLogDataBase64.Length : 0, playLogDataBase64);
-                        SushiDebug.LogFormat("Play Log Data ({0} bytes - compresseed)", playLogData.Length);
-                    }
-                    else
-                    {
-                        Debug.LogError($"Loading play log failed - status code {getTask.StatusCode}");
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"Play log upload exception: {e}");
-            }
-            finally
-            {
-                // 어떤 경우가 됐든지 마지막으로는 진행 상황 창을 닫아야 한다.
-                ProgressMessage.instance.Close();
-            }
         }
     }
 }

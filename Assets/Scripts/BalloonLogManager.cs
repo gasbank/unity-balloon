@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using MessagePack.LZ4;
 using UnityEngine;
 
 public class BalloonLogManager : MonoBehaviour, BalloonLogViewer.IBalloonLogSource
@@ -102,6 +101,7 @@ public class BalloonLogManager : MonoBehaviour, BalloonLogViewer.IBalloonLogSour
         }
         catch
         {
+            // ignored
         }
     }
 
@@ -230,35 +230,6 @@ public class BalloonLogManager : MonoBehaviour, BalloonLogViewer.IBalloonLogSour
         {
             // 어떤 경우가 됐든지 마지막으로는 진행 상황 창을 닫아야 한다.
             ProgressMessage.instance.Close();
-        }
-    }
-
-    public static async Task DumpAndUploadPlayLog()
-    {
-        var count = 10000;
-        SushiDebug.Log($"Dumping log for last {count:n0} log entries...");
-        var dummyLogEntryBytes = GetLogEntryBytes(BalloonLogEntry.Type.DummyLogRecord, 0, 0);
-        using (var readLogStream = instance.OpenReadLogStream())
-        {
-            readLogStream.Seek(Math.Max(0, readLogStream.Length - count * dummyLogEntryBytes.Length), SeekOrigin.Begin);
-            var bytes = new byte[count * dummyLogEntryBytes.Length];
-            var readByteCount = readLogStream.Read(bytes, 0, bytes.Length);
-            SushiDebug.Log(
-                $"{readByteCount:n0} bytes ({readByteCount / dummyLogEntryBytes.Length:n0} log entries) read.");
-            if (readByteCount % dummyLogEntryBytes.Length != 0)
-            {
-                Debug.LogError(
-                    $"Log dump failed! readByteCount={readByteCount:n0}, logEntrySize={dummyLogEntryBytes.Length:n0}. Abort!");
-                return;
-            }
-
-            var maxOutBytesLength = LZ4Codec.MaximumOutputLength(readByteCount);
-            SushiDebug.Log($"Maximum compressed log: {maxOutBytesLength:n0} bytes");
-            var outBytes = new byte[maxOutBytesLength];
-            var outBytesLength = LZ4Codec.Encode(bytes, 0, readByteCount, outBytes, 0, outBytes.Length);
-            SushiDebug.Log($"Compressed log size: {outBytesLength:n0} bytes");
-            outBytes = outBytes.Take(outBytesLength).ToArray();
-            await instance.UploadPlayLogAsync(outBytes, readByteCount);
         }
     }
 

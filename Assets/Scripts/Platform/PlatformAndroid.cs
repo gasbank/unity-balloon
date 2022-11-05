@@ -1,7 +1,9 @@
 ﻿using System;
+#if !NO_GPGS
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using GooglePlayGames.BasicApi.SavedGame;
+#endif
 using UnityEngine;
 using UnityEngine.Events;
 using Random = System.Random;
@@ -276,11 +278,12 @@ public class PlatformAndroid : IPlatformBase
     {
         return TextHelper.GetText("platform_account_google");
     }
-
+    
+#if !NO_GPGS
     public static void Open(ISavedGameClient savedGameClient, bool useAutomaticResolution,
         ConflictCallback conflictCallback, Action<SavedGameRequestStatus, ISavedGameMetadata> completedCallback)
     {
-#if !NO_GPGS
+
         if (useAutomaticResolution)
             savedGameClient.OpenWithAutomaticConflictResolution(
                 PlatformSaveUtil.remoteSaveFileName,
@@ -294,7 +297,6 @@ public class PlatformAndroid : IPlatformBase
                 true,
                 conflictCallback,
                 completedCallback);
-#endif
     }
 
     void OnSavedGameOpenedAndWriteConflictResolve(IConflictResolver resolver, ISavedGameMetadata original,
@@ -341,7 +343,6 @@ public class PlatformAndroid : IPlatformBase
 
     void SaveGame(ISavedGameMetadata game, byte[] savedData, TimeSpan totalPlaytime)
     {
-#if !NO_GPGS
         var remoteSaveDict = PlatformSaveUtil.DeserializeSaveData(savedData);
         var accountLevel =
             PlatformSaveUtil.GetInt32FromRemoteSaveDict(remoteSaveDict, PlatformSaveUtil.ACCOUNT_LEVEL_KEY);
@@ -357,7 +358,6 @@ public class PlatformAndroid : IPlatformBase
         builder = builder.WithUpdatedPlayedTime(totalPlaytime);
         var updatedMetadata = builder.Build();
         savedGameClient.CommitUpdate(game, updatedMetadata, savedData, OnSavedGameWritten);
-#endif
     }
 
     public void OnSavedGameWritten(SavedGameRequestStatus status, ISavedGameMetadata game)
@@ -398,10 +398,8 @@ public class PlatformAndroid : IPlatformBase
 
     public void LoadGameData(ISavedGameMetadata game)
     {
-#if !NO_GPGS
         var savedGameClient = PlayGamesPlatform.Instance.SavedGame;
         savedGameClient.ReadBinaryData(game, OnSavedGameDataRead);
-#endif
     }
 
     public void OnSavedGameDataRead(SavedGameRequestStatus status, byte[] data)
@@ -422,7 +420,8 @@ public class PlatformAndroid : IPlatformBase
             BalloonLogManager.Add(BalloonLogEntry.Type.GameCloudLoadFailure, 0, 4);
         }
     }
-
+#endif
+    
     static int SendNotification(TimeSpan delay, string title, string message, Color32 bgColor, bool sound = true,
         bool vibrate = true, bool lights = true, string bigIcon = "", string smallIcon = "")
     {

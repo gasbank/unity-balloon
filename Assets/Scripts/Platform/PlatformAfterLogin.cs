@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Text;
+#if !NO_GPGS
 using GooglePlayGames;
 using GooglePlayGames.BasicApi.SavedGame;
+#endif
 using UnityEngine;
 using UnityEngine.UI;
 //using GooglePlayGames.BasicApi;
@@ -170,6 +172,7 @@ public class PlatformAfterLogin : MonoBehaviour
     }
 
 
+#if !NO_GPGS
     public void OnSavedGameSelected(SelectUIStatus status, ISavedGameMetadata game)
     {
         if (status == SelectUIStatus.SavedGameSelected)
@@ -186,7 +189,7 @@ public class PlatformAfterLogin : MonoBehaviour
 
         //rootCanvasGroup.interactable = true;
     }
-
+    
     public void OpenDefaultSavedGameAndWrite()
     {
         //rootCanvasGroup.interactable = false;
@@ -201,7 +204,6 @@ public class PlatformAfterLogin : MonoBehaviour
 
     void OpenSavedGameAndWrite(string filename)
     {
-#if !NO_GPGS
         var savedGameClient = PlayGamesPlatform.Instance.SavedGame;
         if (savedGameClient != null)
             PlatformAndroid.Open(
@@ -209,12 +211,10 @@ public class PlatformAfterLogin : MonoBehaviour
                 true,
                 null,
                 OnSavedGameOpenedAndWrite);
-#endif
     }
 
     void OpenSavedGameAndRead(string filename)
     {
-#if !NO_GPGS
         var savedGameClient = PlayGamesPlatform.Instance.SavedGame;
         if (savedGameClient != null)
         {
@@ -224,8 +224,8 @@ public class PlatformAfterLogin : MonoBehaviour
                 null,
                 OnSavedGameOpenedAndRead);
         }
-#endif
     }
+
 
     public void OnSavedGameOpenedAndWrite(SavedGameRequestStatus status, ISavedGameMetadata game)
     {
@@ -250,7 +250,6 @@ public class PlatformAfterLogin : MonoBehaviour
 
     public void OnSavedGameOpenedAndRead(SavedGameRequestStatus status, ISavedGameMetadata game)
     {
-#if !NO_GPGS
         if (status == SavedGameRequestStatus.Success)
         {
             // handle reading or writing of saved game.
@@ -268,7 +267,6 @@ public class PlatformAfterLogin : MonoBehaviour
 
             //rootCanvasGroup.interactable = true;
         }
-#endif
     }
 
     void SaveGame(ISavedGameMetadata game, byte[] savedData, TimeSpan totalPlaytime)
@@ -327,10 +325,8 @@ public class PlatformAfterLogin : MonoBehaviour
 
     public void LoadGameData(ISavedGameMetadata game)
     {
-#if !NO_GPGS
         var savedGameClient = PlayGamesPlatform.Instance.SavedGame;
         savedGameClient.ReadBinaryData(game, OnSavedGameDataRead);
-#endif
     }
 
     public void OnSavedGameDataRead(SavedGameRequestStatus status, byte[] data)
@@ -357,7 +353,6 @@ public class PlatformAfterLogin : MonoBehaviour
 
     public void DeleteSavedGame(SavedGameRequestStatus status, ISavedGameMetadata game)
     {
-#if !NO_GPGS
         if (status == SavedGameRequestStatus.Success)
         {
             var savedGameClient = PlayGamesPlatform.Instance.SavedGame;
@@ -371,6 +366,6 @@ public class PlatformAfterLogin : MonoBehaviour
 
             SushiDebug.LogFormat("DeleteSavedGame failed! - {0}", status);
         }
-#endif
     }
+#endif
 }

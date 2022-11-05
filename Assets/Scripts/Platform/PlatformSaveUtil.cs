@@ -3,7 +3,9 @@ using System.Collections;
 using System.IO;
 using System.Numerics;
 using System.Runtime.Serialization.Formatters.Binary;
+#if !NO_GPGS
 using GooglePlayGames.BasicApi.SavedGame;
+#endif
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
@@ -57,6 +59,7 @@ public class PlatformSaveUtil
         return binFormatter.Deserialize(memStream) as RemoteSaveDictionary;
     }
 
+#if !NO_GPGS
     static void OnSavedGameOpenedAndWriteConflictResolve(IConflictResolver resolver, ISavedGameMetadata original,
         byte[] originalData, ISavedGameMetadata unmerged, byte[] unmergedData)
     {
@@ -68,6 +71,7 @@ public class PlatformSaveUtil
     {
         resolver.ChooseMetadata(original);
     }
+#endif
 
     public static void LogCloudLoadSaveError(string message)
     {
