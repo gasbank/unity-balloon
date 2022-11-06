@@ -144,8 +144,8 @@ public class PlatformIos : IPlatformBase
 #if UNITY_IOS
         string text = string.Format("{0}\n{1}", title, body);
         SushiDebug.Log("Schedule Local Notification");
-        UnityEngine.iOS.NotificationServices.ClearLocalNotifications();
-        UnityEngine.iOS.NotificationServices.CancelAllLocalNotifications();
+        //UnityEngine.iOS.NotificationServices.ClearLocalNotifications();
+        //UnityEngine.iOS.NotificationServices.CancelAllLocalNotifications();
         ClearAllNotifications();
 
         // 09:00
@@ -155,7 +155,7 @@ public class PlatformIos : IPlatformBase
         notification0900.alertAction = "Action";
         notification0900.soundName = UnityEngine.iOS.LocalNotification.defaultSoundName;
         notification0900.repeatInterval = UnityEngine.iOS.CalendarUnit.Day;
-        UnityEngine.iOS.NotificationServices.ScheduleLocalNotification(notification0900);
+        //UnityEngine.iOS.NotificationServices.ScheduleLocalNotification(notification0900);
 #endif
     }
 
@@ -265,7 +265,7 @@ public class PlatformIos : IPlatformBase
         n.alertBody = body;
         n.alertAction = "Action";
         n.soundName = UnityEngine.iOS.LocalNotification.defaultSoundName;
-        UnityEngine.iOS.NotificationServices.ScheduleLocalNotification(n);
+        //UnityEngine.iOS.NotificationServices.ScheduleLocalNotification(n);
 #endif
     }
 
@@ -296,7 +296,7 @@ public class PlatformIos : IPlatformBase
 
 #if UNITY_IOS
         // 로그인 이후 알림 기능에 대한 동의 팝업을 띄우자...
-        UnityEngine.iOS.NotificationServices.RegisterForNotifications(UnityEngine.iOS.NotificationType.Alert | UnityEngine.iOS.NotificationType.Badge | UnityEngine.iOS.NotificationType.Sound);
+        //UnityEngine.iOS.NotificationServices.RegisterForNotifications(UnityEngine.iOS.NotificationType.Alert | UnityEngine.iOS.NotificationType.Badge | UnityEngine.iOS.NotificationType.Sound);
 
         // 로그인 성공했다면 업적 알림 기능 켜기
         if (b) {

@@ -23,7 +23,7 @@ public class PlatformIosNative : MonoBehaviour
     void Start()
     {
 #if UNITY_IOS
-		UnityEngine.iOS.NotificationServices.RegisterForNotifications(UnityEngine.iOS.NotificationType.Alert | UnityEngine.iOS.NotificationType.Badge | UnityEngine.iOS.NotificationType.Sound);
+		//UnityEngine.iOS.NotificationServices.RegisterForNotifications(UnityEngine.iOS.NotificationType.Alert | UnityEngine.iOS.NotificationType.Badge | UnityEngine.iOS.NotificationType.Sound);
 #if !UNITY_EDITOR
 		saveToCloudPrivate("testplayerid", "heheheh~~~", "test login error title", "test login error message", "test confirm message");
 		loadFromCloudPrivate("testplayerid", "test login error title", "test login error message", "test confirm message");
@@ -36,8 +36,8 @@ public class PlatformIosNative : MonoBehaviour
         if (pauseStatus == false)
         {
 #if UNITY_IOS && !UNITY_EDITOR
-			UnityEngine.iOS.NotificationServices.ClearLocalNotifications();
-			UnityEngine.iOS.NotificationServices.CancelAllLocalNotifications();
+			//UnityEngine.iOS.NotificationServices.ClearLocalNotifications();
+			//UnityEngine.iOS.NotificationServices.CancelAllLocalNotifications();
 			clearAllNotifications();
 #endif
         }
@@ -48,8 +48,8 @@ public class PlatformIosNative : MonoBehaviour
         if (hasFocus)
         {
 #if UNITY_IOS && !UNITY_EDITOR
-			UnityEngine.iOS.NotificationServices.ClearLocalNotifications();
-			UnityEngine.iOS.NotificationServices.CancelAllLocalNotifications();
+			//UnityEngine.iOS.NotificationServices.ClearLocalNotifications();
+			//UnityEngine.iOS.NotificationServices.CancelAllLocalNotifications();
 			clearAllNotifications();
 #endif
         }
@@ -67,8 +67,8 @@ public class PlatformIosNative : MonoBehaviour
         SushiDebug.LogFormat("Notification Time 2: {0}", notificationDate1800);
 #if UNITY_IOS
 		SushiDebug.Log("Schedule Local Notification");
-		UnityEngine.iOS.NotificationServices.ClearLocalNotifications();
-		UnityEngine.iOS.NotificationServices.CancelAllLocalNotifications();
+		//UnityEngine.iOS.NotificationServices.ClearLocalNotifications();
+		//UnityEngine.iOS.NotificationServices.CancelAllLocalNotifications();
 		#if !UNITY_EDITOR
 		clearAllNotifications();
 		#endif
@@ -79,7 +79,7 @@ public class PlatformIosNative : MonoBehaviour
 		notification1200.alertAction = "Action";
 		notification1200.soundName = UnityEngine.iOS.LocalNotification.defaultSoundName;
 		notification1200.repeatInterval = UnityEngine.iOS.CalendarUnit.Day;
-		UnityEngine.iOS.NotificationServices.ScheduleLocalNotification(notification1200);
+		//UnityEngine.iOS.NotificationServices.ScheduleLocalNotification(notification1200);
 
 		UnityEngine.iOS.LocalNotification notification1800 = new UnityEngine.iOS.LocalNotification();
 		notification1800.fireDate = notificationDate1800;
@@ -87,7 +87,7 @@ public class PlatformIosNative : MonoBehaviour
 		notification1800.alertAction = "Action";
 		notification1800.soundName = UnityEngine.iOS.LocalNotification.defaultSoundName;
 		notification1800.repeatInterval = UnityEngine.iOS.CalendarUnit.Day;
-		UnityEngine.iOS.NotificationServices.ScheduleLocalNotification(notification1800);
+		//UnityEngine.iOS.NotificationServices.ScheduleLocalNotification(notification1800);
 #endif
     }
 

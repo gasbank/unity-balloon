@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Bootstrap : MonoBehaviour
@@ -58,7 +59,15 @@ public class Bootstrap : MonoBehaviour
 
     public static bool GetStageNumber(string sceneName, out int stageNumber)
     {
-        return int.TryParse(sceneName.Substring("Stage ".Length), out stageNumber);
+        try
+        {
+            return int.TryParse(sceneName.Substring("Stage ".Length), out stageNumber);
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            stageNumber = 0;
+            return false;
+        }
     }
 
     public static void LoadStageScene(int stageNumber)

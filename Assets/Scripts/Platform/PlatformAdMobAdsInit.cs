@@ -271,7 +271,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour
     {
         get
         {
-#if BALLOON_TEST_ADS
+#if TEST_ADS
 #if UNITY_ANDROID
             const string adUnitId = "ca-app-pub-3940256099942544/5224354917";
 #elif UNITY_IPHONE
@@ -302,7 +302,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour
     {
         get
         {
-#if BALLOON_TEST_ADS
+#if TEST_ADS
 #if UNITY_ANDROID
             const string adUnitId = "ca-app-pub-3940256099942544/1033173712";
 #elif UNITY_IPHONE
@@ -368,7 +368,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour
 
     void CreateBanner()
     {
-#if BALLOON_TEST_ADS
+#if TEST_ADS
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-3940256099942544/6300978111";
 #elif UNITY_IPHONE
