@@ -147,15 +147,9 @@ static class BalloonBuild
     }
 
     [UsedImplicitly]
-    public static void PerformIosAdHocBuild()
+    public static void PerformIosBuild()
     {
-        PerformIosDistributionBuild(Environment.GetEnvironmentVariable("IOS_AD_HOC_PROFILE_ID"));
-    }
-
-    [UsedImplicitly]
-    public static void PerformIosAppStoreBuild()
-    {
-        PerformIosDistributionBuild(Environment.GetEnvironmentVariable("IOS_APP_STORE_PROFILE_ID"));
+        PerformIosDistributionBuild(Environment.GetEnvironmentVariable("IOS_PROFILE_GUID"));
     }
 
     static void PerformIosDistributionBuild(string profileId)
@@ -172,7 +166,7 @@ static class BalloonBuild
             RemovingBalloonDebugDefine(BuildTargetGroup.iOS);
         }
 
-        PlayerSettings.iOS.appleDeveloperTeamID = "TG9MHV97AH";
+        PlayerSettings.iOS.appleDeveloperTeamID = Environment.GetEnvironmentVariable("IOS_TEAM_ID");
         if (string.IsNullOrEmpty(profileId))
         {
             PlayerSettings.iOS.appleEnableAutomaticSigning = true;
@@ -183,6 +177,9 @@ static class BalloonBuild
             PlayerSettings.iOS.iOSManualProvisioningProfileID = profileId;
             PlayerSettings.iOS.iOSManualProvisioningProfileType = ProvisioningProfileType.Distribution;
         }
+        
+        // 자동 빌드니까 당연히 Device SDK 사용해야겠지?
+        PlayerSettings.iOS.sdkVersion = iOSSdkVersion.DeviceSDK;
 
         var cmdArgs = Environment.GetCommandLineArgs().ToList();
         ProcessBuildNumber(cmdArgs);
