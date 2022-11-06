@@ -68,11 +68,11 @@ public class DataUpdater : MonoBehaviour
 
     public static void DeleteAllCaches()
     {
-        SushiDebug.LogFormat("Deleting invalid cache file {0}...", BalloonBytesPath);
+        SushiDebug.LogFormat("Deleting cache file {0}...", BalloonBytesPath);
         File.Delete(BalloonBytesPath);
-        SushiDebug.LogFormat("Deleting invalid cache file {0}...", BalloonBytesETagPath);
+        SushiDebug.LogFormat("Deleting cache file {0}...", BalloonBytesETagPath);
         File.Delete(BalloonBytesETagPath);
-        SushiDebug.LogFormat("Deleting invalid cache file {0}...", BalloonBytesHashPath);
+        SushiDebug.LogFormat("Deleting cache file {0}...", BalloonBytesHashPath);
         File.Delete(BalloonBytesETagPath);
     }
 

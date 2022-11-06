@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
+using Unity.Services.Core;
+using Unity.Services.Core.Environments;
 using UnityEngine;
 using UnityEngine.Purchasing;
 
@@ -10,6 +13,9 @@ public class PlatformIapManager : MonoBehaviour, IStoreListener
     static readonly string FORCE_ADS_PREF_KEY = "FORCE_ADS_PREF_KEY";
     IStoreController controller;
     IExtensionProvider extensions;
+    
+    [SerializeField]
+    string environment = "production";
 
     [SerializeField]
     GameObject iapGroup;
@@ -117,8 +123,19 @@ public class PlatformIapManager : MonoBehaviour, IStoreListener
             PlatformAdMobAdsInit.instance.StartShowBanner();
     }
 
-    void Awake()
+    async void Start()
     {
+        try {
+            var options = new InitializationOptions()
+                .SetEnvironmentName(environment);
+ 
+            await UnityServices.InitializeAsync(options);
+        }
+        catch (Exception exception) {
+            // An error occurred during initialization.
+            Debug.LogException(exception);
+        }
+        
         iapGroup = GameObject.Find("Canvas/IAP Group");
 
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
