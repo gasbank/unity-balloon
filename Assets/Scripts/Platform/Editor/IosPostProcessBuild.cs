@@ -32,6 +32,12 @@ public static class DisableBitcode
             pbxProject.SetBuildProperty(target, "ENABLE_BITCODE", "NO");
             // 로컬 알림 관련해서 아래 프레임워크가 추가 되어야 한다.
             pbxProject.AddFrameworkToProject(target, "UserNotifications.framework", false);
+            
+            target = pbxProject.TargetGuidByName(PBXProject.GetUnityTestTargetName());
+            pbxProject.SetBuildProperty(target, "ENABLE_BITCODE", "NO");
+
+            target = pbxProject.GetUnityFrameworkTargetGuid();
+            pbxProject.SetBuildProperty(target, "ENABLE_BITCODE", "NO");
 
             pbxProject.AddCapability(target, PBXCapabilityType.iCloud);
             pbxProject.AddCapability(target, PBXCapabilityType.GameCenter);
