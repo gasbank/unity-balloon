@@ -4,8 +4,9 @@ using Unity.Services.Core;
 using Unity.Services.Core.Environments;
 using UnityEngine;
 using UnityEngine.Purchasing;
+using UnityEngine.Purchasing.Extension;
 
-public class PlatformIapManager : MonoBehaviour, IStoreListener
+public class PlatformIapManager : MonoBehaviour, IDetailedStoreListener
 {
     internal static PlatformIapManager instance;
     static readonly string NO_ADS_PRODUCT_ID = "top.plusalpha.balloon.noads";
@@ -26,7 +27,7 @@ public class PlatformIapManager : MonoBehaviour, IStoreListener
         set
         {
             SetForceAds(value);
-            SushiDebug.Log($"ForceAds set to {value}");
+            BalloonDebug.Log($"ForceAds set to {value}");
         }
     }
 
@@ -36,7 +37,7 @@ public class PlatformIapManager : MonoBehaviour, IStoreListener
         private set
         {
             SetNoAdsPurchased_Admin(ForceAds ? false : value);
-            SushiDebug.Log($"NoAdsPurchased set to {NoAdsPurchased}");
+            BalloonDebug.Log($"NoAdsPurchased set to {NoAdsPurchased}");
             SyncNoAdsStates();
         }
     }
@@ -44,13 +45,13 @@ public class PlatformIapManager : MonoBehaviour, IStoreListener
     /// <summary>
     ///     Called when Unity IAP is ready to make purchases.
     /// </summary>
-    public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
+    public void OnInitialized(IStoreController inController, IExtensionProvider inExtensions)
     {
-        this.controller = controller;
-        this.extensions = extensions;
+        controller = inController;
+        extensions = inExtensions;
         var sb = new StringBuilder();
         sb.AppendLine("PlatformIapManager.OnInitialized");
-        foreach (var product in controller.products.all)
+        foreach (var product in inController.products.all)
         {
             sb.AppendLine($" - {product.definition.id}: hasReceipt={product.hasReceipt}");
             if (product.hasReceipt)
@@ -58,23 +59,23 @@ public class PlatformIapManager : MonoBehaviour, IStoreListener
                     NoAdsPurchased = true;
         }
 
-        SushiDebug.Log(sb.ToString());
+        BalloonDebug.Log(sb.ToString());
+    }
+    
+    public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
+    {
+        Debug.LogError($"PlatformIapManager.OnPurchaseFailed: Product={product}, PurchaseFailureDescription={failureDescription}");
     }
 
-    /// <summary>
-    ///     Called when Unity IAP encounters an unrecoverable initialization error.
-    ///     Note that this will not be called if Internet is unavailable; Unity IAP
-    ///     will attempt initialization until it becomes available.
-    /// </summary>
     public void OnInitializeFailed(InitializationFailureReason error)
     {
         Debug.LogError($"PlatformIapManager.OnInitializeFailed: {error}");
     }
 
-    /// <summary>
-    ///     Called when a purchase completes.
-    ///     May be called at any time after OnInitialized().
-    /// </summary>
+    public void OnInitializeFailed(InitializationFailureReason error, string message) {
+        Debug.LogError($"PlatformIapManager.OnInitializeFailed: Error={error}, Message={message}");
+    }
+
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs e)
     {
         var sb = new StringBuilder();
@@ -85,7 +86,7 @@ public class PlatformIapManager : MonoBehaviour, IStoreListener
         sb.AppendLine($"transactionID = {e.purchasedProduct.transactionID}");
         sb.AppendLine($"hasReceipt = {e.purchasedProduct.hasReceipt}");
         sb.Append($"definition.id = {e.purchasedProduct.definition.id}");
-        SushiDebug.Log(sb.ToString());
+        BalloonDebug.Log(sb.ToString());
 
         if (e.purchasedProduct.definition.id == NO_ADS_PRODUCT_ID) NoAdsPurchased = true;
         PurchasingInProgress.instance.Show(false);
@@ -97,7 +98,7 @@ public class PlatformIapManager : MonoBehaviour, IStoreListener
     /// </summary>
     public void OnPurchaseFailed(Product product, PurchaseFailureReason reason)
     {
-        SushiDebug.Log($"PlatformIapManager.OnPurchaseFailed: {product.definition.id}, Reason: {reason}");
+        BalloonDebug.Log($"PlatformIapManager.OnPurchaseFailed: {product.definition.id}, Reason: {reason}");
         PurchasingInProgress.instance.Show(false);
         ConfirmPopup.instance.Open("\\구입을 실패했습니다.".Localized() + "\n\n" + reason);
     }
@@ -141,7 +142,7 @@ public class PlatformIapManager : MonoBehaviour, IStoreListener
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
         builder.AddProduct(NO_ADS_PRODUCT_ID, ProductType.NonConsumable);
         UnityPurchasing.Initialize(this, builder);
-
+        
         // 일단 로컬 저장된 상태만으로 빠르게 판단해서 배너 광고를 보여줘야 하면 보여준다.
         SyncNoAdsStates();
     }

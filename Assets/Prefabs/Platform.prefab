@@ -24,12 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57352732}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7147165497823655059}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &57352733
 MonoBehaviour:
@@ -41,49 +42,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9722bee0e0c514b699e5ceb4a38e7fdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &430855229
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 430855231}
-  - component: {fileID: 430855230}
-  m_Layer: 0
-  m_Name: Ads Manager (Unity)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &430855231
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 430855229}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7147165497823655059}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &430855230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 430855229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 676bd4597ca3047f8819bb4996ec4143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1230787329951124705
@@ -112,14 +70,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1230787329951124705}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 430855231}
   - {fileID: 57352734}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7286687159639300767
 MonoBehaviour:
@@ -133,9 +91,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec75a9e72d0f71478c37dfcf9ffe772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userName: {fileID: 0}
-  userId: {fileID: 0}
   rootCanvasGroup: {fileID: 0}
+  userId: {fileID: 0}
+  userName: {fileID: 0}
 --- !u!114 &2053680846763412076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,9 +106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c77f3ed4515d3b45a29305fe3639cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  daysPlayed: 0
   leaderboardScore1: 0
   leaderboardScore2: 0
-  daysPlayed: 0
   loginStateText: {fileID: 0}
 --- !u!114 &7730286740639119968
 MonoBehaviour:
@@ -164,3 +122,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd307fddd45a445dcba357fbdca46ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  environment: production
+  iapGroup: {fileID: 0}

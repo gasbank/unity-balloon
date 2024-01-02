@@ -2,19 +2,9 @@
 
 public class AdTestButton : MonoBehaviour
 {
-    public void ShowContinueAd_UnityAds()
-    {
-        PlatformUnityAds.TryShowRewardedAd(null, null);
-    }
-
     public void ShowContinueAd_AdMob()
     {
         PlatformAdMobAds.TryShowRewardedAd(null, null);
-    }
-
-    public void ShowInterstitialAd_UnityAds()
-    {
-        PlatformUnityAds.TryShowInterstitialAd(null, null, 1);
     }
 
     public void ShowInterstitialAd_AdMob()

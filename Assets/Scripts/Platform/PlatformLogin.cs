@@ -30,10 +30,10 @@ public class PlatformLogin : MonoBehaviour
             Platform.StartAuthAsync((result, reason) =>
             {
                 if (rootCanvasGroup != null) rootCanvasGroup.interactable = true;
-                SushiDebug.LogFormat("Social.localUser.Authenticate {0}", result);
+                BalloonDebug.LogFormat("Social.localUser.Authenticate {0}", result);
                 if (result)
                 {
-                    SushiDebug.LogFormat("Social.localUser userName={0}, userId={1}", Social.localUser.userName,
+                    BalloonDebug.LogFormat("Social.localUser userName={0}, userId={1}", Social.localUser.userName,
                         Social.localUser.id);
                     if (userName) userName.text = Social.localUser.userName;
                     if (userId) userId.text = Social.localUser.id;

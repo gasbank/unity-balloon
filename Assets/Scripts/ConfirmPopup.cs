@@ -106,33 +106,33 @@ public class ConfirmPopup : MonoBehaviour
     {
         while (true)
         {
-            //SushiDebug.Log("ConfirmPopup.Start coro...");
+            //BalloonDebug.Log("ConfirmPopup.Start coro...");
             yield return new WaitForSeconds(1);
             if (AutoCloseRemainSec > 0 && IsOpen)
             {
-                SushiDebug.Log("ConfirmPopup.Start autoCloseRemainSec - 1...");
+                BalloonDebug.Log("ConfirmPopup.Start autoCloseRemainSec - 1...");
                 AutoCloseRemainSec--;
                 if (AutoCloseRemainSec == 0)
                 {
-                    SushiDebug.Log("ConfirmPopup.Start autoCloseRemainSec == 0");
+                    BalloonDebug.Log("ConfirmPopup.Start autoCloseRemainSec == 0");
                     if (onCloseButton != null)
                     {
-                        SushiDebug.Log("ConfirmPopup.Start onClose");
+                        BalloonDebug.Log("ConfirmPopup.Start onClose");
                         onCloseButton();
                     }
                     else if (onButton1 != null)
                     {
-                        SushiDebug.Log("ConfirmPopup.Start onButton1");
+                        BalloonDebug.Log("ConfirmPopup.Start onButton1");
                         onButton1();
                     }
                     else if (onButton2 != null)
                     {
-                        SushiDebug.Log("ConfirmPopup.Start onButton2");
+                        BalloonDebug.Log("ConfirmPopup.Start onButton2");
                         onButton2();
                     }
                     else if (onClaimButton != null)
                     {
-                        SushiDebug.Log("ConfirmPopup.Start onClaimButton");
+                        BalloonDebug.Log("ConfirmPopup.Start onClaimButton");
                         onClaimButton();
                     }
                 }

@@ -194,12 +194,12 @@ public class ErrorReporter : MonoBehaviour
                 var patchData = JsonUtility.ToJson(saveFile);
                 using (var patchContent = new StringContent(patchData))
                 {
-                    SushiDebug.Log($"HttpClient PATCH TO {url}...");
+                    BalloonDebug.Log($"HttpClient PATCH TO {url}...");
 
                     // PATCH 시작하고 기다린다.
                     var patchTask = await httpClient.PatchAsync(new Uri(url), patchContent);
 
-                    SushiDebug.Log($"HttpClient Result: {patchTask.ReasonPhrase}");
+                    BalloonDebug.Log($"HttpClient Result: {patchTask.ReasonPhrase}");
 
                     if (patchTask.IsSuccessStatusCode)
                     {
@@ -280,20 +280,20 @@ public class ErrorReporter : MonoBehaviour
             {
                 try
                 {
-                    //SushiDebug.LogFormat("URL Text: {0}", request.downloadHandler.text);
+                    //BalloonDebug.LogFormat("URL Text: {0}", request.downloadHandler.text);
                     var recoveryDataRoot = Json.Deserialize(request.downloadHandler.text) as Dict;
                     foreach (var kv in recoveryDataRoot)
                     {
-                        //SushiDebug.LogFormat("root key: {0}", kv.Key);
+                        //BalloonDebug.LogFormat("root key: {0}", kv.Key);
                     }
 
                     var recoveryData = recoveryDataRoot["fields"] as Dictionary<string, object>;
                     foreach (var kv in recoveryData)
                     {
-                        //SushiDebug.LogFormat("fields key: {0}", kv.Key);
+                        //BalloonDebug.LogFormat("fields key: {0}", kv.Key);
                     }
 
-                    //SushiDebug.LogFormat("serviceData = {0}", serviceData);
+                    //BalloonDebug.LogFormat("serviceData = {0}", serviceData);
                     foreach (var recovery in recoveryData)
                     {
                         var recoveryIndex = 0;
@@ -318,16 +318,16 @@ public class ErrorReporter : MonoBehaviour
                                 saveData = Convert.FromBase64String(saveDataBase64);
                             }
 
-                        SushiDebug.LogFormat("Error Device ID: {0}", GetOrCreateErrorDeviceId());
-                        SushiDebug.LogFormat("Recovery Error Device ID: {0}", recoveryErrorDeviceId);
-                        SushiDebug.LogFormat("Save Data Base64 ({0} bytes): {1}",
+                        BalloonDebug.LogFormat("Error Device ID: {0}", GetOrCreateErrorDeviceId());
+                        BalloonDebug.LogFormat("Recovery Error Device ID: {0}", recoveryErrorDeviceId);
+                        BalloonDebug.LogFormat("Save Data Base64 ({0} bytes): {1}",
                             saveDataBase64 != null ? saveDataBase64.Length : 0, saveDataBase64);
 
                         if (isValidErrorDeviceId && saveData != null && saveData.Length > 0)
                         {
                             // 복구 성공!!
                             // 새로운 세이브 파일 쓰고, 다시 Splash 신 로드
-                            SushiDebug.LogFormat("Writing recovery save data {0} bytes", saveData.Length);
+                            BalloonDebug.LogFormat("Writing recovery save data {0} bytes", saveData.Length);
                             File.WriteAllBytes(SaveLoadManager.SaveFileName, saveData);
                             // 일반적인 저장 경로가 아니고 파일을 직접 만들어낸 것이라서 수동으로 저장 슬롯 인덱스 증가시켜 줘야
                             // 다음에 직전에 저장한 슬롯의 저장 데이터를 불러온다.
@@ -362,7 +362,7 @@ public class ErrorReporter : MonoBehaviour
         ProgressMessage.instance.Open("\\유저 세이브 코드 확인중...".Localized());
         userSaveCode = userSaveCode.Trim();
         var url = string.Format("{0}/{1}", saveDbUrl, userSaveCode);
-        SushiDebug.LogFormat("URL: {0}", url);
+        BalloonDebug.LogFormat("URL: {0}", url);
         using (var request = UnityWebRequest.Get(url))
         {
             yield return request.SendWebRequest();
@@ -382,7 +382,7 @@ public class ErrorReporter : MonoBehaviour
                     foreach (var fieldName in userSaveDataFields.Keys.Where(e => e.StartsWith("saveData"))
                         .OrderBy(e => e))
                     {
-                        SushiDebug.Log($"Checking save data field name '{fieldName}'...");
+                        BalloonDebug.Log($"Checking save data field name '{fieldName}'...");
                         var userSaveDataFieldsSaveData = userSaveDataFields[fieldName] as Dict;
                         if (userSaveDataFieldsSaveData.Keys.Count > 0)
                         {
@@ -394,12 +394,12 @@ public class ErrorReporter : MonoBehaviour
                             var saveDataBase64 = userSaveDataFieldsSaveDataStringValue;
                             var saveData = Convert.FromBase64String(saveDataBase64);
 
-                            SushiDebug.LogFormat("Save Data Base64 ({0} bytes): {1}",
+                            BalloonDebug.LogFormat("Save Data Base64 ({0} bytes): {1}",
                                 saveDataBase64 != null ? saveDataBase64.Length : 0, saveDataBase64);
 
                             if (saveData.Length > 0)
                             {
-                                SushiDebug.LogFormat("Writing recovery save data {0} bytes", saveData.Length);
+                                BalloonDebug.LogFormat("Writing recovery save data {0} bytes", saveData.Length);
                                 File.WriteAllBytes(SaveLoadManager.SaveFileName, saveData);
                                 // 일반적인 저장 경로가 아니고 파일을 직접 만들어낸 것이라서 수동으로 저장 슬롯 인덱스 증가시켜 줘야
                                 // 다음에 직전에 저장한 슬롯의 저장 데이터를 불러온다.
@@ -408,11 +408,11 @@ public class ErrorReporter : MonoBehaviour
                                 yield break;
                             }
 
-                            SushiDebug.Log($"Save data field name '{fieldName}' is empty!");
+                            BalloonDebug.Log($"Save data field name '{fieldName}' is empty!");
                         }
                         else
                         {
-                            SushiDebug.Log($"Save data field name '{fieldName}' is empty!");
+                            BalloonDebug.Log($"Save data field name '{fieldName}' is empty!");
                         }
                     }
                 }

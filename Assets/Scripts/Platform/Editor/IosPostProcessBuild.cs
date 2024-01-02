@@ -20,7 +20,7 @@ public static class DisableBitcode
 #if UNITY_IOS
             //localization
             NativeLocale.AddLocalizedStringsIOS(path, Path.Combine(Application.dataPath, "NativeLocale/iOS"));
-            SushiDebug.Log("DEBUG_________Application datapath:" + Application.dataPath);
+            BalloonDebug.Log("DEBUG_________Application datapath:" + Application.dataPath);
             string projectPath = path + "/Unity-iPhone.xcodeproj/project.pbxproj";
 
             PBXProject pbxProject = new PBXProject();

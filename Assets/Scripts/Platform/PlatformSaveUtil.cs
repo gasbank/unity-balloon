@@ -37,7 +37,7 @@ public class PlatformSaveUtil
         // SaveLoadManager.LoadFileName을 써야 한다.
         // 저장하는 키는 'save.dat'로 고정이다. (하위호환성)
         var localSaveFileName = SaveLoadManager.GetSaveLoadFileNameOnly(0);
-        SushiDebug.Log($"Saving '{SaveLoadManager.LoadFileName}' to a dict key '{localSaveFileName}'");
+        BalloonDebug.Log($"Saving '{SaveLoadManager.LoadFileName}' to a dict key '{localSaveFileName}'");
         dict[localSaveFileName] = File.ReadAllBytes(SaveLoadManager.LoadFileName);
         dict[ACCOUNT_LEVEL_KEY] = BitConverter.GetBytes(ResourceManager.instance.accountLevel);
         dict[ACCOUNT_LEVEL_EXP_KEY] = BitConverter.GetBytes(ResourceManager.instance.accountLevelExp);
@@ -110,12 +110,12 @@ public class PlatformSaveUtil
         foreach (var fileName in dict)
         {
             var filePath = Path.Combine(Application.persistentDataPath, fileName.Key);
-            SushiDebug.Log(
+            BalloonDebug.Log(
                 $"LoadDataAndLoadSplashScene: gd key = {fileName.Key}, length = {fileName.Value.Length:n0}, writing to = {filePath}");
             File.WriteAllBytes(filePath, fileName.Value);
         }
 
-        SushiDebug.Log("LoadCloudDataAndSave");
+        BalloonDebug.Log("LoadCloudDataAndSave");
         BalloonLogManager.Add(BalloonLogEntry.Type.GameCloudLoadEnd, 0, 0);
         SceneManager.LoadScene("Splash");
     }
@@ -204,7 +204,7 @@ public class PlatformSaveUtil
             yield return request.SendWebRequest();
         }
 
-        SushiDebug.LogFormat("ReportCorruptSaveFile report finished. GUID {0}", guid);
+        BalloonDebug.LogFormat("ReportCorruptSaveFile report finished. GUID {0}", guid);
     }
 
     public static int GetInt32FromRemoteSaveDict(RemoteSaveDictionary remoteSaveDict, string key)

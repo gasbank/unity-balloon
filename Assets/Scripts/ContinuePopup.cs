@@ -160,10 +160,7 @@ public class ContinuePopup : MonoBehaviour
         {
             // 에디터에서 테스트하기 쉽도록 에디터에서는 Unity Ads를,
             // 실제 기기에서는 Google AdMob을 쓴다.
-            if (Application.isEditor || Application.isMobilePlatform == false)
-                PlatformUnityAds.TryShowRewardedAd(null, null);
-            else
-                PlatformAdMobAds.TryShowRewardedAd(null, null);
+            PlatformAdMobAds.TryShowRewardedAd(null, null);
         }
     }
 
@@ -197,10 +194,7 @@ public class ContinuePopup : MonoBehaviour
 
     static void ProceedNoThanksWithAds()
     {
-        if (Application.isEditor)
-            PlatformUnityAds.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumberSafe);
-        else
-            PlatformAdMobAds.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumberSafe);
+        PlatformAdMobAds.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumberSafe);
     }
 
     static void ProceedNoThanksWithoutAds()
@@ -213,21 +207,21 @@ public class ContinuePopup : MonoBehaviour
 
     void SetToSlowTimeScale(float newTimeScale)
     {
-        SushiDebug.Log("SetToSlowTimeScale() called.");
+        BalloonDebug.Log("SetToSlowTimeScale() called.");
         Time.timeScale = newTimeScale;
         Time.fixedDeltaTime = defaultFixedDeltaTime * Time.timeScale;
     }
 
     void RevertToDefaultTimeScale()
     {
-        SushiDebug.Log("RevertToDefaultTimeScale() called.");
+        BalloonDebug.Log("RevertToDefaultTimeScale() called.");
         Time.timeScale = 1.0f;
         Time.fixedDeltaTime = defaultFixedDeltaTime * Time.timeScale;
     }
 
     void StopTimeScale()
     {
-        SushiDebug.Log("StopTimeScale() called.");
+        BalloonDebug.Log("StopTimeScale() called.");
         Time.timeScale = 0.0f;
     }
 }

@@ -46,9 +46,9 @@ public static class NativeShare
 #elif UNITY_IOS
 		ShareIOS(body, subject, url, filePaths);
 #else
-        SushiDebug.Log("No sharing set up for this platform.");
-        SushiDebug.Log("Subject: " + subject);
-        SushiDebug.Log("Body: " + body);
+        BalloonDebug.Log("No sharing set up for this platform.");
+        BalloonDebug.Log("Subject: " + subject);
+        BalloonDebug.Log("Body: " + body);
 #endif
     }
 

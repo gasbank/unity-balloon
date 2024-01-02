@@ -124,7 +124,7 @@ public class Stage : MonoBehaviour
             foreach (var rb in allRbs)
                 if (Mathf.Abs(rb.position.y - HotairBalloon.InitialPositionY) < 10)
                 {
-                    SushiDebug.Log($"{rb.gameObject.name} is destroyed since it is close to checkpoint.");
+                    BalloonDebug.Log($"{rb.gameObject.name} is destroyed since it is close to checkpoint.");
                     Destroy(rb.gameObject);
                 }
         }

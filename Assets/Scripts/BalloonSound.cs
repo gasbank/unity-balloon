@@ -148,16 +148,13 @@ public class BalloonSound : MonoBehaviour
 
     public void StopTimeAndMuteAudioMixer()
     {
-        SushiDebug.Log("StopTimeAndMuteAudioMixer() called.");
-        if (Time.timeScale != 1) Debug.LogError("Time.timeScale expected to be 1 at this moment!");
-        Time.timeScale = 0;
+        BalloonDebug.Log("StopTimeAndMuteAudioMixer() called.");
         audioMixer.SetFloat("MasterVolume", -80.0f);
     }
 
     public void ResumeToNormalTimeAndResumeAudioMixer()
     {
-        SushiDebug.Log("ResumeToNormalTimeAndResumeAudioMixer() called.");
-        Time.timeScale = 1;
+        BalloonDebug.Log("ResumeToNormalTimeAndResumeAudioMixer() called.");
         audioMixer.SetFloat("MasterVolume", 0.0f);
     }
 #pragma warning disable CS0414

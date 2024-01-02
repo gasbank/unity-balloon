@@ -27,14 +27,14 @@ public class VignetteImage : MonoBehaviour
 
     public void HideShowContinuePopupImmediatelyButton()
     {
-        SushiDebug.Log("HideShowContinuePopupImmediatelyButton");
+        BalloonDebug.Log("HideShowContinuePopupImmediatelyButton");
         continued = true;
         showContinuePopupImmediatelyButton.gameObject.SetActive(false);
     }
 
     internal void ResetShowContinuePopupImmediatelyButton()
     {
-        SushiDebug.Log("ResetShowContinuePopupImmediatelyButton");
+        BalloonDebug.Log("ResetShowContinuePopupImmediatelyButton");
         continued = false;
     }
 }

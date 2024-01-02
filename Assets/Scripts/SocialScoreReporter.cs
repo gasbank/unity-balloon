@@ -18,18 +18,18 @@ public class SocialScoreReporter : MonoBehaviour
             // 복사해서 써야한다.
             foreach (var kv in new Dictionary<string, long>(queuedScoreDict))
             {
-                SushiDebug.Log($"Social.ReportScore {kv.Key}: {kv.Value}...");
+                BalloonDebug.Log($"Social.ReportScore {kv.Key}: {kv.Value}...");
                 if (!Application.isEditor)
                 {
                     Social.ReportScore(kv.Value, kv.Key, success =>
                     {
-                        SushiDebug.Log($"Social.ReportScore {kv.Key}: {kv.Value} (Result:{success})");
+                        BalloonDebug.Log($"Social.ReportScore {kv.Key}: {kv.Value} (Result:{success})");
                         if (success) successfullyReportedScoreDict[kv.Key] = kv.Value;
                     });
                 }
                 else
                 {
-                    SushiDebug.Log($"Social.ReportScore {kv.Key}: {kv.Value} (Result:EDITOR MODE)");
+                    BalloonDebug.Log($"Social.ReportScore {kv.Key}: {kv.Value} (Result:EDITOR MODE)");
                     successfullyReportedScoreDict[kv.Key] = kv.Value;
                 }
 
@@ -44,7 +44,7 @@ public class SocialScoreReporter : MonoBehaviour
     {
         if (Application.isEditor)
         {
-            //SushiDebug.Log($"Editor Mode: Try to queue score... {key}: {value} ({desc})");
+            //BalloonDebug.Log($"Editor Mode: Try to queue score... {key}: {value} ({desc})");
         }
 
         long oldValue = 0;
@@ -58,8 +58,8 @@ public class SocialScoreReporter : MonoBehaviour
             {
                 if (notifyCheatModeOnlyOnce == false)
                 {
-                    SushiDebug.Log("### Cheat Mode was turned on (notified only at the first time)");
-                    SushiDebug.Log($"ReportScore: {key}: {value} ({desc})");
+                    BalloonDebug.Log("### Cheat Mode was turned on (notified only at the first time)");
+                    BalloonDebug.Log($"ReportScore: {key}: {value} ({desc})");
                     notifyCheatModeOnlyOnce = true;
                 }
 

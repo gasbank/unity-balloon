@@ -14,6 +14,6 @@ public class LimitCubeGroup : MonoBehaviour
         var cubePosX = width / 2 + boundThickness;
         rightCube.transform.position = Vector3.right * cubePosX;
         leftCube.transform.position = -Vector3.right * cubePosX;
-        //SushiDebug.Log($"LimitCubeGroup.SetWidth({width})");
+        //BalloonDebug.Log($"LimitCubeGroup.SetWidth({width})");
     }
 }

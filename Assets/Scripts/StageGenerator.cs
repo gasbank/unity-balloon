@@ -47,7 +47,7 @@ public class StageGenerator : MonoBehaviour
     {
         if (rebuild)
         {
-            SushiDebug.Log("Rebuilding stage...");
+            BalloonDebug.Log("Rebuilding stage...");
             foreach (var t in transform.Cast<Transform>().ToArray()) Destroy(t.gameObject);
             var yOffset = 0.0f;
             if (stageSegmentPrefabs != null)
@@ -80,7 +80,7 @@ public class StageGenerator : MonoBehaviour
         var isPrefab = PrefabUtility.GetPrefabAssetType(gameObject) != PrefabAssetType.NotAPrefab;
         if (isPrefab == false && rebuild)
         {
-            SushiDebug.Log("Rebuilding stage... (Editor)");
+            BalloonDebug.Log("Rebuilding stage... (Editor)");
             foreach (var t in transform.Cast<Transform>().ToArray()) DestroyImmediate(t.gameObject);
             var yOffset = 0.0f;
             if (stageSegmentPrefabs != null)
@@ -114,7 +114,7 @@ public class StageGenerator : MonoBehaviour
     [ContextMenu("Generate New Random Stage")]
     void GenerateNewRandomStage()
     {
-        SushiDebug.Log($"Generating stage with random seed {stageSeed}");
+        BalloonDebug.Log($"Generating stage with random seed {stageSeed}");
         var selectedSegments = new List<StageSegment>();
         var oldRandomState = Random.state;
         Random.InitState(stageSeed);

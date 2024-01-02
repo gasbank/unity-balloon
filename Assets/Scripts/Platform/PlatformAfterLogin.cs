@@ -99,7 +99,7 @@ public class PlatformAfterLogin : MonoBehaviour
         var id = Application.platform == RuntimePlatform.Android ? "CgkI87XJzNYNEAIQAQ" : "finishTutorial1";
         Social.ReportProgress(id, 100.0f, success =>
         {
-            SushiDebug.LogFormat("Unlock achievement 1 result: {0}", success);
+            BalloonDebug.LogFormat("Unlock achievement 1 result: {0}", success);
             //rootCanvasGroup.interactable = true;
         });
     }
@@ -110,7 +110,7 @@ public class PlatformAfterLogin : MonoBehaviour
         var id = Application.platform == RuntimePlatform.Android ? "CgkI87XJzNYNEAIQAQ" : "share_screenshot2";
         Social.ReportProgress(id, 100.0f, success =>
         {
-            SushiDebug.LogFormat("Unlock achievement 2 result: {0}", success);
+            BalloonDebug.LogFormat("Unlock achievement 2 result: {0}", success);
             //rootCanvasGroup.interactable = true;
         });
     }
@@ -121,7 +121,7 @@ public class PlatformAfterLogin : MonoBehaviour
         leaderboardScore1++;
         Social.ReportScore(leaderboardScore1, "CgkI87XJzNYNEAIQAw", success =>
         {
-            SushiDebug.LogFormat("PostLeaderboardScore1 result: {0}, score: {1}", success, leaderboardScore1);
+            BalloonDebug.LogFormat("PostLeaderboardScore1 result: {0}, score: {1}", success, leaderboardScore1);
             //rootCanvasGroup.interactable = true;
         });
     }
@@ -132,7 +132,7 @@ public class PlatformAfterLogin : MonoBehaviour
         leaderboardScore2++;
         Social.ReportScore(leaderboardScore2, "CgkI87XJzNYNEAIQBA", success =>
         {
-            SushiDebug.LogFormat("PostLeaderboardScore2 result: {0}, score: {1}", success, leaderboardScore2);
+            BalloonDebug.LogFormat("PostLeaderboardScore2 result: {0}, score: {1}", success, leaderboardScore2);
             //rootCanvasGroup.interactable = true;
         });
     }
@@ -178,13 +178,13 @@ public class PlatformAfterLogin : MonoBehaviour
         if (status == SelectUIStatus.SavedGameSelected)
         {
             // handle selected game save
-            SushiDebug.LogFormat("Save game selection selected! Selected save filename: {0}", game.Filename);
+            BalloonDebug.LogFormat("Save game selection selected! Selected save filename: {0}", game.Filename);
             ShortMessage.instance.Show("ERROR: Not supported");
         }
         else
         {
             // handle cancel or error
-            SushiDebug.LogFormat("Save game selection canceled! - {0}", status);
+            BalloonDebug.LogFormat("Save game selection canceled! - {0}", status);
         }
 
         //rootCanvasGroup.interactable = true;
@@ -233,7 +233,7 @@ public class PlatformAfterLogin : MonoBehaviour
         {
             // handle reading or writing of saved game.
 
-            SushiDebug.LogFormat("Save game open (write) success! Filename: {0}", game.Filename);
+            BalloonDebug.LogFormat("Save game open (write) success! Filename: {0}", game.Filename);
 
             daysPlayed++;
 
@@ -243,7 +243,7 @@ public class PlatformAfterLogin : MonoBehaviour
         else
         {
             // handle error
-            SushiDebug.LogFormat("Save game open (write) failed! - {0}", status);
+            BalloonDebug.LogFormat("Save game open (write) failed! - {0}", status);
             //rootCanvasGroup.interactable = true;
         }
     }
@@ -254,7 +254,7 @@ public class PlatformAfterLogin : MonoBehaviour
         {
             // handle reading or writing of saved game.
 
-            SushiDebug.LogFormat("Save game open (read) success! Filename: {0}", game.Filename);
+            BalloonDebug.LogFormat("Save game open (read) success! Filename: {0}", game.Filename);
 
             daysPlayed++;
 
@@ -263,7 +263,7 @@ public class PlatformAfterLogin : MonoBehaviour
         else
         {
             // handle error
-            SushiDebug.LogFormat("Save game open (read) failed! - {0}", status);
+            BalloonDebug.LogFormat("Save game open (read) failed! - {0}", status);
 
             //rootCanvasGroup.interactable = true;
         }
@@ -300,11 +300,11 @@ public class PlatformAfterLogin : MonoBehaviour
         if (status == SavedGameRequestStatus.Success)
             // handle reading or writing of saved game.
 
-            SushiDebug.LogFormat("OnSavedGameWritten success!");
+            BalloonDebug.LogFormat("OnSavedGameWritten success!");
         else
             // handle error
 
-            SushiDebug.LogFormat("OnSavedGameWritten failed! - {0}", status);
+            BalloonDebug.LogFormat("OnSavedGameWritten failed! - {0}", status);
 
         //rootCanvasGroup.interactable = true;
     }
@@ -334,11 +334,11 @@ public class PlatformAfterLogin : MonoBehaviour
         if (status == SavedGameRequestStatus.Success)
             // handle processing the byte array data
 
-            SushiDebug.LogFormat("OnSavedGameDataRead success! - Data: " + Encoding.UTF8.GetString(data));
+            BalloonDebug.LogFormat("OnSavedGameDataRead success! - Data: " + Encoding.UTF8.GetString(data));
         else
             // handle error
 
-            SushiDebug.LogFormat("OnSavedGameDataRead failed! - {0}", status);
+            BalloonDebug.LogFormat("OnSavedGameDataRead failed! - {0}", status);
 
         //rootCanvasGroup.interactable = true;
     }
@@ -358,13 +358,13 @@ public class PlatformAfterLogin : MonoBehaviour
             var savedGameClient = PlayGamesPlatform.Instance.SavedGame;
             savedGameClient.Delete(game);
 
-            SushiDebug.LogFormat("DeleteSavedGame success!");
+            BalloonDebug.LogFormat("DeleteSavedGame success!");
         }
         else
         {
             // handle error
 
-            SushiDebug.LogFormat("DeleteSavedGame failed! - {0}", status);
+            BalloonDebug.LogFormat("DeleteSavedGame failed! - {0}", status);
         }
     }
 #endif

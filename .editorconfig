@@ -1,0 +1,61 @@
+
+[*.{cg,cginc,compute,hlsl,hlsli,hlslinc,usf,ush}]
+indent_style = tab
+indent_size = tab
+tab_width = 4
+
+[*]
+
+# Microsoft .NET properties
+csharp_indent_braces = false
+csharp_new_line_before_catch = true
+csharp_new_line_before_else = true
+csharp_new_line_before_finally = true
+csharp_new_line_before_members_in_object_initializers = false
+csharp_new_line_before_open_brace = all
+csharp_preserve_single_line_blocks = true
+csharp_space_after_cast = true
+
+# ReSharper properties
+resharper_align_multiline_statement_conditions = false
+resharper_blank_lines_after_block_statements = 0
+resharper_blank_lines_after_start_comment = 0
+resharper_blank_lines_after_using_list = 0
+resharper_blank_lines_around_property = 0
+resharper_blank_lines_around_single_line_type = 1
+resharper_continuous_line_indent = none
+resharper_cpp_indent_style = tab
+resharper_cpp_keep_blank_lines_in_code = 100
+resharper_cpp_max_line_length = 153
+resharper_cpp_space_after_keywords_in_control_flow_statements = false
+resharper_csharp_blank_lines_around_field = 0
+resharper_csharp_blank_lines_around_invocable = 0
+resharper_csharp_blank_lines_around_type = 0
+resharper_csharp_max_line_length = 458
+resharper_csharp_space_around_shift_op = false
+resharper_csharp_wrap_ternary_expr_style = wrap_if_long
+resharper_indent_preprocessor_directives = none
+resharper_indent_preprocessor_if = do_not_change
+resharper_indent_preprocessor_other = do_not_change
+resharper_int_align_comments = true
+resharper_int_align_declaration_names = true
+resharper_keep_existing_enum_arrangement = false
+resharper_keep_existing_expr_member_arrangement = true
+resharper_max_array_initializer_elements_on_line = 2
+resharper_max_initializer_elements_on_line = 2
+resharper_new_line_before_while = true
+resharper_outdent_statement_labels = true
+resharper_place_expr_accessor_on_single_line = true
+resharper_place_expr_property_on_single_line = true
+resharper_place_simple_embedded_statement_on_same_line = false
+resharper_place_simple_initializer_on_single_line = false
+resharper_remove_blank_lines_near_braces_in_code = false
+resharper_remove_blank_lines_near_braces_in_declarations = false
+resharper_simple_embedded_statement_style = on_single_line
+resharper_space_within_empty_braces = false
+resharper_toplevel_function_definition_return_type_style = on_single_line
+resharper_wrap_after_expression_lbrace = false
+resharper_wrap_before_binary_opsign = false
+resharper_wrap_before_expression_rbrace = false
+resharper_wrap_chained_binary_expressions = wrap_if_long
+resharper_wrap_object_and_collection_initializer_style = chop_always

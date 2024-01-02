@@ -38,7 +38,7 @@ public class Subcanvas : MonoBehaviour
 
     public void Close()
     {
-        SushiDebug.Log("Subcanvas.Close()");
+        BalloonDebug.Log("Subcanvas.Close()");
         if (canvas.enabled)
         {
             canvas.enabled = false;

@@ -2,12 +2,12 @@
 {
     public static void RegisterAllRepeatingNotifications()
     {
-        SushiDebug.Log("RegisterAllRepeatingNotifications");
+        BalloonDebug.Log("RegisterAllRepeatingNotifications");
     }
 
     public static void RemoveAllRepeatingNotifications()
     {
         Platform.instance.ClearAllNotifications();
-        SushiDebug.Log("RemoveAllRepeatingNotifications");
+        BalloonDebug.Log("RemoveAllRepeatingNotifications");
     }
 }

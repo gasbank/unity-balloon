@@ -55,7 +55,7 @@ public class PlatformIos : IPlatformBase
     {
         if (!Social.localUser.authenticated)
         {
-            SushiDebug.LogFormat("GetCloudSavedAccountData: not authenticated");
+            BalloonDebug.LogFormat("GetCloudSavedAccountData: not authenticated");
             if (onPeekResult != null) onPeekResult(CloudMetadata.Invalid);
             return;
         }
@@ -143,7 +143,7 @@ public class PlatformIos : IPlatformBase
 
 #if UNITY_IOS
         string text = string.Format("{0}\n{1}", title, body);
-        SushiDebug.Log("Schedule Local Notification");
+        BalloonDebug.Log("Schedule Local Notification");
         //UnityEngine.iOS.NotificationServices.ClearLocalNotifications();
         //UnityEngine.iOS.NotificationServices.CancelAllLocalNotifications();
         ClearAllNotifications();
@@ -194,11 +194,11 @@ public class PlatformIos : IPlatformBase
     {
         if (result == "OK")
         {
-            SushiDebug.LogFormat("OnCloudLoadResult: data length {0} bytes", data != null ? data.Length : 0);
+            BalloonDebug.LogFormat("OnCloudLoadResult: data length {0} bytes", data != null ? data.Length : 0);
             // 메타데이터 조회의 경우와 실제 세이브 데이터 로딩의 경우를 나눠서 처리
             if (onPeekResultSave != null)
             {
-                SushiDebug.Log("OnCloudLoadResult: onPeekResultSave valid");
+                BalloonDebug.Log("OnCloudLoadResult: onPeekResultSave valid");
                 var cloudMetadata = CloudMetadata.Invalid;
                 if (data == null || data.Length == 0)
                 {
@@ -233,14 +233,14 @@ public class PlatformIos : IPlatformBase
             }
             else
             {
-                SushiDebug.Log("OnCloudLoadResult: onPeekResultSave empty. data load...");
+                BalloonDebug.Log("OnCloudLoadResult: onPeekResultSave empty. data load...");
                 if (data == null || data.Length == 0)
                 {
                     PlatformSaveUtil.ShowLoadErrorPopup("OnCloudLoadResult: Cloud save data corrupted");
                 }
                 else
                 {
-                    SushiDebug.LogFormat("OnCloudLoadResult: success! - Data size: {0} bytes", data.Length);
+                    BalloonDebug.LogFormat("OnCloudLoadResult: success! - Data size: {0} bytes", data.Length);
                     var remoteSaveDict = PlatformSaveUtil.DeserializeSaveData(data);
                     PlatformSaveUtil.LoadDataAndLoadSplashScene(remoteSaveDict);
                 }
@@ -279,7 +279,7 @@ public class PlatformIos : IPlatformBase
         // Game Center 로그인 성공/실패 유무에 따른 플래그 업데이트
         PlayerPrefs.SetInt(GAME_CENTER_LOGIN_FAILED_FLAG_PREF_KEY, b ? 0 : 1);
 
-        SushiDebug.LogFormat("iOS Game Center Login Result: {0} / Reason: {1}", b, reason);
+        BalloonDebug.LogFormat("iOS Game Center Login Result: {0} / Reason: {1}", b, reason);
 
         // 회수 제한 마지막 기회임을 체크해서 다시는 시도하지 않도록 한다.
         // 그런데... reason은 유저가 읽을 수 있도록 시스템 언어 설정에 따라

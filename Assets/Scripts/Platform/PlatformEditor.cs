@@ -59,10 +59,10 @@ public class PlatformEditor : IPlatformBase
 
     public void ShareScreenshot(byte[] pngData)
     {
-        SushiDebug.LogFormat("ShareScreenshot: pngData length {0} bytes", pngData.Length);
+        BalloonDebug.LogFormat("ShareScreenshot: pngData length {0} bytes", pngData.Length);
         var screenshotFileName = "screenshot.png";
         File.WriteAllBytes(screenshotFileName, pngData);
-        SushiDebug.Log($"ShareScreenshot: successfully written to {screenshotFileName}");
+        BalloonDebug.Log($"ShareScreenshot: successfully written to {screenshotFileName}");
     }
 
     public void GetCloudLastSavedMetadataAsync(Action<CloudMetadata> onPeekResult)
@@ -102,12 +102,12 @@ public class PlatformEditor : IPlatformBase
 
     public void RegisterAllNotifications(string title, string body, string largeIcon)
     {
-        //SushiDebug.LogFormat("RegisterAllNotifications: title={0}, body={1}, largeIcon={2}", title, body, largeIcon);
+        //BalloonDebug.LogFormat("RegisterAllNotifications: title={0}, body={1}, largeIcon={2}", title, body, largeIcon);
     }
 
     public void ClearAllNotifications()
     {
-        //SushiDebug.LogFormat("ClearAllNotifications");
+        //BalloonDebug.LogFormat("ClearAllNotifications");
     }
 
     public void OnCloudSaveResult(string result)
@@ -127,7 +127,7 @@ public class PlatformEditor : IPlatformBase
 
     public void RegisterSingleNotification(string title, string body, int afterMs, string largeIcon)
     {
-        SushiDebug.LogFormat("RegisterSingleNotification: title={0}, body={1}, afterMs={2}", title, body, afterMs);
+        BalloonDebug.LogFormat("RegisterSingleNotification: title={0}, body={1}, afterMs={2}", title, body, afterMs);
     }
 
     public string GetAccountTypeText()

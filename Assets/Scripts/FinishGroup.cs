@@ -13,7 +13,7 @@ public class FinishGroup : MonoBehaviour
         {
             canvas.enabled = value;
 
-            SushiDebug.Log(
+            BalloonDebug.Log(
                 $"FinishGroup.Visible={value}, LastPlayedStageNumber={Bootstrap.LastPlayedStageNumber}, NextStageNumber={NextStageNumber}");
 
             // 이게 보였다는 것은 판을 깼다는 말.
@@ -43,10 +43,7 @@ public class FinishGroup : MonoBehaviour
         }
         else
         {
-            if (Application.isEditor || Application.isMobilePlatform == false)
-                PlatformUnityAds.TryShowInterstitialAd(null, null, NextStageNumber);
-            else
-                PlatformAdMobAds.TryShowInterstitialAd(null, null, NextStageNumber);
+            PlatformAdMobAds.TryShowInterstitialAd(null, null, NextStageNumber);
         }
     }
 }

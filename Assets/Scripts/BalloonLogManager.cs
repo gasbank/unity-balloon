@@ -207,14 +207,14 @@ public class BalloonLogManager : MonoBehaviour, BalloonLogViewer.IBalloonLogSour
                 var patchData = JsonUtility.ToJson(saveFile);
                 using (var patchContent = new StringContent(patchData))
                 {
-                    SushiDebug.Log($"HttpClient PATCH TO {url}...");
+                    BalloonDebug.Log($"HttpClient PATCH TO {url}...");
 
                     // PATCH 시작하고 기다린다.
                     var patchTask = await httpClient.PatchAsync(new Uri(url), patchContent);
 
-                    SushiDebug.Log($"HttpClient Result: {patchTask.ReasonPhrase}");
+                    BalloonDebug.Log($"HttpClient Result: {patchTask.ReasonPhrase}");
 
-                    if (patchTask.IsSuccessStatusCode) SushiDebug.Log("Play log uploaded successfully.");
+                    if (patchTask.IsSuccessStatusCode) BalloonDebug.Log("Play log uploaded successfully.");
                     //var msg = string.Format("\\업로드가 성공적으로 완료됐습니다.\\n\\n업로드 코드: {0}\\n용량: {1:n0}바이트\\nTS: {2}\\n\\n<color=brown>본 화면의 스크린샷을 찍어 공식 카페에 버그 신고를 부탁 드립니다.</color>\\n\\n업로드된 데이터를 분석 후, 카페를 통해 이후 진행을 안내드리겠습니다.\\n\\n공식 카페로 이동하거나, 안내 받은 복구 코드를 입력하세요.".Localized(), errorDeviceId, patchData.Length, saveFile.fields.uploadDate.timestampValue);
                     //ConfirmPopup.instance.OpenTwoButtonPopup(msg, () => ConfigPopup.instance.OpenCommunity(), () => SaveLoadManager.EnterRecoveryCode(exceptionList, st), "\\업로드 완료".Localized(), "\\공식 카페 이동".Localized(), "\\복구 코드 입력".Localized());
                     else

@@ -150,7 +150,7 @@ public class HotairBalloon : MonoBehaviour
         get => initialPositionY;
         set
         {
-            SushiDebug.Log($"Setting initial position Y: {value}...");
+            BalloonDebug.Log($"Setting initial position Y: {value}...");
             initialPositionY = value;
         }
     }

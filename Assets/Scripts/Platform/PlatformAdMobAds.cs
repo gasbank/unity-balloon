@@ -20,8 +20,8 @@ public class PlatformAdMobAds
         {
             PlatformAdMobAds.shopProductEntry = shopProductEntry;
             PlatformAdMobAds.shopProductData = shopProductData;
-            SushiDebug.LogFormat("ShowRewardedAd: shopProductEntry: {0}", shopProductEntry);
-            SushiDebug.LogFormat("ShowRewardedAd: shopProductData: {0}", shopProductData);
+            BalloonDebug.LogFormat("ShowRewardedAd: shopProductEntry: {0}", shopProductEntry);
+            BalloonDebug.LogFormat("ShowRewardedAd: shopProductData: {0}", shopProductData);
             rewardBasedVideo.Show();
         }
         else

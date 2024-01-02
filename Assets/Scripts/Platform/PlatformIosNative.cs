@@ -63,10 +63,10 @@ public class PlatformIosNative : MonoBehaviour
         var notificationDate1800 = notificationDate0000.AddHours(18);
         if (notificationDate1200 < now) notificationDate1200 = notificationDate1200.AddDays(1);
         if (notificationDate1800 < now) notificationDate1800 = notificationDate1800.AddDays(1);
-        SushiDebug.LogFormat("Notification Time 1: {0}", notificationDate1200);
-        SushiDebug.LogFormat("Notification Time 2: {0}", notificationDate1800);
+        BalloonDebug.LogFormat("Notification Time 1: {0}", notificationDate1200);
+        BalloonDebug.LogFormat("Notification Time 2: {0}", notificationDate1800);
 #if UNITY_IOS
-		SushiDebug.Log("Schedule Local Notification");
+		BalloonDebug.Log("Schedule Local Notification");
 		//UnityEngine.iOS.NotificationServices.ClearLocalNotifications();
 		//UnityEngine.iOS.NotificationServices.CancelAllLocalNotifications();
 		#if !UNITY_EDITOR
@@ -93,12 +93,12 @@ public class PlatformIosNative : MonoBehaviour
 
     void OnIosSaveResult(string result)
     {
-        SushiDebug.LogFormat("OnIosSaveResult: {0}", result);
+        BalloonDebug.LogFormat("OnIosSaveResult: {0}", result);
     }
 
     void OnIosLoadResult(string result)
     {
-        SushiDebug.LogFormat("OnIosLoadResult: {0}", result);
+        BalloonDebug.LogFormat("OnIosLoadResult: {0}", result);
     }
 
     public void CaptureScreenshot()
@@ -114,7 +114,7 @@ public class PlatformIosNative : MonoBehaviour
             ScreenCapture.CaptureScreenshot(Application.persistentDataPath + "/" + filename);
         else
             ScreenCapture.CaptureScreenshot(filename);
-        SushiDebug.LogFormat("Captured!");
+        BalloonDebug.LogFormat("Captured!");
         var info = new FileInfo(Application.persistentDataPath + "/" + filename);
         while (info == null || info.Exists == false)
         {
@@ -122,7 +122,7 @@ public class PlatformIosNative : MonoBehaviour
             yield return null;
         }
 
-        SushiDebug.LogFormat("Screenshot saved successfully! Size={0}, Path={1}", info.Length, info.FullName);
+        BalloonDebug.LogFormat("Screenshot saved successfully! Size={0}, Path={1}", info.Length, info.FullName);
 #if !UNITY_EDITOR
 		NativeShare.Share("body", info.FullName, null, "subject", "image/png", true, "Select sharing app");
 #endif

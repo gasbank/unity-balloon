@@ -73,7 +73,7 @@ public class DataReloader {
         textRefList = textRefList.Distinct().ToList();
         textRefList.Sort();
         File.WriteAllLines("textref.txt", textRefList.ToArray());
-        SushiDebug.LogFormat("textref.txt written: {0} items", textRefList.Count);
+        BalloonDebug.LogFormat("textref.txt written: {0} items", textRefList.Count);
     }
 
     [MenuItem("Balloon/Print All Text Sizes")]

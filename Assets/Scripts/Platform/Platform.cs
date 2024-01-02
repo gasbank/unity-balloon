@@ -59,11 +59,11 @@ public class Platform
         {
             ProgressMessage.instance.Close();
 
-            SushiDebug.LogFormat("prevAccountLevel = {0}", cloudMetadata.level);
-            SushiDebug.LogFormat("prevAccountLevelExp = {0}", cloudMetadata.levelExp);
-            SushiDebug.LogFormat("prevAccountGem = {0}", cloudMetadata.gem);
-            SushiDebug.LogFormat("prevAccountRiceRate = {0}", cloudMetadata.riceRate);
-            SushiDebug.LogFormat("prevSaveDate = {0}", cloudMetadata.saveDate);
+            BalloonDebug.LogFormat("prevAccountLevel = {0}", cloudMetadata.level);
+            BalloonDebug.LogFormat("prevAccountLevelExp = {0}", cloudMetadata.levelExp);
+            BalloonDebug.LogFormat("prevAccountGem = {0}", cloudMetadata.gem);
+            BalloonDebug.LogFormat("prevAccountRiceRate = {0}", cloudMetadata.riceRate);
+            BalloonDebug.LogFormat("prevSaveDate = {0}", cloudMetadata.saveDate);
 
             if (cloudMetadata.level >= 0 && cloudMetadata.levelExp >= 0 && cloudMetadata.saveDate >= 0)
             {
@@ -118,11 +118,11 @@ public class Platform
         {
             ProgressMessage.instance.Close();
 
-            SushiDebug.LogFormat("prevAccountLevel = {0}", cloudMetadata.level);
-            SushiDebug.LogFormat("prevAccountLevelExp = {0}", cloudMetadata.levelExp);
-            SushiDebug.LogFormat("prevAccountGem = {0}", cloudMetadata.gem);
-            SushiDebug.LogFormat("prevAccountRiceRate = {0}", cloudMetadata.riceRate);
-            SushiDebug.LogFormat("prevSaveDate = {0}", cloudMetadata.saveDate);
+            BalloonDebug.LogFormat("prevAccountLevel = {0}", cloudMetadata.level);
+            BalloonDebug.LogFormat("prevAccountLevelExp = {0}", cloudMetadata.levelExp);
+            BalloonDebug.LogFormat("prevAccountGem = {0}", cloudMetadata.gem);
+            BalloonDebug.LogFormat("prevAccountRiceRate = {0}", cloudMetadata.riceRate);
+            BalloonDebug.LogFormat("prevSaveDate = {0}", cloudMetadata.saveDate);
 
             if (cloudMetadata.level >= 0 && cloudMetadata.levelExp >= 0 && cloudMetadata.saveDate >= 0)
             {

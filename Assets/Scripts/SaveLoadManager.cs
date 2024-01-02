@@ -58,10 +58,10 @@ public class SaveLoadManager
     {
         var oldSaveDataSlot = GetSaveSlot();
         var newSaveDataSlot = PositiveMod(oldSaveDataSlot + 1, maxSaveDataSlot);
-        SushiDebug.Log($"Increase save data slot from {oldSaveDataSlot} to {newSaveDataSlot}...");
+        BalloonDebug.Log($"Increase save data slot from {oldSaveDataSlot} to {newSaveDataSlot}...");
         PlayerPrefs.SetInt(saveDataSlotKey, newSaveDataSlot);
         PlayerPrefs.Save();
-        SushiDebug.Log($"Increase save data slot from {oldSaveDataSlot} to {newSaveDataSlot}... OKAY");
+        BalloonDebug.Log($"Increase save data slot from {oldSaveDataSlot} to {newSaveDataSlot}... OKAY");
     }
 
     // 저장 슬롯 감소 (불러오기 실패 후 항상 1씩 감소되어야 함)
@@ -69,10 +69,10 @@ public class SaveLoadManager
     {
         var oldSaveDataSlot = GetSaveSlot();
         var newSaveDataSlot = PositiveMod(oldSaveDataSlot - 1, maxSaveDataSlot);
-        SushiDebug.Log($"Decrease save data slot from {oldSaveDataSlot} to {newSaveDataSlot}...");
+        BalloonDebug.Log($"Decrease save data slot from {oldSaveDataSlot} to {newSaveDataSlot}...");
         PlayerPrefs.SetInt(saveDataSlotKey, newSaveDataSlot);
         PlayerPrefs.Save();
-        SushiDebug.Log($"Decrease save data slot from {oldSaveDataSlot} to {newSaveDataSlot}... OKAY");
+        BalloonDebug.Log($"Decrease save data slot from {oldSaveDataSlot} to {newSaveDataSlot}... OKAY");
     }
 
     static void ResetSaveDataSlotAndWrite()
@@ -85,7 +85,7 @@ public class SaveLoadManager
     internal static void DeleteSaveFileAndReloadScene()
     {
         // From MSDN: If the file to be deleted does not exist, no exception is thrown.
-        SushiDebug.Log("DeleteSaveFileAndReloadScene");
+        BalloonDebug.Log("DeleteSaveFileAndReloadScene");
         DeleteAllSaveFiles();
 
         SceneManager.LoadScene("Splash");
@@ -112,7 +112,7 @@ public class SaveLoadManager
         }
 
         var balloonSaveData2 = new BalloonSaveData2();
-        SushiDebug.LogFormat("Saving...");
+        BalloonDebug.LogFormat("Saving...");
         balloonSaveData2.version = LatestVersion;
 
         return SaveBalloonSaveData2(balloonSaveData2);
@@ -122,12 +122,12 @@ public class SaveLoadManager
     {
         var binFormatter = new BinaryFormatter();
         var memStream = new MemoryStream();
-        //SushiDebug.LogFormat("Start Saving JSON Data: {0}", JsonUtility.ToJson(balloonSaveData2));
+        //BalloonDebug.LogFormat("Start Saving JSON Data: {0}", JsonUtility.ToJson(balloonSaveData2));
         binFormatter.Serialize(memStream, balloonSaveData2);
         var saveDataArray = memStream.ToArray();
-        SushiDebug.LogFormat("Saving path: {0}", SaveFileName);
+        BalloonDebug.LogFormat("Saving path: {0}", SaveFileName);
         if (lastSaveDataArray != null && lastSaveDataArray.SequenceEqual(saveDataArray))
-            SushiDebug.LogFormat("Saving skipped since there is no difference made compared to last time saved.");
+            BalloonDebug.LogFormat("Saving skipped since there is no difference made compared to last time saved.");
         else
             try
             {
@@ -136,16 +136,16 @@ public class SaveLoadManager
 
                 // 마지막 저장 데이터 갱신
                 lastSaveDataArray = saveDataArray;
-                SushiDebug.Log($"{SaveFileName} Saved. (written to disk)");
+                BalloonDebug.Log($"{SaveFileName} Saved. (written to disk)");
 
                 // 유저 서비스를 위해 필요할 수도 있으니까 개발 중일 때는 base64 인코딩 버전 세이브 파일도 저장한다.
                 // 실서비스 버전에서는 불필요한 기능이다.
                 if (Application.isEditor)
                 {
                     var base64Path = SaveFileName + ".base64.txt";
-                    SushiDebug.LogFormat("Saving path (base64): {0}", base64Path);
+                    BalloonDebug.LogFormat("Saving path (base64): {0}", base64Path);
                     File.WriteAllText(base64Path, Convert.ToBase64String(saveDataArray));
-                    SushiDebug.Log($"{base64Path} Saved. (written to disk)");
+                    BalloonDebug.Log($"{base64Path} Saved. (written to disk)");
                 }
 
                 IncreaseSaveDataSlotAndWrite();
@@ -267,15 +267,15 @@ public class SaveLoadManager
                 $"[CRITICAL ERROR] Latest version {LatestVersion} not match save file latest version field {balloonSaveData2.version}!!!");
         }
 
-        //SushiDebug.LogFormat("Start Loading JSON Data: {0}", JsonUtility.ToJson(balloonSaveData2));
+        //BalloonDebug.LogFormat("Start Loading JSON Data: {0}", JsonUtility.ToJson(balloonSaveData2));
 
 
         // 인앱 상품 구매 내역 디버그 정보
-        SushiDebug.Log("=== Purchased Begin ===");
+        BalloonDebug.Log("=== Purchased Begin ===");
         if (balloonSaveData2.purchasedProductDict != null)
             foreach (var kv in balloonSaveData2.purchasedProductDict)
-                SushiDebug.Log($"PURCHASED (THANK YOU!!!): {kv.Key} = {kv.Value}");
-        SushiDebug.Log("=== Purchased End ===");
+                BalloonDebug.Log($"PURCHASED (THANK YOU!!!): {kv.Key} = {kv.Value}");
+        BalloonDebug.Log("=== Purchased End ===");
 
         BalloonSpawner.instance.loadedAtLeastOnce = true;
         BalloonLogManager.Add(BalloonLogEntry.Type.GameLoaded, BalloonSpawner.instance.LastBalloonLevel,
@@ -293,7 +293,7 @@ public class SaveLoadManager
         // Version 1 --> 2
         if (balloonSaveData2.version == 1)
         {
-            SushiDebug.LogFormat("Upgrading save file version from {0} to {1}", balloonSaveData2.version,
+            BalloonDebug.LogFormat("Upgrading save file version from {0} to {1}", balloonSaveData2.version,
                 balloonSaveData2.version + 1);
             balloonSaveData2.version++;
         }
@@ -304,11 +304,11 @@ public class SaveLoadManager
         var memStream = new MemoryStream();
         var binFormatter = new BinaryFormatter();
         //binFormatter.Binder = new BalloonSaveDataSerializationBinder();
-        SushiDebug.Log($"Reading the save file {LoadFileName}...");
+        BalloonDebug.Log($"Reading the save file {LoadFileName}...");
         try
         {
             var saveDataArray = File.ReadAllBytes(LoadFileName);
-            SushiDebug.Log($"Loaded on memory. ({saveDataArray.Length:n0} bytes)");
+            BalloonDebug.Log($"Loaded on memory. ({saveDataArray.Length:n0} bytes)");
             memStream.Write(saveDataArray, 0, saveDataArray.Length);
         }
         catch (FileNotFoundException)
@@ -417,12 +417,12 @@ public class SaveLoadManager
 
     static void ProcessNewUser(BalloonSpawner spawner, Exception e)
     {
-        SushiDebug.LogFormat("Load: Save file not found: {0}", e.ToString());
+        BalloonDebug.LogFormat("Load: Save file not found: {0}", e.ToString());
         ResetData(spawner);
-        SushiDebug.Log("Your OS language is " + Application.systemLanguage);
+        BalloonDebug.Log("Your OS language is " + Application.systemLanguage);
         ChangeLanguageBySystemLanguage();
         ShowFirstInstallWelcomePopup();
-        SushiDebug.Log("loadedAtLeastOnce set to true");
+        BalloonDebug.Log("loadedAtLeastOnce set to true");
         spawner.loadedAtLeastOnce = true;
     }
 

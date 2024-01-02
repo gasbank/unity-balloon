@@ -35,7 +35,7 @@ public class PlatformAndroid : IPlatformBase
     {
         if (!Social.localUser.authenticated)
         {
-            SushiDebug.LogFormat("GetCloudSavedAccountData: not authenticated");
+            BalloonDebug.LogFormat("GetCloudSavedAccountData: not authenticated");
             onPeekResult(CloudMetadata.Invalid);
             return;
         }
@@ -53,7 +53,7 @@ public class PlatformAndroid : IPlatformBase
                     {
                         // handle reading or writing of saved game.
 
-                        SushiDebug.LogFormat("GetCloudSavedAccountData: Save game open (read) success! Filename: {0}",
+                        BalloonDebug.LogFormat("GetCloudSavedAccountData: Save game open (read) success! Filename: {0}",
                             game.Filename);
 
                         savedGameClient.ReadBinaryData(game, (status2, data2) =>
@@ -61,7 +61,7 @@ public class PlatformAndroid : IPlatformBase
                             if (status == SavedGameRequestStatus.Success)
                             {
                                 // handle processing the byte array data
-                                SushiDebug.LogFormat("GetCloudSavedAccountData success! - Data size: {0} bytes",
+                                BalloonDebug.LogFormat("GetCloudSavedAccountData success! - Data size: {0} bytes",
                                     data2.Length);
                                 try
                                 {
@@ -83,13 +83,13 @@ public class PlatformAndroid : IPlatformBase
                                 }
                                 catch
                                 {
-                                    SushiDebug.LogFormat("GetCloudSavedAccountData: Exception at deserialization");
+                                    BalloonDebug.LogFormat("GetCloudSavedAccountData: Exception at deserialization");
                                     onPeekResult(CloudMetadata.Invalid);
                                 }
                             }
                             else
                             {
-                                SushiDebug.LogFormat("GetCloudSavedAccountData: ReadBinaryData error! - {0}", status2);
+                                BalloonDebug.LogFormat("GetCloudSavedAccountData: ReadBinaryData error! - {0}", status2);
                                 onPeekResult(CloudMetadata.Invalid);
                             }
                         });
@@ -240,7 +240,7 @@ public class PlatformAndroid : IPlatformBase
             largeIcon,
             "icon1024_2_gray");
 
-        SushiDebug.Log("RegisterAllRepeatingNotifications");
+        BalloonDebug.Log("RegisterAllRepeatingNotifications");
     }
 
     public void ClearAllNotifications()
@@ -312,7 +312,7 @@ public class PlatformAndroid : IPlatformBase
         {
             // handle reading or writing of saved game.
 
-            SushiDebug.LogFormat("OnSavedGameOpenedAndWrite: Save game open (write) success! Filename: {0}",
+            BalloonDebug.LogFormat("OnSavedGameOpenedAndWrite: Save game open (write) success! Filename: {0}",
                 game.Filename);
 
             SerializeAndSaveGame(game);
@@ -379,7 +379,7 @@ public class PlatformAndroid : IPlatformBase
         {
             // handle reading or writing of saved game.
 
-            SushiDebug.LogFormat("Save game open (read) success! Filename: {0}", game.Filename);
+            BalloonDebug.LogFormat("Save game open (read) success! Filename: {0}", game.Filename);
 
             LoadGameData(game);
         }
@@ -402,7 +402,7 @@ public class PlatformAndroid : IPlatformBase
         if (status == SavedGameRequestStatus.Success)
         {
             // handle processing the byte array data
-            SushiDebug.LogFormat("OnSavedGameDataRead success! - Data size: {0} bytes", data.Length);
+            BalloonDebug.LogFormat("OnSavedGameDataRead success! - Data size: {0} bytes", data.Length);
 
             var remoteSaveDict = PlatformSaveUtil.DeserializeSaveData(data);
 

@@ -48,7 +48,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour
 
     public void Start()
     {
-        SushiDebug.Log("PlatformAdMobAdsInit.Start()");
+        BalloonDebug.Log("PlatformAdMobAdsInit.Start()");
         if (PlatformIapManager.instance.NoAdsPurchased)
         {
             Debug.Log("PlatformIapManager.NoAdsPurchased = true (thank you!)");
@@ -129,7 +129,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour
     IEnumerator HandleRewardBasedVideoLoadedCoro(EventArgs args)
     {
         yield return null;
-        SushiDebug.Log("HandleRewardBasedVideoLoaded event received");
+        BalloonDebug.Log("HandleRewardBasedVideoLoaded event received");
     }
 
     void HandleRewardBasedVideoFailedToLoad(object sender, AdFailedToLoadEventArgs args)
@@ -142,7 +142,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour
     {
         var errorStr = args.LoadAdError.ToString();
         yield return null;
-        SushiDebug.Log("HandleRewardBasedVideoFailedToLoad event received with message: " + errorStr);
+        BalloonDebug.Log("HandleRewardBasedVideoFailedToLoad event received with message: " + errorStr);
         PlatformAdMobAds.HandleFailedToLoad();
     }
 
@@ -161,7 +161,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour
     IEnumerator HandleRewardBasedVideoOpenedCoro(EventArgs args)
     {
         yield return null;
-        SushiDebug.Log("HandleRewardBasedVideoOpened event received");
+        BalloonDebug.Log("HandleRewardBasedVideoOpened event received");
         shouldBeRewarded = false;
         BalloonSound.instance.StopTimeAndMuteAudioMixer();
     }
@@ -175,7 +175,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour
     IEnumerator HandleRewardBasedVideoStartedCoro(EventArgs args)
     {
         yield return null;
-        SushiDebug.Log("HandleRewardBasedVideoStarted event received");
+        BalloonDebug.Log("HandleRewardBasedVideoStarted event received");
     }
 
     void HandleRewardBasedVideoClosed(object sender, EventArgs args)
@@ -187,7 +187,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour
     IEnumerator HandleRewardBasedVideoClosedCoro(EventArgs args)
     {
         yield return null;
-        SushiDebug.Log("HandleRewardBasedVideoClosed event received");
+        BalloonDebug.Log("HandleRewardBasedVideoClosed event received");
         RequestRewardBasedVideo();
         if (shouldBeRewarded) // Workaround for processing result in main thread
             StartCoroutine(HandleRewarded());
@@ -197,7 +197,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour
     IEnumerator HandleAdOpenedCoro(EventArgs args)
     {
         yield return null;
-        SushiDebug.Log("HandleAdClosedCoro event received");
+        BalloonDebug.Log("HandleAdClosedCoro event received");
         BalloonSound.instance.StopTimeAndMuteAudioMixer();
     }
 
@@ -212,7 +212,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour
         yield return null;
         var type = args.Type;
         var amount = args.Amount;
-        SushiDebug.Log("HandleRewardBasedVideoRewarded event received for " + amount + " " + type);
+        BalloonDebug.Log("HandleRewardBasedVideoRewarded event received for " + amount + " " + type);
         shouldBeRewarded = true;
     }
 
@@ -356,7 +356,7 @@ public class PlatformAdMobAdsInit : MonoBehaviour
     IEnumerator HandleAdClosedCoro()
     {
         yield return null;
-        SushiDebug.Log("HandleAdClosedCoro event received");
+        BalloonDebug.Log("HandleAdClosedCoro event received");
         PlatformAds.HandleRewarded_Video(null, null, PlatformAds.AdsType.AdMob);
         BalloonSound.instance.ResumeToNormalTimeAndResumeAudioMixer();
     }

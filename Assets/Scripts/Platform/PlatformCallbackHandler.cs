@@ -7,7 +7,7 @@ public class PlatformCallbackHandler : MonoBehaviour
     // Unity API의 한계로 함수 인자는 string 하나만 쓸 수 있다.
     void OnIosSaveResult(string result)
     {
-        SushiDebug.LogFormat("PlatformCallbackHandler.OnIosSaveResult: {0}", result != null ? result : "(null)");
+        BalloonDebug.LogFormat("PlatformCallbackHandler.OnIosSaveResult: {0}", result != null ? result : "(null)");
         Platform.instance.OnCloudSaveResult(result);
     }
 
@@ -20,7 +20,7 @@ public class PlatformCallbackHandler : MonoBehaviour
         }
         else
         {
-            SushiDebug.LogFormat("PlatformCallbackHandler.OnIosLoadResult: {0}", result != null ? result : "(null)");
+            BalloonDebug.LogFormat("PlatformCallbackHandler.OnIosLoadResult: {0}", result != null ? result : "(null)");
             byte[] loadedDataBytes = null;
             if (result != null)
                 try

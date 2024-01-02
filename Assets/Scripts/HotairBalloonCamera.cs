@@ -67,7 +67,7 @@ public class HotairBalloonCamera : MonoBehaviour
         var fovYDeg = cam.fieldOfView;
         var fovXDeg = GetFovXDegFromFovYDeg(fovYDeg, cam.aspect);
 
-        //SushiDebug.Log($"fovYDeg = {fovYDeg}, fovXDeg = {fovXDeg}, aspect = {cam.aspect}");
+        //BalloonDebug.Log($"fovYDeg = {fovYDeg}, fovXDeg = {fovXDeg}, aspect = {cam.aspect}");
 
         if (limitCubeRight != null)
         {

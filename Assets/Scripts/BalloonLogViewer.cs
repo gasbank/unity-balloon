@@ -56,7 +56,7 @@ public class BalloonLogViewer : MonoBehaviour
         {
             var sb = new StringBuilder();
             var logEntryList = logSource.Read(curPage * entryCountPerPage, entryCountPerPage);
-            //SushiDebug.Log($"log Entry List: {logEntryList.Count}");
+            //BalloonDebug.Log($"log Entry List: {logEntryList.Count}");
             foreach (var logEntry in logEntryList)
                 sb.AppendLine(string.Format("{0} {1,-20} {2,6:n0} {3:n0}",
                     new DateTime(logEntry.ticks, DateTimeKind.Utc).ToLocalTime().ToString("MM/dd HH:mm:ss"),

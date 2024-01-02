@@ -55,12 +55,12 @@ public class DataUpdater : MonoBehaviour
         try
         {
             var stream = new MemoryStream(File.ReadAllBytes(BalloonBytesPath));
-            SushiDebug.Log("GetBalloonDataStream(): returning cached remote datasheet");
+            BalloonDebug.Log("GetBalloonDataStream(): returning cached remote datasheet");
             return stream;
         }
         catch (Exception e)
         {
-            SushiDebug.LogFormat("Something went wrong while accessing cached remote datasheet: {0}", e.ToString());
+            BalloonDebug.LogFormat("Something went wrong while accessing cached remote datasheet: {0}", e.ToString());
             DeleteAllCaches();
             return GetBuiltInBalloonDataStream();
         }
@@ -68,11 +68,11 @@ public class DataUpdater : MonoBehaviour
 
     public static void DeleteAllCaches()
     {
-        SushiDebug.LogFormat("Deleting cache file {0}...", BalloonBytesPath);
+        BalloonDebug.LogFormat("Deleting cache file {0}...", BalloonBytesPath);
         File.Delete(BalloonBytesPath);
-        SushiDebug.LogFormat("Deleting cache file {0}...", BalloonBytesETagPath);
+        BalloonDebug.LogFormat("Deleting cache file {0}...", BalloonBytesETagPath);
         File.Delete(BalloonBytesETagPath);
-        SushiDebug.LogFormat("Deleting cache file {0}...", BalloonBytesHashPath);
+        BalloonDebug.LogFormat("Deleting cache file {0}...", BalloonBytesHashPath);
         File.Delete(BalloonBytesETagPath);
     }
 
@@ -80,7 +80,7 @@ public class DataUpdater : MonoBehaviour
     {
         var asset = Resources.Load("Data/Balloon") as TextAsset;
         var stream = new MemoryStream(asset.bytes);
-        SushiDebug.Log("GetBalloonDataStream(): returning built-in datasheet");
+        BalloonDebug.Log("GetBalloonDataStream(): returning built-in datasheet");
         return stream;
     }
 
@@ -89,7 +89,7 @@ public class DataUpdater : MonoBehaviour
     {
         var getUri = string.Format("https://s3.ap-northeast-2.amazonaws.com/balloontycoon/{0}/Balloon.bytes",
             Application.version);
-        SushiDebug.LogFormat("HTTP GET: {0}", getUri);
+        BalloonDebug.LogFormat("HTTP GET: {0}", getUri);
         using (var www = UnityWebRequest.Get(getUri))
         {
             www.redirectLimit = 1;
@@ -101,23 +101,23 @@ public class DataUpdater : MonoBehaviour
             var downloadAsync = www.SendWebRequest();
             while (downloadAsync.isDone == false && www.result != UnityWebRequest.Result.ConnectionError)
             {
-                SushiDebug.LogFormat("Downloading...{0:f0}%", downloadAsync.progress * 100.0f);
+                BalloonDebug.LogFormat("Downloading...{0:f0}%", downloadAsync.progress * 100.0f);
                 onProgress(downloadAsync.progress);
                 yield return null;
             }
 
             if (www.result == UnityWebRequest.Result.ConnectionError)
             {
-                SushiDebug.Log(www.error);
+                BalloonDebug.Log(www.error);
                 onNetworkFail(www.error);
             }
             else
             {
-                SushiDebug.LogFormat("www.responseCode = {0}", www.responseCode);
-                SushiDebug.LogFormat("Data length: {0}", www.downloadHandler.data.Length);
+                BalloonDebug.LogFormat("www.responseCode = {0}", www.responseCode);
+                BalloonDebug.LogFormat("Data length: {0}", www.downloadHandler.data.Length);
                 if (www.responseCode == 304)
                 {
-                    SushiDebug.LogFormat("Cached file is UP-TO-DATE.");
+                    BalloonDebug.LogFormat("Cached file is UP-TO-DATE.");
                     try
                     {
                         var cachedBytes = File.ReadAllBytes(BalloonBytesPath);
@@ -134,14 +134,14 @@ public class DataUpdater : MonoBehaviour
                 }
                 else if (www.responseCode == 200)
                 {
-                    SushiDebug.LogFormat("Successfully downloaded.");
+                    BalloonDebug.LogFormat("Successfully downloaded.");
                     File.WriteAllBytes(BalloonBytesPath, www.downloadHandler.data);
-                    SushiDebug.LogFormat("Successfully written to {0}", BalloonBytesPath);
+                    BalloonDebug.LogFormat("Successfully written to {0}", BalloonBytesPath);
                     File.WriteAllText(BalloonBytesETagPath, www.GetResponseHeader("ETag"));
-                    SushiDebug.LogFormat("Successfully written to {0}", BalloonBytesETagPath);
+                    BalloonDebug.LogFormat("Successfully written to {0}", BalloonBytesETagPath);
                     var downloadedSha1Hash = Sha1Hash(www.downloadHandler.data);
                     File.WriteAllText(BalloonBytesHashPath, downloadedSha1Hash);
-                    SushiDebug.LogFormat("Successfully written to {0}", BalloonBytesHashPath);
+                    BalloonDebug.LogFormat("Successfully written to {0}", BalloonBytesHashPath);
                     var builtInSha1Hash = Sha1Hash(GetBuiltInBalloonDataStream());
                     onSuccess(downloadedSha1Hash != builtInSha1Hash);
                 }

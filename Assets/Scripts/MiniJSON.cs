@@ -55,16 +55,16 @@ namespace MiniJSON
     //
     //          var dict = Json.Deserialize(jsonString) as Dictionary<string,object>;
     //
-    //          SushiDebug.Log("deserialized: " + dict.GetType());
-    //          SushiDebug.Log("dict['array'][0]: " + ((List<object>) dict["array"])[0]);
-    //          SushiDebug.Log("dict['string']: " + (string) dict["string"]);
-    //          SushiDebug.Log("dict['float']: " + (double) dict["float"]); // floats come out as doubles
-    //          SushiDebug.Log("dict['int']: " + (long) dict["int"]); // ints come out as longs
-    //          SushiDebug.Log("dict['unicode']: " + (string) dict["unicode"]);
+    //          BalloonDebug.Log("deserialized: " + dict.GetType());
+    //          BalloonDebug.Log("dict['array'][0]: " + ((List<object>) dict["array"])[0]);
+    //          BalloonDebug.Log("dict['string']: " + (string) dict["string"]);
+    //          BalloonDebug.Log("dict['float']: " + (double) dict["float"]); // floats come out as doubles
+    //          BalloonDebug.Log("dict['int']: " + (long) dict["int"]); // ints come out as longs
+    //          BalloonDebug.Log("dict['unicode']: " + (string) dict["unicode"]);
     //
     //          var str = Json.Serialize(dict);
     //
-    //          SushiDebug.Log("serialized: " + str);
+    //          BalloonDebug.Log("serialized: " + str);
     //      }
     //  }
 
