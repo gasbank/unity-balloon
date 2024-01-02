@@ -35,6 +35,9 @@ public class ManifestProcessor : IPreprocessBuild
     private const string MANIFEST_RELATIVE_PATH =
             "Plugins/Android/GoogleMobileAdsPlugin.androidlib/AndroidManifest.xml";
 
+    private const string PROPERTIES_RELATIVE_PATH =
+            "Plugins/Android/GoogleMobileAdsPlugin.androidlib/project.properties";
+
     private const string METADATA_APPLICATION_ID  =
             "com.google.android.gms.ads.APPLICATION_ID";
 
@@ -47,6 +50,10 @@ public class ManifestProcessor : IPreprocessBuild
     private const string METADATA_OPTIMIZE_AD_LOADING =
             "com.google.android.gms.ads.flag.OPTIMIZE_AD_LOADING";
 
+    // LINT.IfChange
+    private const string METADATA_UNITY_VERSION  = "com.google.unity.ads.UNITY_VERSION";
+    // LINT.ThenChange(//depot/google3/javatests/com/google/android/gmscore/integ/modules/admob/tests/robolectric/src/com/google/android/gms/ads/nonagon/signals/StaticDeviceSignalSourceTest.java)
+
     private XNamespace ns = "http://schemas.android.com/apk/res/android";
 
     public int callbackOrder { get { return 0; } }
@@ -57,8 +64,25 @@ public class ManifestProcessor : IPreprocessBuild
     public void OnPreprocessBuild(BuildTarget target, string path)
 #endif
     {
-        string manifestPath = Path.Combine(
-                Application.dataPath, MANIFEST_RELATIVE_PATH);
+        string manifestPath = Path.Combine(Application.dataPath, MANIFEST_RELATIVE_PATH);
+        string propertiesPath = Path.Combine(Application.dataPath, PROPERTIES_RELATIVE_PATH);
+
+        /*
+         * Handle importing GMA via Unity Package Manager.
+         */
+        EditorPathUtils pathUtils =
+            ScriptableObject.CreateInstance<EditorPathUtils>();
+        if (pathUtils.IsPackageRootPath())
+        {
+            // pathUtils.GetParentDirectoryAssetPath() returns "Packages/.../GoogleMobileAds" but
+            // Plugins is at the same level of GoogleMobileAds so we go up one directory before
+            // appending MANIFEST_RELATIVE_PATH.
+            string packagesPathPrefix =
+                    Path.GetDirectoryName(pathUtils.GetParentDirectoryAssetPath());
+            manifestPath = Path.Combine(packagesPathPrefix, MANIFEST_RELATIVE_PATH);
+            propertiesPath = Path.Combine(packagesPathPrefix, PROPERTIES_RELATIVE_PATH);
+        }
+
         if (AssetDatabase.IsValidFolder("Packages/com.google.ads.mobile"))
         {
             manifestPath = Path.Combine("Packages/com.google.ads.mobile", MANIFEST_RELATIVE_PATH);
@@ -119,6 +143,11 @@ public class ManifestProcessor : IPreprocessBuild
                            metas,
                            METADATA_OPTIMIZE_AD_LOADING,
                            instance.OptimizeAdLoading);
+
+        SetMetadataElement(elemApplication,
+                           metas,
+                           METADATA_UNITY_VERSION,
+                           Application.unityVersion);
 
         elemManifest.Save(manifestPath);
     }

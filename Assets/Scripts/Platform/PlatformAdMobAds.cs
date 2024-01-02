@@ -10,19 +10,24 @@ public class PlatformAdMobAds
     {
 #if GOOGLE_MOBILE_ADS
         // Get singleton reward based video ad reference.
-        var rewardBasedVideo = PlatformAdMobAdsInit.instance.rewardBasedVideo;
+        var rewardBasedVideo = PlatformAdMobAdsInit.instance.Ad;
 
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
             ConfirmPopup.instance.Open(string.Format("\\인터넷 연결이 필요합니다.".Localized()));
         }
-        else if (rewardBasedVideo.IsLoaded())
+        else if (rewardBasedVideo.CanShowAd())
         {
             PlatformAdMobAds.shopProductEntry = shopProductEntry;
             PlatformAdMobAds.shopProductData = shopProductData;
             BalloonDebug.LogFormat("ShowRewardedAd: shopProductEntry: {0}", shopProductEntry);
             BalloonDebug.LogFormat("ShowRewardedAd: shopProductData: {0}", shopProductData);
-            rewardBasedVideo.Show();
+            rewardBasedVideo.Show(reward =>
+            {
+#if GOOGLE_MOBILE_ADS
+                PlatformAds.HandleRewarded_RewardedVideo(shopProductEntry, shopProductData, PlatformAds.AdsType.AdMob);
+#endif
+            });
         }
         else
         {
@@ -37,8 +42,8 @@ public class PlatformAdMobAds
     {
         PlatformAds.stageNumber = stageNumber;
 #if GOOGLE_MOBILE_ADS
-        if (PlatformAdMobAdsInit.interstitial.IsLoaded())
-            PlatformAdMobAdsInit.interstitial.Show();
+        if (PlatformAdMobAdsInit.instance.interstitial.CanShowAd())
+            PlatformAdMobAdsInit.instance.interstitial.Show();
         else
             PlatformAds.HandleRewarded_Video(null, null, PlatformAds.AdsType.AdMob);
 #endif

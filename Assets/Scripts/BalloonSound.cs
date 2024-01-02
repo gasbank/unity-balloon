@@ -149,12 +149,14 @@ public class BalloonSound : MonoBehaviour
     public void StopTimeAndMuteAudioMixer()
     {
         BalloonDebug.Log("StopTimeAndMuteAudioMixer() called.");
+        Time.timeScale = 0.0f;
         audioMixer.SetFloat("MasterVolume", -80.0f);
     }
 
     public void ResumeToNormalTimeAndResumeAudioMixer()
     {
         BalloonDebug.Log("ResumeToNormalTimeAndResumeAudioMixer() called.");
+        Time.timeScale = 1.0f;
         audioMixer.SetFloat("MasterVolume", 0.0f);
     }
 #pragma warning disable CS0414

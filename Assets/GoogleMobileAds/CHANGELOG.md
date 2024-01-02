@@ -1,6 +1,251 @@
 Google Mobile Ads Unity Plugin Change Log
 
 **************
+Version 8.6.0
+**************
+
+- Fixed [#3007] by aligning the PrivacyOptionsRequirementStatus Enum on iOS with Android Plugin.
+- Fixed [#2930] for Projects using Android Gradle Plugin less than 4.2.2.
+- Added Editor Options to toggle adding packagingOptions to gradle files to pick the first occurrence of META-INF/kotlinx_coroutines_core.version file.
+- Added Editor Options to enable removing the property tag from the Android Manifest of the GMA Android SDK. This is enabled by default for projects using Android Gradle Plugin version 4.2.1 and lower.
+- Updated Google Mobile Ads SDK dependency to use v22.5.0 on Android.
+- Updated Google Mobile Ads SDK dependency to use v10.13 on iOS.
+
+Built and tested with:
+- Google Mobile Ads Android SDK 22.5.0
+- Google Mobile Ads iOS SDK 10.13
+- Google User Messaging Platform 2.1.0
+- External Dependency Manager for Unity 1.2.177
+
+**************
+Version 8.5.3
+**************
+
+- Fixed "cannot find symbol" error when building the Android bridge project using gradle.
+- Fixed [#2930] by pinning the Google Mobile Ads SDK dependency to use v22.3.0 on Android.
+- Fixed [#2974] ConsentInformation.Update() wasn't working as expected on consecutive requests.
+
+Built and tested with:
+- Google Mobile Ads Android SDK 22.3.0
+- Google Mobile Ads iOS SDK 10.9
+- Google User Messaging Platform 2.1.0
+- External Dependency Manager for Unity 1.2.176
+
+**************
+Version 8.5.2
+**************
+
+- Fixed AndroidJavaException when using AdManagerAdRequest custom targeting.
+- Fixed [#2826] "No such proxy method" error within GoogleMobileAds.Ump.
+- Updated Google Mobile Ads SDK dependency to use v22.3.0 on Android.
+
+Built and tested with:
+- Google Mobile Ads Android SDK 22.3.0
+- Google Mobile Ads iOS SDK 10.9
+- Google User Messaging Platform 2.1.0
+- External Dependency Manager for Unity 1.2.176
+
+**************
+Version 8.5.1
+**************
+
+- Version 8.5.0 has been deprecated. Please upgrade to 8.5.1 instead.
+- Fixed [#2866] Read enum from getPrivacyOptionsRequirementStatus.
+- Removed double quotes from GoogleMobileAdsSKAdNetworkItems.xml.
+
+Built and tested with:
+- Google Mobile Ads Android SDK 22.2.0
+- Google Mobile Ads iOS SDK 10.9
+- Google User Messaging Platform 2.1.0
+- External Dependency Manager for Unity 1.2.176
+
+**************
+Version 8.5.0
+**************
+
+- Requires apps to build against Xcode 14.1 or higher.
+- This release introduces several new APIs to simplify the consent gathering
+  process.
+    - Calling `ConsentInformation.Update()` is now required before interacting
+      with other `ConsentInformation` public APIs. Before calling it, the following are returned:
+        - `ConsentStatus` returns `ConsentStatus.Unknown`
+        - `PrivacyOptionsRequirementStatus` returns
+          `PrivacyOptionsRequirementStatus.Unknown`
+        - `ConsentInformation.CanRequestAds` returns `false`.
+    - [ConsentForm](https://github.com/googleads/googleads-mobile-unity/blob/main/source/plugin/Assets/GoogleMobileAds/Ump/Api/ConsentForm.cs)
+        - Added method `LoadAndPresentIfRequired` to combine load and show calls.
+          This method is intended for the use case of showing a form if needed
+          when the app starts.
+        - Added method `ShowPrivacyOptionsForm`, to be called when users interact
+          with your app's privacy setting.
+    - [ConsentInformation](https://github.com/googleads/googleads-mobile-unity/blob/main/source/plugin/Assets/GoogleMobileAds/Ump/Api/ConsentInformation.cs)
+        - Added `CanRequestAds` property.
+        - Added `PrivacyOptionsRequirementStatus` property to indicate whether
+          privacy options are required to be shown in this session.
+- Updated the Android User Messaging Platform dependency version to 2.1.0.
+- Updated the Google Mobile Ads iOS SDK dependency version to 10.9.
+- Fixed [#2840] Check if the ad references get deallocated in the iOS
+  plugin (bridge).
+- Updated [SKAdNetwork](https://developers.google.com/admob/unity/3p-skadnetworks)
+  list with values from the July 13, 2023 update.
+
+Built and tested with:
+- Google Mobile Ads Android SDK 22.2.0
+- Google Mobile Ads iOS SDK 10.9
+- Google User Messaging Platform 2.1.0
+- External Dependency Manager for Unity 1.2.176
+
+**************
+Version 8.4.1
+**************
+
+- Fixed [#2815] Setting ApplicationPreferences on Android.
+
+Built and tested with:
+- Google Mobile Ads Android SDK 22.2.0
+- Google Mobile Ads iOS SDK 10.7
+- Google User Messaging Platform 2.0.0
+- External Dependency Manager for Unity 1.2.176
+
+**************
+Version 8.4.0
+**************
+
+- Fixed [#2757] Rewarded Interstitial events not raising on the main thread.
+- Added support for rendering Ad Manager banner ad.
+- Removed method call logs from showing up in Unity Editor Console.
+- Deprecated ScreenOrientation parameter of the AppOpenAd Load() API. Added AppOpenAd.Load() API for loading AppOpen Ads using ad unit ID, ad request and ad load callbacks.
+- Added ApplicationPreferences API to manage GMA preferences.
+- Updated Google Mobile Ads SDK dependency to use v10.7 on iOS.
+- Updated Google Mobile Ads SDK dependency to use v22.2.0 on Android.
+
+Built and tested with:
+- Google Mobile Ads Android SDK 22.2.0
+- Google Mobile Ads iOS SDK 10.7
+- Google User Messaging Platform 2.0.0
+- External Dependency Manager for Unity 1.2.176
+
+**************
+Version 8.3.0
+**************
+
+- Added support to RaiseAdEventsOnUnityMainThread for UMP callbacks.
+- Added support for Ad Manager interstitial ad.
+- Updated Google Mobile Ads SDK dependency to use v22.1.0 on Android.
+- Updated Google Mobile Ads SDK dependency to use v10.5 on iOS.
+
+Built and tested with:
+- Google Mobile Ads Android SDK 22.1.0
+- Google Mobile Ads iOS SDK 10.5
+- Google User Messaging Platform 2.0.0
+- External Dependency Manager for Unity 1.2.176
+
+**************
+Version 8.2.0
+**************
+
+- Fixed [#2646] Android Banner 'Descendant focus' crash.
+- Fixed [#2676] Raising Interstitial events on main thread.
+- Deprecated builder pattern in AdRequest, RequestConfiguration and ServerSideVerificationOptions Class. Utilize fields instead.
+- Added AdManagerAdRequest class to allow passing CustomTargeting, CategoryExclusions and PublisherProvidedId as part of AdManager requests.
+- Updated Google Mobile Ads SDK dependency to use v10.4 on iOS.
+
+Built and tested with:
+- Google Mobile Ads Android SDK 22.0.0
+- Google Mobile Ads iOS SDK 10.4
+- Google User Messaging Platform 2.0.0
+- External Dependency Manager for Unity 1.2.176
+
+**************
+Version 8.1.0
+**************
+
+- Requires apps to build against Xcode 14.0 or higher.
+- Fixed [#2611] [UMP] Exception raised when calling Update of ConsentInformation on Android
+
+Built and tested with:
+- Google Mobile Ads Android SDK 22.0.0
+- Google Mobile Ads iOS SDK 10.3
+- Google User Messaging Platform 2.0.0
+- External Dependency Manager for Unity 1.2.175
+
+**************
+Version 8.0.0
+**************
+
+Plugin:
+- Removed obsolete APIs for AppOpenAd.
+- Removed obsolete APIs for InterstitialAd.
+- Added the MobileAds.RaiseAdEventsOnUnityMainThread option for raising ad events on the Unity main thread.
+- Dropped support for `armv7` and `i386` architectures.
+- Requires minimum iOS version 11.0.
+- Fixed [#2543] NullReferenceException when UMP ConsentDebugSettings are null.
+- Fixed [#2531] Xcode 13 compile time error.
+- Fixed [#1779] Crash with custom Banner Ad Sizes on the Unity platform.
+- Fixed [#2553] Banner position in Unity Editor to reflect Android and iOS position.
+- Added support for GMA Android SDK v22.0.0. Requires using GMA Android SDK v22.0.0 or higher.
+- Added support for GMA iOS SDK v10.3. Requires using GMA iOS SDK v10.3 or higher.
+
+Built and tested with:
+- Google Mobile Ads Android SDK 22.0.0
+- Google Mobile Ads iOS SDK 10.3
+- Google User Messaging Platform 2.0.0
+- External Dependency Manager for Unity 1.2.175
+
+**************
+Version 7.4.1
+**************
+
+Plugin:
+- Added support for GMA iOS SDK v10. Requires using Google Mobile Ads iOS SDK v10.0 or higher.
+
+Built and tested with:
+- Google Mobile Ads Android SDK 21.3.0
+- Google Mobile Ads iOS SDK 10.0
+- Google User Messaging Platform 2.0.0
+- External Dependency Manager for Unity 1.2.175
+
+**************
+Version 7.4.0
+**************
+
+Plugin:
+- Added OnAdClicked and OnAdImpressionRecorded events to BannerView.
+- Updated all ad format APIs to have consistent nomenclature.
+- Added new InterstitialAd.OnAdClicked event to interstitial ads.
+- Added new InterstitialAd.Load() API for loading interstitial ads.
+- Added new InterstitialAd.CanShowAd() API for checking interstitial ad state.
+- Added new RewardedAd.OnAdClicked event to rewarded ads.
+- Added new RewardedAd.Load() API for loading rewarded ads.
+- Added new RewardedAd.CanShowAd() API for checking rewarded ad state.
+- Added new RewardedInterstitialAd.OnAdClicked event to rewarded interstitial ads.
+- Added new RewardedInterstitialAd.Load() API for loading rewarded interstitial ads.
+- Added new RewardedInterstitialAd.CanShowAd() API for checking rewarded interstitial ad state.
+- Added new AppOpenAd.OnAdClicked event to app open ads.
+- Added new AppOpenAd.Load() API for loading app open  ads.
+- Added new AppOpenAd.CanShowAd() API for checking app open ad state.
+- Fixed [#2453] and [#2450] XCode build error when using iOS SDK 9.14.0 or greater.
+- Added User Messaging Platform (UMP) APIs.
+
+Built and tested with:
+- Google Mobile Ads Android SDK 21.3.0
+- Google Mobile Ads iOS SDK 9.11.0
+- Google User Messaging Platform 2.0.0
+- External Dependency Manager for Unity 1.2.175
+
+**************
+Version 7.3.1
+**************
+
+Plugin:
+- Fixed [#1799](https://github.com/googleads/googleads-mobile-unity/issues/1799) RewardedAd OnAdFailedToPresentFullScreenContent called twice.
+
+Built and tested with:
+- Google Mobile Ads Android SDK 21.3.0.
+- Google Mobile Ads iOS SDK 9.11.0
+- External Dependency Manager for Unity 1.2.171
+
+**************
 Version 7.3.0
 **************
 
@@ -60,7 +305,7 @@ Plugin:
 - Fixed Github issue [1943](https://github.com/googleads/googleads-mobile-unity/issues/1943) related App Id saving.
 - Fixed Github issue [2001](https://github.com/googleads/googleads-mobile-unity/issues/2001) related to Android manifest.
 - Fixed Github issue [2003](https://github.com/googleads/googleads-mobile-unity/issues/2003) related to Ad Inspector crash.
-- Added Dummy AdInspector for Unity editor.
+- Added placeholder AdInspector for Unity editor.
 
 Built and tested with:
 - Google Play services 20.2.0
@@ -136,6 +381,7 @@ Version 6.0.2
 
 Plugin:
 - Fixed https://github.com/googleads/googleads-mobile-unity/issues/1677 This version requires Xcode 12.4 where the previous version required Xcode 12.5.1.
+- You no longer need to enable "Link frameworks statically" for the Google Mobile Ads plugin to work.
 
 Built and tested with:
 - Google Play services 20.2.0
@@ -562,7 +808,7 @@ Plugin:
 - Updated Android ad events to be invoked on the main thread.
 - Added `MobileAds.SetiOSAppPauseOnBackground()` method to pause iOS apps when
 displaying full screen ads.
-- Fixed issue were banners repositioned incorrectly following an orienation
+- Fixed issue were banners repositioned incorrectly following an orientation
 change.
 
 Mediation packages:
@@ -604,7 +850,7 @@ Plugin:
 - Implemented workaround for issue where ad views are rendered in incorrect
 position.
 - Resolved compatibility issues with Gradle 4.
-- Resovled comnpatilbity issues with older versions of Xcode.
+- Resolved comnpatilbity issues with older versions of Xcode.
 
 Mediation packages:
 - Added API for video ad volume control.
@@ -734,7 +980,7 @@ Version 3.3.0
 - Fix issue were ads larger than 320dp could not be rendered.
 - Fix incorrect positioning of ads in iOS for ad position BOTTOM.
 - Add rewarded video test ad units to HelloWorld sample app.
-- Suppress warnings for unsed dummy ad events.
+- Suppress warnings for unused placeholder ad events.
 
 Built and tested with:
 - Google Play services 10.2.0
