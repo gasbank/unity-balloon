@@ -15,9 +15,9 @@ public partial class PlatformAdMobAdsInit : MonoBehaviour
     {
 #if GOOGLE_MOBILE_ADS
         RequestNewBannerAd();
-#endif        
+#endif
     }
-    
+
     public void HideBanner()
     {
 #if GOOGLE_MOBILE_ADS
@@ -51,7 +51,7 @@ public partial class PlatformAdMobAdsInit : MonoBehaviour
 
                 RequestNewRewardedAd();
 
-                RequestNewInterstitialAd();    
+                RequestNewInterstitialAd();
             });
         }
 
@@ -80,13 +80,13 @@ public partial class PlatformAdMobAdsInit : MonoBehaviour
             bannerView.Destroy();
             bannerView = null;
         }
-        
+
         bannerView = new(BannerAdUnitId, AdSize.Banner, AdPosition.Bottom);
-        
+
         BalloonDebug.Log("Loading banner ad.");
-        bannerView.LoadAd(new ());
+        bannerView.LoadAd(new());
     }
-    
+
     void RequestNewInterstitialAd()
     {
         if (interstitial != null)
@@ -94,7 +94,7 @@ public partial class PlatformAdMobAdsInit : MonoBehaviour
             interstitial.Destroy();
             interstitial = null;
         }
-        
+
         InterstitialAd.Load(InterstitialAdUnitId, new(), (ad, error) =>
         {
             // if error is not null, the load request failed.
@@ -125,14 +125,14 @@ public partial class PlatformAdMobAdsInit : MonoBehaviour
             if (error != null || ad == null)
             {
                 Debug.LogError(error);
-                PlatformAdMobAds.HandleFailedToLoad();
+                HandleFailedToLoad();
                 return;
             }
 
             BalloonDebug.Log("A new ad received!");
 
             Ad = ad;
-            
+
             RegisterEventHandlersForRewardedAd();
         });
     }
@@ -165,12 +165,13 @@ public partial class PlatformAdMobAdsInit : MonoBehaviour
             Debug.Log("Interstitial Ad full screen content closed.");
 
             RequestNewInterstitialAd();
+            
+            PlatformAds.ExecuteInterstitialReward(null, null, PlatformAds.AdsType.AdMob);
         };
 
         interstitial.OnAdFullScreenContentFailed += error =>
         {
-            Debug.LogError("Interstitial ad failed to open full screen content " +
-                           "with error : " + error);
+            Debug.LogError("Interstitial ad failed to open full screen content " + "with error : " + error);
 
             RequestNewInterstitialAd();
         };
@@ -219,4 +220,61 @@ public partial class PlatformAdMobAdsInit : MonoBehaviour
         };
     }
 #endif // #if GOOGLE_MOBILE_ADS
+
+    public void TryShowRewardedAd(ShopProductEntry shopProductEntry, ShopProductData shopProductData)
+    {
+#if GOOGLE_MOBILE_ADS
+        // Get singleton reward based video ad reference.
+        var rewardBasedVideo = Ad;
+
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            ConfirmPopup.instance.Open(string.Format("\\인터넷 연결이 필요합니다.".Localized()));
+        }
+        else if (rewardBasedVideo.CanShowAd())
+        {
+            this.shopProductEntry = shopProductEntry;
+            this.shopProductData = shopProductData;
+            BalloonDebug.LogFormat("ShowRewardedAd: shopProductEntry: {0}", shopProductEntry);
+            BalloonDebug.LogFormat("ShowRewardedAd: shopProductData: {0}", shopProductData);
+            rewardBasedVideo.Show(reward =>
+            {
+#if GOOGLE_MOBILE_ADS
+                PlatformAds.ExecuteRewardedVideoReward(shopProductEntry, shopProductData, PlatformAds.AdsType.AdMob);
+#endif
+            });
+        }
+        else
+        {
+            Debug.LogError("Ad not ready!");
+            ConfirmPopup.instance.Open(string.Format("\\광고가 아직 준비되지 않았습니다.".Localized()));
+        }
+#endif
+    }
+
+    public void TryShowInterstitialAd(ShopProductEntry shopProductEntry, ShopProductData shopProductData, int stageNumber)
+    {
+        PlatformAds.stageNumber = stageNumber;
+#if GOOGLE_MOBILE_ADS
+        if (interstitial.CanShowAd())
+        {
+            interstitial.Show();
+        }
+        else
+        {
+            PlatformAds.ExecuteInterstitialReward(null, null, PlatformAds.AdsType.AdMob);
+        }
+#endif
+    }
+
+    void HandleFailedToLoad()
+    {
+        Debug.LogError("HandleFailedToLoad");
+        // 유저에게 광고를 못불러왔다는 걸 굳이 게임 시작할 때 보여줄 필요는 없지...
+        //ShortMessage.instance.ShowLocalized("광고 불러오기를 실패했습니다.");
+    }
+#if GOOGLE_MOBILE_ADS
+    ShopProductEntry shopProductEntry;
+    ShopProductData shopProductData;
+#endif
 }

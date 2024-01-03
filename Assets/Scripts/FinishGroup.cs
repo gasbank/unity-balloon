@@ -43,7 +43,7 @@ public class FinishGroup : MonoBehaviour
         }
         else
         {
-            PlatformAdMobAds.TryShowInterstitialAd(null, null, NextStageNumber);
+            PlatformAdMobAdsInit.instance.TryShowInterstitialAd(null, null, NextStageNumber);
         }
     }
 }

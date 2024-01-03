@@ -1,14 +1,13 @@
-﻿public class PlatformAds
+﻿public static class PlatformAds
 {
     public enum AdsType
     {
         AdMob,
-        UnityAds
     }
 
     public static int stageNumber;
 
-    public static void HandleRewarded_RewardedVideo(ShopProductEntry shopProductEntry, ShopProductData shopProductData,
+    public static void ExecuteRewardedVideoReward(ShopProductEntry shopProductEntry, ShopProductData shopProductData,
         AdsType adsType)
     {
         BalloonDebug.Log("The ad was successfully shown. (Rewarded Video)");
@@ -20,7 +19,7 @@
         Bootstrap.ReloadCurrentScene();
     }
 
-    public static void HandleRewarded_Video(ShopProductEntry shopProductEntry, ShopProductData shopProductData,
+    public static void ExecuteInterstitialReward(ShopProductEntry shopProductEntry, ShopProductData shopProductData,
         AdsType adsType)
     {
         BalloonDebug.Log("The ad was successfully shown. (Video)");

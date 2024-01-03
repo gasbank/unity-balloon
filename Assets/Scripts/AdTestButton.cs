@@ -4,11 +4,11 @@ public class AdTestButton : MonoBehaviour
 {
     public void ShowContinueAd_AdMob()
     {
-        PlatformAdMobAds.TryShowRewardedAd(null, null);
+        PlatformAdMobAdsInit.instance.TryShowRewardedAd(null, null);
     }
 
     public void ShowInterstitialAd_AdMob()
     {
-        PlatformAdMobAds.TryShowInterstitialAd(null, null, 1);
+        PlatformAdMobAdsInit.instance.TryShowInterstitialAd(null, null, 1);
     }
 }

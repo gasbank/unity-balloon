@@ -154,13 +154,13 @@ public class ContinuePopup : MonoBehaviour
     {
         if (PlatformIapManager.instance.NoAdsPurchased)
         {
-            PlatformAds.HandleRewarded_RewardedVideo(null, null, PlatformAds.AdsType.AdMob);
+            PlatformAds.ExecuteRewardedVideoReward(null, null, PlatformAds.AdsType.AdMob);
         }
         else
         {
             // 에디터에서 테스트하기 쉽도록 에디터에서는 Unity Ads를,
             // 실제 기기에서는 Google AdMob을 쓴다.
-            PlatformAdMobAds.TryShowRewardedAd(null, null);
+            PlatformAdMobAdsInit.instance.TryShowRewardedAd(null, null);
         }
     }
 
@@ -177,24 +177,26 @@ public class ContinuePopup : MonoBehaviour
         }
         else
         {
-            // 에디터에서 테스트하기 쉽도록 에디터에서는 Unity Ads를,
-            // 실제 기기에서는 Google AdMob을 쓴다.
             if (PlatformIapManager.instance.NoAdsPurchased)
+            {
                 ProceedNoThanksWithoutAds();
+            }
             else
+            {
                 //  if (Random.Range(0, 100) < 40) 
                 //  {
                 //     ProceedNoThanksWithAds();
                 //} else    처음에는 혜자로 가야한다. 500~1000다운로드까지는 광고 최소화 하다가 유저풀 모이면 광고 서서히 늘려나간다.
                 // {
                 ProceedNoThanksWithoutAds();
-            //  }
+                // }
+            }
         }
     }
 
-    static void ProceedNoThanksWithAds()
+    void ProceedNoThanksWithAds()
     {
-        PlatformAdMobAds.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumberSafe);
+        PlatformAdMobAdsInit.instance.TryShowInterstitialAd(null, null, Bootstrap.CurrentStageNumberSafe);
     }
 
     static void ProceedNoThanksWithoutAds()
