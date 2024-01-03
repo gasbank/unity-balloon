@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 [DisallowMultipleComponent]
@@ -10,7 +11,7 @@ public class ShortMessage : MonoBehaviour
     public float bgMaxAlpha = 0.5f;
     public Image image;
     public float remainTime;
-    public Text text;
+    public TextMeshProUGUI text;
     public float visibleTime = 2.0f;
 
     void Awake()
@@ -30,7 +31,11 @@ public class ShortMessage : MonoBehaviour
             remainTime -= Time.deltaTime;
         }
 
-        image.color = new Color(image.color.r, image.color.g, image.color.b, bgMaxAlpha * alpha);
+        if (image != null)
+        {
+            image.color = new Color(image.color.r, image.color.g, image.color.b, bgMaxAlpha * alpha);
+        }
+        
         text.color = new Color(text.color.r, text.color.g, text.color.b, alpha);
     }
 

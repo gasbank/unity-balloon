@@ -1,11 +1,11 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using TMPro;
+using UnityEngine;
 
 [DisallowMultipleComponent]
 public class ProgressMessage : MonoBehaviour
 {
     public static ProgressMessage instance;
-    public Text messageText;
+    public TextMeshProUGUI messageText;
 
     [SerializeField]
     Subcanvas subcanvas;

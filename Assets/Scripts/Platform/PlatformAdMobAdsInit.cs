@@ -100,11 +100,13 @@ public partial class PlatformAdMobAdsInit : MonoBehaviour
             // if error is not null, the load request failed.
             if (error != null || ad == null)
             {
-                Debug.LogError("interstitial ad failed to load an ad " + "with error : " + error);
+                var msg = $"Interstitial ad failed to load an ad with error: {error}";
+                Debug.LogError(msg);
+                ShortMessage.instance.Show(msg);
                 return;
             }
 
-            BalloonDebug.Log("Interstitial ad loaded with response : " + ad.GetResponseInfo());
+            BalloonDebug.Log($"Interstitial ad loaded with response: {ad.GetResponseInfo()}");
 
             interstitial = ad;
 
@@ -124,12 +126,13 @@ public partial class PlatformAdMobAdsInit : MonoBehaviour
         {
             if (error != null || ad == null)
             {
-                Debug.LogError(error);
-                HandleFailedToLoad();
+                var msg = $"Rewarded ad failed to load an ad with error: {error}";
+                Debug.LogError(msg);
+                ShortMessage.instance.ShowLocalized(msg);
                 return;
             }
 
-            BalloonDebug.Log("A new ad received!");
+            BalloonDebug.Log($"Rewarded ad loaded with response: {ad.GetResponseInfo()}");
 
             Ad = ad;
 
@@ -224,24 +227,23 @@ public partial class PlatformAdMobAdsInit : MonoBehaviour
     public void TryShowRewardedAd(ShopProductEntry shopProductEntry, ShopProductData shopProductData)
     {
 #if GOOGLE_MOBILE_ADS
-        // Get singleton reward based video ad reference.
-        var rewardBasedVideo = Ad;
-
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
             ConfirmPopup.instance.Open(string.Format("\\인터넷 연결이 필요합니다.".Localized()));
         }
-        else if (rewardBasedVideo.CanShowAd())
+        else if (Ad == null)
         {
-            this.shopProductEntry = shopProductEntry;
-            this.shopProductData = shopProductData;
+            Debug.LogError("Rewarded ad is null. Requesting a new one...");
+            ConfirmPopup.instance.Open(string.Format("\\광고가 아직 준비되지 않았습니다.".Localized()));
+            RequestNewRewardedAd();
+        }
+        else if (Ad.CanShowAd())
+        {
             BalloonDebug.LogFormat("ShowRewardedAd: shopProductEntry: {0}", shopProductEntry);
             BalloonDebug.LogFormat("ShowRewardedAd: shopProductData: {0}", shopProductData);
-            rewardBasedVideo.Show(reward =>
+            Ad.Show(reward =>
             {
-#if GOOGLE_MOBILE_ADS
                 PlatformAds.ExecuteRewardedVideoReward(shopProductEntry, shopProductData, PlatformAds.AdsType.AdMob);
-#endif
             });
         }
         else
@@ -256,7 +258,17 @@ public partial class PlatformAdMobAdsInit : MonoBehaviour
     {
         PlatformAds.stageNumber = stageNumber;
 #if GOOGLE_MOBILE_ADS
-        if (interstitial.CanShowAd())
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            ConfirmPopup.instance.Open(string.Format("\\인터넷 연결이 필요합니다.".Localized()));
+        }
+        else if (interstitial == null)
+        {
+            // 인터스티셜 받아올 수 없는 상황에서 플레이가 중단되는 것은 좋지 않다...
+            // 그냥 진행하게 해 주자 ㅜ.ㅜ 
+            PlatformAds.ExecuteInterstitialReward(null, null, PlatformAds.AdsType.AdMob);
+        }
+        else if (interstitial.CanShowAd())
         {
             interstitial.Show();
         }
@@ -266,15 +278,4 @@ public partial class PlatformAdMobAdsInit : MonoBehaviour
         }
 #endif
     }
-
-    void HandleFailedToLoad()
-    {
-        Debug.LogError("HandleFailedToLoad");
-        // 유저에게 광고를 못불러왔다는 걸 굳이 게임 시작할 때 보여줄 필요는 없지...
-        //ShortMessage.instance.ShowLocalized("광고 불러오기를 실패했습니다.");
-    }
-#if GOOGLE_MOBILE_ADS
-    ShopProductEntry shopProductEntry;
-    ShopProductData shopProductData;
-#endif
 }

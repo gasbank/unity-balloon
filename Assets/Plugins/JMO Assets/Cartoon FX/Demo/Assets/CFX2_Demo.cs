@@ -20,15 +20,15 @@ public class CFX2_Demo : MonoBehaviour
 	
 	private bool slowMo;
 	
-	void OnMouseDown()
-	{
-		RaycastHit hit = new RaycastHit();
-		if(this.GetComponent<Collider>().Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 9999f))
-		{
-			GameObject particle = spawnParticle();
-			particle.transform.position = hit.point + particle.transform.position;
-		}
-	}
+	// void OnMouseDown()
+	// {
+	// 	RaycastHit hit = new RaycastHit();
+	// 	if(this.GetComponent<Collider>().Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 9999f))
+	// 	{
+	// 		GameObject particle = spawnParticle();
+	// 		particle.transform.position = hit.point + particle.transform.position;
+	// 	}
+	// }
 	
 	private GameObject spawnParticle()
 	{

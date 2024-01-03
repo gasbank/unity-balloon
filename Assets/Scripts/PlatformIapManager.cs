@@ -65,15 +65,18 @@ public class PlatformIapManager : MonoBehaviour, IDetailedStoreListener
     public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
     {
         Debug.LogError($"PlatformIapManager.OnPurchaseFailed: Product={product}, PurchaseFailureDescription={failureDescription}");
+        PurchasingInProgress.instance.Show(false);
     }
 
     public void OnInitializeFailed(InitializationFailureReason error)
     {
         Debug.LogError($"PlatformIapManager.OnInitializeFailed: {error}");
+        PurchasingInProgress.instance.Show(false);
     }
 
     public void OnInitializeFailed(InitializationFailureReason error, string message) {
         Debug.LogError($"PlatformIapManager.OnInitializeFailed: Error={error}, Message={message}");
+        PurchasingInProgress.instance.Show(false);
     }
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs e)

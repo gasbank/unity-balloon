@@ -26,9 +26,14 @@ public class SingletonManager : MonoBehaviour
 
     [SerializeField]
     PurchasingInProgress purchasingInProgress;
+    
+    [SerializeField]
+    ShortMessage shortMessage;
 
     void Awake()
     {
+        Application.targetFrameRate = 60;
+        
         confirmPopup = FindObjectOfType<ConfirmPopup>();
         configPopup = FindObjectOfType<ConfigPopup>();
         progressMessage = FindObjectOfType<ProgressMessage>();
@@ -42,5 +47,6 @@ public class SingletonManager : MonoBehaviour
         PlatformAdMobAdsInit.instance = platformAdMobAdsInit;
         PurchasingInProgress.instance = purchasingInProgress;
         Data.instance = data;
+        ShortMessage.instance = shortMessage;
     }
 }
