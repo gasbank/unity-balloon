@@ -301,7 +301,7 @@ public class HotairBalloon : MonoBehaviour
         var vNormalized = new Vector3(Mathf.Cos(dirRad), Mathf.Sin(dirRad), 0);
 
         if (IsVerticallyStationaryForceApplied)
-            balloonRb.AddForce(Vector3.up * (-5 * (balloonRb.position.y - InitialPositionY) - 2 * balloonRb.velocity.y),
+            balloonRb.AddForce(Vector3.up * (-5 * (balloonRb.position.y - InitialPositionY) - 2 * balloonRb.linearVelocity.y),
                 ForceMode.Impulse);
 
         if (IsGameOver)
@@ -316,8 +316,8 @@ public class HotairBalloon : MonoBehaviour
             emissionLeft.rateOverTime = 25;
             emissionRight.rateOverTime = 25;
             PlayTopThrusterParticle();
-            balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
-            balloonRb.velocity += Vector3.up * AdditionalVelocity;
+            balloonRb.linearVelocity = new Vector3(balloonRb.linearVelocity.x, defaultVelocity, balloonRb.linearVelocity.z);
+            balloonRb.linearVelocity += Vector3.up * AdditionalVelocity;
         }
         else if (RemainOilAmount > 0 || InFeverGaugeNotEmpty)
         {
@@ -325,8 +325,8 @@ public class HotairBalloon : MonoBehaviour
             if (HorizontalAxis != 0)
             {
                 // 방향 조작을 하고 있는 중이면 상승 + 좌우 이동
-                balloonRb.velocity = defaultVelocity * vNormalized;
-                balloonRb.velocity += Vector3.up * AdditionalVelocity;
+                balloonRb.linearVelocity = defaultVelocity * vNormalized;
+                balloonRb.linearVelocity += Vector3.up * AdditionalVelocity;
 
                 if (vNormalized.x > 0.01f)
                 {
@@ -349,8 +349,8 @@ public class HotairBalloon : MonoBehaviour
             else if (handleSlider.Controlled || InFeverGaugeNotEmpty)
             {
                 // 터치만 하고 있는 상태(방향 조작 0)라면 위로만 올라가면 된다.
-                balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
-                balloonRb.velocity += Vector3.up * AdditionalVelocity;
+                balloonRb.linearVelocity = new Vector3(balloonRb.linearVelocity.x, defaultVelocity, balloonRb.linearVelocity.z);
+                balloonRb.linearVelocity += Vector3.up * AdditionalVelocity;
 
                 emissionLeft.rateOverTime = 0;
                 emissionRight.rateOverTime = 0;
@@ -366,8 +366,8 @@ public class HotairBalloon : MonoBehaviour
             else if (IsFreeOilOnStart && IsTitleVisible == false)
             {
                 // 스테이지 시작하고 5초동안은 공짜로 위로 올라간다.
-                balloonRb.velocity = new Vector3(balloonRb.velocity.x, defaultVelocity, balloonRb.velocity.z);
-                balloonRb.velocity += Vector3.up * AdditionalVelocity;
+                balloonRb.linearVelocity = new Vector3(balloonRb.linearVelocity.x, defaultVelocity, balloonRb.linearVelocity.z);
+                balloonRb.linearVelocity += Vector3.up * AdditionalVelocity;
 
                 emissionLeft.rateOverTime = 25;
                 emissionRight.rateOverTime = 25;
@@ -382,8 +382,8 @@ public class HotairBalloon : MonoBehaviour
         else if (IsStageFinished == false && IsGameOver == false)
         {
             // 추락 중에는 조타만 가능하게 한다.
-            balloonRb.velocity =
-                new Vector3(defaultVelocity * vNormalized.x, balloonRb.velocity.y, balloonRb.velocity.z);
+            balloonRb.linearVelocity =
+                new Vector3(defaultVelocity * vNormalized.x, balloonRb.linearVelocity.y, balloonRb.linearVelocity.z);
 
             emissionLeft.rateOverTime = 0;
             emissionRight.rateOverTime = 0;
@@ -392,7 +392,7 @@ public class HotairBalloon : MonoBehaviour
         if (IsGameOver == false)
             foreach (var windRegion in appliedWindRegionSet)
                 if (windRegion != null)
-                    balloonRb.velocity += windRegion.WindForce;
+                    balloonRb.linearVelocity += windRegion.WindForce;
     }
 
     void Update()
@@ -412,9 +412,9 @@ public class HotairBalloon : MonoBehaviour
 
         if (IsVerticallyStationaryForceApplied)
             BalloonSound.instance.SetEngineVolume(1);
-        else if (balloonRb.velocity.y < 0)
+        else if (balloonRb.linearVelocity.y < 0)
             BalloonSound.instance.SetEngineVolume(0);
-        else if (balloonRb.velocity.y > 0) BalloonSound.instance.SetEngineVolume(1);
+        else if (balloonRb.linearVelocity.y > 0) BalloonSound.instance.SetEngineVolume(1);
 
         // 기름이 바닥난 상태라면...
         if (RemainOilAmount <= 0)
@@ -466,7 +466,7 @@ public class HotairBalloon : MonoBehaviour
         boostVelocity = Mathf.SmoothDamp(boostVelocity, 0, ref boostVelocityVelocity, boostVelocityDamp);
 
         if (stageStatText != null)
-            stageStatText.SetText(string.Format("SPEED: {0:f1}\nHEIGHT: {1:f1}", balloonRb.velocity.magnitude,
+            stageStatText.SetText(string.Format("SPEED: {0:f1}\nHEIGHT: {1:f1}", balloonRb.linearVelocity.magnitude,
                 balloon.transform.position.y));
 
         // 피버 아이템을 가지고 있지 않을 때만 감소
